@@ -55,13 +55,42 @@ import "@/components/rte-block-editor/style.css";
 
 The `@tiptap/*` packages are peer dependencies. The shadcn CLI will prompt you to install any it detects as missing, but you can also add them yourself:
 
-```bash
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
 npm install @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
 ```
 
-```bash
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn add @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
 pnpm add @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
 ```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bun add @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
+```
+
+  </TabsContent>
+</Tabs>
 
 See the [Editor](./editor) or [Block Editor](./block-editor) docs for the full list of extensions.
 

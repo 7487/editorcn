@@ -29,21 +29,63 @@ import type {
 import "@rtecn/block-editor/style.css";
 
 const DEMO_CONTENT = `
-<h2>Getting Started</h2>
-<p>The <code>BlockEditor</code> is a block-style editor. Type <code>/</code> to open the command menu and insert blocks.</p>
-<h3>Text Formatting</h3>
-<p>Select any text to see the <strong>bubble menu</strong> with <em>formatting</em> options.</p>
-<h3>Task List</h3>
+<h1 style="text-align: center;">Block Editor</h1>
+<p>A block-style editor built on <strong>Tiptap</strong> and <strong>shadcn/ui</strong>. Type <code>/</code> to open the command menu and insert blocks. Drag the handle on the left to reorder any block.</p>
+<h2>Text Formatting</h2>
+<p>Select any text to see the <strong>bubble menu</strong> with <em>formatting</em> options. You can also use <u>underline</u>, <s>strikethrough</s>, and <code>inline code</code>.</p>
+<h2>Task List</h2>
 <ul data-type="taskList">
-   <li data-type="taskItem" data-checked="true">A list item</li>
-   <li data-type="taskItem" data-checked="false">And another one</li>
+   <li data-type="taskItem" data-checked="true">Design the component API</li>
+   <li data-type="taskItem" data-checked="true">Build the slash command menu</li>
+   <li data-type="taskItem" data-checked="false">Add table support</li>
+   <li data-type="taskItem" data-checked="false">Write documentation</li>
 </ul>
-<h3>Code Block</h3>
-<pre><code class="language-javascript">function greet(name) {
-  return \`Hello, \${name}!\`;
+<h2>Table</h2>
+<p>Use <code>/table</code> to insert a table. Resize columns by dragging the handles.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Status</th>
+      <th>Priority</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Bubble menu</td>
+      <td>Done</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Drag handles</td>
+      <td>Done</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Tables</td>
+      <td>In progress</td>
+      <td>Medium</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Code Block with Syntax Highlighting</h2>
+<pre><code class="language-javascript">import { BlockEditor } from "@rtecn/block-editor";
+import StarterKit from "@tiptap/starter-kit";
+
+function MyEditor() {
+  const editor = useEditor({
+    extensions: [StarterKit],
+  });
+
+  return &lt;BlockEditor editor={editor} /&gt;;
 }</code></pre>
-<h3>Blockquote</h3>
-<blockquote><p>Block-level content with drag handles for reordering.</p></blockquote>
+<h2>Blockquote</h2>
+<blockquote><p>Block-level content with drag handles for reordering. Every block can be moved, edited, or deleted independently.</p></blockquote>
+<h2>Text Alignment</h2>
+<p style="text-align: center;">Center-aligned text — great for headings.</p>
+<p style="text-align: right;">Right-aligned text — useful for annotations.</p>
+<h2>Images &amp; Links</h2>
+<p>Type <code>/image</code> to insert an image by URL. Links are auto-detected and open in a new tab. Drag handles let you reorder any block — try it on this paragraph.</p>
 `.trim();
 
 const myItems: SlashCommandSuggestionItem[] = [

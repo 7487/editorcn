@@ -10,6 +10,8 @@ import { RichTextEditorControl } from './controls/rte-control';
 import { LinkControl } from './controls/rte-link-control';
 import * as controls from './controls/rte-controls';
 import type { RichTextEditorProps } from './types';
+import { YouTubeEmbedControl } from './controls/rte-youtube-control';
+import { TwitterEmbedControl } from './controls/rte-twitter-control';
 
 function RichTextEditorRoot({
   editor,
@@ -51,6 +53,8 @@ export const RichTextEditor = Object.assign(RichTextEditorRoot, {
   Content,
   Control: RichTextEditorControl,
   Link: LinkControl,
+  YouTubeEmbed: YouTubeEmbedControl,
+  TwitterEmbed: TwitterEmbedControl,
   Bold: controls.BoldControl,
   Italic: controls.ItalicControl,
   Underline: controls.UnderlineControl,

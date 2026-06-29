@@ -21,6 +21,7 @@ export interface RichTextEditorToolbarProps {
 }
 
 export interface RichTextEditorContentProps {
+  children?: React.ReactNode;
   className?: string;
 }
 

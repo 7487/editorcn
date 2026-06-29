@@ -88,6 +88,18 @@
           "type": "registry:component"
         },
         {
+          "path": "rte-editor/extensions/resizable-node-view.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "rte-editor/controls/rte-twitter-control.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "rte-editor/controls/rte-youtube-control.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "rte-editor/ui/utils.ts",
           "type": "registry:lib"
         },

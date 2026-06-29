@@ -19,7 +19,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Highlight from "@tiptap/extension-highlight";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
-import { RichTextEditor, Link } from "@rtecn/editor";
+import { RichTextEditor, Link, YouTubeEmbed, TwitterEmbed } from "@rtecn/editor";
 import "@rtecn/editor/style.css";
 
 export function MyEditor() {
@@ -30,6 +30,8 @@ export function MyEditor() {
         heading: { levels: [1, 2, 3, 4, 5, 6] },
       }),
       Link,
+      YouTubeEmbed,
+      TwitterEmbed,
       Underline,
       Highlight,
       Subscript,
@@ -84,6 +86,11 @@ export function MyEditor() {
           <RichTextEditor.Subscript />
           <RichTextEditor.Superscript />
           <RichTextEditor.CodeBlock />
+        </RichTextEditor.ControlsGroup>
+
+        <RichTextEditor.ControlsGroup>
+          <RichTextEditor.YouTubeEmbed />
+          <RichTextEditor.TwitterEmbed />
         </RichTextEditor.ControlsGroup>
 
         <RichTextEditor.ControlsGroup>

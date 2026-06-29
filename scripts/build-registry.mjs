@@ -9,6 +9,14 @@ function read(pkg, file) {
   return readFileSync(resolve(root, "packages", pkg, "src", file), "utf-8");
 }
 
+function readRegistry(pkg, file) {
+  return readFileSync(resolve(root, "packages", pkg, "src", "custom-controls", file), "utf-8");
+}
+
+function readRegistryExtension(pkg, file) {
+  return readFileSync(resolve(root, "packages", pkg, "src", "extensions", file), "utf-8");
+}
+
 function entry(path, type, pkg, src) {
   const target = `@components/${path}`;
   return { path, type, target, content: read(pkg, src) };
@@ -30,6 +38,9 @@ const editorFiles = [
   entry("rte-editor/controls/rte-link-control.tsx", "registry:component", "editor", "controls/rte-link-control.tsx"),
   entry("rte-editor/extensions/index.ts", "registry:component", "editor", "extensions/index.ts"),
   entry("rte-editor/extensions/link.ts", "registry:component", "editor", "extensions/link.ts"),
+  entry("rte-editor/extensions/resizable-node-view.tsx", "registry:component", "editor", "extensions/resizable-node-view.tsx"),
+  entry("rte-editor/controls/rte-twitter-control.tsx", "registry:component", "editor", "controls/rte-twitter-control.tsx"),
+  entry("rte-editor/controls/rte-youtube-control.tsx", "registry:component", "editor", "controls/rte-youtube-control.tsx"),
   entry("rte-editor/ui/utils.ts", "registry:lib", "editor", "ui/utils.ts"),
   entry("rte-editor/ui/button.tsx", "registry:component", "editor", "ui/button.tsx"),
   entry("rte-editor/ui/toggle.tsx", "registry:component", "editor", "ui/toggle.tsx"),
@@ -58,6 +69,35 @@ const blockEditorFiles = [
   entry("rte-block-editor/ui/textarea.tsx", "registry:component", "block-editor", "ui/textarea.tsx"),
   entry("rte-block-editor/lib/utils.ts", "registry:lib", "block-editor", "lib/utils.ts"),
 ];
+
+// const customControlNames = [
+//   "heading-select", "insert-link-dialog", "highlight-color-popover",
+//   "emoji-menu", "insert-table-dialog", "font-family-select",
+//   "font-size",
+// ];
+
+// const customControlExtensionNames = [
+//   "font-size-extension",
+// ];
+
+// function entryRegistry(name) {
+//   const path = `custom-controls/${name}.tsx`;
+//   const target = `@components/${path}`;
+//   return { path, type: "registry:component", target, content: readRegistry("registry", `${name}.tsx`) };
+// }
+
+// function entryRegistryExtension(name) {
+//   const path = `extensions/${name}.ts`;
+//   const target = `@components/${path}`;
+//   return { path, type: "registry:component", target, content: readRegistryExtension("registry", `${name}.ts`) };
+// }
+
+// const customControlFiles = [
+//   ...customControlNames.map(entryRegistry),
+//   ...customControlExtensionNames.map(entryRegistryExtension),
+// ];
+
+// const customControlRegistryDeps = ["select", "dialog", "popover", "dropdown-menu", "button", "input"];
 
 const deps = {
   editor: [
@@ -105,10 +145,14 @@ const deps = {
     "clsx@^2.1.1",
     "tailwind-merge@^3.0.0",
   ],
+  "custom-controls": [
+    "@rtecn/editor@latest",
+    "lucide-react@^0.546.0",
+  ],
 };
 
-function buildItem(name, title, desc, files, dependencies) {
-  return {
+function buildItem(name, title, desc, files, dependencies, registryDependencies) {
+  const item = {
     $schema: "https://ui.shadcn.com/schema/registry-item.json",
     name,
     type: "registry:component",
@@ -117,6 +161,8 @@ function buildItem(name, title, desc, files, dependencies) {
     dependencies,
     files,
   };
+  if (registryDependencies) item.registryDependencies = registryDependencies;
+  return item;
 }
 
 function catalogItem(name, title, desc, depsList, fileList) {
@@ -142,6 +188,10 @@ writeFileSync(
   resolve(outDir, "block-editor.json"),
   JSON.stringify(buildItem("block-editor", "Block Editor", "A Notion-style block editor built on Tiptap with shadcn/ui tokens.", blockEditorFiles, deps["block-editor"]), null, 2),
 );
+// writeFileSync(
+//   resolve(outDir, "custom-controls.json"),
+//   JSON.stringify(buildItem("custom-controls", "Custom Toolbar Controls", "Ready-to-use custom toolbar controls for the Rich Text Editor.", customControlFiles, deps["custom-controls"], customControlRegistryDeps), null, 2),
+// );
 
 // Write catalog JSON (metadata only, no file content)
 const catalog = {
@@ -151,6 +201,7 @@ const catalog = {
   items: [
     catalogItem("editor", "Rich Text Editor", "A toolbar-style rich text editor built on Tiptap with shadcn/ui tokens.", deps.editor, editorFiles),
     catalogItem("block-editor", "Block Editor", "A Notion-style block editor built on Tiptap with shadcn/ui tokens.", deps["block-editor"], blockEditorFiles),
+    // catalogItem("custom-controls", "Custom Toolbar Controls", "Ready-to-use custom toolbar controls for the Rich Text Editor.", deps["custom-controls"], customControlFiles),
   ],
 };
 writeFileSync(resolve(outDir, "registry.json"), JSON.stringify(catalog, null, 2));
@@ -159,3 +210,4 @@ console.log("Built registry:");
 console.log("  apps/web/public/r/registry.json");
 console.log("  apps/web/public/r/editor.json");
 console.log("  apps/web/public/r/block-editor.json");
+// console.log("  apps/web/public/r/custom-controls.json");

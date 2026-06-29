@@ -8,7 +8,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Highlight from "@tiptap/extension-highlight";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
-import { RichTextEditor, Link, useRichTextEditorContext } from "@rtecn/editor";
+import { RichTextEditor, Link, useRichTextEditorContext, TwitterEmbed, YouTubeEmbed } from "@rtecn/editor";
 import type { RichTextEditorVariant } from "@rtecn/editor";
 import "@rtecn/editor/style.css";
 
@@ -29,20 +29,50 @@ function InsertStarControl() {
 }
 
 const DEMO_CONTENT = `
-<h1 style="text-align: center;">Rich Text Editing</h1>
-<h2>Formatting</h2>
-<p>Use the toolbar above to apply <strong>bold</strong>, <em>italic</em>, <u>underline</u>, <s>strikethrough</s>, <mark>highlighted</mark>, and <code>inline code</code>.</p>
+<h1 style="text-align: center;">Welcome to Rtecn</h1>
+<p>A rich text editor built on <a href="https://tiptap.dev/">Tiptap</a> and <strong>shadcn/ui</strong>. Every control in the toolbar is a standalone component — pick the ones you need, build your own layout.</p>
+<hr>
+<h2>Text Formatting</h2>
+<p>Use the toolbar to apply <strong>bold</strong>, <em>italic</em>, <u>underline</u>, <s>strikethrough</s>, <mark>highlighted text</mark>, H<sub>2</sub>O (subscript), and E=mc<sup>2</sup> (superscript). Inline <code>code</code> is also supported.</p>
+<h2>Headings</h2>
+<h3>Heading 3 — Section Title</h3>
+<p>Headings from H1 through H6 are available. This editor uses six levels for deep document structure.</p>
+<h4>Heading 4 — Subsection</h4>
+<p>Nested content under a section. H4 works well for grouped items within an H3 section.</p>
+<h5>Heading 5 — Detail</h5>
+<p>Fine-grained headings for technical documentation or nested outlines.</p>
 <h2>Lists</h2>
+<p>Organize content with <strong>bullet lists</strong> and <strong>ordered lists</strong>:</p>
 <ul>
-  <li>Unordered list item</li>
-  <li>Another item with <strong>bold text</strong></li>
+  <li>Bullet list item one</li>
+  <li>Bullet list with <strong>bold</strong> and <em>italic</em> text</li>
+  <li>Nested bullet
+    <ul>
+      <li>Indented sub-item</li>
+      <li>Another sub-item</li>
+    </ul>
+  </li>
 </ul>
 <ol>
   <li>First ordered item</li>
-  <li>Second ordered item</li>
+  <li>Second ordered item with a <a href="#">link</a></li>
+  <li>Third ordered item</li>
 </ol>
-<h2>Links &amp; Alignment</h2>
-<p style="text-align: center;">This text is center aligned. Try the alignment controls in the toolbar.</p>
+<h2>Blockquote &amp; Code</h2>
+<blockquote><p>A well-placed blockquote adds authority. The left border uses your theme's border color.</p></blockquote>
+<p>For longer code snippets, use a <strong>code block</strong>:</p>
+<pre><code class="language-javascript">function greet(name) {
+  return \`Hello, \${name}! Welcome to Rtecn.\`;
+}</code></pre>
+<h2>Alignment</h2>
+<p style="text-align: left;">Left aligned — the default for most content.</p>
+<p style="text-align: center;">Center aligned — great for headings or callouts.</p>
+<p style="text-align: right;">Right aligned — useful for captions or annotations.</p>
+<p style="text-align: justify;">Justified text stretches each line to fill the container width, creating clean edges on both sides. This works best for longer paragraphs where readability matters.</p>
+<h2>Embeds</h2>
+<p>Use the <strong>YouTube</strong> and <strong>Twitter</strong> buttons in the toolbar to paste a URL and embed content. Select an embed to see the resize handles — drag to resize. Embeds maintain their dimensions in the document and can be aligned left, center, or right.</p>
+<hr>
+<p style="text-align: center; color: var(--muted-foreground);">Built with Tiptap, shadcn/ui, and TypeScript. MIT licensed.</p>
 `.trim();
 
 export function EditorPreview({ variant = "default" }: { variant?: RichTextEditorVariant }) {
@@ -58,6 +88,8 @@ export function EditorPreview({ variant = "default" }: { variant?: RichTextEdito
       Highlight,
       Subscript,
       Superscript,
+      TwitterEmbed,
+      YouTubeEmbed,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       Placeholder.configure({ placeholder: "Start typing..." }),
     ],
@@ -110,6 +142,10 @@ export function EditorPreview({ variant = "default" }: { variant?: RichTextEdito
           </RichTextEditor.ControlsGroup>
           <RichTextEditor.ControlsGroup>
             <InsertStarControl />
+          </RichTextEditor.ControlsGroup>
+          <RichTextEditor.ControlsGroup>
+            <RichTextEditor.YouTubeEmbed />
+            <RichTextEditor.TwitterEmbed />
           </RichTextEditor.ControlsGroup>
           <RichTextEditor.ControlsGroup>
             <RichTextEditor.Undo />

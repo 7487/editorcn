@@ -1,0 +1,469 @@
+---
+title: Custom Controls
+description: Ready-to-use custom toolbar controls with live preview and source code.
+---
+
+# Custom Controls
+
+Pre-built custom toolbar controls — each template has a live **Preview** tab and a **Code** tab with the full source you can copy.
+
+All controls use `useRichTextEditorContext` from `@rtecn/editor` to access the editor instance. Add them as children inside `<RichTextEditor.Toolbar>`.
+
+Install all controls at once:
+
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
+npx shadcn@latest add "https://rtecn.space/r/custom-controls"
+```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn dlx shadcn@latest add "https://rtecn.space/r/custom-controls"
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm dlx shadcn@latest add "https://rtecn.space/r/custom-controls"
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bunx shadcn@latest add "https://rtecn.space/r/custom-controls"
+```
+
+  </TabsContent>
+</Tabs>
+
+You can also copy the source directly from the **Code** tab in each control below.
+
+### Heading Select
+
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
+npx shadcn@latest add "https://rtecn.space/r/custom-controls/heading-select"
+```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn dlx shadcn@latest add "https://rtecn.space/r/custom-controls/heading-select"
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm dlx shadcn@latest add "https://rtecn.space/r/custom-controls/heading-select"
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bunx shadcn@latest add "https://rtecn.space/r/custom-controls/heading-select"
+```
+
+  </TabsContent>
+</Tabs>
+
+A unified dropdown that toggles between paragraph and heading levels (H1–H3). Uses `useEditorState` from `@tiptap/react` to keep the select value in sync with the cursor position.
+
+<HeadingSelectCard />
+
+### Insert Link Dialog
+
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
+npx shadcn@latest add "https://rtecn.space/r/custom-controls/insert-link-dialog"
+```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn dlx shadcn@latest add "https://rtecn.space/r/custom-controls/insert-link-dialog"
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm dlx shadcn@latest add "https://rtecn.space/r/custom-controls/insert-link-dialog"
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bunx shadcn@latest add "https://rtecn.space/r/custom-controls/insert-link-dialog"
+```
+
+  </TabsContent>
+</Tabs>
+
+A dialog that opens when the toolbar button is clicked, with an input field to enter a URL and auto-detection of selected link text.
+
+<InsertLinkDialogCard />
+
+### Highlight Color Popover
+
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
+npx shadcn@latest add "https://rtecn.space/r/custom-controls/highlight-color-popover"
+```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn dlx shadcn@latest add "https://rtecn.space/r/custom-controls/highlight-color-popover"
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm dlx shadcn@latest add "https://rtecn.space/r/custom-controls/highlight-color-popover"
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bunx shadcn@latest add "https://rtecn.space/r/custom-controls/highlight-color-popover"
+```
+
+  </TabsContent>
+</Tabs>
+
+A popover with a color swatch grid for highlight colors and a button to remove existing highlights.
+
+<HighlightColorPopoverCard />
+
+### Emoji Menu
+
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
+npx shadcn@latest add "https://rtecn.space/r/custom-controls/emoji-menu"
+```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn dlx shadcn@latest add "https://rtecn.space/r/custom-controls/emoji-menu"
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm dlx shadcn@latest add "https://rtecn.space/r/custom-controls/emoji-menu"
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bunx shadcn@latest add "https://rtecn.space/r/custom-controls/emoji-menu"
+```
+
+  </TabsContent>
+</Tabs>
+
+A dropdown menu with a grid of emojis that inserts the selected emoji at the cursor position.
+
+<EmojiMenuCard />
+
+### Insert Table Dialog
+
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
+npx shadcn@latest add "https://rtecn.space/r/custom-controls/insert-table-dialog"
+```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn dlx shadcn@latest add "https://rtecn.space/r/custom-controls/insert-table-dialog"
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm dlx shadcn@latest add "https://rtecn.space/r/custom-controls/insert-table-dialog"
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bunx shadcn@latest add "https://rtecn.space/r/custom-controls/insert-table-dialog"
+```
+
+  </TabsContent>
+</Tabs>
+
+Requires table extensions:
+
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
+npm install @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header
+```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn add @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm add @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bun add @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header
+```
+
+  </TabsContent>
+</Tabs>
+
+A dialog that opens when the toolbar button is clicked, with inputs for rows and columns, a header row toggle, and inserts the table on submit.
+
+<InsertTableDialogCard />
+
+### Font Family Select
+
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
+npx shadcn@latest add "https://rtecn.space/r/custom-controls/font-family-select"
+```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn dlx shadcn@latest add "https://rtecn.space/r/custom-controls/font-family-select"
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm dlx shadcn@latest add "https://rtecn.space/r/custom-controls/font-family-select"
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bunx shadcn@latest add "https://rtecn.space/r/custom-controls/font-family-select"
+```
+
+  </TabsContent>
+</Tabs>
+
+Requires text style extensions:
+
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
+npm install @tiptap/extension-text-style @tiptap/extension-font-family
+```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn add @tiptap/extension-text-style @tiptap/extension-font-family
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm add @tiptap/extension-text-style @tiptap/extension-font-family
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bun add @tiptap/extension-text-style @tiptap/extension-font-family
+```
+
+  </TabsContent>
+</Tabs>
+
+A select dropdown that changes the font family of selected text using `@tiptap/extension-font-family` and `@tiptap/extension-text-style`.
+
+<FontFamilySelectCard />
+
+### Font Size
+
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
+npx shadcn@latest add "https://rtecn.space/r/custom-controls/font-size"
+```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn dlx shadcn@latest add "https://rtecn.space/r/custom-controls/font-size"
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm dlx shadcn@latest add "https://rtecn.space/r/custom-controls/font-size"
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bunx shadcn@latest add "https://rtecn.space/r/custom-controls/font-size"
+```
+
+  </TabsContent>
+</Tabs>
+
+Requires font-size extension:
+
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
+npx shadcn@latest add "https://rtecn.space/r/custom-controls/font-size-extension"
+```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn dlx shadcn@latest add "https://rtecn.space/r/custom-controls/font-size-extension"
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm dlx shadcn@latest add "https://rtecn.space/r/custom-controls/font-size-extension"
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bunx shadcn@latest add "https://rtecn.space/r/custom-controls/font-size-extension"
+```
+
+  </TabsContent>
+</Tabs>
+
+A plus/minus control with a number input to adjust the font size of selected text. Uses the `FontSize` extension which adds a `fontSize` attribute to `textStyle`.
+
+<FontSizeCard />

@@ -26,7 +26,9 @@
       "@rtecn/editor": ["../../packages/editor/src"],
       "@rtecn/editor/*": ["../../packages/editor/src/*"],
       "@rtecn/block-editor": ["../../packages/block-editor/src"],
-      "@rtecn/block-editor/*": ["../../packages/block-editor/src/*"]
+      "@rtecn/block-editor/*": ["../../packages/block-editor/src/*"],
+      "@tiptap/core": ["../../node_modules/.pnpm/@tiptap+core@2.27.2_@tiptap+pm@2.27.2/node_modules/@tiptap/core"],
+      "@tiptap/pm": ["../../node_modules/.pnpm/@tiptap+pm@2.27.2/node_modules/@tiptap/pm"]
     }
   },
   "include": [

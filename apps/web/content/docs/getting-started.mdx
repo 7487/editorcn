@@ -40,15 +40,81 @@ Since the shadcn registry is the recommended install method, add the rtecn regis
 
 **Install via the shadcn registry (recommended):**
 
-```bash
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
 npx shadcn@latest add @rtecn/editor
 ```
 
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn dlx shadcn@latest add @rtecn/editor
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm dlx shadcn@latest add @rtecn/editor
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bunx shadcn@latest add @rtecn/editor
+```
+
+  </TabsContent>
+</Tabs>
+
 **Or install via npm:**
 
-```bash
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
 npm install @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
 ```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bun add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
+```
+
+  </TabsContent>
+</Tabs>
 
 Import the styles:
 
@@ -141,15 +207,81 @@ export function MyEditor() {
 
 **Install via the shadcn registry (recommended):**
 
-```bash
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
 npx shadcn@latest add @rtecn/block-editor
 ```
 
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn dlx shadcn@latest add @rtecn/block-editor
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm dlx shadcn@latest add @rtecn/block-editor
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bunx shadcn@latest add @rtecn/block-editor
+```
+
+  </TabsContent>
+</Tabs>
+
 **Or install via npm:**
 
-```bash
+<Tabs defaultValue="npm" groupId="pm">
+  <TabsList>
+    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
+    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
+    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
+    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+
+```shell frame="none"
 npm install @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder
 ```
+
+  </TabsContent>
+  <TabsContent value="yarn">
+
+```shell frame="none"
+yarn add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder
+```
+
+  </TabsContent>
+  <TabsContent value="pnpm">
+
+```shell frame="none"
+pnpm add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder
+```
+
+  </TabsContent>
+  <TabsContent value="bun">
+
+```shell frame="none"
+bun add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder
+```
+
+  </TabsContent>
+</Tabs>
 
 Import the styles:
 

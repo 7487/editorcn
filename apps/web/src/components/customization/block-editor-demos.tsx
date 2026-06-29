@@ -48,7 +48,10 @@ const blockItems = [
     command: ({ editor, range }: any) => {
       showImagePrompt().then((url) => {
         if (!url) return;
-        (editor.chain().focus() as any).deleteRange(range).setImage({ src: url }).run();
+        (editor.chain().focus() as any)
+          .deleteRange(range)
+          .setImage({ src: url })
+          .run();
       });
     },
   },
@@ -79,12 +82,21 @@ const extensions = [
   TableCell,
   TableHeader,
   Image,
-  Link.configure({ openOnClick: true, autolink: true, defaultProtocol: "https" }),
+  Link.configure({
+    openOnClick: true,
+    autolink: true,
+    defaultProtocol: "https",
+  }),
   SlashCommand.configure({ suggestion: getSlashCommandSuggestion(blockItems) }),
 ];
 
 export function BlockEditorVariantsDemo() {
-  const editor = useEditor({ immediatelyRender: false, shouldRerenderOnTransaction: false, extensions, content: BLOCK_CONTENT });
+  const editor = useEditor({
+    immediatelyRender: false,
+    shouldRerenderOnTransaction: false,
+    extensions,
+    content: BLOCK_CONTENT,
+  });
   return (
     <div className="overflow-hidden rounded-md border border-border">
       <BlockEditor editor={editor} />
@@ -93,22 +105,44 @@ export function BlockEditorVariantsDemo() {
 }
 
 export function BlockEditorThemingDemo() {
-  const editor = useEditor({ immediatelyRender: false, shouldRerenderOnTransaction: false, extensions, content: BLOCK_CONTENT });
+  const editor = useEditor({
+    immediatelyRender: false,
+    shouldRerenderOnTransaction: false,
+    extensions,
+    content: BLOCK_CONTENT,
+  });
   return (
-    <div style={{ "--primary": "oklch(0.55 0.25 280)", "--radius": "0.5rem", "--accent": "oklch(0.9 0.06 280)", "--accent-foreground": "oklch(0.3 0.1 280)", "--muted": "oklch(0.93 0.03 280)", "--muted-foreground": "oklch(0.5 0.05 280)" } as React.CSSProperties}>
+    <div
+      style={
+        {
+          "--primary": "oklch(0.55 0.25 280)",
+          "--radius": "0.5rem",
+          "--accent": "oklch(0.9 0.06 280)",
+          "--accent-foreground": "oklch(0.3 0.1 280)",
+          "--muted": "oklch(0.93 0.03 280)",
+          "--muted-foreground": "oklch(0.5 0.05 280)",
+        } as React.CSSProperties
+      }
+    >
       <BlockEditor editor={editor} />
     </div>
   );
 }
 
 export function BlockEditorClassNameDemo() {
-  const editor = useEditor({ immediatelyRender: false, shouldRerenderOnTransaction: false, extensions, content: BLOCK_CONTENT });
+  const editor = useEditor({
+    immediatelyRender: false,
+    shouldRerenderOnTransaction: false,
+    extensions,
+    content: BLOCK_CONTENT,
+  });
   return (
-    <BlockEditor editor={editor} className="border-2 border-dashed border-primary/50 rounded-xl" />
+    <BlockEditor
+      editor={editor}
+      className="border-2 border-dashed border-primary/50 rounded-xl"
+    />
   );
 }
-
-/* ───── Custom Slash Commands ───── */
 
 const customSlashItems: SlashCommandSuggestionItem[] = [
   {
@@ -117,7 +151,12 @@ const customSlashItems: SlashCommandSuggestionItem[] = [
     description: "Insert a friendly greeting.",
     keywords: ["hello", "hi", "greeting"],
     command: ({ editor, range }) => {
-      editor.chain().focus().deleteRange(range).insertContent("Hello there! 👋").run();
+      editor
+        .chain()
+        .focus()
+        .deleteRange(range)
+        .insertContent("Hello there! 👋")
+        .run();
     },
   },
   {
@@ -128,7 +167,10 @@ const customSlashItems: SlashCommandSuggestionItem[] = [
     command: ({ editor, range }) => {
       showImagePrompt().then((url) => {
         if (!url) return;
-        (editor.chain().focus() as any).deleteRange(range).setImage({ src: url }).run();
+        (editor.chain().focus() as any)
+          .deleteRange(range)
+          .setImage({ src: url })
+          .run();
       });
     },
   },
@@ -159,12 +201,23 @@ const customSlashExtensions = [
   TableCell,
   TableHeader,
   Image,
-  Link.configure({ openOnClick: true, autolink: true, defaultProtocol: "https" }),
-  SlashCommand.configure({ suggestion: getSlashCommandSuggestion(customSlashItems) }),
+  Link.configure({
+    openOnClick: true,
+    autolink: true,
+    defaultProtocol: "https",
+  }),
+  SlashCommand.configure({
+    suggestion: getSlashCommandSuggestion(customSlashItems),
+  }),
 ];
 
 export function BlockEditorCustomSlashCommandsDemo() {
-  const editor = useEditor({ immediatelyRender: false, shouldRerenderOnTransaction: false, extensions: customSlashExtensions, content: BLOCK_CONTENT });
+  const editor = useEditor({
+    immediatelyRender: false,
+    shouldRerenderOnTransaction: false,
+    extensions: customSlashExtensions,
+    content: BLOCK_CONTENT,
+  });
   return (
     <div className="overflow-hidden rounded-md border border-border">
       <BlockEditor editor={editor} />
