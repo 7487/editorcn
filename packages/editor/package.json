@@ -1,6 +1,6 @@
 {
   "name": "@rtecn/editor",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -25,6 +25,7 @@
   },
   "peerDependencies": {
     "@base-ui/react": "^1.0.0",
+    "@tiptap/core": ">=2.11.5 <4",
     "@tiptap/extension-code-block-lowlight": ">=2.11.5 <4",
     "@tiptap/extension-link": ">=2.11.5 <4",
     "@tiptap/extension-placeholder": ">=2.11.5 <4",

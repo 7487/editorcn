@@ -9,6 +9,7 @@
       "title": "Rich Text Editor",
       "description": "A toolbar-style rich text editor built on Tiptap with shadcn/ui tokens.",
       "dependencies": [
+        "@tiptap/core@>=2.11.5 <4",
         "@tiptap/react@>=2.11.5 <4",
         "@tiptap/pm@>=2.11.5 <4",
         "@tiptap/starter-kit@>=2.11.5 <4",

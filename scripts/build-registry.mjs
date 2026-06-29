@@ -101,6 +101,7 @@ const blockEditorFiles = [
 
 const deps = {
   editor: [
+    "@tiptap/core@>=2.11.5 <4",
     "@tiptap/react@>=2.11.5 <4",
     "@tiptap/pm@>=2.11.5 <4",
     "@tiptap/starter-kit@>=2.11.5 <4",
