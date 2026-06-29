@@ -42,7 +42,6 @@ export default function Header() {
         Rtecn
       </Link>
 
-      {/* Desktop Navigation */}
       <nav className="hidden items-center gap-6 md:flex">
         {navLinks.map((link) =>
           link.external ? (
@@ -71,7 +70,6 @@ export default function Header() {
         <ModeToggle />
       </nav>
 
-      {/* Mobile Navigation */}
       <div className="flex items-center gap-2 md:hidden">
         <ModeToggle />
 
