@@ -119,6 +119,10 @@
         {
           "path": "rte-editor/ui/input.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "rte-editor/ui/dialog.tsx",
+          "type": "registry:component"
         }
       ]
     },

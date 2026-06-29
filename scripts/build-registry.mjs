@@ -46,6 +46,7 @@ const editorFiles = [
   entry("rte-editor/ui/toggle.tsx", "registry:component", "editor", "ui/toggle.tsx"),
   entry("rte-editor/ui/popover.tsx", "registry:component", "editor", "ui/popover.tsx"),
   entry("rte-editor/ui/input.tsx", "registry:component", "editor", "ui/input.tsx"),
+  entry("rte-editor/ui/dialog.tsx", "registry:component", "editor", "ui/dialog.tsx"),
 ];
 
 const blockEditorFiles = [
