@@ -1,6 +1,7 @@
 {
   "title": "@rtecn/block-editor",
   "pages": [
-    "index"
+    "index",
+    "serialization-format"
   ]
 }

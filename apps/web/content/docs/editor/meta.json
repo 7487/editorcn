@@ -1,6 +1,7 @@
 {
   "title": "@rtecn/editor",
   "pages": [
-    "index"
+    "index",
+    "serialization-format"
   ]
 }

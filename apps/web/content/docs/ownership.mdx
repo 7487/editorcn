@@ -1,0 +1,99 @@
+---
+title: Code ownership
+description: What code you own after installing rtecn and how it affects customization.
+---
+
+# Code ownership
+
+Rtecn is designed so that **you own the code** after installation. How much you own depends on the install method.
+
+## Registry install (recommended)
+
+When you install via the shadcn registry with `npx shadcn@latest add @rtecn/editor`, the CLI copies every source file directly into your project. The editor becomes part of your codebase — you can modify anything without fighting a dependency.
+
+```
+your-project/
+├── components/
+│   ├── rte-editor/
+│   │   ├── index.ts
+│   │   ├── rte-text-editor.tsx
+│   │   ├── rte-context.ts
+│   │   ├── rte-toolbar.tsx
+│   │   ├── rte-content.tsx
+│   │   ├── rte-controls-group.tsx
+│   │   ├── labels.ts
+│   │   ├── icons.tsx
+│   │   ├── types.ts
+│   │   ├── style.css
+│   │   ├── controls/
+│   │   │   ├── rte-control.tsx
+│   │   │   ├── rte-controls.tsx
+│   │   │   ├── rte-link-control.tsx
+│   │   │   ├── rte-twitter-control.tsx
+│   │   │   └── rte-youtube-control.tsx
+│   │   ├── extensions/
+│   │   │   ├── index.ts
+│   │   │   ├── link.ts
+│   │   │   └── resizable-node-view.tsx
+│   │   └── ui/
+│   │       ├── utils.ts
+│   │       ├── button.tsx
+│   │       ├── toggle.tsx
+│   │       ├── popover.tsx
+│   │       └── input.tsx
+│   └── rte-block-editor/
+│       └── ... (same pattern, ~19 files)
+```
+
+**What this means for you:**
+
+- **Full customization**: Every control, extension, UI component, and style is yours to edit. Want to change the toolbar layout? Edit `rte-text-editor.tsx`. Want different resize behavior? Edit `resizable-node-view.tsx`.
+- **No dependency lock-in**: Your editor doesn't break when rtecn publishes a new version. You control when and if you update.
+- **Direct imports**: Import from your project's components directory, not from a `node_modules` package:
+
+```tsx
+import { RichTextEditor, Link } from "@/components/rte-editor";
+import "@/components/rte-editor/style.css";
+```
+
+Peerdependencies are not copied — `@tiptap/*` packages remain in `node_modules`. You own the UI layer and extensions that are specific to rtecn.
+
+## npm install
+
+When you install `@rtecn/editor` from npm, you get the compiled JavaScript and type definitions in `node_modules`. The source files remain in the published package and are not copied into your project.
+
+```
+your-project/
+└── node_modules/
+    └── @rtecn/editor/
+        ├── dist/
+        │   ├── index.js
+        │   ├── index.cjs
+        │   ├── index.d.ts
+        │   └── style.css
+        └── package.json
+```
+
+**Tradeoffs:**
+
+| Aspect                | Registry (recommended)          | npm                                |
+| --------------------- | ------------------------------- | ---------------------------------- |
+| Files in your project | ~20 files, full source          | 4 files, compiled dist             |
+| Customizable          | Everything                      | Limited (props, CSS overrides)     |
+| Updates               | Manual (re-run `shadcn add`)    | `npm update`                       |
+| Bundle size           | Tree-shaken with your build     | Same                                |
+| Version pinning       | Tracks latest source            | Semver via npm                     |
+
+## Updating
+
+With the registry install, update by re-running the same `shadcn add` command:
+
+```shell frame="none"
+npx shadcn@latest add @rtecn/editor
+```
+
+The CLI will prompt you before overwriting each file. If you've made local changes, keep your version or manually merge the diff.
+
+## License
+
+Rtecn is [MIT licensed](https://github.com/AbdullahMukadam/Rtecn/blob/main/LICENSE). You can use it in personal and commercial projects, modify the source, and redistribute it under the same license.

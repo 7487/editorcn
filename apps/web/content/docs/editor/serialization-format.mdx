@@ -1,0 +1,190 @@
+---
+title: Serialization format
+description: How editor content is serialized and how to handle it.
+---
+
+# Serialization format
+
+Both editors use [Tiptap](https://tiptap.dev/) under the hood, which manages content as a [ProseMirror document](https://prosemirror.net/docs/guide/#doc). You can retrieve the content in multiple formats depending on your storage and rendering needs.
+
+## HTML
+
+HTML is the default output format. Use `editor.getHTML()` to retrieve the content as an HTML string:
+
+```tsx
+const html = editor.getHTML();
+```
+
+The HTML output is standard HTML with inline styles for certain attributes:
+
+### Formatting
+
+| Element          | Output                                   |
+| ---------------- | ---------------------------------------- |
+| Bold             | `<strong>`                               |
+| Italic           | `<em>`                                   |
+| Underline        | `<u>`                                    |
+| Strikethrough    | `<s>`                                    |
+| Code (inline)    | `<code>`                                 |
+| Highlight        | `<mark>` with inline `style` attribute   |
+| Link             | `<a href="...">`                         |
+| Subscript        | `<sub>`                                  |
+| Superscript      | `<sup>`                                  |
+| Font size        | Inline `style="font-size: ..."`          |
+| Font family      | Inline `style="font-family: ..."`        |
+
+### Block elements
+
+| Element        | Output                      |
+| -------------- | --------------------------- |
+| Heading        | `<h1>` through `<h6>`      |
+| Paragraph      | `<p>`                       |
+| Bullet list    | `<ul>` / `<li>`             |
+| Ordered list   | `<ol>` / `<li>`             |
+| Blockquote     | `<blockquote>` / `<p>`      |
+| Code block     | `<pre><code>`               |
+| Horizontal rule| `<hr>`                      |
+| Task list      | `<ul data-type="taskList">` |
+
+### Alignment
+
+Text alignment is stored as an inline style:
+
+```html
+<p style="text-align: center;">Centered text</p>
+<p style="text-align: right;">Right aligned</p>
+<p style="text-align: justify;">Justified text</p>
+```
+
+### Embeds (toolbar editor only)
+
+YouTube and Twitter embeds are serialized as custom HTML nodes.
+
+**YouTube embed:**
+
+```html
+<div data-type="youtube" data-src="https://www.youtube.com/watch?v=dQw4w9WgXcQ" data-width="560" data-height="315" data-align="center"></div>
+```
+
+| Attribute      | Description                          |
+| -------------- | ------------------------------------ |
+| `data-type`    | Always `"youtube"`                   |
+| `data-src`     | The full YouTube URL or video ID     |
+| `data-width`   | Width in pixels (default: `560`)     |
+| `data-height`  | Height in pixels (default: `315`)    |
+| `data-align`   | Alignment: `"left"` / `"center"` / `"right"` |
+
+**Twitter embed:**
+
+```html
+<div data-type="twitter" data-tweet-id="123456789" data-width="550" data-height="400" data-align="center"></div>
+```
+
+| Attribute        | Description                          |
+| ---------------- | ------------------------------------ |
+| `data-type`      | Always `"twitter"`                   |
+| `data-tweet-id`  | Numeric tweet ID                     |
+| `data-width`     | Width in pixels (default: `550`)     |
+| `data-height`    | Height in pixels (default: `400`)    |
+| `data-align`     | Alignment: `"left"` / `"center"` / `"right"` |
+
+When rendering embeds on your own (outside the editor), detect these by their `data-type` attribute and render the appropriate iframe/widget.
+
+### Block editor
+
+The block editor uses standard Tiptap nodes with no custom node types. Its output follows the same table above — standard HTML for headings, paragraphs, lists, code blocks, etc.
+
+## JSON
+
+Use `editor.getJSON()` to retrieve the content as a ProseMirror JSON document:
+
+```tsx
+const json = editor.getJSON();
+```
+
+This returns a structured JSON tree representing the document. You can store this in a database and restore it later with `editor.commands.setContent(json)`.
+
+The JSON format is useful when you need to:
+- Store content in a structured format (e.g. a JSON column in your database)
+- Transform or analyze the document programmatically
+- Avoid HTML parsing on the server
+
+### Example JSON output
+
+```json
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        { "type": "text", "text": "Hello " },
+        { "type": "text", "marks": [{ "type": "bold" }], "text": "world" }
+      ]
+    },
+    {
+      "type": "youtube",
+      "attrs": {
+        "src": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "width": 560,
+        "height": 315,
+        "align": "center"
+      }
+    }
+  ]
+}
+```
+
+### Embed node types (toolbar editor only)
+
+| Embed            | JSON node type | Attributes                                           |
+| ---------------- | -------------- | ---------------------------------------------------- |
+| YouTube          | `youtube`      | `src`, `width`, `height`, `align`                    |
+| Twitter          | `twitter`      | `tweetId`, `width`, `height`, `align`                |
+
+## Plain text
+
+Use `editor.getText()` to retrieve the content as plain text without any formatting:
+
+```tsx
+const text = editor.getText();
+```
+
+## Controlled mode
+
+For reactive forms or database-backed content, use the `onUpdate` callback with `getHTML()` or `getJSON()`:
+
+```tsx
+const editor = useEditor({
+  extensions: [StarterKit],
+  content: initialContent,
+  onUpdate: ({ editor }) => {
+    const html = editor.getHTML();
+    onChange(html);
+  },
+});
+```
+
+When restoring content, pass it back as the `content` prop. Tiptap accepts both HTML strings and JSON objects.
+
+## Server-side rendering
+
+The editor runs in the browser only — `editor.getHTML()` / `editor.getJSON()` are client-side APIs. The recommended approach is:
+
+1. **On the server**: Store the HTML or JSON blob (returned from the client's `onUpdate`) in your database
+2. **On the client**: Pass it back to `useEditor({ content })` when loading the editor
+
+To render editor content on the server (e.g. in a blog post view), use the HTML output with `dangerouslySetInnerHTML`. Make sure to sanitize the HTML if users can submit content:
+
+```tsx
+function RenderContent({ html }: { html: string }) {
+  return (
+    <div
+      className="prose"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}
+```
+
+For embeds rendered outside the editor, you'll need to replace the custom `<div data-type="youtube">` / `<div data-type="twitter">` elements with actual iframes or Twitter widgets. Use the `data-src` / `data-tweet-id` attributes to construct the embed URL.
