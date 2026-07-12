@@ -8,7 +8,9 @@ export function Toolbar({
   sticky,
   stickyOffset = 0,
 }: RichTextEditorToolbarProps) {
-  const { variant } = useRichTextEditorContext();
+  const { variant, editable } = useRichTextEditorContext();
+
+  if (!editable) return null;
 
   return (
     <div

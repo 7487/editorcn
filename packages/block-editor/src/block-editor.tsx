@@ -10,7 +10,7 @@ function BlockEditorContent() {
 
   return (
     <div className="block-editor">
-      {editor && (
+      {editor && editor.isEditable && (
         <DragHandle editor={editor}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="block-editor-drag-handle-icon">
             <circle cx="9" cy="5" r="1" />
@@ -22,7 +22,7 @@ function BlockEditorContent() {
           </svg>
         </DragHandle>
       )}
-      {editor && <BubbleMenu editor={editor} />}
+      {editor && editor.isEditable && <BubbleMenu editor={editor} />}
       <EditorContent editor={editor} className="block-editor-content" />
     </div>
   );

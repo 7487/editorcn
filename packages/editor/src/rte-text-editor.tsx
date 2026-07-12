@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { cn } from "./ui/utils";
 import { RichTextEditorContext } from './rte-context';
 import { DEFAULT_LABELS } from './labels';
@@ -20,6 +20,7 @@ function RichTextEditorRoot({
   labels,
   icons,
   variant = "default",
+  editable = true,
 }: RichTextEditorProps) {
   const mergedLabels = useMemo(
     () => ({ ...DEFAULT_LABELS, ...labels }),
@@ -31,8 +32,14 @@ function RichTextEditorRoot({
     [icons]
   );
 
+  useEffect(() => {
+    if (editor && editor.isEditable !== editable) {
+      editor.setEditable(editable);
+    }
+  }, [editor, editable]);
+
   return (
-    <RichTextEditorContext.Provider value={{ editor, labels: mergedLabels, icons: mergedIcons, variant }}>
+    <RichTextEditorContext.Provider value={{ editor, labels: mergedLabels, icons: mergedIcons, variant, editable }}>
       <div
         className={cn(
           'rte-root',

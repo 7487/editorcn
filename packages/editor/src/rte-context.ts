@@ -9,6 +9,7 @@ interface RichTextEditorContextValue {
   labels: RichTextEditorLabels;
   icons: RichTextEditorIcons;
   variant: RichTextEditorVariant;
+  editable: boolean;
 }
 
 export const RichTextEditorContext = createContext<RichTextEditorContextValue | null>(null);

@@ -11,6 +11,7 @@ export interface RichTextEditorProps {
   labels?: Partial<RichTextEditorLabels>;
   icons?: Partial<RichTextEditorIcons>;
   variant?: RichTextEditorVariant;
+  editable?: boolean;
 }
 
 export interface RichTextEditorToolbarProps {

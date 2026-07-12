@@ -279,6 +279,7 @@ export function EditorCustomControlsDemo() {
 export function EditorReadOnlyDemo() {
   const [isEditable, setIsEditable] = useState(true);
   const editor = useEditor({
+    editable: isEditable,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
     extensions,
@@ -306,7 +307,7 @@ export function EditorReadOnlyDemo() {
         )}
         {isEditable ? "Switch to Read-only" : "Switch to Editable"}
       </button>
-      <RichTextEditor editor={editor}>
+      <RichTextEditor editor={editor} editable={isEditable}>
         <RichTextEditor.Toolbar>
           <div className="flex items-center gap-2" data-editable={isEditable}>
             <EditorToolbar />

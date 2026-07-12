@@ -132,28 +132,60 @@ function InsertStar() {
 
 ### Read-only Mode
 
-Toggle the editor between editable and read-only using `editor.setEditable()`.
+Both editors support read-only mode. When disabled, the toolbar and drag handles are hidden, and content is displayed as plain document.
 
 <EditorReadOnlyDemo />
 
+#### RichTextEditor
+
+Use the `editable` prop on `RichTextEditor` — the toolbar is hidden automatically when `false`, and the editor state is synced:
+
 ```tsx
-const [isEditable, setIsEditable] = useState(true);
 const editor = useEditor({
-  extensions: [...],
+  editable: false,
+  extensions: [StarterKit, Link],
 });
 
-const toggle = () => {
-  const next = !editor.isEditable;
-  editor.setEditable(next);
-  setIsEditable(next);
-};
-
-<button onClick={toggle}>
-  {isEditable ? "Switch to Read-only" : "Switch to Editable"}
-</button>
+<RichTextEditor editor={editor} editable={false}>
+  <RichTextEditor.Toolbar>
+    {/* hidden when editable is false */}
+  </RichTextEditor.Toolbar>
+  <RichTextEditor.Content />
+</RichTextEditor>
 ```
 
-When read-only, the bubble menu in BlockEditor also automatically hides.
+Toggle dynamically:
+
+```tsx
+const [editable, setEditable] = useState(true);
+
+<button onClick={() => setEditable(!editable)}>
+  {editable ? "Read-only" : "Edit"}
+</button>
+
+<RichTextEditor editor={editor} editable={editable}>
+  ...
+</RichTextEditor>
+```
+
+#### BlockEditor
+
+Use `editor.setEditable()` directly. The drag handle and bubble menu auto-hide when `editor.isEditable` is `false`:
+
+```tsx
+const editor = useEditor({
+  editable: false,
+  extensions: [StarterKit, SlashCommand],
+});
+
+<button onClick={() => {
+  editor.setEditable(!editor.isEditable);
+}}>
+  Toggle edit
+</button>
+
+<BlockEditor editor={editor} />
+```
 
 ### Custom Label Overrides
 
