@@ -21,7 +21,7 @@ import {
   TabsList,
   TabsTrigger,
   TabsContent,
-} from "@rtecn/ui/components/tabs";
+} from "@/components/ui/tabs";
 import {
   CodeBlock,
   CodeBlockBody,

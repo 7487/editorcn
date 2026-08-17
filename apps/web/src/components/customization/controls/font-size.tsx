@@ -2,9 +2,9 @@
 
 import { useEditorState } from "@tiptap/react";
 import { Minus, Plus } from "lucide-react";
-import { Button } from "@rtecn/ui/components/button";
+import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@rtecn/ui/components/button-group";
-import { Input } from "@rtecn/ui/components/input";
+import { Input } from "@/components/ui/input";
 import { useRichTextEditorContext } from "@rtecn/editor";
 
 const MIN = 1;

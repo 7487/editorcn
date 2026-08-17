@@ -1,6 +1,6 @@
 "use client";
 
-import { Toaster } from "@rtecn/ui/components/sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "./theme-provider";
 import { Analytics } from "@vercel/analytics/next";
 import { ImagePromptPortal } from "./image-prompt";

@@ -1,12 +1,43 @@
-import { defineDocs, defineConfig } from "fumadocs-mdx/config";
+import {
+  defineConfig,
+  defineDocs,
+  frontmatterSchema,
+  metaSchema,
+} from "fumadocs-mdx/config";
+import { rehypePrettyCode } from "rehype-pretty-code";
 
-export const docs = defineDocs({
-  dir: "content/docs",
-  docs: {
-    postprocess: {
-      includeProcessedMarkdown: true,
+import { DOCS_DIR } from "@/lib/docs";
+import { transformers } from "@/lib/highlight-code";
+
+export default defineConfig({
+  mdxOptions: {
+    rehypePlugins: (plugins) => {
+      plugins.shift();
+      plugins.push([
+        rehypePrettyCode,
+        {
+          theme: {
+            dark: "github-dark",
+            light: "github-light-default",
+          },
+          transformers,
+        },
+      ]);
+
+      return plugins;
     },
   },
 });
 
-export default defineConfig();
+export const docs = defineDocs({
+  dir: DOCS_DIR,
+  docs: {
+    postprocess: {
+      includeProcessedMarkdown: true,
+    },
+    schema: frontmatterSchema,
+  },
+  meta: {
+    schema: metaSchema,
+  },
+});

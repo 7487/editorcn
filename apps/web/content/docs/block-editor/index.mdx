@@ -4,8 +4,6 @@ description: Notion-style block-based rich text editor with slash commands and b
 package: "@rtecn/block-editor"
 ---
 
-# Block Editor
-
 Package: `@rtecn/block-editor`
 Import: `import { BlockEditor } from "@rtecn/block-editor"`
 Description: Notion-style block-based editor with slash commands, drag handles, and a context-aware bubble menu for inline formatting.
@@ -14,83 +12,23 @@ Description: Notion-style block-based editor with slash commands, drag handles, 
 
 **Install via the shadcn registry (recommended):**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npx shadcn@latest add @rtecn/block-editor
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn dlx shadcn@latest add @rtecn/block-editor
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm dlx shadcn@latest add @rtecn/block-editor
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bunx shadcn@latest add @rtecn/block-editor
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npx shadcn@latest add @rtecn/block-editor"}
+  __yarn__={"yarn dlx shadcn@latest add @rtecn/block-editor"}
+  __pnpm__={"pnpm dlx shadcn@latest add @rtecn/block-editor"}
+  __bun__={"bunx shadcn@latest add @rtecn/block-editor"}
+/>
 
 This copies the component source directly into your project, so you can customize it freely.
 
 **Or install via npm/pnpm:**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
+  __yarn__={"yarn add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
+  __pnpm__={"pnpm add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
+  __bun__={"bun add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
+/>
 
 After installation, import the editor styles at the root of your application:
 
@@ -102,7 +40,6 @@ import "@rtecn/ui/globals.css";
 import "@rtecn/block-editor/style.css";
 ```
 
-<Callout type="warning">
   If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@rtecn/block-editor` throughout this page:
   ```tsx
   import {
@@ -113,48 +50,17 @@ import "@rtecn/block-editor/style.css";
   } from "@/components/rte-block-editor";
   import "@/components/rte-block-editor/style.css";
   ```
-</Callout>
 
 ## Install Extensions
 
 For demo, we will use these extensions:
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header"}
+  __yarn__={"yarn add @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header"}
+  __pnpm__={"pnpm add @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header"}
+  __bun__={"bun add @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header"}
+/>
 
 ## Usage
 
@@ -426,42 +332,12 @@ Extensions for **Image**, **Table**, **Link**, and others are not included — a
 
 To enable syntax highlighting in code blocks, install `lowlight` and pass it to `@tiptap/extension-code-block-lowlight`:
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install lowlight @tiptap/extension-code-block-lowlight
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add lowlight @tiptap/extension-code-block-lowlight
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add lowlight @tiptap/extension-code-block-lowlight
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add lowlight @tiptap/extension-code-block-lowlight
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install lowlight @tiptap/extension-code-block-lowlight"}
+  __yarn__={"yarn add lowlight @tiptap/extension-code-block-lowlight"}
+  __pnpm__={"pnpm add lowlight @tiptap/extension-code-block-lowlight"}
+  __bun__={"bun add lowlight @tiptap/extension-code-block-lowlight"}
+/>
 
 ```tsx
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
@@ -484,42 +360,12 @@ const editor = useEditor({
 
 Install `@tiptap/extension-placeholder` to show placeholder text:
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install @tiptap/extension-placeholder"}
+  __yarn__={"yarn add @tiptap/extension-placeholder"}
+  __pnpm__={"pnpm add @tiptap/extension-placeholder"}
+  __bun__={"bun add @tiptap/extension-placeholder"}
+/>
 
 ```tsx
 import Placeholder from "@tiptap/extension-placeholder";

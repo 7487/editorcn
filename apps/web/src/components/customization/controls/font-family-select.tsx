@@ -2,13 +2,7 @@
 
 import { useEditorState } from "@tiptap/react";
 import { Type } from "lucide-react";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@rtecn/ui/components/select";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import { useRichTextEditorContext } from "@rtecn/editor";
 
 const FONTS = [
@@ -34,27 +28,27 @@ export function FontFamilySelect() {
     }) ?? "";
 
   return (
-    <Select
-      value={value}
-      onValueChange={(v) => {
-        if (!v || v === "") {
-          editor?.chain().focus().unsetFontFamily().run();
-        } else {
-          editor?.chain().focus().setFontFamily(v).run();
-        }
-      }}
-    >
-      <SelectTrigger className="w-24" size="sm">
-        <Type className="h-3.5 w-3.5 shrink-0" />
-        <SelectValue placeholder="Font" />
-      </SelectTrigger>
-      <SelectContent>
+    <div className="flex items-center gap-1">
+      <Type className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+      <NativeSelect
+        size="sm"
+        value={value}
+        onChange={(e) => {
+          const v = e.target.value;
+          if (!v || v === "") {
+            editor?.chain().focus().unsetFontFamily().run();
+          } else {
+            editor?.chain().focus().setFontFamily(v).run();
+          }
+        }}
+        className="w-24"
+      >
         {FONTS.map((f) => (
-          <SelectItem key={f.value || "default"} value={f.value}>
+          <NativeSelectOption key={f.value || "default"} value={f.value}>
             {f.label}
-          </SelectItem>
+          </NativeSelectOption>
         ))}
-      </SelectContent>
-    </Select>
+      </NativeSelect>
+    </div>
   );
 }

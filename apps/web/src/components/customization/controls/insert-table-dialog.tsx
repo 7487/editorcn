@@ -10,9 +10,9 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@rtecn/ui/components/dialog";
-import { Button } from "@rtecn/ui/components/button";
-import { Input } from "@rtecn/ui/components/input";
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useRichTextEditorContext } from "@rtecn/editor";
 
 export function InsertTableDialog() {
@@ -30,8 +30,10 @@ export function InsertTableDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button variant="ghost" size="icon-sm" />}>
-        <Grid3x3 className="h-4 w-4" />
+      <DialogTrigger asChild>
+        <Button variant="ghost" size="icon-sm">
+          <Grid3x3 className="h-4 w-4" />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

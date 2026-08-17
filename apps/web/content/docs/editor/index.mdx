@@ -4,8 +4,6 @@ description: Tiptap-based rich text editor with toolbar controls.
 package: "@rtecn/editor"
 ---
 
-# Rich text editor
-
 Package: `@rtecn/editor`
 Import: `import { RichTextEditor } from "@rtecn/editor"`
 Description: Tiptap-based rich text editor with a compound component API and 20+ built-in toolbar controls.
@@ -14,83 +12,23 @@ Description: Tiptap-based rich text editor with a compound component API and 20+
 
 **Install via the shadcn registry (recommended):**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn dlx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm dlx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bunx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npx shadcn@latest add @rtecn/editor"}
+  __yarn__={"yarn dlx shadcn@latest add @rtecn/editor"}
+  __pnpm__={"pnpm dlx shadcn@latest add @rtecn/editor"}
+  __bun__={"bunx shadcn@latest add @rtecn/editor"}
+/>
 
 This copies the component source directly into your project, so you can customize it freely.
 
 **Or install via npm/pnpm:**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
+  __yarn__={"yarn add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
+  __pnpm__={"pnpm add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
+  __bun__={"bun add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
+/>
 
 After installation, import the editor styles at the root of your application:
 
@@ -102,13 +40,11 @@ import "@rtecn/ui/globals.css";
 import "@rtecn/editor/style.css";
 ```
 
-<Callout type="warning">
   If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@rtecn/editor` throughout this page:
   ```tsx
   import { RichTextEditor, Link } from "@/components/rte-editor";
   import "@/components/rte-editor/style.css";
   ```
-</Callout>
 
 ## Tiptap editor
 
@@ -403,42 +339,12 @@ Some controls require additional [Tiptap extensions](https://tiptap.dev/extensio
 
 ### Controls requiring `@tiptap/extension-underline`
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install @tiptap/extension-underline
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add @tiptap/extension-underline
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add @tiptap/extension-underline
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add @tiptap/extension-underline
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install @tiptap/extension-underline"}
+  __yarn__={"yarn add @tiptap/extension-underline"}
+  __pnpm__={"pnpm add @tiptap/extension-underline"}
+  __bun__={"bun add @tiptap/extension-underline"}
+/>
 
 | Control                    |
 | -------------------------- |
@@ -446,42 +352,12 @@ bun add @tiptap/extension-underline
 
 ### Controls requiring `@tiptap/extension-text-align`
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install @tiptap/extension-text-align
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add @tiptap/extension-text-align
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add @tiptap/extension-text-align
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add @tiptap/extension-text-align
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install @tiptap/extension-text-align"}
+  __yarn__={"yarn add @tiptap/extension-text-align"}
+  __pnpm__={"pnpm add @tiptap/extension-text-align"}
+  __bun__={"bun add @tiptap/extension-text-align"}
+/>
 
 ```tsx
 import TextAlign from "@tiptap/extension-text-align";
@@ -500,42 +376,12 @@ const editor = useEditor({
 
 ### Controls requiring `@tiptap/extension-highlight`
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install @tiptap/extension-highlight
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add @tiptap/extension-highlight
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add @tiptap/extension-highlight
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add @tiptap/extension-highlight
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install @tiptap/extension-highlight"}
+  __yarn__={"yarn add @tiptap/extension-highlight"}
+  __pnpm__={"pnpm add @tiptap/extension-highlight"}
+  __bun__={"bun add @tiptap/extension-highlight"}
+/>
 
 | Control                    |
 | -------------------------- |
@@ -543,42 +389,12 @@ bun add @tiptap/extension-highlight
 
 ### Controls requiring `@tiptap/extension-subscript`
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install @tiptap/extension-subscript
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add @tiptap/extension-subscript
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add @tiptap/extension-subscript
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add @tiptap/extension-subscript
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install @tiptap/extension-subscript"}
+  __yarn__={"yarn add @tiptap/extension-subscript"}
+  __pnpm__={"pnpm add @tiptap/extension-subscript"}
+  __bun__={"bun add @tiptap/extension-subscript"}
+/>
 
 | Control                    |
 | -------------------------- |
@@ -586,42 +402,12 @@ bun add @tiptap/extension-subscript
 
 ### Controls requiring `@tiptap/extension-superscript`
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install @tiptap/extension-superscript
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add @tiptap/extension-superscript
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add @tiptap/extension-superscript
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add @tiptap/extension-superscript
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install @tiptap/extension-superscript"}
+  __yarn__={"yarn add @tiptap/extension-superscript"}
+  __pnpm__={"pnpm add @tiptap/extension-superscript"}
+  __bun__={"bun add @tiptap/extension-superscript"}
+/>
 
 | Control                      |
 | ---------------------------- |
@@ -720,42 +506,12 @@ Both embeds support **alignment** (left, center, right) via the `data-align` att
 
 Install `@tiptap/extension-placeholder` to show placeholder text when the editor is empty:
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install @tiptap/extension-placeholder"}
+  __yarn__={"yarn add @tiptap/extension-placeholder"}
+  __pnpm__={"pnpm add @tiptap/extension-placeholder"}
+  __bun__={"bun add @tiptap/extension-placeholder"}
+/>
 
 ```tsx
 import Placeholder from "@tiptap/extension-placeholder";
@@ -1011,42 +767,12 @@ function CustomBoldButton() {
 
 To use syntax highlighting in code blocks, install `@tiptap/extension-code-block-lowlight` and `lowlight`:
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install lowlight @tiptap/extension-code-block-lowlight
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add lowlight @tiptap/extension-code-block-lowlight
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add lowlight @tiptap/extension-code-block-lowlight
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add lowlight @tiptap/extension-code-block-lowlight
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install lowlight @tiptap/extension-code-block-lowlight"}
+  __yarn__={"yarn add lowlight @tiptap/extension-code-block-lowlight"}
+  __pnpm__={"pnpm add lowlight @tiptap/extension-code-block-lowlight"}
+  __bun__={"bun add lowlight @tiptap/extension-code-block-lowlight"}
+/>
 
 ```tsx
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";

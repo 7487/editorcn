@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@rtecn/ui/components/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@rtecn/ui/components/tabs";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { EditorPreview } from "@/components/editor-preview";
 import { BlockEditorPreview } from "@/components/block-editor-preview";
 import { EditorCodeBlock } from "@/components/editor-code-block";

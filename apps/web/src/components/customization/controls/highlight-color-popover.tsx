@@ -5,8 +5,8 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@rtecn/ui/components/popover";
-import { Button } from "@rtecn/ui/components/button";
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 import { useRichTextEditorContext } from "@rtecn/editor";
 
 const COLORS = [
@@ -22,8 +22,10 @@ export function HighlightColorPopover() {
   const { editor } = useRichTextEditorContext();
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant="ghost" size="icon-sm" />}>
-        <Highlighter className="h-4 w-4" />
+      <PopoverTrigger asChild>
+        <Button variant="ghost" size="icon-sm">
+          <Highlighter className="h-4 w-4" />
+        </Button>
       </PopoverTrigger>
       <PopoverContent align="start" className="w-48">
         <div className="grid grid-cols-6 gap-1.5">
@@ -46,7 +48,7 @@ export function HighlightColorPopover() {
         </div>
         <Button
           variant="secondary"
-          size="xs"
+          size="icon-sm"
           className="mt-2 w-full"
           onClick={() => editor?.chain().focus().unsetHighlight().run()}
         >
