@@ -31,3 +31,7 @@ export const META_THEME_COLORS = {
   dark: "#09090b",
   light: "#ffffff",
 };
+
+export const UTM_PARAMS = {
+  utm_source: new URL(baseUrl).hostname,
+};
