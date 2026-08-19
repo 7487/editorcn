@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Button } from "@rtecn/ui/components/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@rtecn/ui/components/tabs";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { EditorPreview } from "@/components/editor-preview";
 import { BlockEditorPreview } from "@/components/block-editor-preview";
-import { EditorCodeBlock } from "@/components/editor-code-block";
 import type { RichTextEditorVariant } from "@rtecn/editor";
+import { ComponentCode } from "./component-code";
+import { codeToHtml } from "shiki";
 
 type CodeFile = {
   language: string;
@@ -37,12 +38,21 @@ export function EditorSection(props: EditorSectionProps) {
   return (
     <div>
       <div className="mb-2 flex items-center gap-2">
-        <h2 className="text-lg font-medium tracking-tight text-foreground">{props.title}</h2>
-        <span className={props.badgeClass ?? "inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background"}>
+        <h2 className="text-lg font-medium tracking-tight text-foreground">
+          {props.title}
+        </h2>
+        <span
+          className={
+            props.badgeClass ??
+            "inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background"
+          }
+        >
           {props.badge}
         </span>
       </div>
-      <p className="mb-4 text-base text-muted-foreground">{props.description}</p>
+      <p className="mb-4 text-base text-muted-foreground">
+        {props.description}
+      </p>
 
       {props.type === "editor" && (
         <div className="mb-3 flex gap-1">
@@ -72,14 +82,116 @@ export function EditorSection(props: EditorSectionProps) {
           )}
         </TabsContent>
         <TabsContent value="code" className="pt-4">
-          <EditorCodeBlock data={props.codeData} />
+          <CodeViewer files={props.codeData} />
         </TabsContent>
       </Tabs>
       <div className="mt-3">
         <Link href={props.docsHref}>
-          <Button variant="link" className="h-auto px-0">View docs &rarr;</Button>
+          <Button variant="link" className="h-auto px-0">
+            View docs &rarr;
+          </Button>
         </Link>
       </div>
     </div>
   );
 }
+
+const CodeViewer = ({ files }: { files: CodeFile[] }) => {
+  const [activeFile, setActiveFile] = useState(files[0]?.filename);
+  const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const current = files.find((f) => f.filename === activeFile) ?? files[0];
+
+  useEffect(() => {
+    if (!current) return;
+    let cancelled = false;
+
+    setIsLoading(true);
+    setError(null);
+    setHighlightedCode(null);
+
+    codeToHtml(current.code, {
+      lang: current.language,
+      theme: "github-dark",
+    })
+      .then((html) => {
+        if (!cancelled) {
+          setHighlightedCode(html);
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) {
+          setError(
+            err instanceof Error ? err.message : "Failed to render code."
+          );
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [current]);
+
+  if (!files.length) {
+    return (
+      <div className="flex h-full min-h-72 items-center justify-center text-sm text-muted-foreground">
+        No code available.
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative h-full min-h-140 bg-code text-code-foreground lg:min-h-0">
+      {files.length > 1 ? (
+        <div className="mb-2 flex gap-1 border-b border-border/40 px-1">
+          {files.map((f) => (
+            <button
+              key={f.filename}
+              onClick={() => setActiveFile(f.filename)}
+              className={
+                f.filename === current?.filename
+                  ? "border-b-2 border-foreground px-2 py-1 text-xs font-medium text-foreground"
+                  : "border-b-2 border-transparent px-2 py-1 text-xs text-muted-foreground hover:text-foreground"
+              }
+            >
+              {f.filename}
+            </button>
+          ))}
+        </div>
+      ) : null}
+
+      <div className="no-scrollbar min-h-0 flex-1 overflow-auto px-3">
+        {isLoading ? (
+          <div
+            className="flex h-full min-h-72 items-center justify-center text-sm text-code-foreground/60"
+            role="status"
+          >
+            Rendering code…
+          </div>
+        ) : null}
+        {error ? (
+          <div
+            className="flex h-full min-h-72 items-center justify-center px-6 text-center text-sm text-red-400"
+            role="alert"
+          >
+            {error}
+          </div>
+        ) : null}
+        {current && highlightedCode && !isLoading && !error ? (
+          <ComponentCode
+            code={current.code}
+            highlightedCode={highlightedCode}
+            language={current.language}
+            title={current.filename}
+            className="mt-0"
+            copyButtonClassName="right-4"
+          />
+        ) : null}
+      </div>
+    </div>
+  );
+};

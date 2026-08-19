@@ -6,6 +6,17 @@ const nextConfig = {
   // typedRoutes: true, // disabled due to Next.js 16 bug with @base-ui/react Form types
   reactCompiler: true,
   transpilePackages: ['@rtecn/editor'],
+  experimental: {
+    viewTransition: true,
+  },
+  images: {
+    remotePatterns: [
+      {
+        hostname: "avatars.githubusercontent.com",
+        protocol: "https",
+      },
+    ],
+  },
   async rewrites() {
     return [
       {

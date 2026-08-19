@@ -3,8 +3,6 @@ title: Getting Started
 description: Get started with rtecn packages in your project.
 ---
 
-# Getting Started
-
 ## Prerequisites
 
 - React 18 or 19
@@ -40,81 +38,21 @@ Since the shadcn registry is the recommended install method, add the rtecn regis
 
 **Install via the shadcn registry (recommended):**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn dlx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm dlx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bunx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npx shadcn@latest add @rtecn/editor"}
+  __yarn__={"yarn dlx shadcn@latest add @rtecn/editor"}
+  __pnpm__={"pnpm dlx shadcn@latest add @rtecn/editor"}
+  __bun__={"bunx shadcn@latest add @rtecn/editor"}
+/>
 
 **Or install via npm:**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
+  __yarn__={"yarn add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
+  __pnpm__={"pnpm add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
+  __bun__={"bun add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
+/>
 
 Import the styles:
 
@@ -122,13 +60,11 @@ Import the styles:
 import "@rtecn/editor/style.css";
 ```
 
-<Callout type="warning">
   If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@rtecn/editor`:
   ```tsx
     import { RichTextEditor, Link } from '@/components/rte-editor';
     import "@/components/rte-editor/style.css";
   ```
-</Callout>
 
 ```tsx
 "use client";
@@ -207,81 +143,21 @@ export function MyEditor() {
 
 **Install via the shadcn registry (recommended):**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npx shadcn@latest add @rtecn/block-editor
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn dlx shadcn@latest add @rtecn/block-editor
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm dlx shadcn@latest add @rtecn/block-editor
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bunx shadcn@latest add @rtecn/block-editor
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npx shadcn@latest add @rtecn/block-editor"}
+  __yarn__={"yarn dlx shadcn@latest add @rtecn/block-editor"}
+  __pnpm__={"pnpm dlx shadcn@latest add @rtecn/block-editor"}
+  __bun__={"bunx shadcn@latest add @rtecn/block-editor"}
+/>
 
 **Or install via npm:**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npm install @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bun add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npm install @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder"}
+  __yarn__={"yarn add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder"}
+  __pnpm__={"pnpm add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder"}
+  __bun__={"bun add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder"}
+/>
 
 Import the styles:
 
@@ -289,7 +165,6 @@ Import the styles:
 import "@rtecn/block-editor/style.css";
 ```
 
-<Callout type="warning">
   If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@rtecn/block-editor`:
   ```tsx
   import {
@@ -300,7 +175,6 @@ import "@rtecn/block-editor/style.css";
   } from '@/components/rte-block-editor';
   import "@/components/rte-block-editor/style.css";
   ```
-</Callout>
 
 ```tsx
 "use client";

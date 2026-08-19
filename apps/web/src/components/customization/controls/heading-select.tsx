@@ -1,13 +1,7 @@
 "use client";
 
 import { useEditorState } from "@tiptap/react";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@rtecn/ui/components/select";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import { useRichTextEditorContext } from "@rtecn/editor";
 
 export function HeadingSelect() {
@@ -26,9 +20,11 @@ export function HeadingSelect() {
     }) ?? "paragraph";
 
   return (
-    <Select
+    <NativeSelect
+      size="sm"
       value={value}
-      onValueChange={(v) => {
+      onChange={(e) => {
+        const v = e.target.value;
         if (!v) return;
         if (v === "paragraph") {
           editor?.chain().focus().setParagraph().run();
@@ -37,16 +33,12 @@ export function HeadingSelect() {
           editor?.chain().focus().toggleHeading({ level }).run();
         }
       }}
+      className="w-14"
     >
-      <SelectTrigger className="w-14" size="sm">
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="paragraph">Paragraph</SelectItem>
-        <SelectItem value="h1">Heading 1</SelectItem>
-        <SelectItem value="h2">Heading 2</SelectItem>
-        <SelectItem value="h3">Heading 3</SelectItem>
-      </SelectContent>
-    </Select>
+      <NativeSelectOption value="paragraph">Paragraph</NativeSelectOption>
+      <NativeSelectOption value="h1">Heading 1</NativeSelectOption>
+      <NativeSelectOption value="h2">Heading 2</NativeSelectOption>
+      <NativeSelectOption value="h3">Heading 3</NativeSelectOption>
+    </NativeSelect>
   );
 }

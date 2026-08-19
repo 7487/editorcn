@@ -3,8 +3,6 @@ title: Templates
 description: Prebuilt rich text editor configurations with custom controls baked in.
 ---
 
-# Templates
-
 Prebuilt editor configurations that come with custom controls already integrated. Each template is a complete `@rtecn/editor` setup with specific controls tailored to a use case — just install and go.
 
 Install the base editor and the controls you need, or install everything at once.
@@ -21,81 +19,21 @@ A rich text editor focused on document styling — choose fonts, set text size, 
 
 **Install the editor:**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn dlx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm dlx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bunx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npx shadcn@latest add @rtecn/editor"}
+  __yarn__={"yarn dlx shadcn@latest add @rtecn/editor"}
+  __pnpm__={"pnpm dlx shadcn@latest add @rtecn/editor"}
+  __bun__={"bunx shadcn@latest add @rtecn/editor"}
+/>
 
 **Then install the controls:**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npx shadcn@latest add "https://rtecn.space/r/custom-controls/font-family-select" "https://rtecn.space/r/custom-controls/font-size" "https://rtecn.space/r/custom-controls/highlight-color-popover"
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn dlx shadcn@latest add "https://rtecn.space/r/custom-controls/font-family-select" "https://rtecn.space/r/custom-controls/font-size" "https://rtecn.space/r/custom-controls/highlight-color-popover"
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm dlx shadcn@latest add "https://rtecn.space/r/custom-controls/font-family-select" "https://rtecn.space/r/custom-controls/font-size" "https://rtecn.space/r/custom-controls/highlight-color-popover"
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bunx shadcn@latest add "https://rtecn.space/r/custom-controls/font-family-select" "https://rtecn.space/r/custom-controls/font-size" "https://rtecn.space/r/custom-controls/highlight-color-popover"
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npx shadcn@latest add \"https://rtecn.space/r/custom-controls/font-family-select\" \"https://rtecn.space/r/custom-controls/font-size\" \"https://rtecn.space/r/custom-controls/highlight-color-popover\""}
+  __yarn__={"yarn dlx shadcn@latest add \"https://rtecn.space/r/custom-controls/font-family-select\" \"https://rtecn.space/r/custom-controls/font-size\" \"https://rtecn.space/r/custom-controls/highlight-color-popover\""}
+  __pnpm__={"pnpm dlx shadcn@latest add \"https://rtecn.space/r/custom-controls/font-family-select\" \"https://rtecn.space/r/custom-controls/font-size\" \"https://rtecn.space/r/custom-controls/highlight-color-popover\""}
+  __bun__={"bunx shadcn@latest add \"https://rtecn.space/r/custom-controls/font-family-select\" \"https://rtecn.space/r/custom-controls/font-size\" \"https://rtecn.space/r/custom-controls/highlight-color-popover\""}
+/>
 
 <DocumentEditorCard />
 
@@ -113,81 +51,21 @@ A content-creation focused editor with a heading selector, link dialog, and emoj
 
 **Install the editor:**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn dlx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm dlx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bunx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npx shadcn@latest add @rtecn/editor"}
+  __yarn__={"yarn dlx shadcn@latest add @rtecn/editor"}
+  __pnpm__={"pnpm dlx shadcn@latest add @rtecn/editor"}
+  __bun__={"bunx shadcn@latest add @rtecn/editor"}
+/>
 
 **Then install the controls:**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npx shadcn@latest add "https://rtecn.space/r/custom-controls/heading-select" "https://rtecn.space/r/custom-controls/insert-link-dialog" "https://rtecn.space/r/custom-controls/emoji-menu"
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn dlx shadcn@latest add "https://rtecn.space/r/custom-controls/heading-select" "https://rtecn.space/r/custom-controls/insert-link-dialog" "https://rtecn.space/r/custom-controls/emoji-menu"
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm dlx shadcn@latest add "https://rtecn.space/r/custom-controls/heading-select" "https://rtecn.space/r/custom-controls/insert-link-dialog" "https://rtecn.space/r/custom-controls/emoji-menu"
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bunx shadcn@latest add "https://rtecn.space/r/custom-controls/heading-select" "https://rtecn.space/r/custom-controls/insert-link-dialog" "https://rtecn.space/r/custom-controls/emoji-menu"
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npx shadcn@latest add \"https://rtecn.space/r/custom-controls/heading-select\" \"https://rtecn.space/r/custom-controls/insert-link-dialog\" \"https://rtecn.space/r/custom-controls/emoji-menu\""}
+  __yarn__={"yarn dlx shadcn@latest add \"https://rtecn.space/r/custom-controls/heading-select\" \"https://rtecn.space/r/custom-controls/insert-link-dialog\" \"https://rtecn.space/r/custom-controls/emoji-menu\""}
+  __pnpm__={"pnpm dlx shadcn@latest add \"https://rtecn.space/r/custom-controls/heading-select\" \"https://rtecn.space/r/custom-controls/insert-link-dialog\" \"https://rtecn.space/r/custom-controls/emoji-menu\""}
+  __bun__={"bunx shadcn@latest add \"https://rtecn.space/r/custom-controls/heading-select\" \"https://rtecn.space/r/custom-controls/insert-link-dialog\" \"https://rtecn.space/r/custom-controls/emoji-menu\""}
+/>
 
 <EnhancedEditorCard />
 
@@ -205,81 +83,21 @@ Everything included — all custom controls in a feature-complete editor with a 
 
 **Install the editor:**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn dlx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm dlx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bunx shadcn@latest add @rtecn/editor
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npx shadcn@latest add @rtecn/editor"}
+  __yarn__={"yarn dlx shadcn@latest add @rtecn/editor"}
+  __pnpm__={"pnpm dlx shadcn@latest add @rtecn/editor"}
+  __bun__={"bunx shadcn@latest add @rtecn/editor"}
+/>
 
 **Then install all controls at once:**
 
-<Tabs defaultValue="npm" groupId="pm">
-  <TabsList>
-    <TabsTrigger value="npm"><NpmIcon className="h-4 w-4" /> npm</TabsTrigger>
-    <TabsTrigger value="yarn"><YarnIcon className="h-4 w-4" /> yarn</TabsTrigger>
-    <TabsTrigger value="pnpm"><PnpmIcon className="h-4 w-4" /> pnpm</TabsTrigger>
-    <TabsTrigger value="bun"><BunIcon className="h-4 w-4" /> bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-
-```shell frame="none"
-npx shadcn@latest add "https://rtecn.space/r/custom-controls"
-```
-
-  </TabsContent>
-  <TabsContent value="yarn">
-
-```shell frame="none"
-yarn dlx shadcn@latest add "https://rtecn.space/r/custom-controls"
-```
-
-  </TabsContent>
-  <TabsContent value="pnpm">
-
-```shell frame="none"
-pnpm dlx shadcn@latest add "https://rtecn.space/r/custom-controls"
-```
-
-  </TabsContent>
-  <TabsContent value="bun">
-
-```shell frame="none"
-bunx shadcn@latest add "https://rtecn.space/r/custom-controls"
-```
-
-  </TabsContent>
-</Tabs>
+<CodeBlockCommand
+  __npm__={"npx shadcn@latest add \"https://rtecn.space/r/custom-controls\""}
+  __yarn__={"yarn dlx shadcn@latest add \"https://rtecn.space/r/custom-controls\""}
+  __pnpm__={"pnpm dlx shadcn@latest add \"https://rtecn.space/r/custom-controls\""}
+  __bun__={"bunx shadcn@latest add \"https://rtecn.space/r/custom-controls\""}
+/>
 
 <FullEditorCard />
 

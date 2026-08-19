@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Button } from "@rtecn/ui/components/button";
+import { Button } from "@/components/ui/button";
+import { CommandBox } from "@/components/command-box";
 import { EditorSection } from "@/components/editor-section";
 import {
   IconsPreview,
@@ -7,7 +8,9 @@ import {
   ControlsPreview,
   ThemeCard,
 } from "@/components/landing-previews";
-import Header from "@/components/header";
+import { PageTransition } from "@/components/page-transition";
+import { BreadcrumbJsonLd } from "@/seo/json-ld";
+import { ROUTES } from "@/constants/routes";
 
 export const GITHUB_URL = "https://github.com/AbdullahMukadam/Rtecn";
 
@@ -126,23 +129,7 @@ import {
 import type { SlashCommandSuggestionItem } from "@rtecn/block-editor";
 import "@rtecn/block-editor/style.css";
 
-const DEMO_CONTENT = "
-<h2>Getting Started</h2>
-<p>The <code>BlockEditor</code> is a block-style editor. Type <code>/</code> to open the command menu and insert blocks.</p>
-<h3>Text Formatting</h3>
-<p>Select any text to see the <strong>bubble menu</strong> with <em>formatting</em> options.</p>
-<h3>Task List</h3>
-<ul data-type="taskList">
-   <li data-type="taskItem" data-checked="true">A list item</li>
-   <li data-type="taskItem" data-checked="false">And another one</li>
-</ul>
-<h3>Code Block</h3>
-<pre><code class="language-javascript">function greet(name) {
-  return \`Hello, \${name}!\`;
-}</code></pre>
-<h3>Blockquote</h3>
-<blockquote><p>Block-level content with drag handles for reordering.</p></blockquote>
-".trim();
+const DEMO_CONTENT = "<h2>Getting Started</h2><p>The BlockEditor is a block-style editor.</p>";
 
 const myItems: SlashCommandSuggestionItem[] = [
   ...defaultSlashCommandItems,
@@ -177,9 +164,7 @@ export function MyBlockEditor() {
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
-      StarterKit.configure({
-        heading: { levels: [1, 2, 3] },
-      }),
+      StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
       Placeholder.configure({ placeholder: "Type / for commands..." }),
       Underline,
       TaskList,
@@ -189,15 +174,8 @@ export function MyBlockEditor() {
       TableCell,
       TableHeader,
       Image,
-      SlashCommand.configure({
-        suggestion: getSlashCommandSuggestion(myItems),
-      }),
-      Link.configure({
-        openOnClick: true,
-        autolink: true,
-        defaultProtocol: "https",
-        protocols: ["http", "https"],
-      }),
+      SlashCommand.configure({ suggestion: getSlashCommandSuggestion(myItems) }),
+      Link.configure({ openOnClick: true, autolink: true, defaultProtocol: "https", protocols: ["http", "https"] }),
     ],
     content: DEMO_CONTENT,
   });
@@ -223,114 +201,118 @@ const blockEditorCodeData = [
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <Header />
+    <>
+      <BreadcrumbJsonLd items={[{ name: "Home", path: ROUTES.HOME }]} />
+      <PageTransition>
+        <section className="container-wrapper relative">
+          <div className="container flex flex-col items-center gap-4 py-16 text-center md:py-20 lg:py-24">
+            <h1 className="max-w-7xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl from-foreground via-foreground to-foreground/65 bg-linear-to-b bg-clip-text text-transparent">
+              Rich text editors
+              <br />
+              for shadcn/ui
+            </h1>
 
-      <main className="flex-1">
-        <section className="mx-auto flex max-w-3xl flex-col items-center px-8 pt-24 pb-16 text-center">
-          <h1 className="text-5xl font-medium leading-tight tracking-tighter text-foreground sm:text-6xl">
-            Rich text editors
-            <br />
-            for shadcn/ui
-          </h1>
+            <p className="max-w-2xl text-lg text-muted-foreground sm:text-xl">
+              Two editors. One design system. Built on Tiptap with shadcn/ui
+              tokens.
+            </p>
 
-          <p className="mt-5 max-w-md text-base text-muted-foreground">
-            Two editors. One design system. Built on Tiptap with shadcn/ui
-            tokens.
-          </p>
+            <CommandBox className="mt-4 w-full max-w-xl" />
 
-          <div className="mt-8 flex gap-3">
-            <Link href="/docs">
-              <Button>Explore docs &rarr;</Button>
-            </Link>
-            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline">GitHub</Button>
-            </a>
+            <div className="mt-4 flex gap-3">
+              <Button asChild>
+                <Link href="/docs">Get Started &rarr;</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                  GitHub
+                </a>
+              </Button>
+            </div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-4xl space-y-12 px-4 md:px-8 pb-24">
-          <EditorSection
-            type="editor"
-            title="@rtecn/editor"
-            badge="Toolbar"
-            description="A traditional toolbar-style rich text editor. 20+ built-in controls including text formatting, headings, lists, links, alignment, and history."
-            codeData={editorCodeData}
-            docsHref="/docs/editor"
-          />
+        <section className="container-wrapper pb-8 lg:pb-12">
+          <div className="container space-y-12">
+            <EditorSection
+              type="editor"
+              title="@rtecn/editor"
+              badge="Toolbar"
+              description="A traditional toolbar-style rich text editor. 20+ built-in controls including text formatting, headings, lists, links, alignment, and history."
+              codeData={editorCodeData}
+              docsHref="/docs/editor"
+            />
 
-          <EditorSection
-            type="block-editor"
-            title="@rtecn/block-editor"
-            badge="Blocks"
-            badgeClass="inline-flex h-5 items-center rounded-full bg-primary px-2 text-[11px] font-medium tracking-wider text-primary-foreground"
-            description="A Notion-style block-based editor with slash commands, drag handles, and a bubble menu. Supports images, tables, code blocks, and task lists."
-            codeData={blockEditorCodeData}
-            docsHref="/docs/block-editor"
-          />
+            <EditorSection
+              type="block-editor"
+              title="@rtecn/block-editor"
+              badge="Blocks"
+              badgeClass="inline-flex h-5 items-center rounded-full bg-primary px-2 text-[11px] font-medium tracking-wider text-primary-foreground"
+              description="A Notion-style block-based editor with slash commands, drag handles, and a bubble menu. Supports images, tables, code blocks, and task lists."
+              codeData={blockEditorCodeData}
+              docsHref="/docs/block-editor"
+            />
+          </div>
         </section>
 
         <section className="border-t border-border">
-          <div className="mx-auto max-w-6xl space-y-12 px-4 md:px-8 py-24">
-            <div>
-              <h2 className="mb-2 text-lg font-medium tracking-tight text-foreground">
-                Customize everything
-              </h2>
-              <p className="text-base text-muted-foreground">
-                Icons, colors, controls — every part of the editor is yours to
-                shape.
-              </p>
-            </div>
-            <div className="grid gap-6 lg:grid-cols-3">
-              <div className="space-y-3 rounded-lg border border-border p-4">
-                <span className="inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background">
-                  Icons
-                </span>
-                <p className="text-sm text-muted-foreground">
-                  Swap any icon via the icons prop — bold now shows a heart.
+          <div className="container-wrapper">
+            <div className="container space-y-12 py-24">
+              <div>
+                <h2 className="mb-2 text-lg font-medium tracking-tight text-foreground">
+                  Customize everything
+                </h2>
+                <p className="text-base text-muted-foreground">
+                  Icons, colors, controls — every part of the editor is yours to
+                  shape.
                 </p>
-                <div className="-mx-4 -mb-4 border-t border-border">
-                  <IconsPreview />
+              </div>
+              <div className="grid gap-6 lg:grid-cols-3">
+                <div className="space-y-3 rounded-lg border border-border p-4">
+                  <span className="inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background">
+                    Icons
+                  </span>
+                  <p className="text-sm text-muted-foreground">
+                    Swap any icon via the icons prop — bold now shows a heart.
+                  </p>
+                  <div className="-mx-4 -mb-4 border-t border-border">
+                    <IconsPreview />
+                  </div>
+                </div>
+                <ThemeCard className="space-y-3 rounded-lg border border-border p-4">
+                  <span className="inline-flex h-5 items-center rounded-full bg-primary px-2 text-[11px] font-medium tracking-wider text-primary-foreground">
+                    Themes
+                  </span>
+                  <p className="text-sm text-muted-foreground">
+                    Override CSS variables for a completely different look.
+                  </p>
+                  <div className="-mx-4 -mb-4 border-t border-border">
+                    <ThemePreview />
+                  </div>
+                </ThemeCard>
+                <div className="space-y-3 rounded-lg border border-border p-4">
+                  <span className="inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background">
+                    Controls
+                  </span>
+                  <p className="text-sm text-muted-foreground">
+                    Add custom toolbar buttons using RichTextEditor.Control.
+                  </p>
+                  <div className="-mx-4 -mb-4 border-t border-border">
+                    <ControlsPreview />
+                  </div>
                 </div>
               </div>
-              <ThemeCard className="space-y-3 rounded-lg border border-border p-4">
-                <span className="inline-flex h-5 items-center rounded-full bg-primary px-2 text-[11px] font-medium tracking-wider text-primary-foreground">
-                  Themes
-                </span>
-                <p className="text-sm text-muted-foreground">
-                  Override CSS variables for a completely different look.
-                </p>
-                <div className="-mx-4 -mb-4 border-t border-border">
-                  <ThemePreview />
-                </div>
-              </ThemeCard>
-              <div className="space-y-3 rounded-lg border border-border p-4">
-                <span className="inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background">
-                  Controls
-                </span>
-                <p className="text-sm text-muted-foreground">
-                  Add custom toolbar buttons using RichTextEditor.Control.
-                </p>
-                <div className="-mx-4 -mb-4 border-t border-border">
-                  <ControlsPreview />
-                </div>
+              <div>
+                <Link href="/docs/customization">
+                  <Button variant="link" className="h-auto px-0">
+                    Explore customization &rarr;
+                  </Button>
+                </Link>
               </div>
-            </div>
-            <div>
-              <Link href="/docs/customization">
-                <Button variant="link" className="h-auto px-0">
-                  Explore customization &rarr;
-                </Button>
-              </Link>
             </div>
           </div>
         </section>
-      </main>
-
-      <footer className="flex h-12 items-center justify-between border-t border-border px-8 text-xs text-muted-foreground">
-        <span>Rtecn</span>
-        <span>MIT License</span>
-      </footer>
-    </div>
+      </PageTransition>
+    </>
   );
 }

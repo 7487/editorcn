@@ -1,6 +1,14 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
+import { SITE } from "@/constants/site";
+
+export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
+
+export const absoluteUrl = (path: string) => `${SITE.URL}${path}`;
+
+export const formatLabelFromSlug = (slug: string) =>
+  slug
+    .split("-")
+    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+    .join(" ");

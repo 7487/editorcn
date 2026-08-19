@@ -8,8 +8,8 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@rtecn/ui/components/dialog";
-import { Button } from "@rtecn/ui/components/button";
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 let resolveCurrent: ((url: string | null) => void) | null = null;
 let listeners: Array<() => void> = [];
