@@ -10,4 +10,7 @@ export const GITHUB = {
 export const LINK = {
   GITHUB: githubUrl,
   LICENSE: `${githubUrl}/blob/main/LICENSE`,
+  X_SHADCN_LABS: "https://x.com/shadcnlabs",
+  DISCORD: "https://discord.gg/N6G36KhYK4",
 } as const;
+
