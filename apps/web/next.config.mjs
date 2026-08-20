@@ -1,11 +1,11 @@
 import { createMDX } from 'fumadocs-mdx/next';
-import '@rtecn/env/web';
+import '@editorcn/env/web';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // typedRoutes: true, // disabled due to Next.js 16 bug with @base-ui/react Form types
   reactCompiler: true,
-  transpilePackages: ['@rtecn/editor'],
+  transpilePackages: ['@editorcn/editor'],
   experimental: {
     viewTransition: true,
   },
