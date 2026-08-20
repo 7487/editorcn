@@ -1,102 +1,60 @@
-# Editorcn
+<p align="center">
+  <img src="./.github/assets/gh.png" alt="editorcn banner" />
+</p>
 
-Rich text editor components for [shadcn/ui](https://ui.shadcn.com/) projects, built on [Tiptap](https://tiptap.dev/).
+<h1 align="center">editorcn</h1>
 
-Two editor variants are available, installable via the [shadcn registry](https://ui.shadcn.com/docs/registry) (recommended) or npm/pnpm:
+<p align="center">
+  Rich text editor components for <a href="https://ui.shadcn.com/">shadcn/ui</a> projects. Built on <a href="https://tiptap.dev/">Tiptap</a>.<br/>
+  Zero config. One command setup. Install via <a href="https://ui.shadcn.com/docs/registry">shadcn registry</a> or npm.
+</p>
 
-| Package | Description |
-|---------|-------------|
-| [`@editorcn/editor`](https://editorcn.vercel.app/docs/editor) | Toolbar-style rich text editor with 20+ built-in controls |
-| [`@editorcn/block-editor`](https://editorcn.vercel.app/docs/block-editor) | Notion-style block editor with slash commands, drag handles, and bubble menu |
+<p align="center">
+  <a href="https://editorcn.vercel.app/docs">Get Started</a> ·
+  <a href="https://editorcn.vercel.app/docs/getting-started">Installation</a> ·
+  <a href="https://editorcn.vercel.app/docs/editor">Editor</a> ·
+  <a href="https://editorcn.vercel.app/docs/block-editor">Block Editor</a>
+</p>
 
-## Quick start
+## Features
 
-**Install via the shadcn registry (recommended)** — this copies the editor source directly into your project so you can customize it freely.
+- **Theme-aware** — Automatically adapts to your shadcn/ui theme tokens
+- **Zero config** — Works out of the box with sensible defaults
+- **shadcn/ui compatible** — Uses the same registry format and CLI
+- **Tiptap powered** — Full access to the Tiptap editor ecosystem
+- **Composable** — Build complex editors with declarative, composable components
+- **20+ toolbar controls** — Bold, italic, headings, lists, links, alignment, embeds, and more
+- **Slash commands** — Notion-style slash command menu with drag handles and bubble menu
+- **Customizable** — Override icons, labels, colors, and controls via props
 
-Add the editorcn registry to your `components.json`:
+## Community
 
-```json
-{
-  "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "registries": {
-    "@editorcn": "https://editorcn.vercel.app/r/{name}.json"
-  }
-}
-```
+The editorcn community lives on [GitHub](https://github.com/shadcn-labs/editorcn), where you can ask questions, share ideas, and show what you've built.
 
-Then install whichever editor you want (pick one):
+## Contributing
 
-```bash
-npx shadcn@latest add @editorcn/editor
-```
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) to get the repo running locally and land a change, and use [issues](https://github.com/shadcn-labs/editorcn/issues) and [discussions](https://github.com/shadcn-labs/editorcn/discussions) to collaborate. By participating, you agree to the [Code of Conduct](./CODE_OF_CONDUCT.md).
 
-```bash
-npx shadcn@latest add @editorcn/block-editor
-```
+## Security
 
-Then install the Tiptap peer dependencies and import the components. See the [registry docs](https://editorcn.vercel.app/docs/registry) for full usage instructions.
+Please do not open public issues for security vulnerabilities. Follow [SECURITY.md](./SECURITY.md) and report them privately through GitHub Security Advisories.
 
-## npm
+## License
 
-Both packages are also available on npm, if you'd rather depend on a published, versioned package than vendor the source into your project. Pick one:
+[MIT](LICENSE)
 
-```bash
-npm install @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
-```
+## Contributors
 
-```bash
-npm install @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react
-```
+[![Contributors](https://contrib.rocks/image?repo=AbdullahMukadam/Editorcn)](https://github.com/shadcn-labs/editorcn/graphs/contributors)
 
-Or with pnpm:
+> Made with [contrib.rocks](https://contrib.rocks)
 
-```bash
-pnpm add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
-```
+## Star History
 
-```bash
-pnpm add @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react
-```
-
-See [npm vs registry](https://editorcn.vercel.app/docs/registry#npm-vs-registry) for the full tradeoffs.
-
-## Documentation
-
-Full documentation is available at [editorcn.vercel.app](https://editorcn.vercel.app/docs):
-
-- [Getting started](https://editorcn.vercel.app/docs/getting-started)
-- [Editor API](https://editorcn.vercel.app/docs/editor)
-- [Block Editor API](https://editorcn.vercel.app/docs/block-editor)
-- [Customization](https://editorcn.vercel.app/docs/customization)
-- [Registry](https://editorcn.vercel.app/docs/registry)
-
-## Project structure
-
-```
-shadcn-RTE/
-├── apps/
-│   └── web/               # Documentation site (Next.js) + registry JSON
-├── packages/
-│   ├── editor/            # @editorcn/editor — toolbar-style editor
-│   ├── block-editor/      # @editorcn/block-editor — block-type editor
-│   └── ui/                # Shared shadcn/ui primitives (button, popover, etc.)
-└── scripts/
-    └── build-registry.mjs # Builds registry JSON from source files
-```
-
-## Development
-
-```bash
-pnpm install
-pnpm run dev              # Start all apps in development mode
-pnpm run dev:web          # Start only the documentation site
-pnpm run build:registry   # Rebuild registry JSON files
-```
-
-## Built with
-
-- [Tiptap](https://tiptap.dev/) — Headless rich text editor framework
-- [shadcn/ui](https://ui.shadcn.com/) — Component primitives and design tokens
-- [Next.js](https://nextjs.org/) — React framework
-- [Turborepo](https://turbo.build/repo) — Monorepo tooling
-- [TypeScript](https://www.typescriptlang.org/) — Type safety
+<a href="https://www.star-history.com/?repos=AbdullahMukadam%2FEditorcn&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=AbdullahMukadam/Editorcn&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=AbdullahMukadam/Editorcn&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=AbdullahMukadam/Editorcn&type=date&legend=top-left" />
+ </picture>
+</a>
