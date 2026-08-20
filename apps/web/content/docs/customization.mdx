@@ -106,7 +106,7 @@ Add your own buttons to the toolbar using `useRichTextEditorContext` and `RichTe
 <EditorCustomControlsDemo />
 
 ```tsx
-import { useRichTextEditorContext } from "@editorcn/editor";
+import { useRichTextEditorContext } from "@/components/editor";
 
 function InsertStar() {
   const { editor } = useRichTextEditorContext();
@@ -284,8 +284,8 @@ import {
   SlashCommand,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
-} from "@editorcn/block-editor";
-import type { SlashCommandSuggestionItem } from "@editorcn/block-editor";
+} from "@/components/block-editor";
+import type { SlashCommandSuggestionItem } from "@/components/block-editor";
 
 const customItems: SlashCommandSuggestionItem[] = [
   {

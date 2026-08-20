@@ -30,16 +30,18 @@ After installation, import the editor styles at the root of your application:
 
 ```tsx
 // Your shadcn globals
-import "@editorcn/ui/globals.css";
+import "@/app/globals.css";
 
 // Editor styles
-import "@editorcn/editor/style.css";
+import "@/components/editor/style.css";
 ```
 
-  If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@editorcn/editor` throughout this page:
+> **Order matters**: Import your shadcn globals first, then the editor styles.
+
+  If you installed via npm, import from `@editorcn/editor` instead of `@/components/editor` throughout this page:
   ```tsx
-  import { RichTextEditor, Link } from "@/components/editor";
-  import "@/components/editor/style.css";
+import { RichTextEditor, Link } from "@/components/editor";
+  import "@editorcn/editor/style.css";
   ```
 
 ## Tiptap editor
@@ -58,7 +60,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Placeholder from "@tiptap/extension-placeholder";
-import { RichTextEditor, Link } from "@editorcn/editor";
+import { RichTextEditor, Link } from "@/components/editor";
 
 const content = `
 <h2 style="text-align: center;">Welcome to editorcn</h2>
@@ -201,7 +203,7 @@ A generic control button for custom controls. Use built-in controls when possibl
 Use the `Control` component with the `useRichTextEditorContext` hook to create controls that execute custom editor commands:
 
 ```tsx
-import { useRichTextEditorContext } from "@editorcn/editor";
+import { useRichTextEditorContext } from "@/components/editor";
 
 function InsertStarControl() {
   const { editor } = useRichTextEditorContext();
@@ -243,7 +245,7 @@ Then use it in the toolbar like any built-in control:
 Create a control that toggles a custom highlight color:
 
 ```tsx
-import { useRichTextEditorContext } from "@editorcn/editor";
+import { useRichTextEditorContext } from "@/components/editor";
 
 function YellowHighlightControl() {
   const { editor } = useRichTextEditorContext();
@@ -414,7 +416,7 @@ const editor = useEditor({
 `@editorcn/editor` ships a custom `Link` extension that extends `@tiptap/extension-link`. It is required for the `Mod-K` keyboard shortcut and the link popover UI to work correctly.
 
 ```tsx
-import { Link, RichTextEditor } from "@editorcn/editor";
+import { Link, RichTextEditor } from "@/components/editor";
 
 const editor = useEditor({
   extensions: [
@@ -441,7 +443,7 @@ The link button opens a popover where users can enter or edit a URL. The `Mod-K`
 Embed YouTube videos by URL or video ID. Supports standard watch URLs, shorts, live streams, and youtu.be shortlinks.
 
 ```tsx
-import { YouTubeEmbed, RichTextEditor } from "@editorcn/editor";
+import { YouTubeEmbed, RichTextEditor } from "@/components/editor";
 
 const editor = useEditor({
   extensions: [
@@ -463,7 +465,7 @@ The YouTube embed maintains a **16:9 aspect ratio** and can be resized by draggi
 Embed tweets by pasting a tweet URL or numeric ID. Supports both `twitter.com` and `x.com` URLs.
 
 ```tsx
-import { TwitterEmbed, RichTextEditor } from "@editorcn/editor";
+import { TwitterEmbed, RichTextEditor } from "@/components/editor";
 
 const editor = useEditor({
   extensions: [
@@ -485,7 +487,7 @@ The Twitter embed can be freely resized (no aspect ratio lock) and will re-rende
 Add both to your editor:
 
 ```tsx
-import { YouTubeEmbed, TwitterEmbed, RichTextEditor } from "@editorcn/editor";
+import { YouTubeEmbed, TwitterEmbed, RichTextEditor } from "@/components/editor";
 
 const editor = useEditor({
   extensions: [
@@ -530,7 +532,7 @@ To control the editor state, use the `onUpdate` callback on the `useEditor` hook
 ```tsx
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { RichTextEditor } from "@editorcn/editor";
+import { RichTextEditor } from "@/components/editor";
 
 interface Props {
   value: string;
@@ -565,7 +567,7 @@ function MyControlledEditor({ value, onChange }: Props) {
 Override labels for all controls with the `labels` prop. Labels are used for `aria-label` and `title` attributes.
 
 ```tsx
-import { RichTextEditor, DEFAULT_LABELS } from "@editorcn/editor";
+import { RichTextEditor, DEFAULT_LABELS } from "@/components/editor";
 
 <RichTextEditor
   editor={editor}
@@ -629,7 +631,7 @@ interface RichTextEditorLabels {
 ### Default labels
 
 ```tsx
-import { DEFAULT_LABELS } from "@editorcn/editor";
+import { DEFAULT_LABELS } from "@/components/editor";
 
 // Values:
 {
@@ -678,7 +680,7 @@ import { DEFAULT_LABELS } from "@editorcn/editor";
 Override any toolbar icon with the `icons` prop. Icons are rendered inside control buttons and use the `.rte-editor-icon` class for sizing.
 
 ```tsx
-import { RichTextEditor, DEFAULT_ICONS } from "@editorcn/editor";
+import { RichTextEditor, DEFAULT_ICONS } from "@/components/editor";
 
 <RichTextEditor
   editor={editor}
@@ -746,7 +748,7 @@ The default icons are inline SVGs with `strokeWidth={2}`, `24×24` viewBox, and 
 Use the `useRichTextEditorContext` hook to access the editor instance from inside a child component:
 
 ```tsx
-import { useRichTextEditorContext } from "@editorcn/editor";
+import { useRichTextEditorContext } from "@/components/editor";
 
 function CustomBoldButton() {
   const { editor } = useRichTextEditorContext();
