@@ -1,5 +1,5 @@
 {
-  "name": "@rtecn/env",
+  "name": "@editorcn/env",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -14,7 +14,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@rtecn/config": "workspace:*",
+    "@editorcn/config": "workspace:*",
     "@types/node": "^22.13.14",
     "typescript": "catalog:"
   }

@@ -1,22 +1,18 @@
 ---
 title: BlockEditor
 description: Notion-style block-based rich text editor with slash commands and bubble menu.
-package: "@rtecn/block-editor"
+package: "@editorcn/block-editor"
 ---
-
-Package: `@rtecn/block-editor`
-Import: `import { BlockEditor } from "@rtecn/block-editor"`
-Description: Notion-style block-based editor with slash commands, drag handles, and a context-aware bubble menu for inline formatting.
 
 ## Installation
 
 **Install via the shadcn registry (recommended):**
 
 <CodeBlockCommand
-  __npm__={"npx shadcn@latest add @rtecn/block-editor"}
-  __yarn__={"yarn dlx shadcn@latest add @rtecn/block-editor"}
-  __pnpm__={"pnpm dlx shadcn@latest add @rtecn/block-editor"}
-  __bun__={"bunx shadcn@latest add @rtecn/block-editor"}
+  __npm__={"npx shadcn@latest add @editorcn/block-editor"}
+  __yarn__={"yarn dlx shadcn@latest add @editorcn/block-editor"}
+  __pnpm__={"pnpm dlx shadcn@latest add @editorcn/block-editor"}
+  __bun__={"bunx shadcn@latest add @editorcn/block-editor"}
 />
 
 This copies the component source directly into your project, so you can customize it freely.
@@ -24,31 +20,31 @@ This copies the component source directly into your project, so you can customiz
 **Or install via npm/pnpm:**
 
 <CodeBlockCommand
-  __npm__={"npm install @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
-  __yarn__={"yarn add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
-  __pnpm__={"pnpm add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
-  __bun__={"bun add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
+  __npm__={"npm install @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
+  __yarn__={"yarn add @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
+  __pnpm__={"pnpm add @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
+  __bun__={"bun add @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
 />
 
 After installation, import the editor styles at the root of your application:
 
 ```tsx
 // Your shadcn globals
-import "@rtecn/ui/globals.css";
+import "@editorcn/ui/globals.css";
 
 // Block editor styles
-import "@rtecn/block-editor/style.css";
+import "@editorcn/block-editor/style.css";
 ```
 
-  If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@rtecn/block-editor` throughout this page:
+  If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@editorcn/block-editor` throughout this page:
   ```tsx
   import {
     BlockEditor,
     SlashCommand,
     defaultSlashCommandItems,
     getSlashCommandSuggestion,
-  } from "@/components/rte-block-editor";
-  import "@/components/rte-block-editor/style.css";
+  } from "@/components/block-editor";
+  import "@/components/block-editor/style.css";
   ```
 
 ## Install Extensions
@@ -83,8 +79,8 @@ import {
   SlashCommand,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
-} from "@rtecn/block-editor";
-import type { SlashCommandSuggestionItem } from "@rtecn/block-editor";
+} from "@editorcn/block-editor";
+import type { SlashCommandSuggestionItem } from "@editorcn/block-editor";
 
 const myItems: SlashCommandSuggestionItem[] = [
   ...defaultSlashCommandItems,
@@ -215,11 +211,11 @@ import {
   SlashCommand,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
-} from "@rtecn/block-editor";
+} from "@editorcn/block-editor";
 import type {
   SlashCommandSuggestionItem,
   OnCommandSelect,
-} from "@rtecn/block-editor";
+} from "@editorcn/block-editor";
 
 const myItems: SlashCommandSuggestionItem[] = [
   ...defaultSlashCommandItems,

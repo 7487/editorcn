@@ -1,11 +1,18 @@
 "use client";
 
+import { motion } from "motion/react";
+import { useRef } from "react";
+
 import { CopyButton } from "@/components/copy-button";
 import { getIconForPackageManager } from "@/components/icons";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { RegistryAddButton } from "@/components/registry-add-button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TextFlip } from "@/components/ui/text-flip";
+import { SITE } from "@/constants/site";
 import type { PackageManager } from "@/hooks/use-package-manager";
 import { usePackageManager } from "@/hooks/use-package-manager";
 import { cn } from "@/lib/utils";
+import registry from "../../public/r/registry.json";
 
 const pmCommands = {
   bun: "bunx --bun",
@@ -14,10 +21,18 @@ const pmCommands = {
   yarn: "yarn",
 };
 
-const installCommand = "shadcn@latest add";
+const registryItemNames = registry.items
+  .map((item) => item.name)
+  .toSorted((a, b) =>
+    a.localeCompare(b, "en", {
+      sensitivity: "base",
+    })
+  );
 
 export const CommandBox = ({ className }: { className?: string }) => {
   const [packageManager, setPackageManager] = usePackageManager();
+
+  const currentItemRef = useRef(registryItemNames[0]);
 
   return (
     <div
@@ -57,7 +72,7 @@ export const CommandBox = ({ className }: { className?: string }) => {
               <TabsContent key={key} value={key} asChild>
                 <span className="block sm:inline-block">
                   <span className="select-none">$ </span>
-                  {command} {installCommand}{" "}
+                  {command} shadcn add{" "}
                   <span className="select-none sm:hidden" aria-hidden="true">
                     \
                   </span>
@@ -65,14 +80,32 @@ export const CommandBox = ({ className }: { className?: string }) => {
               </TabsContent>
             ))}
 
-            <span className="text-foreground">@rtecn/editor</span>
+            <span>{SITE.REGISTRY}/</span>
+
+            <TextFlip
+              className="text-foreground"
+              as={motion.span}
+              variants={{
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: 12 },
+                initial: { opacity: 0, y: -12 },
+              }}
+              interval={1.5}
+              onIndexChange={(index: number) => {
+                currentItemRef.current = registryItemNames[index];
+              }}
+            >
+              {registryItemNames}
+            </TextFlip>
           </code>
         </pre>
       </Tabs>
 
       <CopyButton
         className="absolute top-2 right-2 z-10 size-7 opacity-70 hover:opacity-100 focus-visible:opacity-100"
-        value={`${pmCommands[packageManager]} ${installCommand} @rtecn/editor`}
+        value={() =>
+          `${pmCommands[packageManager]} shadcn@latest add ${SITE.REGISTRY}/${currentItemRef.current}`
+        }
         event="copy_npm_command"
       />
     </div>

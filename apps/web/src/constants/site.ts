@@ -1,4 +1,4 @@
-export const FALLBACK_SITE_ORIGIN = "https://rtecn.space" as const;
+export const FALLBACK_SITE_ORIGIN = "https://editorcn.vercel.app" as const;
 
 const getBaseUrl = () => {
   if (process.env.NODE_ENV !== "production") {
@@ -22,8 +22,9 @@ export const SITE = {
     LONG: "Rich text editor components for the shadcn/ui ecosystem.",
     SHORT: "Rich text editors for shadcn/ui",
   },
-  NAME: "Rtecn",
+  NAME: "Editorcn",
   OG_IMAGE: `${baseUrl}/og`,
+  REGISTRY: "@editorcn",
   URL: baseUrl,
 };
 

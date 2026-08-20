@@ -26,3 +26,42 @@ export const BreadcrumbJsonLd = ({
     }}
   />
 );
+
+export const WebSiteJsonLd = () => (
+  <JsonLdScript
+    data={{
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: SITE.NAME,
+      url: SITE.URL,
+      description: SITE.DESCRIPTION.LONG,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${SITE.URL}/docs?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
+    }}
+  />
+);
+
+export const SoftwareApplicationJsonLd = () => (
+  <JsonLdScript
+    data={{
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: SITE.NAME,
+      url: SITE.URL,
+      description: SITE.DESCRIPTION.LONG,
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Web",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+    }}
+  />
+);

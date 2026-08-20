@@ -21,9 +21,9 @@ import {
   SlashCommand,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
-} from "@rtecn/block-editor";
-import type { SlashCommandSuggestionItem } from "@rtecn/block-editor";
-import "@rtecn/block-editor/style.css";
+} from "@editorcn/block-editor";
+import type { SlashCommandSuggestionItem } from "@editorcn/block-editor";
+import "@editorcn/block-editor/style.css";
 
 const BLOCK_CONTENT = `
 <h2>Getting Started</h2>

@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "rtecn",
-  "homepage": "https://rtecn.space",
+  "name": "editorcn",
+  "homepage": "https://editorcn.vercel.app",
   "items": [
     {
       "name": "editor",
@@ -29,99 +29,99 @@
       ],
       "files": [
         {
-          "path": "rte-editor/index.ts",
+          "path": "editor/index.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/rte-text-editor.tsx",
+          "path": "editor/rte-text-editor.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/rte-context.ts",
+          "path": "editor/rte-context.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/rte-toolbar.tsx",
+          "path": "editor/rte-toolbar.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/rte-content.tsx",
+          "path": "editor/rte-content.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/rte-controls-group.tsx",
+          "path": "editor/rte-controls-group.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/labels.ts",
+          "path": "editor/labels.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/icons.tsx",
+          "path": "editor/icons.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/types.ts",
+          "path": "editor/types.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/style.css",
+          "path": "editor/style.css",
           "type": "registry:style"
         },
         {
-          "path": "rte-editor/controls/rte-control.tsx",
+          "path": "editor/controls/rte-control.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/controls/rte-controls.tsx",
+          "path": "editor/controls/rte-controls.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/controls/rte-link-control.tsx",
+          "path": "editor/controls/rte-link-control.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/extensions/index.ts",
+          "path": "editor/extensions/index.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/extensions/link.ts",
+          "path": "editor/extensions/link.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/extensions/resizable-node-view.tsx",
+          "path": "editor/extensions/resizable-node-view.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/controls/rte-twitter-control.tsx",
+          "path": "editor/controls/rte-twitter-control.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/controls/rte-youtube-control.tsx",
+          "path": "editor/controls/rte-youtube-control.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/ui/utils.ts",
+          "path": "editor/ui/utils.ts",
           "type": "registry:lib"
         },
         {
-          "path": "rte-editor/ui/button.tsx",
+          "path": "editor/ui/button.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/ui/toggle.tsx",
+          "path": "editor/ui/toggle.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/ui/popover.tsx",
+          "path": "editor/ui/popover.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/ui/input.tsx",
+          "path": "editor/ui/input.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-editor/ui/dialog.tsx",
+          "path": "editor/ui/dialog.tsx",
           "type": "registry:component"
         }
       ]
@@ -160,79 +160,79 @@
       ],
       "files": [
         {
-          "path": "rte-block-editor/index.ts",
+          "path": "block-editor/index.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/block-editor.tsx",
+          "path": "block-editor/block-editor.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/bubble-menu.tsx",
+          "path": "block-editor/bubble-menu.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/context.tsx",
+          "path": "block-editor/context.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/labels.ts",
+          "path": "block-editor/labels.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/types.ts",
+          "path": "block-editor/types.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/style.css",
+          "path": "block-editor/style.css",
           "type": "registry:style"
         },
         {
-          "path": "rte-block-editor/extensions/index.ts",
+          "path": "block-editor/extensions/index.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/extensions/slash-command/index.ts",
+          "path": "block-editor/extensions/slash-command/index.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/extensions/slash-command/slash-command.ts",
+          "path": "block-editor/extensions/slash-command/slash-command.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/extensions/slash-command/suggestion.ts",
+          "path": "block-editor/extensions/slash-command/suggestion.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/extensions/slash-command/suggestion-list.tsx",
+          "path": "block-editor/extensions/slash-command/suggestion-list.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/ui/index.ts",
+          "path": "block-editor/ui/index.ts",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/ui/alert.tsx",
+          "path": "block-editor/ui/alert.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/ui/button.tsx",
+          "path": "block-editor/ui/button.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/ui/label.tsx",
+          "path": "block-editor/ui/label.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/ui/scroll-area.tsx",
+          "path": "block-editor/ui/scroll-area.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/ui/textarea.tsx",
+          "path": "block-editor/ui/textarea.tsx",
           "type": "registry:component"
         },
         {
-          "path": "rte-block-editor/lib/utils.ts",
+          "path": "block-editor/lib/utils.ts",
           "type": "registry:lib"
         }
       ]

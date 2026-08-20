@@ -12,6 +12,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import type { Event } from "@/lib/events";
+import { trackEvent } from "@/lib/events";
 import { cn } from "@/lib/utils";
 
 export const motionIconVariants: Variants = {
@@ -28,13 +30,11 @@ export const motionIconProps: HTMLMotionProps<"span"> = {
   variants: motionIconVariants,
 };
 
-export interface CopyButtonProps extends Omit<
-  React.ComponentProps<typeof Button>,
-  "value"
-> {
+export interface CopyButtonProps
+  extends Omit<React.ComponentProps<typeof Button>, "value"> {
   value: string | (() => Promise<string> | string);
   src?: string;
-  event?: string;
+  event?: Event["name"];
   showTooltip?: boolean;
 }
 
@@ -61,8 +61,17 @@ export const CopyButton = ({
 
   const handleCopy = useCallback(async () => {
     const text = await getValue();
-    await copyToClipboard(text);
-  }, [copyToClipboard, getValue]);
+    const hasCopied = await copyToClipboard(text);
+
+    if (hasCopied && event) {
+      trackEvent({
+        name: event,
+        properties: {
+          code: text,
+        },
+      });
+    }
+  }, [copyToClipboard, event, getValue]);
 
   const copyButton = (
     <Button
@@ -75,6 +84,7 @@ export const CopyButton = ({
           : "bg-code absolute top-3 right-2 z-10 size-7 hover:opacity-100 focus-visible:opacity-100",
         className
       )}
+      sound="copy"
       onClick={handleCopy}
       {...props}
     >
@@ -100,7 +110,7 @@ export const CopyButton = ({
 
   return (
     <Tooltip>
-      <TooltipTrigger asChild>{copyButton}</TooltipTrigger>
+      <TooltipTrigger>{copyButton}</TooltipTrigger>
       <TooltipContent>
         {isCopied ? "Copied" : "Copy to Clipboard"}
       </TooltipContent>

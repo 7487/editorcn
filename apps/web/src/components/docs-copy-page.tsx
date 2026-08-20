@@ -4,22 +4,32 @@ import { ChevronDownIcon } from "lucide-react";
 import { useCallback } from "react";
 
 import { CopyButton } from "@/components/copy-button";
-import { Button } from "@/components/ui/button";
 import {
-  Popover,
-  PopoverAnchor,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  ChatGptIcon,
+  ClaudeIcon,
+  CursorIcon,
+  GeminiIcon,
+  GrokIcon,
+  MarkdownDocIcon,
+  PerplexityIcon,
+  SciraIcon,
+  V0Icon,
+} from "@/components/icons";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 import { SITE } from "@/constants/site";
-import { MarkdownDocIcon } from "@/components/icons";
 
 const getPromptUrl = (baseURL: string, url: string, param = "q") =>
   `${baseURL}?${param}=${encodeURIComponent(
@@ -39,6 +49,32 @@ const MENU_ITEMS: [string, (url: string) => React.ReactNode][] = [
     ),
   ],
   [
+    "v0",
+    (url) => (
+      <a
+        href={getPromptUrl("https://v0.dev", url)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <V0Icon />
+        <span className="translate-x-[-2px]">Open in v0</span>
+      </a>
+    ),
+  ],
+  [
+    "cursor",
+    (url) => (
+      <a
+        href={getPromptUrl("https://cursor.com/link/prompt", url, "text")}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <CursorIcon />
+        Open in Cursor
+      </a>
+    ),
+  ],
+  [
     "chatgpt",
     (url) => (
       <a
@@ -46,7 +82,74 @@ const MENU_ITEMS: [string, (url: string) => React.ReactNode][] = [
         rel="noopener noreferrer"
         target="_blank"
       >
+        <ChatGptIcon />
         Open in ChatGPT
+      </a>
+    ),
+  ],
+  [
+    "claude",
+    (url) => (
+      <a
+        href={getPromptUrl("https://claude.ai/new", url)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <ClaudeIcon />
+        Open in Claude
+      </a>
+    ),
+  ],
+  [
+    "perplexity",
+    (url) => (
+      <a
+        href={getPromptUrl("https://perplexity.ai", url)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <PerplexityIcon />
+        Open in Perplexity
+      </a>
+    ),
+  ],
+  [
+    "gemini",
+    (url) => (
+      <a
+        href={getPromptUrl("https://gemini.google.com/app", url)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <GeminiIcon />
+        Open in Gemini
+      </a>
+    ),
+  ],
+  [
+    "grok",
+    (url) => (
+      <a
+        href={getPromptUrl("https://grok.com", url)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <GrokIcon />
+        Open in Grok
+      </a>
+    ),
+  ],
+  [
+    "scira",
+    (url) => (
+      <a
+        className="m-0 p-0"
+        href={getPromptUrl("https://scira.ai/", url)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <SciraIcon />
+        Open in Scira AI
       </a>
     ),
   ],
@@ -75,18 +178,19 @@ export const DocsCopyPage = ({
   );
 
   return (
-    <Popover>
+    <Popover sounds>
       <div className="group/buttons relative flex rounded-lg bg-secondary *:data-[slot=button]:focus-visible:relative *:data-[slot=button]:focus-visible:z-10">
         <PopoverAnchor />
         <CopyButton
           value={copyValue}
           showTooltip={false}
+          sound="copy"
           variant="secondary"
           className="md:h-7 md:text-[0.8rem]"
         >
           Copy Page
         </CopyButton>
-        <DropdownMenu>
+        <DropdownMenu sounds>
           <DropdownMenuTrigger asChild className="hidden sm:flex">
             {trigger}
           </DropdownMenuTrigger>
@@ -95,7 +199,7 @@ export const DocsCopyPage = ({
             className="animate-none! rounded-lg shadow-none"
           >
             {MENU_ITEMS.map(([key, render]) => (
-              <DropdownMenuItem key={key} asChild>
+              <DropdownMenuItem key={key} asChild sound="click">
                 {render(url)}
               </DropdownMenuItem>
             ))}
@@ -118,6 +222,7 @@ export const DocsCopyPage = ({
               size="lg"
               asChild
               key={key}
+              sound="click"
               className="w-full justify-start text-base font-normal *:[svg]:text-muted-foreground"
             >
               {render(url)}

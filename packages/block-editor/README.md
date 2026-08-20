@@ -1,6 +1,6 @@
-# @rtecn/block-editor
+# @editorcn/block-editor
 
-A **Notion-style** block-type rich text editor built on [Tiptap](https://tiptap.dev/) with shadcn/ui design tokens. Part of the [rtecn](https://rtecn.space) editor suite.
+A **Notion-style** block-type rich text editor built on [Tiptap](https://tiptap.dev/) with shadcn/ui design tokens. Part of the [editorcn](https://editorcn.vercel.app) editor suite.
 
 ## Features
 
@@ -18,21 +18,21 @@ A **Notion-style** block-type rich text editor built on [Tiptap](https://tiptap.
 ### npm
 
 ```bash
-npm install @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
+npm install @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
 ```
 
 ### shadcn registry
 
 ```bash
-npx shadcn@latest add @rtecn/block-editor
+npx shadcn@latest add @editorcn/block-editor
 ```
 
-Make sure your `components.json` includes the rtecn registry:
+Make sure your `components.json` includes the editorcn registry:
 
 ```json
 {
   "registries": {
-    "@rtecn": "https://rtecn.space/r/{name}.json"
+    "@editorcn": "https://editorcn.vercel.app/r/{name}.json"
   }
 }
 ```
@@ -46,8 +46,8 @@ import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import Underline from "@tiptap/extension-underline";
-import { BlockEditor } from "@rtecn/block-editor";
-import "@rtecn/block-editor/style.css";
+import { BlockEditor } from "@editorcn/block-editor";
+import "@editorcn/block-editor/style.css";
 
 export function MyEditor() {
   const editor = useEditor({
@@ -64,7 +64,7 @@ export function MyEditor() {
 
 ## Documentation
 
-Full API reference at [rtecn.space/docs/block-editor](https://rtecn.space/docs/block-editor).
+Full API reference at [editorcn.vercel.app/docs/block-editor](https://editorcn.vercel.app/docs/block-editor).
 
 ## License
 

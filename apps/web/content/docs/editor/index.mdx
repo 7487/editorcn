@@ -1,22 +1,18 @@
 ---
 title: RichTextEditor
 description: Tiptap-based rich text editor with toolbar controls.
-package: "@rtecn/editor"
+package: "@editorcn/editor"
 ---
-
-Package: `@rtecn/editor`
-Import: `import { RichTextEditor } from "@rtecn/editor"`
-Description: Tiptap-based rich text editor with a compound component API and 20+ built-in toolbar controls.
 
 ## Installation
 
 **Install via the shadcn registry (recommended):**
 
 <CodeBlockCommand
-  __npm__={"npx shadcn@latest add @rtecn/editor"}
-  __yarn__={"yarn dlx shadcn@latest add @rtecn/editor"}
-  __pnpm__={"pnpm dlx shadcn@latest add @rtecn/editor"}
-  __bun__={"bunx shadcn@latest add @rtecn/editor"}
+  __npm__={"npx shadcn@latest add @editorcn/editor"}
+  __yarn__={"yarn dlx shadcn@latest add @editorcn/editor"}
+  __pnpm__={"pnpm dlx shadcn@latest add @editorcn/editor"}
+  __bun__={"bunx shadcn@latest add @editorcn/editor"}
 />
 
 This copies the component source directly into your project, so you can customize it freely.
@@ -24,31 +20,31 @@ This copies the component source directly into your project, so you can customiz
 **Or install via npm/pnpm:**
 
 <CodeBlockCommand
-  __npm__={"npm install @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
-  __yarn__={"yarn add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
-  __pnpm__={"pnpm add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
-  __bun__={"bun add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
+  __npm__={"npm install @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
+  __yarn__={"yarn add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
+  __pnpm__={"pnpm add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
+  __bun__={"bun add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
 />
 
 After installation, import the editor styles at the root of your application:
 
 ```tsx
 // Your shadcn globals
-import "@rtecn/ui/globals.css";
+import "@editorcn/ui/globals.css";
 
 // Editor styles
-import "@rtecn/editor/style.css";
+import "@editorcn/editor/style.css";
 ```
 
-  If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@rtecn/editor` throughout this page:
+  If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@editorcn/editor` throughout this page:
   ```tsx
-  import { RichTextEditor, Link } from "@/components/rte-editor";
-  import "@/components/rte-editor/style.css";
+  import { RichTextEditor, Link } from "@/components/editor";
+  import "@/components/editor/style.css";
   ```
 
 ## Tiptap editor
 
-`@rtecn/editor` provides a UI layer for [Tiptap](https://tiptap.dev/). The `RichTextEditor` component works with the [Editor](https://tiptap.dev/api/editor) instance of Tiptap. This means you have full control over the editor [state and configuration](https://tiptap.dev/guide/configuration) via the [useEditor hook](https://tiptap.dev/installation/react).
+`@editorcn/editor` provides a UI layer for [Tiptap](https://tiptap.dev/). The `RichTextEditor` component works with the [Editor](https://tiptap.dev/api/editor) instance of Tiptap. This means you have full control over the editor [state and configuration](https://tiptap.dev/guide/configuration) via the [useEditor hook](https://tiptap.dev/installation/react).
 
 The `RichTextEditor` component does not manage state for you — controls just execute operations on the `Editor` instance. For controlled mode or value transforms (HTML/Markdown conversion), refer to the [tiptap.dev](https://tiptap.dev/) documentation.
 
@@ -62,10 +58,10 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Placeholder from "@tiptap/extension-placeholder";
-import { RichTextEditor, Link } from "@rtecn/editor";
+import { RichTextEditor, Link } from "@editorcn/editor";
 
 const content = `
-<h2 style="text-align: center;">Welcome to rtecn</h2>
+<h2 style="text-align: center;">Welcome to editorcn</h2>
 <p><code>RichTextEditor</code> is based on <a href="https://tiptap.dev/">Tiptap</a> and supports:</p>
 <ul>
   <li>Text formatting: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, <s>strikethrough</s></li>
@@ -205,7 +201,7 @@ A generic control button for custom controls. Use built-in controls when possibl
 Use the `Control` component with the `useRichTextEditorContext` hook to create controls that execute custom editor commands:
 
 ```tsx
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 function InsertStarControl() {
   const { editor } = useRichTextEditorContext();
@@ -247,7 +243,7 @@ Then use it in the toolbar like any built-in control:
 Create a control that toggles a custom highlight color:
 
 ```tsx
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 function YellowHighlightControl() {
   const { editor } = useRichTextEditorContext();
@@ -293,8 +289,8 @@ function InsertExampleLink() {
         editor
           ?.chain()
           .focus()
-          .insertContent("rtecn")
-          .setLink({ href: "https://github.com/AbdullahMukadam/Rtecn" })
+          .insertContent("editorcn")
+          .setLink({ href: "https://github.com/AbdullahMukadam/Editorcn" })
           .run()
       }
       aria-label="Insert example link"
@@ -415,10 +411,10 @@ const editor = useEditor({
 
 ## Link extension
 
-`@rtecn/editor` ships a custom `Link` extension that extends `@tiptap/extension-link`. It is required for the `Mod-K` keyboard shortcut and the link popover UI to work correctly.
+`@editorcn/editor` ships a custom `Link` extension that extends `@tiptap/extension-link`. It is required for the `Mod-K` keyboard shortcut and the link popover UI to work correctly.
 
 ```tsx
-import { Link, RichTextEditor } from "@rtecn/editor";
+import { Link, RichTextEditor } from "@editorcn/editor";
 
 const editor = useEditor({
   extensions: [
@@ -438,14 +434,14 @@ The link button opens a popover where users can enter or edit a URL. The `Mod-K`
 
 ## Embed extensions
 
-`@rtecn/editor` ships with two embed extensions for embedding YouTube videos and tweets. They are self-contained (no extra Tiptap packages needed) and include resizable node views with drag handles.
+`@editorcn/editor` ships with two embed extensions for embedding YouTube videos and tweets. They are self-contained (no extra Tiptap packages needed) and include resizable node views with drag handles.
 
 ### YouTube embed
 
 Embed YouTube videos by URL or video ID. Supports standard watch URLs, shorts, live streams, and youtu.be shortlinks.
 
 ```tsx
-import { YouTubeEmbed, RichTextEditor } from "@rtecn/editor";
+import { YouTubeEmbed, RichTextEditor } from "@editorcn/editor";
 
 const editor = useEditor({
   extensions: [
@@ -467,7 +463,7 @@ The YouTube embed maintains a **16:9 aspect ratio** and can be resized by draggi
 Embed tweets by pasting a tweet URL or numeric ID. Supports both `twitter.com` and `x.com` URLs.
 
 ```tsx
-import { TwitterEmbed, RichTextEditor } from "@rtecn/editor";
+import { TwitterEmbed, RichTextEditor } from "@editorcn/editor";
 
 const editor = useEditor({
   extensions: [
@@ -489,7 +485,7 @@ The Twitter embed can be freely resized (no aspect ratio lock) and will re-rende
 Add both to your editor:
 
 ```tsx
-import { YouTubeEmbed, TwitterEmbed, RichTextEditor } from "@rtecn/editor";
+import { YouTubeEmbed, TwitterEmbed, RichTextEditor } from "@editorcn/editor";
 
 const editor = useEditor({
   extensions: [
@@ -534,7 +530,7 @@ To control the editor state, use the `onUpdate` callback on the `useEditor` hook
 ```tsx
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { RichTextEditor } from "@rtecn/editor";
+import { RichTextEditor } from "@editorcn/editor";
 
 interface Props {
   value: string;
@@ -569,7 +565,7 @@ function MyControlledEditor({ value, onChange }: Props) {
 Override labels for all controls with the `labels` prop. Labels are used for `aria-label` and `title` attributes.
 
 ```tsx
-import { RichTextEditor, DEFAULT_LABELS } from "@rtecn/editor";
+import { RichTextEditor, DEFAULT_LABELS } from "@editorcn/editor";
 
 <RichTextEditor
   editor={editor}
@@ -633,7 +629,7 @@ interface RichTextEditorLabels {
 ### Default labels
 
 ```tsx
-import { DEFAULT_LABELS } from "@rtecn/editor";
+import { DEFAULT_LABELS } from "@editorcn/editor";
 
 // Values:
 {
@@ -682,7 +678,7 @@ import { DEFAULT_LABELS } from "@rtecn/editor";
 Override any toolbar icon with the `icons` prop. Icons are rendered inside control buttons and use the `.rte-editor-icon` class for sizing.
 
 ```tsx
-import { RichTextEditor, DEFAULT_ICONS } from "@rtecn/editor";
+import { RichTextEditor, DEFAULT_ICONS } from "@editorcn/editor";
 
 <RichTextEditor
   editor={editor}
@@ -750,7 +746,7 @@ The default icons are inline SVGs with `strokeWidth={2}`, `24×24` viewBox, and 
 Use the `useRichTextEditorContext` hook to access the editor instance from inside a child component:
 
 ```tsx
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 function CustomBoldButton() {
   const { editor } = useRichTextEditorContext();

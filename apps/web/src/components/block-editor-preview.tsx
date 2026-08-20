@@ -22,11 +22,11 @@ import {
   SlashCommand,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
-} from "@rtecn/block-editor";
+} from "@editorcn/block-editor";
 import type {
   SlashCommandSuggestionItem,
-} from "@rtecn/block-editor";
-import "@rtecn/block-editor/style.css";
+} from "@editorcn/block-editor";
+import "@editorcn/block-editor/style.css";
 
 const DEMO_CONTENT = `
 <h1 style="text-align: center;">Block Editor</h1>
@@ -69,7 +69,7 @@ const DEMO_CONTENT = `
   </tbody>
 </table>
 <h2>Code Block with Syntax Highlighting</h2>
-<pre><code class="language-javascript">import { BlockEditor } from "@rtecn/block-editor";
+<pre><code class="language-javascript">import { BlockEditor } from "@editorcn/block-editor";
 import StarterKit from "@tiptap/starter-kit";
 
 function MyEditor() {

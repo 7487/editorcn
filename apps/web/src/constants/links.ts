@@ -1,4 +1,4 @@
-const githubUrl = "https://github.com/shadcn-labs/editorcn";
+export const githubUrl = "https://github.com/shadcn-labs/editorcn";
 
 export const GITHUB = {
   branch: "main",
@@ -12,4 +12,6 @@ export const LINK = {
   LICENSE: `${githubUrl}/blob/main/LICENSE`,
   DISCORD: "https://discord.gg/N6G36KhYK4",
   X_SHADCN_LABS: "https://x.com/shadcnlabs",
+  SPONSOR: `https://github.com/sponsors/AbdullahMukadam`,
+  PORTFOLIO: "https://abdullahmukadam.fun",
 } as const;

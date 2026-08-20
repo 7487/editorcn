@@ -8,9 +8,9 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Highlight from "@tiptap/extension-highlight";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
-import { RichTextEditor, Link, useRichTextEditorContext, TwitterEmbed, YouTubeEmbed } from "@rtecn/editor";
-import type { RichTextEditorVariant } from "@rtecn/editor";
-import "@rtecn/editor/style.css";
+import { RichTextEditor, Link, useRichTextEditorContext, TwitterEmbed, YouTubeEmbed } from "@editorcn/editor";
+import type { RichTextEditorVariant } from "@editorcn/editor";
+import "@editorcn/editor/style.css";
 
 function InsertStarControl() {
   const { editor } = useRichTextEditorContext();
@@ -29,7 +29,7 @@ function InsertStarControl() {
 }
 
 const DEMO_CONTENT = `
-<h1 style="text-align: center;">Welcome to Rtecn</h1>
+<h1 style="text-align: center;">Welcome to Editorcn</h1>
 <p>A rich text editor built on <a href="https://tiptap.dev/">Tiptap</a> and <strong>shadcn/ui</strong>. Every control in the toolbar is a standalone component — pick the ones you need, build your own layout.</p>
 <hr>
 <h2>Text Formatting</h2>
@@ -62,7 +62,7 @@ const DEMO_CONTENT = `
 <blockquote><p>A well-placed blockquote adds authority. The left border uses your theme's border color.</p></blockquote>
 <p>For longer code snippets, use a <strong>code block</strong>:</p>
 <pre><code class="language-javascript">function greet(name) {
-  return \`Hello, \${name}! Welcome to Rtecn.\`;
+  return \`Hello, \${name}! Welcome to Editorcn.\`;
 }</code></pre>
 <h2>Alignment</h2>
 <p style="text-align: left;">Left aligned — the default for most content.</p>

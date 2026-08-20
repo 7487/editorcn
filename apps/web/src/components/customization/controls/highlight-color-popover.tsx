@@ -7,7 +7,7 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 const COLORS = [
   { name: "Yellow", value: "#fef08a" },

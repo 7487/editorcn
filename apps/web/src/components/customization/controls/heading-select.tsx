@@ -2,7 +2,7 @@
 
 import { useEditorState } from "@tiptap/react";
 import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 export function HeadingSelect() {
   const { editor } = useRichTextEditorContext();

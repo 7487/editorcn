@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
-
+import { SoundProvider } from "@web-kits/audio/react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import { META_THEME_COLORS } from "@/constants/site";
 import { fontVariables } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import { SoftwareApplicationJsonLd, WebSiteJsonLd } from "@/seo/json-ld";
 
 import "@/index.css";
 
 export const metadata: Metadata = {
-  title: "Rtecn",
-  description: "Rich text editor components for the shadcn/ui ecosystem.",
+  title: {
+    default: "Editorcn - Rich Text Editors for shadcn/ui",
+    template: "%s | Editorcn",
+  },
+  description: "Rich text editor components for the shadcn/ui ecosystem. Open-source, customizable, and ready to use.",
+  keywords: ["shadcn", "editor", "rich text", "tiptap", "react", "components"],
 };
 
 const RootLayout = ({
@@ -20,6 +25,8 @@ const RootLayout = ({
 }>) => (
   <html lang="en" suppressHydrationWarning>
     <head>
+      <WebSiteJsonLd />
+      <SoftwareApplicationJsonLd />
       <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -40,8 +47,10 @@ const RootLayout = ({
       )}
     >
       <ThemeProvider>
-        {children}
-        <Toaster position="top-center" />
+        <SoundProvider>
+          {children}
+          <Toaster position="top-center" />
+        </SoundProvider>
       </ThemeProvider>
     </body>
   </html>

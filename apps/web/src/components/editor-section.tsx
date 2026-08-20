@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { EditorPreview } from "@/components/editor-preview";
 import { BlockEditorPreview } from "@/components/block-editor-preview";
-import type { RichTextEditorVariant } from "@rtecn/editor";
+import type { RichTextEditorVariant } from "@editorcn/editor";
 import { ComponentCode } from "./component-code";
 import { codeToHtml } from "shiki";
 
