@@ -45,16 +45,16 @@ Please do not open public issues for security vulnerabilities. Follow [SECURITY.
 
 ## Contributors
 
-[![Contributors](https://contrib.rocks/image?repo=AbdullahMukadam/Editorcn)](https://github.com/shadcn-labs/editorcn/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=shadcn-labs/editorcn)](https://github.com/shadcn-labs/editorcn/graphs/contributors)
 
 > Made with [contrib.rocks](https://contrib.rocks)
 
 ## Star History
 
-<a href="https://www.star-history.com/?repos=AbdullahMukadam%2FEditorcn&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=shadcn-labs%2Feditorcn&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=AbdullahMukadam/Editorcn&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=AbdullahMukadam/Editorcn&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=AbdullahMukadam/Editorcn&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=shadcn-labs/editorcn&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=shadcn-labs/editorcn&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=shadcn-labs/editorcn&type=date&legend=top-left" />
  </picture>
 </a>
