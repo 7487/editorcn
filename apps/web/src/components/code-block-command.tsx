@@ -7,6 +7,7 @@ import { getIconForPackageManager } from "@/components/icons";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import type { PackageManager } from "@/hooks/use-package-manager";
 import { usePackageManager } from "@/hooks/use-package-manager";
+import type { Event } from "@/lib/events";
 import { cn } from "@/lib/utils";
 
 export const CodeBlockCommand = ({
@@ -22,7 +23,7 @@ export const CodeBlockCommand = ({
   __pnpm__?: string;
   __bun__?: string;
   className?: string;
-  copyEvent?: string;
+  copyEvent?: Event["name"];
 }) => {
   const [packageManager, setPackageManager] = usePackageManager();
 

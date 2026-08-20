@@ -98,15 +98,15 @@ import {
   type CodeOptionsMultipleThemes,
   codeToHtml,
 } from "shiki";
-import { Button } from "@rtecn/ui/components/button";
+import { Button } from "@editorcn/ui/components/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@rtecn/ui/components/select";
-import { cn } from "@rtecn/ui/lib/utils";
+} from "@editorcn/ui/components/select";
+import { cn } from "@editorcn/ui/lib/utils";
 
 export type { BundledLanguage } from "shiki";
 

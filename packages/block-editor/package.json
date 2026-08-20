@@ -1,6 +1,6 @@
 {
-  "name": "@rtecn/block-editor",
-  "version": "0.2.4",
+  "name": "@editorcn/block-editor",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

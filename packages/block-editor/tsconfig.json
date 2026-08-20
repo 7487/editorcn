@@ -1,11 +1,11 @@
 {
-    "extends": "@rtecn/config/tsconfig.base.json",
+    "extends": "@editorcn/config/tsconfig.base.json",
     "compilerOptions": {
       "jsx": "react-jsx",
       "lib": ["ESNext", "DOM", "DOM.Iterable"],
       "types": [],
       "paths": {
-        "@rtecn/block-editor/*": ["./src/*"]
+        "@editorcn/block-editor/*": ["./src/*"]
       }
     },
     "include": ["src/**/*.ts", "src/**/*.tsx"],

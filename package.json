@@ -1,5 +1,5 @@
 {
-  "name": "rtecn",
+  "name": "editorcn",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -14,12 +14,12 @@
     "dev:web": "turbo -F web dev"
   },
   "dependencies": {
-    "@rtecn/env": "workspace:*",
+    "@editorcn/env": "workspace:*",
     "dotenv": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@rtecn/config": "workspace:*",
+    "@editorcn/config": "workspace:*",
     "@types/node": "^22.13.14",
     "turbo": "^2.9.16",
     "typescript": "catalog:"

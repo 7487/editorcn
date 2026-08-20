@@ -3,8 +3,8 @@
 import { useSyncExternalStore, type ReactNode } from "react";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { RichTextEditor, useRichTextEditorContext } from "@rtecn/editor";
-import "@rtecn/editor/style.css";
+import { RichTextEditor, useRichTextEditorContext } from "@editorcn/editor";
+import "@editorcn/editor/style.css";
 
 function subscribeToDarkClass(callback: () => void) {
   const observer = new MutationObserver(callback);

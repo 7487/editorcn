@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://rtecn.space/sitemap.xml",
+    sitemap: "https://editorcn.vercel.app/sitemap.xml",
   };
 }

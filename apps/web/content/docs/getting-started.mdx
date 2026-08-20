@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Get started with rtecn packages in your project.
+description: Get started with editorcn packages in your project.
 ---
 
 ## Prerequisites
@@ -11,10 +11,10 @@ description: Get started with rtecn packages in your project.
 
 ## Choose your editor
 
-Rtecn offers two editor packages. Pick the one that fits your use case:
+Editorcn offers two editor packages. Pick the one that fits your use case:
 
-- **[@rtecn/editor](#option-1-rtecneditor-toolbar-style)** — a classic toolbar-style rich text editor
-- **[@rtecn/block-editor](#option-2-rtecnblock-editor-blocks-style)** — a Notion-style block editor with slash commands
+- **[@editorcn/editor](#option-1-rtecneditor-toolbar-style)** — a classic toolbar-style rich text editor
+- **[@editorcn/block-editor](#option-2-rtecnblock-editor-blocks-style)** — a Notion-style block editor with slash commands
 
 Both packages can be installed either via **npm** or via the **shadcn registry**:
 
@@ -23,47 +23,47 @@ Both packages can be installed either via **npm** or via the **shadcn registry**
 
 ## Setup
 
-Since the shadcn registry is the recommended install method, add the rtecn registry to your `components.json` first (skip this if you're installing via npm only):
+Since the shadcn registry is the recommended install method, add the editorcn registry to your `components.json` first (skip this if you're installing via npm only):
 
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "registries": {
-    "@rtecn": "https://rtecn.space/r/{name}.json"
+    "@editorcn": "https://editorcn.vercel.app/r/{name}.json"
   }
 }
 ```
 
-### Option 1: @rtecn/editor (Toolbar-style)
+### Option 1: @editorcn/editor (Toolbar-style)
 
 **Install via the shadcn registry (recommended):**
 
 <CodeBlockCommand
-  __npm__={"npx shadcn@latest add @rtecn/editor"}
-  __yarn__={"yarn dlx shadcn@latest add @rtecn/editor"}
-  __pnpm__={"pnpm dlx shadcn@latest add @rtecn/editor"}
-  __bun__={"bunx shadcn@latest add @rtecn/editor"}
+  __npm__={"npx shadcn@latest add @editorcn/editor"}
+  __yarn__={"yarn dlx shadcn@latest add @editorcn/editor"}
+  __pnpm__={"pnpm dlx shadcn@latest add @editorcn/editor"}
+  __bun__={"bunx shadcn@latest add @editorcn/editor"}
 />
 
 **Or install via npm:**
 
 <CodeBlockCommand
-  __npm__={"npm install @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
-  __yarn__={"yarn add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
-  __pnpm__={"pnpm add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
-  __bun__={"bun add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
+  __npm__={"npm install @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
+  __yarn__={"yarn add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
+  __pnpm__={"pnpm add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
+  __bun__={"bun add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
 />
 
 Import the styles:
 
 ```css
-import "@rtecn/editor/style.css";
+import "@editorcn/editor/style.css";
 ```
 
-  If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@rtecn/editor`:
+  If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@editorcn/editor`:
   ```tsx
-    import { RichTextEditor, Link } from '@/components/rte-editor';
-    import "@/components/rte-editor/style.css";
+    import { RichTextEditor, Link } from '@/components/editor';
+    import "@/components/editor/style.css";
   ```
 
 ```tsx
@@ -74,8 +74,8 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Placeholder from "@tiptap/extension-placeholder";
-import { RichTextEditor, Link } from "@rtecn/editor";
-import "@rtecn/editor/style.css";
+import { RichTextEditor, Link } from "@editorcn/editor";
+import "@editorcn/editor/style.css";
 
 export function MyEditor() {
   const editor = useEditor({
@@ -139,41 +139,41 @@ export function MyEditor() {
 }
 ```
 
-### Option 2: @rtecn/block-editor (Blocks-style)
+### Option 2: @editorcn/block-editor (Blocks-style)
 
 **Install via the shadcn registry (recommended):**
 
 <CodeBlockCommand
-  __npm__={"npx shadcn@latest add @rtecn/block-editor"}
-  __yarn__={"yarn dlx shadcn@latest add @rtecn/block-editor"}
-  __pnpm__={"pnpm dlx shadcn@latest add @rtecn/block-editor"}
-  __bun__={"bunx shadcn@latest add @rtecn/block-editor"}
+  __npm__={"npx shadcn@latest add @editorcn/block-editor"}
+  __yarn__={"yarn dlx shadcn@latest add @editorcn/block-editor"}
+  __pnpm__={"pnpm dlx shadcn@latest add @editorcn/block-editor"}
+  __bun__={"bunx shadcn@latest add @editorcn/block-editor"}
 />
 
 **Or install via npm:**
 
 <CodeBlockCommand
-  __npm__={"npm install @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder"}
-  __yarn__={"yarn add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder"}
-  __pnpm__={"pnpm add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder"}
-  __bun__={"bun add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder"}
+  __npm__={"npm install @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder"}
+  __yarn__={"yarn add @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder"}
+  __pnpm__={"pnpm add @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder"}
+  __bun__={"bun add @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-placeholder"}
 />
 
 Import the styles:
 
 ```css
-import "@rtecn/block-editor/style.css";
+import "@editorcn/block-editor/style.css";
 ```
 
-  If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@rtecn/block-editor`:
+  If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@editorcn/block-editor`:
   ```tsx
   import {
   BlockEditor,
   SlashCommand,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
-  } from '@/components/rte-block-editor';
-  import "@/components/rte-block-editor/style.css";
+  } from '@/components/block-editor';
+  import "@/components/block-editor/style.css";
   ```
 
 ```tsx
@@ -188,8 +188,8 @@ import {
   SlashCommand,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
-} from "@rtecn/block-editor";
-import "@rtecn/block-editor/style.css";
+} from "@editorcn/block-editor";
+import "@editorcn/block-editor/style.css";
 
 export function MyEditor() {
   const editor = useEditor({
@@ -209,7 +209,7 @@ export function MyEditor() {
 }
 ```
 
-> See the [@rtecn/editor docs](./editor) or [@rtecn/block-editor docs](./block-editor) for detailed API references.
+> See the [@editorcn/editor docs](./editor) or [@editorcn/block-editor docs](./block-editor) for detailed API references.
 
 ## Peer dependencies
 

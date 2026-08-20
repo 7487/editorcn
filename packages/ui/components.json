@@ -12,14 +12,14 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@rtecn/ui/components",
-    "utils": "@rtecn/ui/lib/utils",
-    "ui": "@rtecn/ui/components",
-    "lib": "@rtecn/ui/lib",
-    "hooks": "@rtecn/ui/hooks"
+    "components": "@editorcn/ui/components",
+    "utils": "@editorcn/ui/lib/utils",
+    "ui": "@editorcn/ui/components",
+    "lib": "@editorcn/ui/lib",
+    "hooks": "@editorcn/ui/hooks"
   },
   "registries": {
     "@kibo-ui": "https://www.kibo-ui.com/r/{name}.json",
-    "@rtecn": "https://rtecn.space/r/{name}.json"
+    "@editorcn": "https://editorcn.vercel.app/r/{name}.json"
   }
 }

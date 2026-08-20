@@ -15,7 +15,7 @@ import TextStyle from "@tiptap/extension-text-style";
 import FontFamily from "@tiptap/extension-font-family";
 import "@tiptap/extension-text-style";
 import { Extension } from "@tiptap/core";
-import { RichTextEditor } from "@rtecn/editor";
+import { RichTextEditor } from "@editorcn/editor";
 import {
   Tabs,
   TabsList,
@@ -28,9 +28,9 @@ import {
   CodeBlockContent,
   CodeBlockCopyButton,
   CodeBlockItem,
-} from "@rtecn/ui/components/kibo-ui/code-block";
-import type { BundledLanguage } from "@rtecn/ui/components/kibo-ui/code-block";
-import "@rtecn/editor/style.css";
+} from "@editorcn/ui/components/kibo-ui/code-block";
+import type { BundledLanguage } from "@editorcn/ui/components/kibo-ui/code-block";
+import "@editorcn/editor/style.css";
 
 const SAMPLE = `
 <h2>Try it out</h2>

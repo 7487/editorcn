@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 const EMOJIS = [
   "😀", "😂", "❤️", "🔥", "✅", "⭐",

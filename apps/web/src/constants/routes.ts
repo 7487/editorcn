@@ -4,4 +4,5 @@ export const ROUTES = {
   DOCS_INSTALLATION: "/docs/installation",
   HOME: "/",
   MANIFEST: "/manifest.webmanifest",
+  SPONSOR: "/sponsor",
 } as const;

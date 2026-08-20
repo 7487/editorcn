@@ -3,7 +3,7 @@
 import { useEditorState } from "@tiptap/react";
 import { Type } from "lucide-react";
 import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 const FONTS = [
   { label: "Default", value: "" },

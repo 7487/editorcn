@@ -1,4 +1,4 @@
-# Rtecn
+# Editorcn
 
 Rich text editor components for [shadcn/ui](https://ui.shadcn.com/) projects, built on [Tiptap](https://tiptap.dev/).
 
@@ -6,20 +6,20 @@ Two editor variants are available, installable via the [shadcn registry](https:/
 
 | Package | Description |
 |---------|-------------|
-| [`@rtecn/editor`](https://rtecn.space/docs/editor) | Toolbar-style rich text editor with 20+ built-in controls |
-| [`@rtecn/block-editor`](https://rtecn.space/docs/block-editor) | Notion-style block editor with slash commands, drag handles, and bubble menu |
+| [`@editorcn/editor`](https://editorcn.vercel.app/docs/editor) | Toolbar-style rich text editor with 20+ built-in controls |
+| [`@editorcn/block-editor`](https://editorcn.vercel.app/docs/block-editor) | Notion-style block editor with slash commands, drag handles, and bubble menu |
 
 ## Quick start
 
 **Install via the shadcn registry (recommended)** — this copies the editor source directly into your project so you can customize it freely.
 
-Add the rtecn registry to your `components.json`:
+Add the editorcn registry to your `components.json`:
 
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "registries": {
-    "@rtecn": "https://rtecn.space/r/{name}.json"
+    "@editorcn": "https://editorcn.vercel.app/r/{name}.json"
   }
 }
 ```
@@ -27,48 +27,48 @@ Add the rtecn registry to your `components.json`:
 Then install whichever editor you want (pick one):
 
 ```bash
-npx shadcn@latest add @rtecn/editor
+npx shadcn@latest add @editorcn/editor
 ```
 
 ```bash
-npx shadcn@latest add @rtecn/block-editor
+npx shadcn@latest add @editorcn/block-editor
 ```
 
-Then install the Tiptap peer dependencies and import the components. See the [registry docs](https://rtecn.space/docs/registry) for full usage instructions.
+Then install the Tiptap peer dependencies and import the components. See the [registry docs](https://editorcn.vercel.app/docs/registry) for full usage instructions.
 
 ## npm
 
 Both packages are also available on npm, if you'd rather depend on a published, versioned package than vendor the source into your project. Pick one:
 
 ```bash
-npm install @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
+npm install @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
 ```
 
 ```bash
-npm install @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react
+npm install @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react
 ```
 
 Or with pnpm:
 
 ```bash
-pnpm add @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
+pnpm add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
 ```
 
 ```bash
-pnpm add @rtecn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react
+pnpm add @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react
 ```
 
-See [npm vs registry](https://rtecn.space/docs/registry#npm-vs-registry) for the full tradeoffs.
+See [npm vs registry](https://editorcn.vercel.app/docs/registry#npm-vs-registry) for the full tradeoffs.
 
 ## Documentation
 
-Full documentation is available at [rtecn.space](https://rtecn.space/docs):
+Full documentation is available at [editorcn.vercel.app](https://editorcn.vercel.app/docs):
 
-- [Getting started](https://rtecn.space/docs/getting-started)
-- [Editor API](https://rtecn.space/docs/editor)
-- [Block Editor API](https://rtecn.space/docs/block-editor)
-- [Customization](https://rtecn.space/docs/customization)
-- [Registry](https://rtecn.space/docs/registry)
+- [Getting started](https://editorcn.vercel.app/docs/getting-started)
+- [Editor API](https://editorcn.vercel.app/docs/editor)
+- [Block Editor API](https://editorcn.vercel.app/docs/block-editor)
+- [Customization](https://editorcn.vercel.app/docs/customization)
+- [Registry](https://editorcn.vercel.app/docs/registry)
 
 ## Project structure
 
@@ -77,8 +77,8 @@ shadcn-RTE/
 ├── apps/
 │   └── web/               # Documentation site (Next.js) + registry JSON
 ├── packages/
-│   ├── editor/            # @rtecn/editor — toolbar-style editor
-│   ├── block-editor/      # @rtecn/block-editor — block-type editor
+│   ├── editor/            # @editorcn/editor — toolbar-style editor
+│   ├── block-editor/      # @editorcn/block-editor — block-type editor
 │   └── ui/                # Shared shadcn/ui primitives (button, popover, etc.)
 └── scripts/
     └── build-registry.mjs # Builds registry JSON from source files
