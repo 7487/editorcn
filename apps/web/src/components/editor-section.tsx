@@ -9,6 +9,7 @@ import { BlockEditorPreview } from "@/components/block-editor-preview";
 import type { RichTextEditorVariant } from "@editorcn/editor";
 import { ComponentCode } from "./component-code";
 import { codeToHtml } from "shiki";
+import { Badge } from "./ui/badge";
 
 type CodeFile = {
   language: string;
@@ -41,14 +42,7 @@ export function EditorSection(props: EditorSectionProps) {
         <h2 className="text-lg font-medium tracking-tight text-foreground">
           {props.title}
         </h2>
-        <span
-          className={
-            props.badgeClass ??
-            "inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background"
-          }
-        >
-          {props.badge}
-        </span>
+        <Badge className={`${props.badgeClass}`}>{props.badge}</Badge>
       </div>
       <p className="mb-4 text-base text-muted-foreground">
         {props.description}
