@@ -11,8 +11,8 @@ import "@/index.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Editorcn - Rich Text Editors for shadcn/ui",
-    template: "%s | Editorcn",
+    default: "editorcn - Rich Text Editors for shadcn/ui",
+    template: "%s | editorcn",
   },
   description: "Rich text editor components for the shadcn/ui ecosystem. Open-source, customizable, and ready to use.",
   keywords: ["shadcn", "editor", "rich text", "tiptap", "react", "components"],

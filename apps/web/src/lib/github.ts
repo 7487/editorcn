@@ -6,7 +6,7 @@ interface Stargazer {
   avatar_url: string;
 }
 
-export const repo = 'Editorcn';
+export const repo = 'editorcn';
 export const owner = 'AbdullahMukadam';
 
 export const getStargazers = unstable_cache(
