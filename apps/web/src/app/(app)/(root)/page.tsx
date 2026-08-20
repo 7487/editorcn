@@ -12,6 +12,7 @@ import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbJsonLd } from "@/seo/json-ld";
 import { ROUTES } from "@/constants/routes";
 import { HomeCtas } from "@/components/home-ctas";
+import { PageHero } from "@/components/page-hero";
 
 const editorCode = `import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -205,16 +206,18 @@ export default function HomePage() {
       <PageTransition>
         <section className="container-wrapper relative">
           <div className="container flex flex-col items-center gap-4 py-16 text-center md:py-20 lg:py-24">
-            <h1 className="max-w-7xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl from-foreground via-foreground to-foreground/65 bg-linear-to-b bg-clip-text text-transparent">
-              Rich text editors
-              <br />
-              for shadcn/ui
-            </h1>
-
-            <p className="max-w-2xl text-lg text-muted-foreground sm:text-xl">
-              Two editors. One design system. Built on Tiptap with shadcn/ui
-              tokens.
-            </p>
+            <PageHero
+              description={
+                <>
+                  Two editors. One design system.
+                  <br className="hidden sm:block" />
+                  Built on Tiptap with shadcn/ui tokens.
+                </>
+              }
+              descriptionClassName="max-w-2xl text-lg sm:text-xl"
+              title="Rich Text Editors for Shadcn ui."
+              titleClassName="max-w-7xl"
+            />
 
             <CommandBox className="mt-4 w-full max-w-xl" />
 
@@ -226,7 +229,7 @@ export default function HomePage() {
           <div className="container space-y-12">
             <EditorSection
               type="editor"
-              title="@editorcn/editor"
+              title="Rich Text Editor"
               badge="Toolbar"
               description="A traditional toolbar-style rich text editor. 20+ built-in controls including text formatting, headings, lists, links, alignment, and history."
               codeData={editorCodeData}
@@ -235,7 +238,7 @@ export default function HomePage() {
 
             <EditorSection
               type="block-editor"
-              title="@editorcn/block-editor"
+              title="Block Editor"
               badge="Blocks"
               badgeClass="inline-flex h-5 items-center rounded-full bg-primary px-2 text-[11px] font-medium tracking-wider text-primary-foreground"
               description="A Notion-style block-based editor with slash commands, drag handles, and a bubble menu. Supports images, tables, code blocks, and task lists."
@@ -258,36 +261,36 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="grid gap-6 lg:grid-cols-3">
-                <div className="space-y-3 rounded-lg border border-border p-4">
+                <div className="space-y-3 rounded-lg p-4">
                   <span className="inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background">
                     Icons
                   </span>
                   <p className="text-sm text-muted-foreground">
-                    Swap any icon via the icons prop — bold now shows a heart.
+                    Swap any icon via the icons prop.
                   </p>
-                  <div className="-mx-4 -mb-4 border-t border-border">
+                  <div className="-mx-4 -mb-4">
                     <IconsPreview />
                   </div>
                 </div>
-                <ThemeCard className="space-y-3 rounded-lg border border-border p-4">
+                <ThemeCard className="space-y-3 rounded-lg p-4">
                   <span className="inline-flex h-5 items-center rounded-full bg-primary px-2 text-[11px] font-medium tracking-wider text-primary-foreground">
                     Themes
                   </span>
                   <p className="text-sm text-muted-foreground">
                     Override CSS variables for a completely different look.
                   </p>
-                  <div className="-mx-4 -mb-4 border-t border-border">
+                  <div className="-mx-4 -mb-4">
                     <ThemePreview />
                   </div>
                 </ThemeCard>
-                <div className="space-y-3 rounded-lg border border-border p-4">
+                <div className="space-y-3 rounded-lg p-4">
                   <span className="inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background">
                     Controls
                   </span>
                   <p className="text-sm text-muted-foreground">
                     Add custom toolbar buttons using RichTextEditor.Control.
                   </p>
-                  <div className="-mx-4 -mb-4 border-t border-border">
+                  <div className="-mx-4 -mb-4">
                     <ControlsPreview />
                   </div>
                 </div>
