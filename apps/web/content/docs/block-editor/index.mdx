@@ -30,13 +30,15 @@ After installation, import the editor styles at the root of your application:
 
 ```tsx
 // Your shadcn globals
-import "@editorcn/ui/globals.css";
+import "@/app/globals.css";
 
 // Block editor styles
-import "@editorcn/block-editor/style.css";
+import "@/components/block-editor/style.css";
 ```
 
-  If you installed via the shadcn registry, the package is copied into your project, so import from your local components path instead of `@editorcn/block-editor` throughout this page:
+> **Order matters**: Import your shadcn globals first, then the editor styles.
+
+  If you installed via npm, import from `@editorcn/block-editor` instead of `@/components/block-editor` throughout this page:
   ```tsx
   import {
     BlockEditor,
@@ -44,7 +46,7 @@ import "@editorcn/block-editor/style.css";
     defaultSlashCommandItems,
     getSlashCommandSuggestion,
   } from "@/components/block-editor";
-  import "@/components/block-editor/style.css";
+  import "@editorcn/block-editor/style.css";
   ```
 
 ## Install Extensions
@@ -79,8 +81,8 @@ import {
   SlashCommand,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
-} from "@editorcn/block-editor";
-import type { SlashCommandSuggestionItem } from "@editorcn/block-editor";
+} from "@/components/block-editor";
+import type { SlashCommandSuggestionItem } from "@/components/block-editor";
 
 const myItems: SlashCommandSuggestionItem[] = [
   ...defaultSlashCommandItems,
@@ -211,11 +213,11 @@ import {
   SlashCommand,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
-} from "@editorcn/block-editor";
+} from "@/components/block-editor";
 import type {
   SlashCommandSuggestionItem,
   OnCommandSelect,
-} from "@editorcn/block-editor";
+} from "@/components/block-editor";
 
 const myItems: SlashCommandSuggestionItem[] = [
   ...defaultSlashCommandItems,
