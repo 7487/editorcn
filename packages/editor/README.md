@@ -1,6 +1,6 @@
-# @rtecn/editor
+# @editorcn/editor
 
-A **toolbar-style** rich text editor built on [Tiptap](https://tiptap.dev/) with shadcn/ui design tokens. Part of the [rtecn](https://rtecn.space) editor suite.
+A **toolbar-style** rich text editor built on [Tiptap](https://tiptap.dev/) with shadcn/ui design tokens. Part of the [editorcn](https://editorcn.vercel.app) editor suite.
 
 ## Features
 
@@ -16,21 +16,21 @@ A **toolbar-style** rich text editor built on [Tiptap](https://tiptap.dev/) with
 ### npm
 
 ```bash
-npm install @rtecn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
+npm install @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
 ```
 
 ### shadcn registry
 
 ```bash
-npx shadcn@latest add @rtecn/editor
+npx shadcn@latest add @editorcn/editor
 ```
 
-Make sure your `components.json` includes the rtecn registry:
+Make sure your `components.json` includes the editorcn registry:
 
 ```json
 {
   "registries": {
-    "@rtecn": "https://rtecn.space/r/{name}.json"
+    "@editorcn": "https://editorcn.vercel.app/r/{name}.json"
   }
 }
 ```
@@ -43,8 +43,8 @@ Make sure your `components.json` includes the rtecn registry:
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
-import { RichTextEditor, Link } from "@rtecn/editor";
-import "@rtecn/editor/style.css";
+import { RichTextEditor, Link } from "@editorcn/editor";
+import "@editorcn/editor/style.css";
 
 export function MyEditor() {
   const editor = useEditor({
@@ -78,7 +78,7 @@ export function MyEditor() {
 
 ## Documentation
 
-Full API reference at [rtecn.space/docs/editor](https://rtecn.space/docs/editor).
+Full API reference at [editorcn.vercel.app/docs/editor](https://editorcn.vercel.app/docs/editor).
 
 ## License
 

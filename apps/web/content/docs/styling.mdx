@@ -1,9 +1,9 @@
 ---
 title: Styling
-description: Customize the appearance of rtecn editors.
+description: Customize the appearance of editorcn editors.
 ---
 
-Both `@rtecn/editor` and `@rtecn/block-editor` are styled using **CSS custom properties** (design tokens) defined by your shadcn/ui theme. This means they automatically adapt to your existing design system — light mode, dark mode, brand colors, border radius, and fonts.
+Both `@editorcn/editor` and `@editorcn/block-editor` are styled using **CSS custom properties** (design tokens) defined by your shadcn/ui theme. This means they automatically adapt to your existing design system — light mode, dark mode, brand colors, border radius, and fonts.
 
 ## How it works
 
@@ -59,8 +59,8 @@ No editor-specific configuration is needed — it just works.
 Override any CSS variable in your own stylesheet to change the editors' appearance:
 
 ```css
-@import "@rtecn/editor/style.css";
-@import "@rtecn/block-editor/style.css";
+@import "@editorcn/editor/style.css";
+@import "@editorcn/block-editor/style.css";
 
 :root {
   --primary: oklch(0.6 0.2 250);
@@ -146,7 +146,7 @@ Every component accepts a `className` prop that merges with the default classes 
 
 Every editor element has a scoped CSS class. Override any of these in your stylesheet to customize specific parts.
 
-### @rtecn/editor
+### @editorcn/editor
 
 | Class | What it styles |
 |-------|----------------|
@@ -176,7 +176,7 @@ Every editor element has a scoped CSS class. Override any of these in your style
 | `.rte-task-list li` | Task list items |
 | `.rte-task-list input[type="checkbox"]` | Task checkboxes |
 
-### @rtecn/block-editor
+### @editorcn/block-editor
 
 | Class | What it styles |
 |-------|----------------|
@@ -466,6 +466,6 @@ Import the editor CSS **after** your shadcn globals so variables are defined:
 
 ```css
 @import "./globals.css";        /* your shadcn theme variables */
-@import "@rtecn/editor/style.css";
-@import "@rtecn/block-editor/style.css";
+@import "@editorcn/editor/style.css";
+@import "@editorcn/block-editor/style.css";
 ```

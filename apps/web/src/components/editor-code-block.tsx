@@ -6,8 +6,8 @@ import {
   CodeBlockContent,
   CodeBlockCopyButton,
   CodeBlockItem,
-} from "@rtecn/ui/components/kibo-ui/code-block";
-import type { BundledLanguage } from "@rtecn/ui/components/kibo-ui/code-block";
+} from "@editorcn/ui/components/kibo-ui/code-block";
+import type { BundledLanguage } from "@editorcn/ui/components/kibo-ui/code-block";
 
 type CodeBlockData = {
   language: string;

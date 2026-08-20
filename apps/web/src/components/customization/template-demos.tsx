@@ -1,6 +1,6 @@
 "use client";
 
-import { RichTextEditor } from "@rtecn/editor";
+import { RichTextEditor } from "@editorcn/editor";
 import { TemplatePreview } from "./template-preview";
 import { HeadingSelect } from "./controls/heading-select";
 import { InsertLinkDialog } from "./controls/insert-link-dialog";

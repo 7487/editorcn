@@ -11,8 +11,7 @@ import {
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbJsonLd } from "@/seo/json-ld";
 import { ROUTES } from "@/constants/routes";
-
-export const GITHUB_URL = "https://github.com/AbdullahMukadam/Rtecn";
+import { HomeCtas } from "@/components/home-ctas";
 
 const editorCode = `import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -22,8 +21,8 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Highlight from "@tiptap/extension-highlight";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
-import { RichTextEditor, Link, YouTubeEmbed, TwitterEmbed } from "@rtecn/editor";
-import "@rtecn/editor/style.css";
+import { RichTextEditor, Link, YouTubeEmbed, TwitterEmbed } from "@editorcn/editor";
+import "@editorcn/editor/style.css";
 
 export function MyEditor() {
   const editor = useEditor({
@@ -125,9 +124,9 @@ import {
   SlashCommand,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
-} from "@rtecn/block-editor";
-import type { SlashCommandSuggestionItem } from "@rtecn/block-editor";
-import "@rtecn/block-editor/style.css";
+} from "@editorcn/block-editor";
+import type { SlashCommandSuggestionItem } from "@editorcn/block-editor";
+import "@editorcn/block-editor/style.css";
 
 const DEMO_CONTENT = "<h2>Getting Started</h2><p>The BlockEditor is a block-style editor.</p>";
 
@@ -219,16 +218,7 @@ export default function HomePage() {
 
             <CommandBox className="mt-4 w-full max-w-xl" />
 
-            <div className="mt-4 flex gap-3">
-              <Button asChild>
-                <Link href="/docs">Get Started &rarr;</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
-                  GitHub
-                </a>
-              </Button>
-            </div>
+            <HomeCtas />
           </div>
         </section>
 
@@ -236,7 +226,7 @@ export default function HomePage() {
           <div className="container space-y-12">
             <EditorSection
               type="editor"
-              title="@rtecn/editor"
+              title="@editorcn/editor"
               badge="Toolbar"
               description="A traditional toolbar-style rich text editor. 20+ built-in controls including text formatting, headings, lists, links, alignment, and history."
               codeData={editorCodeData}
@@ -245,7 +235,7 @@ export default function HomePage() {
 
             <EditorSection
               type="block-editor"
-              title="@rtecn/block-editor"
+              title="@editorcn/block-editor"
               badge="Blocks"
               badgeClass="inline-flex h-5 items-center rounded-full bg-primary px-2 text-[11px] font-medium tracking-wider text-primary-foreground"
               description="A Notion-style block-based editor with slash commands, drag handles, and a bubble menu. Supports images, tables, code blocks, and task lists."

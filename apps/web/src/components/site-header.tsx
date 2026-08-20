@@ -12,6 +12,8 @@ import { SITE } from "@/constants/site";
 import { source } from "@/lib/source";
 import { BrandContextMenu } from "./brand-context-menu";
 import { LabsNav } from "./labs-nav";
+import { SponsorLink } from "./sponser";
+import { SiteSettings } from "./site-settings";
 
 const navItems = [
   { href: ROUTES.DOCS, label: "Docs" },
@@ -59,9 +61,8 @@ export const SiteHeader = () => (
             <CommandMenu navItems={navItems} tree={source.pageTree} />
           </div>
           <NavItemGithub />
-          <ModeSwitcher />
-          {/* <SponsorLink />
-          <SiteSettings /> */}
+          <SponsorLink />
+          <SiteSettings />
         </div>
       </div>
     </div>

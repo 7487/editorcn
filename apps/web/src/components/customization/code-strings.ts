@@ -1,6 +1,6 @@
 export const HEADING_SELECT_CODE = `import { useEditorState } from "@tiptap/react";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 function HeadingSelect() {
   const { editor } = useRichTextEditorContext();
@@ -47,7 +47,7 @@ import { Link } from "lucide-react";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 function InsertLinkDialog() {
   const { editor } = useRichTextEditorContext();
@@ -113,7 +113,7 @@ function InsertLinkDialog() {
 export const COLOR_POPOVER_CODE = `import { Highlighter } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 const COLORS = [
   { name: "Yellow", value: "#fef08a" },
@@ -166,7 +166,7 @@ function HighlightColorPopover() {
 export const EMOJI_MENU_CODE = `import { Smile } from "lucide-react";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 const EMOJIS = [
   "😀", "😂", "❤️", "🔥", "✅", "⭐",
@@ -202,7 +202,7 @@ import { Grid3x3 } from "lucide-react";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 function InsertTableDialog() {
   const { editor } = useRichTextEditorContext();
@@ -284,7 +284,7 @@ import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/button-group";
 import { Input } from "@/components/ui/input";
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 const MIN = 1;
 const MAX = 72;
@@ -357,7 +357,7 @@ function FontSizeControl() {
 export const FONT_FAMILY_CODE = `import { useEditorState } from "@tiptap/react";
 import { Type } from "lucide-react";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { useRichTextEditorContext } from "@rtecn/editor";
+import { useRichTextEditorContext } from "@editorcn/editor";
 
 const FONTS = [
   { label: "Default", value: "" },

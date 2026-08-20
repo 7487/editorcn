@@ -1,6 +1,6 @@
 "use client";
 import { useTheme } from "next-themes";
-import { ThemeSwitcher } from "@rtecn/ui/components/kibo-ui/theme-switcher";
+import { ThemeSwitcher } from "@editorcn/ui/components/kibo-ui/theme-switcher";
 
 export function ModeToggle() {
   const { setTheme, theme } = useTheme();

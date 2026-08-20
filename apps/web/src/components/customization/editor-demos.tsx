@@ -10,9 +10,9 @@ import Highlight from "@tiptap/extension-highlight";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
 import { Lock, Unlock } from "lucide-react";
-import { RichTextEditor, Link, useRichTextEditorContext } from "@rtecn/editor";
-import type { RichTextEditorLabels } from "@rtecn/editor";
-import "@rtecn/editor/style.css";
+import { RichTextEditor, Link, useRichTextEditorContext } from "@editorcn/editor";
+import type { RichTextEditorLabels } from "@editorcn/editor";
+import "@editorcn/editor/style.css";
 
 const EDITOR_CONTENT = `
 <h1 style="text-align: center;">Rich Text Editing</h1>

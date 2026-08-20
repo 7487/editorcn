@@ -1,6 +1,6 @@
 "use client";
 
-import "@rtecn/block-editor/style.css";
+import "@editorcn/block-editor/style.css";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -17,8 +17,8 @@ import {
   SlashCommand,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
-} from "@rtecn/block-editor";
-import type { SlashCommandSuggestionItem } from "@rtecn/block-editor";
+} from "@editorcn/block-editor";
+import type { SlashCommandSuggestionItem } from "@editorcn/block-editor";
 
 const myItems: SlashCommandSuggestionItem[] = [
   ...defaultSlashCommandItems,
