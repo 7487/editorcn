@@ -10,6 +10,7 @@ import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
 import { RichTextEditor, Link, useRichTextEditorContext, TwitterEmbed, YouTubeEmbed } from "@editorcn/editor";
 import type { RichTextEditorVariant } from "@editorcn/editor";
+import { CharacterCount } from "@tiptap/extension-character-count";
 import "@editorcn/editor/style.css";
 
 function InsertStarControl() {
@@ -92,6 +93,7 @@ export function EditorPreview({ variant = "default" }: { variant?: RichTextEdito
       YouTubeEmbed,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       Placeholder.configure({ placeholder: "Start typing..." }),
+      CharacterCount,
     ],
     content: DEMO_CONTENT,
   });
@@ -153,6 +155,7 @@ export function EditorPreview({ variant = "default" }: { variant?: RichTextEdito
           </RichTextEditor.ControlsGroup>
         </RichTextEditor.Toolbar>
         <RichTextEditor.Content className="px-2" />
+        <RichTextEditor.Footer showWordCount />
       </RichTextEditor>
     </div>
   );

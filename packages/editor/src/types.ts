@@ -36,3 +36,18 @@ export interface RichTextEditorControlProps
   active?: boolean;
   interactive?: boolean;
 }
+
+export interface WordCountInfo {
+  words: number;
+  characters: number;
+}
+
+export interface RichTextEditorFooterProps {
+  children?: React.ReactNode;
+  className?: string;
+  sticky?: boolean;
+  stickyOffset?: number | string;
+  showWordCount?: boolean;
+  wordCountClassName?: string;
+  wordCountFormatter?: (info: WordCountInfo) => string;
+}

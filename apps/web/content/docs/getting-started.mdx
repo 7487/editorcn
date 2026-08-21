@@ -48,10 +48,10 @@ Since the shadcn registry is the recommended install method, add the editorcn re
 **Or install via npm:**
 
 <CodeBlockCommand
-  __npm__={"npm install @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
-  __yarn__={"yarn add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
-  __pnpm__={"pnpm add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
-  __bun__={"bun add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline"}
+  __npm__={"npm install @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-character-count"}
+  __yarn__={"yarn add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-character-count"}
+  __pnpm__={"pnpm add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-character-count"}
+  __bun__={"bun add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-underline @tiptap/extension-character-count"}
 />
 
 Import the styles:
@@ -74,6 +74,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Placeholder from "@tiptap/extension-placeholder";
+import { CharacterCount } from "@tiptap/extension-character-count";
 import { RichTextEditor, Link } from "@/components/editor";
 import "@/components/editor/style.css";
 
@@ -87,6 +88,7 @@ export function MyEditor() {
       Underline,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       Placeholder.configure({ placeholder: "Start typing..." }),
+      CharacterCount,
     ],
     content: "<p>Start typing...</p>",
   });
@@ -134,6 +136,7 @@ export function MyEditor() {
       </RichTextEditor.Toolbar>
 
       <RichTextEditor.Content />
+      <RichTextEditor.Footer showWordCount />
     </RichTextEditor>
   );
 }
