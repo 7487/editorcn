@@ -52,7 +52,7 @@ export function Footer({
 
     return wordCountFormatter
       ? wordCountFormatter({ words, characters })
-      : `${words} words · ${characters} characters`;
+      : `${words} words | ${characters} characters`;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     editor,

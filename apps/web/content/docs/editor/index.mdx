@@ -186,6 +186,75 @@ Renders the Tiptap editor content area. Accepts an optional `className` prop.
 <RichTextEditor.Content />
 ```
 
+## RichTextEditor.Footer
+
+A footer bar that sits below the content area. Useful for displaying word count, character count, or custom actions.
+
+To use the word count feature, you must add the [`@tiptap/extension-character-count`](https://tiptap.dev/docs/extensions/api/character-count) extension to your editor.
+
+<CodeBlockCommand
+  __npm__={"npm install @tiptap/extension-character-count"}
+  __yarn__={"yarn add @tiptap/extension-character-count"}
+  __pnpm__={"pnpm add @tiptap/extension-character-count"}
+  __bun__={"bun add @tiptap/extension-character-count"}
+/>
+
+### Props
+
+| Prop                | Type                                       | Default   | Description                                              |
+| ------------------- | ------------------------------------------ | --------- | -------------------------------------------------------- |
+| `showWordCount`     | `boolean`                                  | `false`   | Show word and character count (requires CharacterCount)   |
+| `sticky`            | `boolean`                                  | `false`   | Makes footer stick to bottom on scroll                   |
+| `stickyOffset`      | `number \| string`                         | `0`       | Offset from bottom when sticky                           |
+| `wordCountClassName`| `string`                                   | —         | Additional CSS classes for the word count element        |
+| `wordCountFormatter`| `(info: { words, characters }) => string` | —         | Custom formatter for the word count text                 |
+| `className`         | `string`                                   | —         | Additional CSS classes                                   |
+| `children`          | `ReactNode`                                | —         | Custom content to render in the footer                   |
+
+### Basic usage
+
+```tsx
+import { CharacterCount } from "@tiptap/extension-character-count";
+
+const editor = useEditor({
+  extensions: [
+    StarterKit,
+    CharacterCount, // required for word count
+  ],
+});
+
+<RichTextEditor editor={editor}>
+  <RichTextEditor.Toolbar>...</RichTextEditor.Toolbar>
+  <RichTextEditor.Content />
+  <RichTextEditor.Footer showWordCount />
+</RichTextEditor>
+```
+
+### Custom formatter
+
+```tsx
+<RichTextEditor.Footer
+  showWordCount
+  wordCountFormatter={({ words, characters }) =>
+    `${words} words · ${characters} chars`
+  }
+/>
+```
+
+### With custom content
+
+```tsx
+<RichTextEditor.Footer>
+  <span>Custom footer content</span>
+</RichTextEditor.Footer>
+```
+
+### Sticky footer
+
+```tsx
+<RichTextEditor.Footer sticky stickyOffset={0} showWordCount />
+```
+
 ## RichTextEditor.Control
 
 A generic control button for custom controls. Use built-in controls when possible.
