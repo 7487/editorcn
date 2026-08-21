@@ -4,6 +4,7 @@ import { RichTextEditorContext } from './rte-context';
 import { DEFAULT_LABELS } from './labels';
 import { DEFAULT_ICONS } from './icons';
 import { Toolbar } from './rte-toolbar';
+import { Footer } from './rte-footer';
 import { ControlsGroup } from './rte-controls-group';
 import { Content } from './rte-content';
 import { RichTextEditorControl } from './controls/rte-control';
@@ -56,6 +57,7 @@ function RichTextEditorRoot({
 
 export const RichTextEditor = Object.assign(RichTextEditorRoot, {
   Toolbar,
+  Footer,
   ControlsGroup,
   Content,
   Control: RichTextEditorControl,
