@@ -55,6 +55,7 @@ const blockEditorFiles = [
   entry("block-editor/block-editor.tsx", "registry:component", "block-editor", "block-editor.tsx"),
   entry("block-editor/bubble-menu.tsx", "registry:component", "block-editor", "bubble-menu.tsx"),
   entry("block-editor/context.tsx", "registry:component", "block-editor", "context.tsx"),
+  entry("block-editor/icons.tsx", "registry:component", "block-editor", "icons.tsx"),
   entry("block-editor/labels.ts", "registry:component", "block-editor", "labels.ts"),
   entry("block-editor/types.ts", "registry:component", "block-editor", "types.ts"),
   entry("block-editor/style.css", "registry:style", "block-editor", "style.css"),

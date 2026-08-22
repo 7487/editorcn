@@ -15,7 +15,6 @@ const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
     const [searchQuery, setSearchQuery] = useState("");
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-    // Filter items based on local search query
     const filteredItems = props.items.filter((item) => {
       const query = searchQuery.toLowerCase();
       return (
@@ -102,7 +101,7 @@ const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
           {filteredItems.length > 0 ? (
             filteredItems.map((item, i) => (
               <button
-                key={item.title} // Fallback to title if id is missing in your type
+                key={item.title}
                 type="button"
                 className={`block-editor-slash-menu-item${
                   i === selectedIndex ? " block-editor-slash-menu-item--selected" : ""
