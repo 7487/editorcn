@@ -45,7 +45,9 @@ import "@/components/block-editor/style.css";
     SlashCommand,
     defaultSlashCommandItems,
     getSlashCommandSuggestion,
+    DEFAULT_ICONS,
   } from "@/components/block-editor";
+  import type { BlockEditorIcons } from "@/components/block-editor";
   import "@editorcn/block-editor/style.css";
   ```
 
@@ -151,6 +153,7 @@ The root wrapper that provides editor context. Renders the full editor UI by def
 | `children`  | `ReactNode`                  | —                             | Optional custom children to replace the default layout |
 | `className` | `string`                     | —                             | Additional CSS classes                                 |
 | `labels`    | `Partial<BlockEditorLabels>` | `DEFAULT_BLOCK_EDITOR_LABELS` | Override default slash command labels                  |
+| `icons`     | `Partial<BlockEditorIcons>`  | `DEFAULT_ICONS`               | Override any built-in icon (slash commands, bubble menu, drag handle) |
 
 ### Labels
 
@@ -235,6 +238,86 @@ const myItems: SlashCommandSuggestionItem[] = [
 
 Pass the custom items array to `getSlashCommandSuggestion(myItems)`. Items with the same `id` as a default item will override it.
 
+### Custom icons
+
+Override any built-in icon via the `icons` prop. All icons accept a `ReactNode`, so you can use inline SVGs, emoji, or any icon library.
+
+```tsx
+import {
+  BlockEditor,
+  DEFAULT_ICONS,
+} from "@/components/block-editor";
+import type { BlockEditorIcons } from "@/components/block-editor";
+
+<BlockEditor
+  editor={editor}
+  icons={{
+    slashTextIcon: <span>T</span>,
+    slashHeadingIcon: <span>H</span>,
+    boldIcon: <strong>B</strong>,
+    dragHandleIcon: <span>:::</span>,
+  }}
+/>
+```
+
+Each slash command item also accepts an `icon` property. Override individual items to change their icon without replacing all defaults:
+
+```tsx
+import {
+  defaultSlashCommandItems,
+  getSlashCommandSuggestion,
+} from "@/components/block-editor";
+import type { SlashCommandSuggestionItem } from "@/components/block-editor";
+
+const myItems: SlashCommandSuggestionItem[] = [
+  ...defaultSlashCommandItems,
+  {
+    id: "image",
+    title: "Image",
+    description: "Insert an image.",
+    keywords: ["image", "img", "picture", "photo"],
+    icon: <ImageIcon />, // Your custom icon
+    command: ({ editor, range }) => {
+      const url = window.prompt("Enter image URL");
+      if (!url) return;
+      editor.chain().focus().deleteRange(range).setImage({ src: url }).run();
+    },
+  },
+];
+```
+
+**Available icon keys:**
+
+| Key                    | Used in          |
+| ---------------------- | ---------------- |
+| `slashTextIcon`        | Slash menu       |
+| `slashHeadingIcon`     | Slash menu       |
+| `slashBulletListIcon`  | Slash menu       |
+| `slashOrderedListIcon` | Slash menu       |
+| `slashTaskListIcon`    | Slash menu       |
+| `slashBlockquoteIcon`  | Slash menu       |
+| `slashCodeBlockIcon`   | Slash menu       |
+| `slashDividerIcon`     | Slash menu       |
+| `slashImageIcon`       | Slash menu       |
+| `slashTableIcon`       | Slash menu       |
+| `searchIcon`           | Slash menu       |
+| `fallbackIcon`         | Slash menu       |
+| `dragHandleIcon`       | Drag handle      |
+| `boldIcon`             | Bubble menu      |
+| `italicIcon`           | Bubble menu      |
+| `underlineIcon`        | Bubble menu      |
+| `strikethroughIcon`    | Bubble menu      |
+| `codeIcon`             | Bubble menu      |
+| `alignLeftIcon`        | Bubble menu      |
+| `alignCenterIcon`      | Bubble menu      |
+| `alignRightIcon`       | Bubble menu      |
+| `linkIcon`             | Bubble menu      |
+| `unlinkIcon`           | Bubble menu      |
+| `checkIcon`            | Bubble menu      |
+| `copyIcon`             | Bubble menu      |
+| `deleteIcon`           | Bubble menu      |
+| `dropdownArrowIcon`    | Bubble menu      |
+
 Custom items are commonly used for commands that require additional extensions, such as **Image** and **Table**:
 
 ```tsx
@@ -292,12 +375,12 @@ const editor = useEditor({
 
 Select text to see the floating bubble menu with:
 
-- **Node type selector** — Switch between paragraph, headings, lists, etc.
-- **Inline formatting** — Bold, Italic, Underline, Strike, Code
+- **Node type selector** — Switch between paragraph, headings, lists, etc. (with icons)
+- **Inline formatting** — Bold, Italic, Underline, Strike, Code (with icons)
 - **Link insertion/removal** — Add or remove links
-- **Text alignment** — Left, Center, Right
+- **Text alignment** — Left, Center, Right (with icons)
 
-The bubble menu automatically positions itself near the selection and is styled with your theme's `--popover` tokens.
+The bubble menu automatically positions itself near the selection and is styled with your theme's `--popover` tokens. All bubble menu icons can be overridden via the `icons` prop.
 
 ### Block actions
 

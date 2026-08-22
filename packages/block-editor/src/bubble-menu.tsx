@@ -1,6 +1,7 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect, type ReactNode } from "react";
 import { type Editor } from "@tiptap/react";
 import { isTextSelection } from "@tiptap/core";
+import { DEFAULT_ICONS } from "./icons";
 
 interface BubbleMenuProps {
   editor: Editor | null;
@@ -20,6 +21,7 @@ interface SelectorResult {
 
 interface NodeItem {
   name: string;
+  icon: ReactNode;
   command: (editor: Editor) => void;
   isActive: (state: SelectorResult) => boolean;
 }
@@ -27,6 +29,7 @@ interface NodeItem {
 const nodeItems: NodeItem[] = [
   {
     name: "Text",
+    icon: DEFAULT_ICONS.slashTextIcon,
     command: (e) => (e.chain().focus() as any).setParagraph().run(),
     isActive: (s) =>
       s.isParagraph &&
@@ -38,44 +41,52 @@ const nodeItems: NodeItem[] = [
   },
   {
     name: "Heading 1",
+    icon: DEFAULT_ICONS.slashHeadingIcon,
     command: (e) =>
       (e.chain().focus() as any).toggleHeading({ level: 1 }).run(),
     isActive: (s) => s.isHeading1,
   },
   {
     name: "Heading 2",
+    icon: DEFAULT_ICONS.slashHeadingIcon,
     command: (e) =>
       (e.chain().focus() as any).toggleHeading({ level: 2 }).run(),
     isActive: (s) => s.isHeading2,
   },
   {
     name: "Heading 3",
+    icon: DEFAULT_ICONS.slashHeadingIcon,
     command: (e) =>
       (e.chain().focus() as any).toggleHeading({ level: 3 }).run(),
     isActive: (s) => s.isHeading3,
   },
   {
     name: "Bullet List",
+    icon: DEFAULT_ICONS.slashBulletListIcon,
     command: (e) => (e.chain().focus() as any).toggleBulletList().run(),
     isActive: (s) => s.isBulletList,
   },
   {
     name: "Numbered List",
+    icon: DEFAULT_ICONS.slashOrderedListIcon,
     command: (e) => (e.chain().focus() as any).toggleOrderedList().run(),
     isActive: (s) => s.isOrderedList,
   },
   {
     name: "To-do List",
+    icon: DEFAULT_ICONS.slashTaskListIcon,
     command: (e) => (e.chain().focus() as any).toggleTaskList().run(),
     isActive: (s) => s.isTaskList,
   },
   {
     name: "Quote",
+    icon: DEFAULT_ICONS.slashBlockquoteIcon,
     command: (e) => (e.chain().focus() as any).toggleBlockquote().run(),
     isActive: (s) => s.isBlockquote,
   },
   {
     name: "Code Block",
+    icon: DEFAULT_ICONS.slashCodeBlockIcon,
     command: (e) => (e.chain().focus() as any).toggleCodeBlock().run(),
     isActive: (s) => s.isCodeBlock,
   },
@@ -115,6 +126,7 @@ function NodeSelector({ editor }: { editor: Editor }) {
   const activeItems = nodeItems.filter((i) => i.isActive(editorState));
   const activeName =
     activeItems.length > 1 ? "Multiple" : (activeItems[0]?.name ?? "Text");
+  const activeIcon = activeItems.length === 1 ? activeItems[0]?.icon : null;
 
   return (
     <div style={{ position: "relative" }}>
@@ -123,8 +135,11 @@ function NodeSelector({ editor }: { editor: Editor }) {
         className="block-editor-bubble-btn"
         onClick={() => setOpen(!open)}
       >
+        {activeIcon && (
+          <span className="block-editor-bubble-dropdown-icon">{activeIcon}</span>
+        )}
         <span className="block-editor-bubble-btn-text">{activeName}</span>
-        <DropdownArrowIcon />
+        {DEFAULT_ICONS.dropdownArrowIcon}
       </button>
       {open && (
         <>
@@ -143,8 +158,9 @@ function NodeSelector({ editor }: { editor: Editor }) {
                   setOpen(false);
                 }}
               >
+                <span className="block-editor-bubble-dropdown-icon">{item.icon}</span>
                 <span>{item.name}</span>
-                {item.isActive(editorState) && <CheckIcon />}
+                {item.isActive(editorState) && <span className="block-editor-bubble-dropdown-icon">{DEFAULT_ICONS.checkIcon}</span>}
               </button>
             ))}
             <div className="block-editor-bubble-dropdown-divider" />
@@ -156,7 +172,7 @@ function NodeSelector({ editor }: { editor: Editor }) {
                 setOpen(false);
               }}
             >
-              <CopyIcon />
+              <span className="block-editor-bubble-dropdown-icon">{DEFAULT_ICONS.copyIcon}</span>
               <span>Copy</span>
             </button>
             <button
@@ -167,7 +183,7 @@ function NodeSelector({ editor }: { editor: Editor }) {
                 setOpen(false);
               }}
             >
-              <DeleteIcon />
+              <span className="block-editor-bubble-dropdown-icon">{DEFAULT_ICONS.deleteIcon}</span>
               <span>Delete</span>
             </button>
           </div>
@@ -206,27 +222,27 @@ function useTextEditorState(
 
 const textItems = [
   {
-    icon: <BoldIcon />,
+    icon: DEFAULT_ICONS.boldIcon,
     command: (e: Editor) => (e.chain().focus() as any).toggleBold().run(),
     isActive: (s: TextSelectorResult) => s.isBold,
   },
   {
-    icon: <ItalicIcon />,
+    icon: DEFAULT_ICONS.italicIcon,
     command: (e: Editor) => (e.chain().focus() as any).toggleItalic().run(),
     isActive: (s: TextSelectorResult) => s.isItalic,
   },
   {
-    icon: <UnderlineIcon />,
+    icon: DEFAULT_ICONS.underlineIcon,
     command: (e: Editor) => (e.chain().focus() as any).toggleUnderline().run(),
     isActive: (s: TextSelectorResult) => s.isUnderline,
   },
   {
-    icon: <StrikethroughIcon />,
+    icon: DEFAULT_ICONS.strikethroughIcon,
     command: (e: Editor) => (e.chain().focus() as any).toggleStrike().run(),
     isActive: (s: TextSelectorResult) => s.isStrike,
   },
   {
-    icon: <CodeIcon />,
+    icon: DEFAULT_ICONS.codeIcon,
     command: (e: Editor) => (e.chain().focus() as any).toggleCode().run(),
     isActive: (s: TextSelectorResult) => s.isCode,
   },
@@ -285,21 +301,21 @@ function useAlignEditorState(
 const alignItems = [
   {
     label: "Left",
-    icon: <AlignLeftIcon />,
+    icon: DEFAULT_ICONS.alignLeftIcon,
     command: (e: Editor) =>
       (e.chain().focus() as any).setTextAlign("left").run(),
     isActive: (s: AlignSelectorResult) => s.isAlignLeft,
   },
   {
     label: "Center",
-    icon: <AlignCenterIcon />,
+    icon: DEFAULT_ICONS.alignCenterIcon,
     command: (e: Editor) =>
       (e.chain().focus() as any).setTextAlign("center").run(),
     isActive: (s: AlignSelectorResult) => s.isAlignCenter,
   },
   {
     label: "Right",
-    icon: <AlignRightIcon />,
+    icon: DEFAULT_ICONS.alignRightIcon,
     command: (e: Editor) =>
       (e.chain().focus() as any).setTextAlign("right").run(),
     isActive: (s: AlignSelectorResult) => s.isAlignRight,
@@ -325,8 +341,10 @@ function TextAlignSelector({ editor }: { editor: Editor }) {
         className="block-editor-bubble-btn"
         onClick={() => setOpen(!open)}
       >
-        {activeItem ? activeItem.icon : <AlignLeftIcon />}
-        <DropdownArrowIcon />
+        <span className="block-editor-bubble-dropdown-icon">
+          {activeItem ? activeItem.icon : DEFAULT_ICONS.alignLeftIcon}
+        </span>
+        {DEFAULT_ICONS.dropdownArrowIcon}
       </button>
       {open && (
         <>
@@ -348,9 +366,9 @@ function TextAlignSelector({ editor }: { editor: Editor }) {
                   setOpen(false);
                 }}
               >
-                {item.icon}
+                <span className="block-editor-bubble-dropdown-icon">{item.icon}</span>
                 <span>{item.label}</span>
-                {item.isActive(editorState) && <CheckIcon />}
+                {item.isActive(editorState) && <span className="block-editor-bubble-dropdown-icon">{DEFAULT_ICONS.checkIcon}</span>}
               </button>
             ))}
           </div>
@@ -411,7 +429,7 @@ function LinkSelector({ editor }: { editor: Editor }) {
         onClick={() => setOpen(!open)}
         title="Link"
       >
-        <LinkIcon />
+        {DEFAULT_ICONS.linkIcon}
       </button>
       {open && (
         <>
@@ -440,7 +458,7 @@ function LinkSelector({ editor }: { editor: Editor }) {
                     onClick={handleUnlink}
                     style={{ justifyContent: "center" }}
                   >
-                    <UnlinkIcon />
+                    <span className="block-editor-bubble-dropdown-icon">{DEFAULT_ICONS.unlinkIcon}</span>
                     <span>Remove</span>
                   </button>
                 )}
@@ -449,7 +467,7 @@ function LinkSelector({ editor }: { editor: Editor }) {
                   className="block-editor-bubble-dropdown-item"
                   style={{ justifyContent: "center" }}
                 >
-                  <CheckIcon />
+                  <span className="block-editor-bubble-dropdown-icon">{DEFAULT_ICONS.checkIcon}</span>
                   <span>{isLink ? "Update" : "Add"}</span>
                 </button>
               </div>
@@ -481,9 +499,6 @@ function deleteBlock(editor: Editor) {
   editor.chain().focus().deleteRange({ from: start, to: end }).run();
 }
 
-// BubbleMenu location differs between Tiptap v2 and v3:
-// v2: @tiptap/react  v3: @tiptap/react/menus
-// Eagerly start loading at module scope so the import resolves ASAP
 let BubbleMenuComponent: any = null;
 
 const bubbleMenuPromise = (async () => {
@@ -496,7 +511,7 @@ const bubbleMenuPromise = (async () => {
       const mod = await import("@tiptap/react");
       BubbleMenuComponent = mod.BubbleMenu;
     } catch {
-      // No Tiptap BubbleMenu available (unlikely since @tiptap/react is a peer dep)
+      // No Tiptap BubbleMenu available
     }
   }
 })();
@@ -548,249 +563,5 @@ export function BubbleMenu({ editor }: BubbleMenuProps) {
         )}
       </div>
     </BubbleMenuComponent>
-  );
-}
-
-/* SVG icons */
-function BoldIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
-      <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
-    </svg>
-  );
-}
-function ItalicIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="19" x2="10" y1="4" y2="4" />
-      <line x1="14" x2="5" y1="20" y2="20" />
-      <line x1="15" x2="9" y1="4" y2="20" />
-    </svg>
-  );
-}
-function UnderlineIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M6 4v6a6 6 0 0 0 12 0V4" />
-      <line x1="4" x2="20" y1="20" y2="20" />
-    </svg>
-  );
-}
-function StrikethroughIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M16 4H9a3 3 0 0 0-2.83 4" />
-      <path d="M14 12a4 4 0 0 1 0 8H6" />
-      <line x1="4" x2="20" y1="12" y2="12" />
-    </svg>
-  );
-}
-function CodeIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polyline points="16 18 22 12 16 6" />
-      <polyline points="8 6 2 12 8 18" />
-    </svg>
-  );
-}
-function AlignLeftIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="21" x2="3" y1="6" y2="6" />
-      <line x1="15" x2="3" y1="12" y2="12" />
-      <line x1="17" x2="3" y1="18" y2="18" />
-    </svg>
-  );
-}
-function AlignCenterIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="21" x2="3" y1="6" y2="6" />
-      <line x1="17" x2="7" y1="12" y2="12" />
-      <line x1="19" x2="5" y1="18" y2="18" />
-    </svg>
-  );
-}
-function AlignRightIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="21" x2="3" y1="6" y2="6" />
-      <line x1="21" x2="9" y1="12" y2="12" />
-      <line x1="21" x2="7" y1="18" y2="18" />
-    </svg>
-  );
-}
-function DropdownArrowIcon() {
-  return (
-    <svg
-      width="10"
-      height="10"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  );
-}
-function CheckIcon() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  );
-}
-function CopyIcon() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-    </svg>
-  );
-}
-function DeleteIcon() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polyline points="3 6 5 6 21 6" />
-      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-    </svg>
-  );
-}
-function LinkIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-    </svg>
-  );
-}
-function UnlinkIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="2" x2="22" y1="2" y2="22" />
-      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-    </svg>
   );
 }

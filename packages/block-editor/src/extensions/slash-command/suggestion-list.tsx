@@ -1,6 +1,7 @@
 import type { SlashCommandSuggestionItem } from "./slash-command";
 import type { SuggestionKeyDownProps, SuggestionProps } from "@tiptap/suggestion";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState, useRef } from "react";
+import { DEFAULT_ICONS } from "../../icons";
 
 export type SuggestionListProps = SuggestionProps<SlashCommandSuggestionItem, any>;
 
@@ -11,29 +12,53 @@ export interface SuggestionListHandle {
 const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
   (props, ref) => {
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [searchQuery, setSearchQuery] = useState("");
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    // Filter items based on local search query
+    const filteredItems = props.items.filter((item) => {
+      const query = searchQuery.toLowerCase();
+      return (
+        item.title.toLowerCase().includes(query) ||
+        item.description?.toLowerCase().includes(query)
+      );
+    });
 
     const selectItem = (index: number) => {
-      const item = props.items[index];
+      const item = filteredItems[index];
       if (!item) return;
       props.command(item);
     };
 
     const upHandler = () => {
       setSelectedIndex(
-        (selectedIndex + props.items.length - 1) % props.items.length,
+        (selectedIndex + filteredItems.length - 1) % filteredItems.length
       );
     };
 
     const downHandler = () => {
-      setSelectedIndex((selectedIndex + 1) % props.items.length);
+      setSelectedIndex((selectedIndex + 1) % filteredItems.length);
     };
 
     const enterHandler = () => {
       selectItem(selectedIndex);
     };
 
-    useEffect(() => setSelectedIndex(0), [props.items]);
+    // Reset selection when items or search query changes
+    useEffect(() => {
+      setSelectedIndex(0);
+    }, [filteredItems.length, searchQuery]);
 
+    // Ensure the selected item remains visible in the scrollable area
+    useEffect(() => {
+      if (!scrollContainerRef.current) return;
+      const selectedElement = scrollContainerRef.current.children[selectedIndex] as HTMLElement;
+      if (selectedElement) {
+        selectedElement.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }
+    }, [selectedIndex]);
+
+    // Handle keyboard events originating from the Tiptap editor
     useImperativeHandle(ref, () => ({
       onKeyDown: ({ event }) => {
         if (event.key === "ArrowUp") {
@@ -54,11 +79,30 @@ const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
 
     return (
       <div className="block-editor-slash-menu">
-        <div className="block-editor-slash-menu-list">
-          {props.items.length > 0 ? (
-            props.items.map((item, i) => (
+        {/* Search Header */}
+        <div className="block-editor-slash-menu-search">
+          {DEFAULT_ICONS.searchIcon}
+          <input
+            type="text"
+            placeholder="Search commands..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="block-editor-slash-menu-search-input"
+            // If the user clicks into the input, let them use arrows/enter here too
+            onKeyDown={(e) => {
+              if (e.key === "ArrowUp") { e.preventDefault(); upHandler(); }
+              if (e.key === "ArrowDown") { e.preventDefault(); downHandler(); }
+              if (e.key === "Enter") { e.preventDefault(); enterHandler(); }
+            }}
+          />
+        </div>
+
+        {/* Scrollable List */}
+        <div className="block-editor-slash-menu-list" ref={scrollContainerRef}>
+          {filteredItems.length > 0 ? (
+            filteredItems.map((item, i) => (
               <button
-                key={item.id}
+                key={item.title} // Fallback to title if id is missing in your type
                 type="button"
                 className={`block-editor-slash-menu-item${
                   i === selectedIndex ? " block-editor-slash-menu-item--selected" : ""
@@ -66,18 +110,25 @@ const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
                 onClick={() => selectItem(i)}
                 onMouseEnter={() => setSelectedIndex(i)}
               >
+                <div className="block-editor-slash-menu-item-icon">
+                  {item.icon ?? DEFAULT_ICONS.fallbackIcon}
+                </div>
                 <div className="block-editor-slash-menu-item-content">
                   <span className="block-editor-slash-menu-item-label">
                     {item.title}
                   </span>
-                  <span className="block-editor-slash-menu-item-desc">
-                    {item.description}
-                  </span>
+                  {item.description && (
+                    <span className="block-editor-slash-menu-item-desc">
+                      {item.description}
+                    </span>
+                  )}
                 </div>
               </button>
             ))
           ) : (
-            <div className="block-editor-slash-menu-empty">No results</div>
+            <div className="block-editor-slash-menu-empty">
+              No results for "{searchQuery}"
+            </div>
           )}
         </div>
       </div>

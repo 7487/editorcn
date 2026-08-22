@@ -1,5 +1,6 @@
 import type { Editor } from '@tiptap/core';
 import type { ReactNode } from 'react';
+import type { BlockEditorIcons } from './icons';
 
 export interface BlockEditorLabels {
   paragraphLabel?: string;
@@ -17,9 +18,11 @@ export interface BlockEditorProps {
   children?: ReactNode;
   className?: string;
   labels?: Partial<BlockEditorLabels>;
+  icons?: Partial<BlockEditorIcons>;
 }
 
 export interface BlockEditorContextValue {
   editor: Editor | null;
   labels: BlockEditorLabels;
+  icons: BlockEditorIcons;
 }

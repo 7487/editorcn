@@ -9,6 +9,7 @@ export interface SlashCommandSuggestionItem {
   title: string;
   description: string;
   keywords: string[];
+  icon?: React.ReactNode;
   command: OnCommandSelect;
 }
 
