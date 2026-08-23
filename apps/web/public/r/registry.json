@@ -181,6 +181,10 @@
           "type": "registry:component"
         },
         {
+          "path": "block-editor/icons.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "block-editor/labels.ts",
           "type": "registry:component"
         },

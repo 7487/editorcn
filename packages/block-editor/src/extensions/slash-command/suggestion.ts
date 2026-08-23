@@ -2,6 +2,7 @@ import { computePosition, flip, shift } from "@floating-ui/dom";
 import { Editor, ReactRenderer } from "@tiptap/react";
 import { posToDOMRect } from "@tiptap/core";
 import type { SuggestionOptions } from "@tiptap/suggestion";
+import { DEFAULT_ICONS } from "../../icons";
 import type { SlashCommandSuggestionItem } from "./slash-command";
 import SuggestionList, {
   type SuggestionListHandle,
@@ -19,6 +20,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
     title: "Text",
     description: "Just start typing with plain text.",
     keywords: ["p", "paragraph"],
+    icon: DEFAULT_ICONS.slashTextIcon,
     command: ({ editor, range }) => {
       editor
         .chain()
@@ -33,6 +35,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
     title: "Heading 1",
     description: "Big section heading.",
     keywords: ["title", "big", "large", "heading"],
+    icon: DEFAULT_ICONS.slashHeadingIcon,
     command: ({ editor, range }) => {
       editor
         .chain()
@@ -47,6 +50,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
     title: "Heading 2",
     description: "Medium section heading.",
     keywords: ["subtitle", "medium", "heading"],
+    icon: DEFAULT_ICONS.slashHeadingIcon,
     command: ({ editor, range }) => {
       editor
         .chain()
@@ -61,6 +65,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
     title: "Heading 3",
     description: "Small section heading.",
     keywords: ["subtitle", "small", "heading"],
+    icon: DEFAULT_ICONS.slashHeadingIcon,
     command: ({ editor, range }) => {
       editor
         .chain()
@@ -75,6 +80,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
     title: "Bullet List",
     description: "Create a simple bullet list.",
     keywords: ["unordered", "list", "bullet"],
+    icon: DEFAULT_ICONS.slashBulletListIcon,
     command: ({ editor, range }) => {
       (editor.chain().focus() as any).deleteRange(range).toggleBulletList().run();
     },
@@ -84,6 +90,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
     title: "Numbered List",
     description: "Create a list with numbering.",
     keywords: ["ordered", "list"],
+    icon: DEFAULT_ICONS.slashOrderedListIcon,
     command: ({ editor, range }) => {
       (editor.chain().focus() as any).deleteRange(range).toggleOrderedList().run();
     },
@@ -93,6 +100,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
     title: "Task List",
     description: "Create a task list with checkboxes.",
     keywords: ["task", "todo", "checkbox"],
+    icon: DEFAULT_ICONS.slashTaskListIcon,
     command: ({ editor, range }) => {
       (editor.chain().focus() as any).deleteRange(range).toggleTaskList().run();
     },
@@ -102,6 +110,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
     title: "Quote",
     description: "Capture a quote.",
     keywords: ["blockquote"],
+    icon: DEFAULT_ICONS.slashBlockquoteIcon,
     command: ({ editor, range }) =>
       (editor
         .chain()
@@ -116,6 +125,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
     title: "Code",
     description: "Capture a code snippet.",
     keywords: ["codeblock"],
+    icon: DEFAULT_ICONS.slashCodeBlockIcon,
     command: ({ editor, range }) =>
       (editor.chain().focus() as any)
         .deleteRange(range)
@@ -127,6 +137,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
     title: "Divider",
     description: "Create a horizontal divider.",
     keywords: ["divider"],
+    icon: DEFAULT_ICONS.slashDividerIcon,
     command: ({ editor, range }) =>
       (editor.chain().focus() as any).deleteRange(range).setHorizontalRule().run(),
   },

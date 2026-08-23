@@ -1,8 +1,12 @@
+/* ── Main Editor Wrapper ── */
 .rte-root {
   position: relative;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background-color: var(--background);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .rte-editor-icon {
@@ -18,8 +22,17 @@ button.rte-control-button {
   height: 2rem;
   width: 2rem;
   padding: 0;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.1s ease;
 }
 
+button.rte-control-button:active {
+  transform: scale(0.95);
+}
+
+/* ── Editor Content ── */
 .rte-content .ProseMirror {
   outline: 0;
   padding: var(--spacing, 0.75rem);
@@ -37,6 +50,7 @@ button.rte-control-button {
   float: left;
   height: 0;
   color: var(--muted-foreground);
+  transition: opacity 0.2s ease;
 }
 
 .rte-content .ProseMirror p {
@@ -62,7 +76,6 @@ button.rte-control-button {
   margin-bottom: 1rem;
   margin-top: 1.5rem;
 }
-
 .rte-content .ProseMirror h1:first-child {
   margin-top: 0;
 }
@@ -74,7 +87,6 @@ button.rte-control-button {
   margin-bottom: 0.75rem;
   margin-top: 1.25rem;
 }
-
 .rte-content .ProseMirror h2:first-child {
   margin-top: 0;
 }
@@ -85,7 +97,6 @@ button.rte-control-button {
   margin-bottom: 0.5rem;
   margin-top: 1rem;
 }
-
 .rte-content .ProseMirror h3:first-child {
   margin-top: 0;
 }
@@ -96,7 +107,6 @@ button.rte-control-button {
   margin-bottom: 0.5rem;
   margin-top: 0.75rem;
 }
-
 .rte-content .ProseMirror h4:first-child {
   margin-top: 0;
 }
@@ -107,7 +117,6 @@ button.rte-control-button {
   margin-bottom: 0.5rem;
   margin-top: 0.75rem;
 }
-
 .rte-content .ProseMirror h5:first-child {
   margin-top: 0;
 }
@@ -118,7 +127,6 @@ button.rte-control-button {
   margin-bottom: 0.5rem;
   margin-top: 0.75rem;
 }
-
 .rte-content .ProseMirror h6:first-child {
   margin-top: 0;
 }
@@ -200,16 +208,22 @@ button.rte-control-button {
   text-decoration: underline;
   text-underline-offset: 4px;
   cursor: pointer;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+  text-decoration-color: color-mix(in srgb, var(--primary) 40%, transparent);
 }
 
 .rte-content .ProseMirror a:hover {
   color: color-mix(in srgb, var(--primary) 80%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--primary) 80%, transparent);
 }
 
 .rte-content .ProseMirror ::selection {
   background-color: color-mix(in srgb, var(--primary) 15%, transparent);
 }
 
+/* Syntax Highlighting */
 .rte-content .ProseMirror pre .hljs-comment,
 .rte-content .ProseMirror pre .hljs-quote {
   color: var(--muted-foreground);
@@ -256,11 +270,11 @@ button.rte-control-button {
 .rte-content .ProseMirror pre .hljs-emphasis {
   font-style: italic;
 }
-
 .rte-content .ProseMirror pre .hljs-strong {
   font-weight: 700;
 }
 
+/* ── Toolbars and Footer ── */
 .rte-toolbar {
   display: flex;
   align-items: center;
@@ -274,10 +288,16 @@ button.rte-control-button {
   border-start-start-radius: var(--radius);
   border-bottom: 1px solid var(--border);
   padding: 0.5rem 0.75rem;
+  transition:
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .rte-toolbar[data-sticky] {
   position: sticky;
+  background-color: color-mix(in srgb, var(--background) 85%, transparent);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .rte-footer {
@@ -298,6 +318,10 @@ button.rte-control-button {
 
 .rte-footer[data-sticky] {
   position: sticky;
+  bottom: 0;
+  background-color: color-mix(in srgb, var(--background) 85%, transparent);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .rte-footer-word-count {
@@ -307,7 +331,6 @@ button.rte-control-button {
 .rte-toolbar--subtle + .rte-content + .rte-footer {
   background-color: var(--muted);
 }
-
 .rte-toolbar--compact + .rte-content + .rte-footer {
   background-color: var(--muted);
 }
@@ -320,6 +343,7 @@ button.rte-control-button {
     scrollbar-width: none;
     -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(to right, black 95%, transparent 100%);
   }
   .rte-toolbar::-webkit-scrollbar {
     display: none;
@@ -337,8 +361,11 @@ button.rte-control-button {
   min-width: 1.625rem;
   height: 1.625rem;
   background-color: var(--background);
+  transition: all 0.15s ease;
 }
-.rte-root[data-variant="default"] .rte-controls-group > button:not(:last-of-type) {
+.rte-root[data-variant="default"]
+  .rte-controls-group
+  > button:not(:last-of-type) {
   border-inline-end-width: 0;
 }
 .rte-root[data-variant="default"] .rte-controls-group > button:first-of-type {
@@ -354,15 +381,25 @@ button.rte-control-button {
   color: var(--accent-foreground);
 }
 .rte-root[data-variant="default"] .rte-controls-group > button[data-state="on"],
-.rte-root[data-variant="default"] .rte-controls-group > button[aria-pressed="true"] {
+.rte-root[data-variant="default"]
+  .rte-controls-group
+  > button[aria-pressed="true"] {
   background-color: var(--accent);
   color: var(--accent-foreground);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 /* ── Subtle variant: elevated card with soft toolbar ── */
 .rte-root[data-variant="subtle"] {
   border-color: transparent;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.rte-root[data-variant="subtle"]:focus-within {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 0 0 1px var(--primary);
 }
 .rte-toolbar--subtle {
   border-bottom: 1px solid var(--border);
@@ -383,14 +420,17 @@ button.rte-control-button {
   min-width: 2rem;
   height: 2rem;
   background-color: transparent;
+  transition: all 0.15s ease;
 }
 .rte-root[data-variant="subtle"] .rte-controls-group > button:hover {
   background-color: var(--accent);
   color: var(--accent-foreground);
 }
 .rte-root[data-variant="subtle"] .rte-controls-group > button[data-state="on"],
-.rte-root[data-variant="subtle"] .rte-controls-group > button[aria-pressed="true"] {
-  background-color: var(--accent);
+.rte-root[data-variant="subtle"]
+  .rte-controls-group
+  > button[aria-pressed="true"] {
+  background-color: color-mix(in srgb, var(--accent) 90%, black 5%);
   color: var(--accent-foreground);
 }
 
@@ -418,13 +458,16 @@ button.rte-control-button {
   min-width: 1.5rem;
   height: 1.5rem;
   background-color: transparent;
+  transition: all 0.15s ease;
 }
 .rte-root[data-variant="compact"] .rte-controls-group > button:hover {
   background-color: var(--accent);
   color: var(--accent-foreground);
 }
 .rte-root[data-variant="compact"] .rte-controls-group > button[data-state="on"],
-.rte-root[data-variant="compact"] .rte-controls-group > button[aria-pressed="true"] {
+.rte-root[data-variant="compact"]
+  .rte-controls-group
+  > button[aria-pressed="true"] {
   background-color: var(--accent);
   color: var(--accent-foreground);
 }
@@ -455,6 +498,7 @@ button.rte-control-button {
   border-end-start-radius: 0;
 }
 
+/* ── Task Lists ── */
 .rte-task-list {
   list-style-type: none;
   padding: 0;
@@ -467,6 +511,11 @@ button.rte-control-button {
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.rte-task-list li[data-checked] {
+  opacity: 0.6;
 }
 
 .rte-task-list li[data-checked] > div {
@@ -500,6 +549,14 @@ button.rte-control-button {
   vertical-align: middle;
   position: relative;
   flex-shrink: 0;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.rte-task-list input[type="checkbox"]:active {
+  transform: scale(0.9);
 }
 
 .rte-task-list input[type="checkbox"]:checked {
@@ -507,20 +564,43 @@ button.rte-control-button {
   border-color: var(--primary);
 }
 
+/* Pop animation for the checkmark */
+@keyframes checkmark-in {
+  0% {
+    transform: scale(0.5) rotate(-15deg);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+.rte-task-list input[type="checkbox"]:checked::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAxMCA3Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNCA0LjU4NkwxLjcwNyAyLjI5M0ExIDEgMCAxMC4yOTMgMy43MDdsMyAzYS45OTcuOTk3IDAgMDAxLjQxNCAwbDUtNUExIDEgMCAxMDguMjkzLjI5M0w0IDQuNTg2eiIvPjwvc3ZnPg==");
+  background-repeat: no-repeat;
+  background-size: 10px;
+  background-position: center;
+  animation: checkmark-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
 /* ── Embed nodes ── */
 .rte-embed-wrapper {
   margin: 1rem 0;
-  transition: opacity 0.2s;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
 .rte-embed-wrapper[data-align="left"] {
   text-align: left;
 }
-
 .rte-embed-wrapper[data-align="center"] {
   text-align: center;
 }
-
 .rte-embed-wrapper[data-align="right"] {
   text-align: right;
 }
@@ -529,6 +609,7 @@ button.rte-control-button {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
   border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .rte-embed {
@@ -537,6 +618,9 @@ button.rte-control-button {
   border-radius: var(--radius);
   background: var(--muted);
   display: inline-block;
+  transition:
+    outline-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .rte-embed-iframe {
@@ -551,6 +635,17 @@ button.rte-control-button {
   padding: 2rem;
   text-align: center;
   color: var(--muted-foreground);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 /* ── Resize handles for embeds ── */
@@ -558,7 +653,9 @@ button.rte-control-button {
   position: absolute;
   z-index: 10;
   opacity: 0;
-  transition: opacity 0.15s;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .rte-embed-wrapper[data-selected] .rte-resize-handle {
@@ -581,6 +678,14 @@ button.rte-control-button {
   width: 2px;
   background: var(--primary);
   border-radius: 1px;
+  transition:
+    width 0.2s ease,
+    inset 0.2s ease;
+}
+
+.rte-resize-handle--right:hover::after {
+  width: 4px;
+  inset: 4px 0;
 }
 
 .rte-resize-handle--bottom {
@@ -601,6 +706,14 @@ button.rte-control-button {
   background: var(--primary);
   border-radius: 1px;
   bottom: 1px;
+  transition:
+    height 0.2s ease,
+    bottom 0.2s ease;
+}
+
+.rte-resize-handle--bottom:hover::after {
+  height: 4px;
+  bottom: 0;
 }
 
 .rte-resize-handle--corner {
@@ -612,14 +725,9 @@ button.rte-control-button {
   background: var(--primary);
   border: 2px solid var(--background);
   border-radius: 2px;
+  transition: transform 0.15s ease;
 }
 
-.rte-task-list input[type="checkbox"]:checked::before {
-  position: absolute;
-  content: "";
-  inset: 0;
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAxMCA3Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNCA0LjU4NkwxLjcwNyAyLjI5M0ExIDEgMCAxMC4yOTMgMy43MDdsMyAzYS45OTcuOTk3IDAgMDAxLjQxNCAwbDUtNUExIDEgMCAxMDguMjkzLjI5M0w0IDQuNTg2eiIvPjwvc3ZnPg==');
-  background-repeat: no-repeat;
-  background-size: 10px;
-  background-position: center;
+.rte-resize-handle--corner:hover {
+  transform: scale(1.15);
 }

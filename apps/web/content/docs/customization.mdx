@@ -318,3 +318,41 @@ SlashCommand.configure({
 ```
 
 Custom items appear at the top of the menu. Built-in items with the same `id` are replaced; all others are appended below your custom items.
+
+### Custom Icon Overrides
+
+Replace any built-in icon via the `icons` prop. All 27 icons accept a React node — use inline SVGs, emoji, or any icon library.
+
+```tsx
+import {
+  BlockEditor,
+  DEFAULT_ICONS,
+} from "@/components/block-editor";
+import type { BlockEditorIcons } from "@/components/block-editor";
+
+<BlockEditor
+  editor={editor}
+  icons={{
+    slashTextIcon: <span className="text-sm font-bold">T</span>,
+    boldIcon: <strong>B</strong>,
+    italicIcon: <em>I</em>,
+    dragHandleIcon: <GripVerticalIcon />,
+  }}
+/>
+```
+
+Individual slash command items also accept an `icon` property:
+
+```tsx
+const myItems: SlashCommandSuggestionItem[] = [
+  ...defaultSlashCommandItems,
+  {
+    id: "image",
+    title: "Image",
+    description: "Insert an image.",
+    keywords: ["image", "img", "picture"],
+    icon: < ImageIcon />, // Custom icon for this item
+    command: ({ editor, range }) => { /* ... */ },
+  },
+];
+```
