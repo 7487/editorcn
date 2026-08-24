@@ -8,7 +8,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Highlight from "@tiptap/extension-highlight";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
-import { RichTextEditor, Link, useRichTextEditorContext, TwitterEmbed, YouTubeEmbed } from "@editorcn/editor";
+import { RichTextEditor, Link, useRichTextEditorContext, TwitterEmbed, YouTubeEmbed, CodeBlock } from "@editorcn/editor";
 import type { RichTextEditorVariant } from "@editorcn/editor";
 import { CharacterCount } from "@tiptap/extension-character-count";
 import "@editorcn/editor/style.css";
@@ -94,6 +94,7 @@ export function EditorPreview({ variant = "default" }: { variant?: RichTextEdito
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       Placeholder.configure({ placeholder: "Start typing..." }),
       CharacterCount,
+      CodeBlock,
     ],
     content: DEMO_CONTENT,
   });
@@ -154,6 +155,7 @@ export function EditorPreview({ variant = "default" }: { variant?: RichTextEdito
             <RichTextEditor.Redo />
           </RichTextEditor.ControlsGroup>
         </RichTextEditor.Toolbar>
+        <RichTextEditor.BubbleMenu editor={editor} />
         <RichTextEditor.Content className="px-2" />
         <RichTextEditor.Footer showWordCount />
       </RichTextEditor>

@@ -34,10 +34,15 @@ const editorFiles = [
   entry("editor/icons.tsx", "registry:component", "editor", "icons.tsx"),
   entry("editor/types.ts", "registry:component", "editor", "types.ts"),
   entry("editor/style.css", "registry:style", "editor", "style.css"),
+  entry("editor/bubble-menu/index.tsx", "registry:component", "editor", "bubble-menu/index.tsx"),
+  entry("editor/bubble-menu/utils.ts", "registry:component", "editor", "bubble-menu/utils.ts"),
+  entry("editor/bubble-menu/language-selector.tsx", "registry:component", "editor", "bubble-menu/language-selector.tsx"),
+  entry("editor/bubble-menu/text-buttons.tsx", "registry:component", "editor", "bubble-menu/text-buttons.tsx"),
   entry("editor/controls/rte-control.tsx", "registry:component", "editor", "controls/rte-control.tsx"),
   entry("editor/controls/rte-controls.tsx", "registry:component", "editor", "controls/rte-controls.tsx"),
   entry("editor/controls/rte-link-control.tsx", "registry:component", "editor", "controls/rte-link-control.tsx"),
   entry("editor/extensions/index.ts", "registry:component", "editor", "extensions/index.ts"),
+  entry("editor/extensions/code-block.ts", "registry:component", "editor", "extensions/code-block.ts"),
   entry("editor/extensions/link.ts", "registry:component", "editor", "extensions/link.ts"),
   entry("editor/extensions/resizable-node-view.tsx", "registry:component", "editor", "extensions/resizable-node-view.tsx"),
   entry("editor/controls/rte-twitter-control.tsx", "registry:component", "editor", "controls/rte-twitter-control.tsx"),
@@ -53,13 +58,20 @@ const editorFiles = [
 const blockEditorFiles = [
   entry("block-editor/index.ts", "registry:component", "block-editor", "index.ts"),
   entry("block-editor/block-editor.tsx", "registry:component", "block-editor", "block-editor.tsx"),
-  entry("block-editor/bubble-menu.tsx", "registry:component", "block-editor", "bubble-menu.tsx"),
+  entry("block-editor/bubble-menu/index.tsx", "registry:component", "block-editor", "bubble-menu/index.tsx"),
+  entry("block-editor/bubble-menu/utils.ts", "registry:component", "block-editor", "bubble-menu/utils.ts"),
+  entry("block-editor/bubble-menu/node-selector.tsx", "registry:component", "block-editor", "bubble-menu/node-selector.tsx"),
+  entry("block-editor/bubble-menu/text-buttons.tsx", "registry:component", "block-editor", "bubble-menu/text-buttons.tsx"),
+  entry("block-editor/bubble-menu/align-selector.tsx", "registry:component", "block-editor", "bubble-menu/align-selector.tsx"),
+  entry("block-editor/bubble-menu/link-selector.tsx", "registry:component", "block-editor", "bubble-menu/link-selector.tsx"),
+  entry("block-editor/bubble-menu/language-selector.tsx", "registry:component", "block-editor", "bubble-menu/language-selector.tsx"),
   entry("block-editor/context.tsx", "registry:component", "block-editor", "context.tsx"),
   entry("block-editor/icons.tsx", "registry:component", "block-editor", "icons.tsx"),
   entry("block-editor/labels.ts", "registry:component", "block-editor", "labels.ts"),
   entry("block-editor/types.ts", "registry:component", "block-editor", "types.ts"),
   entry("block-editor/style.css", "registry:style", "block-editor", "style.css"),
   entry("block-editor/extensions/index.ts", "registry:component", "block-editor", "extensions/index.ts"),
+  entry("block-editor/extensions/code-block.ts", "registry:component", "block-editor", "extensions/code-block.ts"),
   entry("block-editor/extensions/slash-command/index.ts", "registry:component", "block-editor", "extensions/slash-command/index.ts"),
   entry("block-editor/extensions/slash-command/slash-command.ts", "registry:component", "block-editor", "extensions/slash-command/slash-command.ts"),
   entry("block-editor/extensions/slash-command/suggestion.ts", "registry:component", "block-editor", "extensions/slash-command/suggestion.ts"),
@@ -73,35 +85,6 @@ const blockEditorFiles = [
   entry("block-editor/lib/utils.ts", "registry:lib", "block-editor", "lib/utils.ts"),
 ];
 
-// const customControlNames = [
-//   "heading-select", "insert-link-dialog", "highlight-color-popover",
-//   "emoji-menu", "insert-table-dialog", "font-family-select",
-//   "font-size",
-// ];
-
-// const customControlExtensionNames = [
-//   "font-size-extension",
-// ];
-
-// function entryRegistry(name) {
-//   const path = `custom-controls/${name}.tsx`;
-//   const target = `@components/${path}`;
-//   return { path, type: "registry:component", target, content: readRegistry("registry", `${name}.tsx`) };
-// }
-
-// function entryRegistryExtension(name) {
-//   const path = `extensions/${name}.ts`;
-//   const target = `@components/${path}`;
-//   return { path, type: "registry:component", target, content: readRegistryExtension("registry", `${name}.ts`) };
-// }
-
-// const customControlFiles = [
-//   ...customControlNames.map(entryRegistry),
-//   ...customControlExtensionNames.map(entryRegistryExtension),
-// ];
-
-// const customControlRegistryDeps = ["select", "dialog", "popover", "dropdown-menu", "button", "input"];
-
 const deps = {
   editor: [
     "@tiptap/core@>=2.11.5 <4",
@@ -114,11 +97,11 @@ const deps = {
     "@tiptap/extension-text-align@>=2.11.5 <4",
     "@tiptap/extension-subscript@>=2.11.5 <4",
     "@tiptap/extension-superscript@>=2.11.5 <4",
-    "@tiptap/extension-code-block-lowlight@>=2.11.5 <4",
     "@tiptap/extension-placeholder@>=2.11.5 <4",
     "@tiptap/extension-character-count@>=2.11.5 <4",
+    "@tiptap/extension-code-block-lowlight@>=2.11.5 <4",
+    "lowlight@>=3.0.0 <4",
     "@base-ui/react@^1.0.0",
-    "lowlight@^3.3.0",
     "class-variance-authority@^0.7.1",
     "clsx@^2.1.1",
     "tailwind-merge@^3.0.0",
@@ -130,7 +113,6 @@ const deps = {
     "@tiptap/core@>=2.11.5 <4",
     "@tiptap/extension-link@>=2.11.5 <4",
     "@tiptap/extension-underline@>=2.11.5 <4",
-    "@tiptap/extension-code-block-lowlight@>=2.11.5 <4",
     "@tiptap/extension-placeholder@>=2.11.5 <4",
     "@tiptap/extension-text-align@>=2.11.5 <4",
     "@tiptap/extension-task-list@>=2.11.5 <4",
@@ -143,9 +125,10 @@ const deps = {
     "@tiptap/extension-drag-handle@>=2.11.5 <4",
     "@tiptap/extension-drag-handle-react@>=2.11.5 <4",
     "@tiptap/suggestion@>=2.11.5 <4",
+    "@tiptap/extension-code-block-lowlight@>=2.11.5 <4",
+    "lowlight@>=3.0.0 <4",
     "@base-ui/react@^1.0.0",
     "@floating-ui/dom@^1.6.0",
-    "lowlight@^3.3.0",
     "class-variance-authority@^0.7.1",
     "clsx@^2.1.1",
     "tailwind-merge@^3.0.0",
@@ -184,7 +167,6 @@ function catalogItem(name, title, desc, depsList, fileList) {
 const outDir = resolve(root, "apps", "web", "public", "r");
 if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true });
 
-// Write individual item JSON files (with content)
 writeFileSync(
   resolve(outDir, "editor.json"),
   JSON.stringify(buildItem("editor", "Rich Text Editor", "A toolbar-style rich text editor built on Tiptap with shadcn/ui tokens.", editorFiles, deps.editor), null, 2),
@@ -193,12 +175,7 @@ writeFileSync(
   resolve(outDir, "block-editor.json"),
   JSON.stringify(buildItem("block-editor", "Block Editor", "A Notion-style block editor built on Tiptap with shadcn/ui tokens.", blockEditorFiles, deps["block-editor"]), null, 2),
 );
-// writeFileSync(
-//   resolve(outDir, "custom-controls.json"),
-//   JSON.stringify(buildItem("custom-controls", "Custom Toolbar Controls", "Ready-to-use custom toolbar controls for the Rich Text Editor.", customControlFiles, deps["custom-controls"], customControlRegistryDeps), null, 2),
-// );
 
-// Write catalog JSON (metadata only, no file content)
 const catalog = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: "editorcn",
@@ -206,7 +183,6 @@ const catalog = {
   items: [
     catalogItem("editor", "Rich Text Editor", "A toolbar-style rich text editor built on Tiptap with shadcn/ui tokens.", deps.editor, editorFiles),
     catalogItem("block-editor", "Block Editor", "A Notion-style block editor built on Tiptap with shadcn/ui tokens.", deps["block-editor"], blockEditorFiles),
-    // catalogItem("custom-controls", "Custom Toolbar Controls", "Ready-to-use custom toolbar controls for the Rich Text Editor.", deps["custom-controls"], customControlFiles),
   ],
 };
 writeFileSync(resolve(outDir, "registry.json"), JSON.stringify(catalog, null, 2));
@@ -215,4 +191,3 @@ console.log("Built registry:");
 console.log("  apps/web/public/r/registry.json");
 console.log("  apps/web/public/r/editor.json");
 console.log("  apps/web/public/r/block-editor.json");
-// console.log("  apps/web/public/r/custom-controls.json");

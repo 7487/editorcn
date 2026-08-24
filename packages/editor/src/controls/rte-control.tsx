@@ -13,7 +13,7 @@ type IsActiveConfig =
 
 interface CreateControlProps {
   label: keyof RichTextEditorLabels;
-  iconKey: keyof RichTextEditorIcons;
+  iconKey: Exclude<keyof RichTextEditorIcons, "languageIcons">;
   isActive?: IsActiveConfig;
   isDisabled?: (editor: any) => boolean;
   operation: { name: string; attributes?: Record<string, any> | string };

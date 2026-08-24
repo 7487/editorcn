@@ -13,8 +13,7 @@ import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
-import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
-import { common, createLowlight } from "lowlight";
+import { CodeBlock } from "@editorcn/block-editor";
 import { showImagePrompt } from "@/components/image-prompt";
 import {
   BlockEditor,
@@ -35,8 +34,6 @@ const BLOCK_CONTENT = `
 </ul>
 <pre><code class="language-javascript">console.log("Hello, world!");</code></pre>
 `.trim();
-
-const lowlight = createLowlight(common);
 
 const blockItems = [
   ...defaultSlashCommandItems,
@@ -75,7 +72,7 @@ const extensions = [
   Underline,
   TaskList,
   TaskItem.configure({ nested: true }),
-  CodeBlockLowlight.configure({ lowlight }),
+  CodeBlock,
   TextAlign.configure({ types: ["heading", "paragraph"] }),
   Table,
   TableRow,
@@ -194,7 +191,7 @@ const customSlashExtensions = [
   Underline,
   TaskList,
   TaskItem.configure({ nested: true }),
-  CodeBlockLowlight.configure({ lowlight }),
+  CodeBlock,
   TextAlign.configure({ types: ["heading", "paragraph"] }),
   Table,
   TableRow,

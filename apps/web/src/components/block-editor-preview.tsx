@@ -13,13 +13,11 @@ import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
-import CodeBlock from '@tiptap/extension-code-block'
-import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
-import { common, createLowlight } from "lowlight";
 import { showImagePrompt } from "@/components/image-prompt";
 import {
   BlockEditor,
   SlashCommand,
+  CodeBlock,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
 } from "@editorcn/block-editor";
@@ -150,8 +148,6 @@ const myItems: SlashCommandSuggestionItem[] = [
   },
 ];
 
-const lowlight = createLowlight(common);
-
 export function BlockEditorPreview() {
 
   const editor = useEditor({
@@ -160,14 +156,12 @@ export function BlockEditorPreview() {
     extensions: [
       StarterKit.configure({
         heading: { levels: [1, 2, 3] },
-        codeBlock: false,
       }),
       Placeholder.configure({ placeholder: "Type / for commands..." }),
       Underline,
       TaskList,
       TaskItem.configure({ nested: true }),
       CodeBlock,
-      CodeBlockLowlight.configure({ lowlight}),
       SlashCommand.configure({
         suggestion: getSlashCommandSuggestion(myItems),
       }),

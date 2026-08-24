@@ -19,16 +19,36 @@
         "@tiptap/extension-text-align@>=2.11.5 <4",
         "@tiptap/extension-subscript@>=2.11.5 <4",
         "@tiptap/extension-superscript@>=2.11.5 <4",
-        "@tiptap/extension-code-block-lowlight@>=2.11.5 <4",
         "@tiptap/extension-placeholder@>=2.11.5 <4",
         "@tiptap/extension-character-count@>=2.11.5 <4",
+        "@tiptap/extension-code-block-lowlight@>=2.11.5 <4",
+        "lowlight@>=3.0.0 <4",
         "@base-ui/react@^1.0.0",
-        "lowlight@^3.3.0",
         "class-variance-authority@^0.7.1",
         "clsx@^2.1.1",
         "tailwind-merge@^3.0.0"
       ],
       "files": [
+        {
+          "path": "editor/shared/index.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "editor/shared/code-block.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "editor/shared/use-editor-state.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "editor/shared/cn.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "editor/shared/types.ts",
+          "type": "registry:lib"
+        },
         {
           "path": "editor/index.ts",
           "type": "registry:component"
@@ -74,6 +94,22 @@
           "type": "registry:style"
         },
         {
+          "path": "editor/bubble-menu/index.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "editor/bubble-menu/utils.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "editor/bubble-menu/language-selector.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "editor/bubble-menu/text-buttons.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "editor/controls/rte-control.tsx",
           "type": "registry:component"
         },
@@ -87,6 +123,10 @@
         },
         {
           "path": "editor/extensions/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "editor/extensions/code-block.ts",
           "type": "registry:component"
         },
         {
@@ -143,7 +183,6 @@
         "@tiptap/core@>=2.11.5 <4",
         "@tiptap/extension-link@>=2.11.5 <4",
         "@tiptap/extension-underline@>=2.11.5 <4",
-        "@tiptap/extension-code-block-lowlight@>=2.11.5 <4",
         "@tiptap/extension-placeholder@>=2.11.5 <4",
         "@tiptap/extension-text-align@>=2.11.5 <4",
         "@tiptap/extension-task-list@>=2.11.5 <4",
@@ -156,14 +195,35 @@
         "@tiptap/extension-drag-handle@>=2.11.5 <4",
         "@tiptap/extension-drag-handle-react@>=2.11.5 <4",
         "@tiptap/suggestion@>=2.11.5 <4",
+        "@tiptap/extension-code-block-lowlight@>=2.11.5 <4",
+        "lowlight@>=3.0.0 <4",
         "@base-ui/react@^1.0.0",
         "@floating-ui/dom@^1.6.0",
-        "lowlight@^3.3.0",
         "class-variance-authority@^0.7.1",
         "clsx@^2.1.1",
         "tailwind-merge@^3.0.0"
       ],
       "files": [
+        {
+          "path": "block-editor/shared/index.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "block-editor/shared/code-block.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "block-editor/shared/use-editor-state.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "block-editor/shared/cn.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "block-editor/shared/types.ts",
+          "type": "registry:lib"
+        },
         {
           "path": "block-editor/index.ts",
           "type": "registry:component"
@@ -173,7 +233,31 @@
           "type": "registry:component"
         },
         {
-          "path": "block-editor/bubble-menu.tsx",
+          "path": "block-editor/bubble-menu/index.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/bubble-menu/utils.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/bubble-menu/node-selector.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/bubble-menu/text-buttons.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/bubble-menu/align-selector.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/bubble-menu/link-selector.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/bubble-menu/language-selector.tsx",
           "type": "registry:component"
         },
         {
@@ -198,6 +282,10 @@
         },
         {
           "path": "block-editor/extensions/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/extensions/code-block.ts",
           "type": "registry:component"
         },
         {
