@@ -59,7 +59,6 @@ export function LanguageSelector({ editor }: { editor: Editor }) {
           <div className="rte-bubble-overlay" onClick={() => setOpen(false)} />
           <div
             className="rte-bubble-dropdown rte-bubble-dropdown--language"
-            style={{ right: 0, left: "auto" }}
           >
             {CODE_BLOCK_LANGUAGES.map((lang) => (
               <button

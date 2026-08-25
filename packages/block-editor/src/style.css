@@ -1,5 +1,4 @@
 /* Block Editor styles using shadcn CSS variables */
-
 .block-editor {
   position: relative;
   width: 100%;
@@ -67,7 +66,6 @@
 }
 
 /* ── Bubble Menu & Dropdowns ── */
-
 @keyframes bubble-pop-in {
   0% { opacity: 0; transform: scale(0.96) translateY(4px); }
   100% { opacity: 1; transform: scale(1) translateY(0); }
@@ -383,6 +381,40 @@
   color: #cba6f7;
 }
 
+/* Object/JSON keys & HTML/XML attribute names (previously missing) */
+.block-editor-content .ProseMirror pre .hljs-attr {
+  color: #89b4fa;
+}
+
+/* JSDoc-style tags, e.g. @param, @returns */
+.block-editor-content .ProseMirror pre .hljs-doctag {
+  color: #f38ba8;
+  font-weight: 600;
+}
+
+/* Operators & punctuation (finer-grained grammars) */
+.block-editor-content .ProseMirror pre .hljs-operator,
+.block-editor-content .ProseMirror pre .hljs-punctuation {
+  color: #9399b2;
+}
+
+/* CSS selector attributes/pseudo-classes, e.g. [type="text"], :hover */
+.block-editor-content .ProseMirror pre .hljs-selector-attr,
+.block-editor-content .ProseMirror pre .hljs-selector-pseudo {
+  color: #94e2d5;
+}
+
+/* Language-level variables, e.g. this, super */
+.block-editor-content .ProseMirror pre .hljs-variable.language_ {
+  color: #cba6f7;
+  font-style: italic;
+}
+
+/* Template literal substitutions, e.g. ${...} */
+.block-editor-content .ProseMirror pre .hljs-subst {
+  color: #cdd6f4;
+}
+
 .block-editor-content .ProseMirror pre .hljs-emphasis {
   font-style: italic;
 }
@@ -514,7 +546,7 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   min-width: 260px;
   max-width: 300px;
-  overflow: hidden; /* Important: moved overflow-y to the list */
+  overflow: hidden;
   transform-origin: var(--origin, 0 0);
   animation: block-editor-slide-in 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -679,11 +711,8 @@
 /* Table wrapper for horizontal scroll */
 .block-editor-content .ProseMirror .tableWrapper {
   overflow-x: auto;
-  /* Smooth scroll behavior for large tables */
   scroll-behavior: smooth; 
 }
-
-/* ── shadcn-style UI components ── */
 
 /* Buttons */
 .block-editor-btn {

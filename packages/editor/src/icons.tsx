@@ -1,5 +1,39 @@
 import React from "react";
 
+const iconProps = { className: "rte-editor-icon" };
+
+export interface RichTextEditorIcons {
+  boldControlIcon: React.ReactNode;
+  italicControlIcon: React.ReactNode;
+  underlineControlIcon: React.ReactNode;
+  strikeControlIcon: React.ReactNode;
+  clearFormattingControlIcon: React.ReactNode;
+  codeControlIcon: React.ReactNode;
+  codeBlockControlIcon: React.ReactNode;
+  h1ControlIcon: React.ReactNode;
+  h2ControlIcon: React.ReactNode;
+  h3ControlIcon: React.ReactNode;
+  h4ControlIcon: React.ReactNode;
+  h5ControlIcon: React.ReactNode;
+  h6ControlIcon: React.ReactNode;
+  bulletListControlIcon: React.ReactNode;
+  orderedListControlIcon: React.ReactNode;
+  blockquoteControlIcon: React.ReactNode;
+  hrControlIcon: React.ReactNode;
+  linkControlIcon: React.ReactNode;
+  unlinkControlIcon: React.ReactNode;
+  undoControlIcon: React.ReactNode;
+  redoControlIcon: React.ReactNode;
+  alignLeftControlIcon: React.ReactNode;
+  alignCenterControlIcon: React.ReactNode;
+  alignRightControlIcon: React.ReactNode;
+  alignJustifyControlIcon: React.ReactNode;
+  highlightControlIcon: React.ReactNode;
+  subscriptControlIcon: React.ReactNode;
+  superscriptControlIcon: React.ReactNode;
+  languageIcons: Record<string, React.ReactNode>;
+}
+
 function Svg({
   children,
   className,
@@ -46,68 +80,36 @@ function LangIcon({
   );
 }
 
-export interface RichTextEditorIcons {
-  boldControlIcon: React.ReactNode;
-  italicControlIcon: React.ReactNode;
-  underlineControlIcon: React.ReactNode;
-  strikeControlIcon: React.ReactNode;
-  clearFormattingControlIcon: React.ReactNode;
-  codeControlIcon: React.ReactNode;
-  codeBlockControlIcon: React.ReactNode;
-  h1ControlIcon: React.ReactNode;
-  h2ControlIcon: React.ReactNode;
-  h3ControlIcon: React.ReactNode;
-  h4ControlIcon: React.ReactNode;
-  h5ControlIcon: React.ReactNode;
-  h6ControlIcon: React.ReactNode;
-  bulletListControlIcon: React.ReactNode;
-  orderedListControlIcon: React.ReactNode;
-  blockquoteControlIcon: React.ReactNode;
-  hrControlIcon: React.ReactNode;
-  linkControlIcon: React.ReactNode;
-  unlinkControlIcon: React.ReactNode;
-  undoControlIcon: React.ReactNode;
-  redoControlIcon: React.ReactNode;
-  alignLeftControlIcon: React.ReactNode;
-  alignCenterControlIcon: React.ReactNode;
-  alignRightControlIcon: React.ReactNode;
-  alignJustifyControlIcon: React.ReactNode;
-  highlightControlIcon: React.ReactNode;
-  subscriptControlIcon: React.ReactNode;
-  superscriptControlIcon: React.ReactNode;
-  languageIcons: Record<string, React.ReactNode>;
-}
-
-const iconProps = { className: "rte-editor-icon" };
-
 export const DEFAULT_LANGUAGE_ICONS: Record<string, React.ReactNode> = {
   javascript: (
     <LangIcon>
-      <rect x="2" y="2" width="20" height="20" rx="2" />
-      <path d="M10 16V8h1.5c1.4 0 2.5.6 2.5 2 0 1-.5 1.5-1.2 1.8C13.8 12.2 15 13 15 15c0 1.8-1.4 3-3 3H9" />
-      <path d="M11 8h2" />
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <path d="M10.5 8v6.5a2 2 0 0 1-3.5 1.3" />
+      <path d="M17 8.8a2 2 0 0 0-2-.8c-1.1 0-2.2.6-2.2 1.7 0 1 .9 1.4 2.2 1.7 1.3.3 2.3.7 2.3 1.9 0 1.1-1 1.8-2.3 1.8a2.4 2.4 0 0 1-2.3-1.4" />
     </LangIcon>
   ),
   typescript: (
     <LangIcon>
-      <rect x="2" y="2" width="20" height="20" rx="2" />
-      <path d="M8 16V8h3c1.7 0 3 1.1 3 2.8 0 1.5-.8 2.5-2 2.8.9.3 1.5 1.1 1.5 2.2 0 1.7-1.3 3.2-3 3.2H8" />
-      <path d="M9 8h3" />
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <path d="M7.3 8.2h5M9.8 8.2v7.6" />
+      <path d="M17 8.8a2 2 0 0 0-2-.8c-1.1 0-2.2.6-2.2 1.7 0 1 .9 1.4 2.2 1.7 1.3.3 2.3.7 2.3 1.9 0 1.1-1 1.8-2.3 1.8a2.4 2.4 0 0 1-2.3-1.4" />
     </LangIcon>
   ),
   html: (
     <LangIcon>
-      <path d="M4 3l1.5 18L12 23l6.5-2L20 3z" />
-      <path d="M8 8h8l-.5 5-3.5 1-3.5-1z" />
-      <path d="M12 14v6" />
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <path d="M9.5 8.5L6.5 12l3 3.5" />
+      <path d="M14.5 8.5L17.5 12l-3 3.5" />
+      <path d="M13 7.3l-2 9.4" />
     </LangIcon>
   ),
   css: (
     <LangIcon>
-      <path d="M4 3l1.5 18L12 23l6.5-2L20 3z" />
-      <path d="M8 8h8l-.3 3-3.7 1.2L7.2 11z" />
-      <circle cx="12" cy="16" r="1.5" />
-      <path d="M9.5 19.5l-.5-3 3 1 3-1-.5 3" />
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <path d="M9.7 7.5l-1 9" />
+      <path d="M15.3 7.5l-1 9" />
+      <path d="M7 10.3h11" />
+      <path d="M6.5 14.3h11" />
     </LangIcon>
   ),
   json: (
@@ -118,78 +120,76 @@ export const DEFAULT_LANGUAGE_ICONS: Record<string, React.ReactNode> = {
   ),
   python: (
     <LangIcon>
-      <path d="M11 2c-2.2 0-4 .9-4 3v2h4v1H6.5C4 9 2 10.8 2 13.5S4 18 6.5 18H8v-2.5C8 14 9 13 10.5 13h4c1.5 0 2.5-1 2.5-2.5v-6C17 3 14 2 11 2" />
-      <circle cx="8.5" cy="5.5" r=".8" fill="currentColor" stroke="none" />
-      <path d="M13 22c2.2 0 4-.9 4-3v-2h-4v-1h4.5c2.5 0 4.5-1.8 4.5-4.5S19.5 7 17 7H16v2.5c0 1.5-1 2.5-2.5 2.5h-4c-1.5 0-2.5 1-2.5 2.5v6C7 21 10 22 13 22" />
-      <circle cx="15.5" cy="18.5" r=".8" fill="currentColor" stroke="none" />
+      <path d="M4.5 15c0-3 2.5-4.7 5.7-4.7h1.6c2.8 0 5-2 5-4.5" />
+      <path d="M9.5 3.3c1.3-.3 2.6 0 3.3 1-.7 1-2 1.3-3.3 1" />
+      <circle cx="15.5" cy="4.3" r=".55" fill="currentColor" stroke="none" />
+      <path d="M17.8 4.5l1.4-.6M17.8 4.9l1.4.6" />
     </LangIcon>
   ),
   rust: (
     <LangIcon>
-      <circle cx="12" cy="12" r="9.5" />
-      <circle cx="12" cy="12" r="2.5" />
+      <circle cx="12" cy="12" r="7" />
+      <circle cx="12" cy="12" r="2.3" />
       <path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3" />
       <path d="M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
     </LangIcon>
   ),
   go: (
     <LangIcon>
-      <path d="M3 12h3m12 0h3" />
-      <path d="M12 3v4m0 10v4" />
-      <circle cx="12" cy="12" r="3.5" />
-      <path d="M12 8.5V7" />
-      <path d="M12 17v-1.5" />
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <path d="M12.6 9.7A3.3 3.3 0 1 0 12.6 14.3" />
+      <path d="M12.6 12h-1.9" />
+      <circle cx="17" cy="12" r="2.9" />
     </LangIcon>
   ),
   java: (
     <LangIcon>
-      <path d="M8 4c0 0-4 1.5-4 7s4 7 4 7" />
-      <path d="M16 4c0 0 4 1.5 4 7s-4 7-4 7" />
-      <ellipse cx="12" cy="14" rx="4.5" ry="5" />
-      <path d="M9.5 17.5L8.5 21" />
-      <path d="M14.5 17.5L15.5 21" />
+      <path d="M6 10h10v5a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-5z" />
+      <path d="M16 12h1.3a1.8 1.8 0 0 1 0 3.6H16" />
+      <path d="M9.3 3.8c-.9.8-.9 1.6 0 2.4M13.3 3.8c-.9.8-.9 1.6 0 2.4" />
+      <path d="M6 19.3h10" />
     </LangIcon>
   ),
   c: (
     <LangIcon>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M15 8.5c-1-1-2.5-1.5-4-.5s-2 3-.5 4.5l4 4c1.5 1.5 3.5.5 4-.5" />
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M15.6 9.3a4.5 4.5 0 1 0 0 5.4" />
     </LangIcon>
   ),
   cpp: (
     <LangIcon>
-      <circle cx="10" cy="12" r="8" />
-      <path d="M12.5 9c-1-1-2.5-1-3 0s-1 2.5 0 3.5l3 3c1 1 2.5 1 3 0" />
-      <circle cx="16.5" cy="15" r=".8" fill="currentColor" stroke="none" />
-      <circle cx="18.5" cy="12" r=".8" fill="currentColor" stroke="none" />
-      <circle cx="16.5" cy="9" r=".8" fill="currentColor" stroke="none" />
+      <circle cx="9.5" cy="12" r="6.5" />
+      <path d="M12.3 9.7a3.3 3.3 0 1 0 0 4.6" />
+      <path d="M15.7 10.5v3M14.2 12h3" />
+      <path d="M19.3 10.5v3M17.8 12h3" />
     </LangIcon>
   ),
   ruby: (
     <LangIcon>
-      <polygon points="12 2 20 8 12 22 4 8" />
-      <line x1="4" y1="8" x2="20" y2="8" />
-      <line x1="12" y1="2" x2="12" y2="22" />
+      <polygon points="12 2.5 19.5 8 12 21.5 4.5 8" />
+      <path d="M4.5 8h15" />
+      <path d="M12 2.5v19" />
     </LangIcon>
   ),
   php: (
     <LangIcon>
-      <ellipse cx="12" cy="12" rx="9" ry="6" />
-      <path d="M9.5 7v10" />
-      <path d="M9.5 7c2.5-1.5 5.5-.5 6.5 1.5s.5 5-1.5 6.5-5.5 1-7 0" />
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <path d="M11.5 8.5L7.5 12l4 3.5" />
+      <path d="M15.2 8.2c1.1 0 1.9.6 1.9 1.6 0 1.1-.9 1.5-1.8 1.8-.6.2-1 .5-1 1.1" />
+      <circle cx="14.3" cy="16.2" r=".5" fill="currentColor" stroke="none" />
     </LangIcon>
   ),
   swift: (
     <LangIcon>
-      <path d="M18 4c-4 6-6.5 8.5-8.5 11 2.5-.5 4.5-1.5 5.5-4-1.5 3.5-4 6-7 7 4 1 7.5-.5 9.5-3 .5 3-1 5.5-3 6.5 5-1.5 8-5 9-9.5-1.5 4-4 6.5-6.5 8" />
+      <path d="M19 4.5c-2.6 4-5.5 7-8.3 9 2-.2 3.7-1 4.8-2.6-.7 2.8-2.8 5-5.3 6.1 3 .5 5.6-.5 7.2-2.4.4 2-.4 3.9-1.9 4.9 3.7-1.3 6-4.2 6.6-7.6-1 2.6-2.8 4.6-4.6 5.8" />
     </LangIcon>
   ),
   kotlin: (
     <LangIcon>
-      <rect x="3" y="3" width="18" height="18" rx="2" />
-      <path d="M8 7v10" />
-      <path d="M8 12l5.5-5.5" />
-      <path d="M13.5 12H17" />
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <path d="M9 7.5v9" />
+      <path d="M9 12l6-4.5" />
+      <path d="M9 12l6 4.5" />
     </LangIcon>
   ),
   sql: (
@@ -201,41 +201,40 @@ export const DEFAULT_LANGUAGE_ICONS: Record<string, React.ReactNode> = {
   ),
   bash: (
     <LangIcon>
-      <rect x="2" y="3" width="20" height="18" rx="2" />
-      <path d="M6 8.5l3.5 3.5L6 15.5" />
-      <path d="M12 15.5h6" />
+      <rect x="2.5" y="4" width="19" height="16" rx="2" />
+      <path d="M6.5 9.5l3.5 3-3.5 3" />
+      <path d="M12 15.5h5.5" />
     </LangIcon>
   ),
   markdown: (
     <LangIcon>
-      <rect x="2" y="4" width="20" height="16" rx="2" />
-      <path d="M6 16V8l3 4 3-4v8" />
-      <path d="M18 12l-3-4-3 4" />
-      <path d="M15 16V8" />
+      <rect x="2" y="5" width="20" height="14" rx="2" />
+      <path d="M6 15V9l3 4 3-4v6" />
+      <path d="M16.5 9v6" />
+      <path d="M14.5 13l2 2 2-2" />
     </LangIcon>
   ),
   yaml: (
     <LangIcon>
-      <rect x="2" y="3" width="20" height="18" rx="2" />
-      <path d="M7 8h3" />
-      <path d="M7 12h5" />
-      <path d="M7 16h4" />
+      <rect x="2.5" y="3" width="19" height="18" rx="2" />
+      <path d="M6.5 8h2M9.5 8h8" />
+      <path d="M6.5 12h2M9.5 12h6" />
+      <path d="M6.5 16h2M9.5 16h7" />
     </LangIcon>
   ),
   xml: (
     <LangIcon>
-      <polyline points="4 7 2 12 4 17" />
-      <polyline points="20 7 22 12 20 17" />
-      <line x1="14" y1="4" x2="10" y2="20" />
-      <line x1="7" y1="8" x2="17" y2="16" />
+      <path d="M8 7l-4.5 5 4.5 5" />
+      <path d="M16 7l4.5 5-4.5 5" />
+      <path d="M12 8v8" />
     </LangIcon>
   ),
   plaintext: (
     <LangIcon>
-      <rect x="3" y="2" width="18" height="20" rx="2" />
-      <line x1="7" y1="7" x2="17" y2="7" />
-      <line x1="7" y1="11" x2="15" y2="11" />
-      <line x1="7" y1="15" x2="13" y2="15" />
+      <rect x="4" y="2.5" width="16" height="19" rx="2" />
+      <line x1="7.5" y1="7.5" x2="16.5" y2="7.5" />
+      <line x1="7.5" y1="11.5" x2="16.5" y2="11.5" />
+      <line x1="7.5" y1="15.5" x2="13.5" y2="15.5" />
     </LangIcon>
   ),
 };

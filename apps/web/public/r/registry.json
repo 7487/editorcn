@@ -30,26 +30,6 @@
       ],
       "files": [
         {
-          "path": "editor/shared/index.ts",
-          "type": "registry:lib"
-        },
-        {
-          "path": "editor/shared/code-block.ts",
-          "type": "registry:lib"
-        },
-        {
-          "path": "editor/shared/use-editor-state.ts",
-          "type": "registry:lib"
-        },
-        {
-          "path": "editor/shared/cn.ts",
-          "type": "registry:lib"
-        },
-        {
-          "path": "editor/shared/types.ts",
-          "type": "registry:lib"
-        },
-        {
           "path": "editor/index.ts",
           "type": "registry:component"
         },
@@ -204,26 +184,6 @@
         "tailwind-merge@^3.0.0"
       ],
       "files": [
-        {
-          "path": "block-editor/shared/index.ts",
-          "type": "registry:lib"
-        },
-        {
-          "path": "block-editor/shared/code-block.ts",
-          "type": "registry:lib"
-        },
-        {
-          "path": "block-editor/shared/use-editor-state.ts",
-          "type": "registry:lib"
-        },
-        {
-          "path": "block-editor/shared/cn.ts",
-          "type": "registry:lib"
-        },
-        {
-          "path": "block-editor/shared/types.ts",
-          "type": "registry:lib"
-        },
         {
           "path": "block-editor/index.ts",
           "type": "registry:component"
