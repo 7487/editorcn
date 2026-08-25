@@ -5,8 +5,15 @@
 <h1 align="center">editorcn</h1>
 
 <p align="center">
-  Rich text editor components for <a href="https://ui.shadcn.com/">shadcn/ui</a> projects. Built on <a href="https://tiptap.dev/">Tiptap</a>.<br/>
-  Zero config. One command setup. Install via <a href="https://ui.shadcn.com/docs/registry">shadcn registry</a> or npm.
+  Free & open-source, ready-to-use, customizable terminal UI components for React.<br/>
+  Zero config. One command setup. Built on <a href="https://tiptap.dev/">Tiptap</a>. Install via <a href="https://ui.shadcn.com/">shadcn CLI</a>.
+</p>
+
+<p align="center">
+  <a href="https://github.com/shadcn-labs/editorcn"><img src="https://www.shieldcn.dev/github/stars/shadcn-labs/editorcn.svg?variant=secondary&size=xs&theme=zinc" alt="GitHub Stars" /></a>
+  <a href="https://github.com/shadcn-labs/editorcn/actions"><img src="https://www.shieldcn.dev/github/ci/shadcn-labs/editorcn.svg?variant=secondary&size=xs&theme=zinc" alt="CI" /></a>
+  <a href="https://discord.gg/N6G36KhYK4"><img src="https://www.shieldcn.dev/discord/online-members/N6G36KhYK4.svg?variant=secondary&size=xs&theme=zinc" alt="Discord Members" /></a>
+  <a href="https://x.com/shadcnlabs"><img src="https://www.shieldcn.dev/x/follow/shadcnlabs.svg?variant=branded&size=xs&theme=zinc" alt="X Follow" /></a>
 </p>
 
 <p align="center">
@@ -53,8 +60,8 @@ Please do not open public issues for security vulnerabilities. Follow [SECURITY.
 
 <a href="https://www.star-history.com/?repos=shadcn-labs%2Feditorcn&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=shadcn-labs/editorcn&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=shadcn-labs/editorcn&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=shadcn-labs/editorcn&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=shadcn-labs/editorcn&type=date&theme=dark&legend=top-left&sealed_token=NxX4PjApPwnn88BcwBmLjsfBjDxzln8o9Hc2dB2xMQ300X19PewOSgwDTrCr-U7QZLr6b67Lz49bPLl2tClPrZaDgGGFdIgYoLVFJeqKnEMmlpI_QD-C66pUE0nWdoL58UX6mXkMS5YEzMABLCHE5ZTNhkVIjvyXT0mLAPW15npHmxo7GH32E96_Bb76" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=shadcn-labs/editorcn&type=date&legend=top-left&sealed_token=NxX4PjApPwnn88BcwBmLjsfBjDxzln8o9Hc2dB2xMQ300X19PewOSgwDTrCr-U7QZLr6b67Lz49bPLl2tClPrZaDgGGFdIgYoLVFJeqKnEMmlpI_QD-C66pUE0nWdoL58UX6mXkMS5YEzMABLCHE5ZTNhkVIjvyXT0mLAPW15npHmxo7GH32E96_Bb76" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=shadcn-labs/editorcn&type=date&legend=top-left&sealed_token=NxX4PjApPwnn88BcwBmLjsfBjDxzln8o9Hc2dB2xMQ300X19PewOSgwDTrCr-U7QZLr6b67Lz49bPLl2tClPrZaDgGGFdIgYoLVFJeqKnEMmlpI_QD-C66pUE0nWdoL58UX6mXkMS5YEzMABLCHE5ZTNhkVIjvyXT0mLAPW15npHmxo7GH32E96_Bb76" />
  </picture>
 </a>

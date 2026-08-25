@@ -30,7 +30,7 @@ function InsertStarControl() {
 }
 
 const DEMO_CONTENT = `
-<h1 style="text-align: center;">Welcome to Editorcn</h1>
+<h1 style="text-align: center;">Welcome to editorcn</h1>
 <p>A rich text editor built on <a href="https://tiptap.dev/">Tiptap</a> and <strong>shadcn/ui</strong>. Every control in the toolbar is a standalone component — pick the ones you need, build your own layout.</p>
 <hr>
 <h2>Text Formatting</h2>
@@ -63,7 +63,7 @@ const DEMO_CONTENT = `
 <blockquote><p>A well-placed blockquote adds authority. The left border uses your theme's border color.</p></blockquote>
 <p>For longer code snippets, use a <strong>code block</strong>:</p>
 <pre><code class="language-javascript">function greet(name) {
-  return \`Hello, \${name}! Welcome to Editorcn.\`;
+  return \`Hello, \${name}! Welcome to editorcn.\`;
 }</code></pre>
 <h2>Alignment</h2>
 <p style="text-align: left;">Left aligned — the default for most content.</p>

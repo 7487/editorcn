@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Editorcn",
-    short_name: "Editorcn",
+    name: "editorcn",
+    short_name: "editorcn",
     description: "Rich text editor components for the shadcn/ui ecosystem.",
     start_url: "/",
     display: "standalone",
