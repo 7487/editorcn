@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { cn } from "./ui/utils";
+
 import { useRichTextEditorContext } from "./rte-context";
 import type { RichTextEditorFooterProps } from "./types";
+import { cn } from "./ui/utils";
 
-export function Footer({
+export const Footer = ({
   children,
   className,
   sticky = false,
@@ -11,16 +12,20 @@ export function Footer({
   showWordCount = false,
   wordCountClassName,
   wordCountFormatter,
-}: RichTextEditorFooterProps) {
+}: RichTextEditorFooterProps) => {
   const { editor, variant } = useRichTextEditorContext();
   const [, forceUpdate] = useState(0);
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!editor || !showWordCount) return;
+    if (!editor || !showWordCount) {
+      return;
+    }
 
     const scheduleUpdate = () => {
-      if (rafRef.current != null) return;
+      if (rafRef.current !== null) {
+        return;
+      }
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = null;
         forceUpdate((t) => t + 1);
@@ -32,7 +37,9 @@ export function Footer({
     }: {
       transaction: { docChanged: boolean };
     }) => {
-      if (transaction.docChanged) scheduleUpdate();
+      if (transaction.docChanged) {
+        scheduleUpdate();
+      }
     };
 
     editor.on("transaction", handleTransaction);
@@ -40,18 +47,22 @@ export function Footer({
 
     return () => {
       editor.off("transaction", handleTransaction);
-      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
   }, [editor, showWordCount]);
 
   const wordCount = useMemo(() => {
-    if (!editor || !showWordCount) return null;
+    if (!editor || !showWordCount) {
+      return null;
+    }
 
     const words = editor.storage.characterCount?.words() ?? 0;
     const characters = editor.storage.characterCount?.characters() ?? 0;
 
     return wordCountFormatter
-      ? wordCountFormatter({ words, characters })
+      ? wordCountFormatter({ characters, words })
       : `${words} words | ${characters} characters`;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -61,7 +72,9 @@ export function Footer({
     editor?.state.doc.content.size,
   ]);
 
-  if (!showWordCount && !children) return null;
+  if (!showWordCount && !children) {
+    return null;
+  }
 
   return (
     <div
@@ -82,4 +95,4 @@ export function Footer({
       {children}
     </div>
   );
-}
+};

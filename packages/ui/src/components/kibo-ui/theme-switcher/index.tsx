@@ -1,35 +1,37 @@
 "use client";
 
+import { cn } from "@editorcn/ui/lib/utils";
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
 import { Monitor, Moon, Sun } from "lucide-react";
 import { motion } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
-import { cn } from "@editorcn/ui/lib/utils";
+import { useCallback, useSyncExternalStore } from "react";
 
 const themes = [
   {
-    key: "system",
     icon: Monitor,
+    key: "system",
     label: "System theme",
   },
   {
-    key: "light",
     icon: Sun,
+    key: "light",
     label: "Light theme",
   },
   {
-    key: "dark",
     icon: Moon,
+    key: "dark",
     label: "Dark theme",
   },
 ];
 
-export type ThemeSwitcherProps = {
+const subscribeToNothing = () => () => null;
+
+export interface ThemeSwitcherProps {
   value?: "light" | "dark" | "system";
   onChange?: (theme: "light" | "dark" | "system") => void;
   defaultValue?: "light" | "dark" | "system";
   className?: string;
-};
+}
 
 export const ThemeSwitcher = ({
   value,
@@ -39,10 +41,14 @@ export const ThemeSwitcher = ({
 }: ThemeSwitcherProps) => {
   const [theme, setTheme] = useControllableState({
     defaultProp: defaultValue,
-    prop: value,
     onChange,
+    prop: value,
   });
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    subscribeToNothing,
+    () => true,
+    () => false
+  );
 
   const handleThemeClick = useCallback(
     (themeKey: "light" | "dark" | "system") => {
@@ -50,11 +56,6 @@ export const ThemeSwitcher = ({
     },
     [setTheme]
   );
-
-  // Prevent hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   if (!mounted) {
     return null;
@@ -82,7 +83,7 @@ export const ThemeSwitcher = ({
               <motion.div
                 className="absolute inset-0 rounded-full bg-secondary"
                 layoutId="activeTheme"
-                transition={{ type: "spring", duration: 0.5 }}
+                transition={{ duration: 0.5, type: "spring" }}
               />
             )}
             <Icon

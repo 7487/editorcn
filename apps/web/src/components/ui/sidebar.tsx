@@ -10,6 +10,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useId,
   useState,
 } from "react";
 
@@ -631,8 +632,15 @@ const SidebarMenuSkeleton = ({
 }: React.ComponentProps<"div"> & {
   showIcon?: boolean;
 }) => {
-  // Random width between 50 to 90%.
-  const width = useMemo(() => `${Math.floor(Math.random() * 40) + 50}%`, []);
+  // Pseudo-random width between 50 to 90%, stable per instance.
+  const id = useId();
+  const width = useMemo(() => {
+    let hash = 0;
+    for (const char of id) {
+      hash = (hash * 31 + (char.codePointAt(0) ?? 0)) % 41;
+    }
+    return `${hash + 50}%`;
+  }, [id]);
 
   return (
     <div

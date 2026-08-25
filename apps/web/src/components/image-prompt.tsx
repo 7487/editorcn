@@ -1,6 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
+
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,55 +17,60 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 
 let resolveCurrent: ((url: string | null) => void) | null = null;
-let listeners: Array<() => void> = [];
+let listeners: (() => void)[] = [];
 let isOpen = false;
 
-function subscribe(cb: () => void) {
-  listeners.push(cb);
+const subscribe = (listener: () => void) => {
+  listeners.push(listener);
   return () => {
-    listeners = listeners.filter((l) => l !== cb);
+    listeners = listeners.filter((l) => l !== listener);
   };
-}
+};
 
-function getSnapshot() {
-  return isOpen;
-}
+const getSnapshot = () => isOpen;
 
-function open() {
+const notifyListeners = () => {
+  for (const listener of listeners) {
+    listener();
+  }
+};
+
+const open = () => {
   isOpen = true;
-  listeners.forEach((l) => l());
-}
+  notifyListeners();
+};
 
-function close() {
+const close = () => {
   isOpen = false;
-  listeners.forEach((l) => l());
-}
+  notifyListeners();
+};
 
-export function showImagePrompt(): Promise<string | null> {
-  if (isOpen) return Promise.resolve(null);
+export const showImagePrompt = (): Promise<string | null> => {
+  if (isOpen) {
+    return Promise.resolve(null);
+  }
   open();
-  return new Promise((resolve) => {
-    resolveCurrent = resolve;
-  });
-}
+  const { promise, resolve } = Promise.withResolvers<string | null>();
+  resolveCurrent = resolve;
+  return promise;
+};
 
-export function ImagePromptPortal() {
+export const ImagePromptPortal = () => {
   const shown = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
   const [url, setUrl] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (shown) {
-      setUrl("");
       requestAnimationFrame(() => inputRef.current?.focus());
     }
   }, [shown]);
 
   const handleClose = useCallback((val: string | null) => {
     close();
+    setUrl("");
     resolveCurrent?.(val);
     resolveCurrent = null;
   }, []);
@@ -65,17 +78,23 @@ export function ImagePromptPortal() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const val = url.trim();
-    if (!val) return;
+    if (!val) {
+      return;
+    }
     let finalUrl = val;
-    if (!/^https?:\/\//i.test(finalUrl)) finalUrl = `https://${finalUrl}`;
+    if (!/^https?:\/\//i.test(finalUrl)) {
+      finalUrl = `https://${finalUrl}`;
+    }
     handleClose(finalUrl);
   };
 
   return (
     <Dialog
       open={shown}
-      onOpenChange={(open) => {
-        if (!open) handleClose(null);
+      onOpenChange={(nextOpen) => {
+        if (!nextOpen) {
+          handleClose(null);
+        }
       }}
     >
       <DialogContent>
@@ -110,4 +129,4 @@ export function ImagePromptPortal() {
       </DialogContent>
     </Dialog>
   );
-}
+};

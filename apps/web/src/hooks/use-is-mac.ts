@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
-export const useIsMac = () => {
-  const [isMac, setIsMac] = useState(true);
+const noop = (): void => undefined;
 
-  useEffect(() => {
-    setIsMac(navigator.platform.toUpperCase().includes("MAC"));
-  }, []);
+const subscribe = () => noop;
 
-  return isMac;
-};
+export const useIsMac = () =>
+  useSyncExternalStore(
+    subscribe,
+    () => navigator.platform.toUpperCase().includes("MAC"),
+    () => true
+  );

@@ -6,11 +6,8 @@ import {
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 import type { HTMLAttributes } from "react";
-import {
-  type BundledLanguage,
-  type CodeOptionsMultipleThemes,
-  codeToHtml,
-} from "shiki";
+import { codeToHtml } from "shiki";
+import type { BundledLanguage, CodeOptionsMultipleThemes } from "shiki";
 
 export type CodeBlockContentProps = HTMLAttributes<HTMLDivElement> & {
   themes?: CodeOptionsMultipleThemes["themes"];
@@ -30,8 +27,8 @@ export const CodeBlockContent = async ({
     ? await codeToHtml(children as string, {
         lang: language ?? "typescript",
         themes: themes ?? {
-          light: "vitesse-light",
           dark: "vitesse-dark",
+          light: "vitesse-light",
         },
         transformers: [
           transformerNotationDiff({

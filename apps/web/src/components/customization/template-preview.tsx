@@ -1,27 +1,6 @@
 "use client";
 
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Underline from "@tiptap/extension-underline";
-import TextAlign from "@tiptap/extension-text-align";
-import Placeholder from "@tiptap/extension-placeholder";
-import Highlight from "@tiptap/extension-highlight";
-import TipTapLink from "@tiptap/extension-link";
-import Table from "@tiptap/extension-table";
-import TableRow from "@tiptap/extension-table-row";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import TextStyle from "@tiptap/extension-text-style";
-import FontFamily from "@tiptap/extension-font-family";
-import { Extension } from "@tiptap/core";
 import { RichTextEditor } from "@editorcn/editor";
-import { useState, useEffect } from "react";
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "@/components/ui/tabs";
 import {
   CodeBlock,
   CodeBlockBody,
@@ -30,6 +9,24 @@ import {
   CodeBlockItem,
 } from "@editorcn/ui/components/kibo-ui/code-block";
 import type { BundledLanguage } from "@editorcn/ui/components/kibo-ui/code-block";
+import { Extension } from "@tiptap/core";
+import { FontFamily } from "@tiptap/extension-font-family";
+import { Highlight } from "@tiptap/extension-highlight";
+import TipTapLink from "@tiptap/extension-link";
+import { Placeholder } from "@tiptap/extension-placeholder";
+import { Table } from "@tiptap/extension-table";
+import { TableCell } from "@tiptap/extension-table-cell";
+import { TableHeader } from "@tiptap/extension-table-header";
+import { TableRow } from "@tiptap/extension-table-row";
+import { TextAlign } from "@tiptap/extension-text-align";
+import { TextStyle } from "@tiptap/extension-text-style";
+import { Underline } from "@tiptap/extension-underline";
+import { useEditor } from "@tiptap/react";
+import { StarterKit } from "@tiptap/starter-kit";
+import { useState, useEffect } from "react";
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+
 import "@editorcn/editor/style.css";
 
 const SAMPLE = `
@@ -38,25 +35,27 @@ const SAMPLE = `
 `.trim();
 
 const FontSize = Extension.create({
-  name: "fontSize",
-
   addGlobalAttributes() {
     return [
       {
-        types: ["textStyle"],
         attributes: {
           fontSize: {
             default: null,
             parseHTML: (element) => element.style.fontSize,
             renderHTML: (attributes) => {
-              if (!attributes.fontSize) return {};
+              if (!attributes.fontSize) {
+                return {};
+              }
               return { style: `font-size: ${attributes.fontSize}` };
             },
           },
         },
+        types: ["textStyle"],
       },
     ];
   },
+
+  name: "fontSize",
 });
 
 const extensions = [
@@ -75,24 +74,26 @@ const extensions = [
   FontSize,
 ];
 
-export function TemplatePreview({
+export const TemplatePreview = ({
   children,
   code,
 }: {
   children: React.ReactNode;
   code: string;
-}) {
+}) => {
   const editor = useEditor({
+    content: SAMPLE,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions: extensions as any,
-    content: SAMPLE,
   });
 
   const [wordCount, setWordCount] = useState(0);
 
   useEffect(() => {
-    if (!editor) return;
+    if (!editor) {
+      return;
+    }
     const update = () => {
       const text = editor.getText();
       setWordCount(text.trim() ? text.trim().split(/\s+/).length : 0);
@@ -149,12 +150,12 @@ export function TemplatePreview({
       <TabsContent value="code" className="pt-4">
         <div className="relative">
           <CodeBlock
-            data={[{ language: "tsx", filename: "editor.tsx", code }]}
+            data={[{ code, filename: "editor.tsx", language: "tsx" }]}
             defaultValue="tsx"
           >
             <CodeBlockCopyButton className="absolute top-3 right-3 z-10" />
             <CodeBlockBody>
-              {(item: any) => (
+              {(item) => (
                 <CodeBlockItem key={item.language} value={item.language}>
                   <CodeBlockContent language={item.language as BundledLanguage}>
                     {item.code}
@@ -167,4 +168,4 @@ export function TemplatePreview({
       </TabsContent>
     </Tabs>
   );
-}
+};

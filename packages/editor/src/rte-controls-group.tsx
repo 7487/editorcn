@@ -1,15 +1,9 @@
+import type { RichTextEditorControlsGroupProps } from "./types";
 import { cn } from "./ui/utils";
-import type { RichTextEditorControlsGroupProps } from './types';
 
-export function ControlsGroup({
+export const ControlsGroup = ({
   children,
   className,
-}: RichTextEditorControlsGroupProps) {
-  return (
-    <div
-      className={cn('rte-controls-group', className)}
-    >
-      {children}
-    </div>
-  );
-}
+}: RichTextEditorControlsGroupProps) => (
+  <div className={cn("rte-controls-group", className)}>{children}</div>
+);

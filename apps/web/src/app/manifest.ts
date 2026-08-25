@@ -2,44 +2,44 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "editorcn",
-    short_name: "editorcn",
-    description: "Rich text editor components for the shadcn/ui ecosystem.",
-    start_url: "/",
-    display: "standalone",
     background_color: "#ffffff",
-    theme_color: "#000000",
+    description: "Rich text editor components for the shadcn/ui ecosystem.",
+    display: "standalone",
     icons: [
       {
-        src: "/favicon-16x16.png",
         sizes: "16x16",
+        src: "/favicon-16x16.png",
         type: "image/png",
       },
       {
-        src: "/favicon-32x32.png",
         sizes: "32x32",
+        src: "/favicon-32x32.png",
         type: "image/png",
       },
       {
-        src: "/favicon-96x96.png",
         sizes: "96x96",
+        src: "/favicon-96x96.png",
         type: "image/png",
       },
       {
-        src: "/android-chrome-192x192.png",
         sizes: "192x192",
+        src: "/android-chrome-192x192.png",
         type: "image/png",
       },
       {
-        src: "/android-chrome-512x512.png",
         sizes: "512x512",
+        src: "/android-chrome-512x512.png",
         type: "image/png",
       },
       {
-        src: "/apple-touch-icon.png",
         sizes: "180x180",
+        src: "/apple-touch-icon.png",
         type: "image/png",
       },
     ],
+    name: "editorcn",
+    short_name: "editorcn",
+    start_url: "/",
+    theme_color: "#000000",
   };
 }

@@ -1,21 +1,32 @@
 "use client";
 
+import { useRichTextEditorContext } from "@editorcn/editor";
 import { Smile } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { useRichTextEditorContext } from "@editorcn/editor";
 
 const EMOJIS = [
-  "😀", "😂", "❤️", "🔥", "✅", "⭐",
-  "👍", "🎉", "🚀", "💡", "📝", "🎨",
+  "😀",
+  "😂",
+  "❤️",
+  "🔥",
+  "✅",
+  "⭐",
+  "👍",
+  "🎉",
+  "🚀",
+  "💡",
+  "📝",
+  "🎨",
 ];
 
-export function EmojiMenu() {
+export const EmojiMenu = () => {
   const { editor } = useRichTextEditorContext();
   return (
     <DropdownMenu>
@@ -39,4 +50,4 @@ export function EmojiMenu() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};

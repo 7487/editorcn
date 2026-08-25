@@ -16,18 +16,26 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "tsup && node -e \"require('fs').copyFileSync('src/style.css','dist/style.css')\"",
     "dev": "tsup --watch",
     "check-types": "tsc --noEmit",
     "prepublishOnly": "pnpm build"
   },
+  "dependencies": {
+    "@floating-ui/dom": "^1.7.6",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "tsup": "^8.4.0",
+    "typescript": "^5"
+  },
   "peerDependencies": {
     "@base-ui/react": "^1.0.0",
     "@tiptap/core": ">=2.11.5 <4",
+    "@tiptap/extension-code-block-lowlight": ">=2.11.5 <4",
     "@tiptap/extension-drag-handle-react": ">=2.11.5 <4",
     "@tiptap/extension-link": ">=2.11.5 <4",
     "@tiptap/extension-placeholder": ">=2.11.5 <4",
@@ -37,10 +45,9 @@
     "@tiptap/starter-kit": ">=2.11.5 <4",
     "@tiptap/suggestion": ">=2.11.5 <4",
     "class-variance-authority": "^0.7.1",
+    "lowlight": ">=3.0.0 <4",
     "react": "^18 || ^19",
-    "react-dom": "^18 || ^19",
-    "@tiptap/extension-code-block-lowlight": ">=2.11.5 <4",
-    "lowlight": ">=3.0.0 <4"
+    "react-dom": "^18 || ^19"
   },
   "peerDependenciesMeta": {
     "@tiptap/extension-code-block-lowlight": {
@@ -52,15 +59,5 @@
     "@tiptap/extension-placeholder": {
       "optional": true
     }
-  },
-  "dependencies": {
-    "@floating-ui/dom": "^1.7.6",
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^3.0.0"
-  },
-  "devDependencies": {
-    "@types/react": "^19",
-    "tsup": "^8.4.0",
-    "typescript": "^5"
   }
 }

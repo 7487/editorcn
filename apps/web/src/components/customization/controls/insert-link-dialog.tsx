@@ -1,7 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useRichTextEditorContext } from "@editorcn/editor";
 import { Link } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogTrigger,
@@ -11,31 +14,39 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRichTextEditorContext } from "@editorcn/editor";
 
-export function InsertLinkDialog() {
+export const InsertLinkDialog = () => {
   const { editor } = useRichTextEditorContext();
   const [open, setOpen] = useState(false);
   const [url, setUrl] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (open) {
+  const handleOpenChange = (nextOpen: boolean) => {
+    if (nextOpen) {
       setUrl("");
       const { from, to } = editor?.state.selection ?? {};
       if (from !== undefined && to !== undefined && from !== to) {
         const text = editor?.state.doc.textBetween(from, to) ?? "";
-        if (/^https?:\/\//.test(text)) setUrl(text);
+        if (/^https?:\/\//.test(text)) {
+          setUrl(text);
+        }
       }
+    }
+    setOpen(nextOpen);
+  };
+
+  useEffect(() => {
+    if (open) {
       requestAnimationFrame(() => inputRef.current?.focus());
     }
-  }, [open, editor]);
+  }, [open]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!url.trim()) return;
+    if (!url.trim()) {
+      return;
+    }
     editor
       ?.chain()
       .focus()
@@ -46,7 +57,7 @@ export function InsertLinkDialog() {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button variant="ghost" size="icon-sm">
           <Link className="h-4 w-4" />
@@ -80,4 +91,4 @@ export function InsertLinkDialog() {
       </DialogContent>
     </Dialog>
   );
-}
+};

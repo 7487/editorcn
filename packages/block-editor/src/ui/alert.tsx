@@ -11,11 +11,9 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   ({ className = "", variant = "default", ...props }, ref) => {
-    const cls = [
-      "block-editor-alert",
-      variantClasses[variant] || "",
-      className,
-    ].filter(Boolean).join(" ");
+    const cls = ["block-editor-alert", variantClasses[variant] || "", className]
+      .filter(Boolean)
+      .join(" ");
 
     return <div ref={ref} role="alert" className={cls} {...props} />;
   }

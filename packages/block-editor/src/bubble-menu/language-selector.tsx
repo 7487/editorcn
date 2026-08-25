@@ -1,11 +1,11 @@
+import type { Editor } from "@tiptap/react";
 import { useState } from "react";
-import { type Editor } from "@tiptap/react";
-import { DEFAULT_ICONS } from "../icons";
-import { CODE_BLOCK_LANGUAGES } from "./utils";
-import { useEditorState } from "./utils";
-import { useBlockEditorContext } from "../context";
 
-export function LanguageSelector({ editor }: { editor: Editor }) {
+import { useBlockEditorContext } from "../context";
+import { DEFAULT_ICONS } from "../icons";
+import { CODE_BLOCK_LANGUAGES, useEditorState } from "./utils";
+
+export const LanguageSelector = ({ editor }: { editor: Editor }) => {
   const [open, setOpen] = useState(false);
   const { icons } = useBlockEditorContext();
 
@@ -13,7 +13,8 @@ export function LanguageSelector({ editor }: { editor: Editor }) {
     currentLanguage: ed.getAttributes("codeBlock").language || "javascript",
   }));
 
-  const langIcon = icons.languageIcons[currentLanguage] ?? icons.codeBlockLanguageIcon;
+  const langIcon =
+    icons.languageIcons[currentLanguage] ?? icons.codeBlockLanguageIcon;
 
   return (
     <div style={{ position: "relative" }}>
@@ -31,11 +32,17 @@ export function LanguageSelector({ editor }: { editor: Editor }) {
         <>
           <div
             className="block-editor-bubble-overlay"
+            role="presentation"
             onClick={() => setOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                setOpen(false);
+              }
+            }}
           />
           <div
             className="block-editor-bubble-dropdown block-editor-bubble-dropdown--language"
-            style={{ right: 0, left: "auto" }}
+            style={{ left: "auto", right: 0 }}
           >
             {CODE_BLOCK_LANGUAGES.map((lang) => (
               <button
@@ -68,4 +75,4 @@ export function LanguageSelector({ editor }: { editor: Editor }) {
       )}
     </div>
   );
-}
+};

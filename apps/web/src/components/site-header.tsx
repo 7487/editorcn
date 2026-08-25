@@ -4,16 +4,15 @@ import { CommandMenu } from "@/components/command-menu";
 import { LogoMark } from "@/components/logo";
 import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
-import { ModeSwitcher } from "@/components/mode-switcher";
 import { NavItemGithub } from "@/components/nav-item-github";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
-import { SITE } from "@/constants/site";
 import { source } from "@/lib/source";
+
 import { BrandContextMenu } from "./brand-context-menu";
 import { LabsNav } from "./labs-nav";
-import { SponsorLink } from "./sponser";
 import { SiteSettings } from "./site-settings";
+import { SponsorLink } from "./sponser";
 
 const navItems = [
   { href: ROUTES.DOCS, label: "Docs" },

@@ -31,16 +31,24 @@ const useActiveItem = (itemIds: string[]) => {
     );
 
     for (const id of itemIds ?? []) {
-      if (!id) continue;
+      if (!id) {
+        continue;
+      }
       const element = headingById(id);
-      if (element) observer.observe(element);
+      if (element) {
+        observer.observe(element);
+      }
     }
 
     return () => {
       for (const id of itemIds ?? []) {
-        if (!id) continue;
+        if (!id) {
+          continue;
+        }
         const element = headingById(id);
-        if (element) observer.unobserve(element);
+        if (element) {
+          observer.unobserve(element);
+        }
       }
     };
   }, [itemIds]);
@@ -69,7 +77,9 @@ export const DocsTableOfContents = ({
   );
   const activeHeading = useActiveItem(itemIds);
 
-  if (!toc?.length) return null;
+  if (!toc?.length) {
+    return null;
+  }
 
   if (variant === "dropdown") {
     return (

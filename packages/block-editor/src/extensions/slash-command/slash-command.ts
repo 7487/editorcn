@@ -1,6 +1,8 @@
-import { Editor, Extension, type Range } from "@tiptap/core";
+import { Extension } from "@tiptap/core";
+import type { Editor, Range } from "@tiptap/core";
 import { PluginKey } from "@tiptap/pm/state";
-import Suggestion, { type SuggestionOptions } from "@tiptap/suggestion";
+import { Suggestion } from "@tiptap/suggestion";
+import type { SuggestionOptions } from "@tiptap/suggestion";
 
 export type OnCommandSelect = (props: { editor: Editor; range: Range }) => void;
 
@@ -13,27 +15,29 @@ export interface SlashCommandSuggestionItem {
   command: OnCommandSelect;
 }
 
-export interface SlashCommandOptions<Item extends SlashCommandSuggestionItem = any> {
-  suggestion: Omit<SuggestionOptions<Item, any>, "editor">;
+export interface SlashCommandOptions<
+  Item extends SlashCommandSuggestionItem = SlashCommandSuggestionItem,
+> {
+  suggestion: Omit<SuggestionOptions<Item>, "editor">;
 }
 
 export const slashCommandPluginKey = new PluginKey("slashCommand");
 
 export const SlashCommand = Extension.create<SlashCommandOptions>({
-  name: "slashCommand",
-
   addOptions() {
     return {
       suggestion: {
+        allow: ({ editor }) => {
+          if (editor.isActive("codeBlock")) {
+            return false;
+          }
+          return true;
+        },
         char: "/",
-        pluginKey: slashCommandPluginKey,
         command: ({ editor, range, props }) => {
           props.command({ editor, range });
         },
-        allow: ({ editor }) => {
-          if (editor.isActive("codeBlock")) return false;
-          return true;
-        },
+        pluginKey: slashCommandPluginKey,
       },
     };
   },
@@ -46,4 +50,6 @@ export const SlashCommand = Extension.create<SlashCommandOptions>({
       }),
     ];
   },
+
+  name: "slashCommand",
 });

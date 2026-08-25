@@ -62,13 +62,8 @@ export const DaikanoidArtwork = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => (
-  <div
-    role="img"
-    aria-label="404"
-    className={cn(ARTWORK_CLASS_NAME, className)}
-    style={style}
-    {...props}
-  >
+  <div className={cn(ARTWORK_CLASS_NAME, className)} style={style} {...props}>
+    <span className="sr-only">404</span>
     <ArtworkBricks />
   </div>
 );

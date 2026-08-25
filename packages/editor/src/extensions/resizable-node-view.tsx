@@ -1,7 +1,8 @@
 "use client";
 
+import { NodeViewWrapper } from "@tiptap/react";
+import type { NodeViewProps } from "@tiptap/react";
 import { useCallback, useRef, useEffect } from "react";
-import { NodeViewWrapper, type NodeViewProps } from "@tiptap/react";
 
 interface ResizableNodeViewProps extends NodeViewProps {
   children: React.ReactNode;
@@ -11,7 +12,7 @@ interface ResizableNodeViewProps extends NodeViewProps {
   maxWidth?: number;
 }
 
-export function ResizableNodeView({
+export const ResizableNodeView = ({
   node,
   selected,
   updateAttributes,
@@ -21,7 +22,7 @@ export function ResizableNodeView({
   aspectRatio = 16 / 9,
   minWidth = 300,
   maxWidth = 1200,
-}: ResizableNodeViewProps) {
+}: ResizableNodeViewProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const resizingRef = useRef<{
     direction: "right" | "bottom" | "corner";
@@ -36,45 +37,17 @@ export function ResizableNodeView({
   const height = node.attrs.height as number | undefined;
   const align = (node.attrs.align as string) || "center";
 
-  const getEditorWidth = useCallback(() => {
-    return view?.dom?.parentElement?.offsetWidth ?? 0;
-  }, [view]);
-
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent, direction: "right" | "bottom" | "corner") => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const editorWidth = getEditorWidth();
-      const startWidth = containerRef.current?.offsetWidth ?? width ?? Math.min(560, editorWidth);
-      const startHeight = containerRef.current?.offsetHeight ?? height ?? 315;
-
-      resizingRef.current = {
-        direction,
-        startX: e.clientX,
-        startY: e.clientY,
-        startWidth,
-        startHeight,
-        editorWidth,
-      };
-
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-      document.body.style.cursor =
-        direction === "right"
-          ? "ew-resize"
-          : direction === "bottom"
-            ? "ns-resize"
-            : "nwse-resize";
-      document.body.style.userSelect = "none";
-    },
-    [width, height, getEditorWidth],
+  const getEditorWidth = useCallback(
+    () => view?.dom?.parentElement?.offsetWidth ?? 0,
+    [view]
   );
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
       const resize = resizingRef.current;
-      if (!resize) return;
+      if (!resize) {
+        return;
+      }
 
       const effectiveMax = Math.min(maxWidth, resize.editorWidth);
 
@@ -84,7 +57,10 @@ export function ResizableNodeView({
       if (resize.direction === "right" || resize.direction === "corner") {
         newWidth = Math.max(
           minWidth,
-          Math.min(effectiveMax, resize.startWidth + (e.clientX - resize.startX)),
+          Math.min(
+            effectiveMax,
+            resize.startWidth + (e.clientX - resize.startX)
+          )
         );
       }
 
@@ -93,8 +69,8 @@ export function ResizableNodeView({
           Math.round(minWidth / aspectRatio),
           Math.min(
             Math.round(effectiveMax / aspectRatio),
-            resize.startHeight + (e.clientY - resize.startY),
-          ),
+            resize.startHeight + (e.clientY - resize.startY)
+          )
         );
       }
 
@@ -111,35 +87,76 @@ export function ResizableNodeView({
         containerRef.current.style.height = `${newHeight}px`;
       }
     },
-    [lockAspect, aspectRatio, minWidth, maxWidth],
+    [lockAspect, aspectRatio, minWidth, maxWidth]
   );
 
-  const handleMouseUp = useCallback(() => {
-    const resize = resizingRef.current;
-    if (!resize) return;
+  const handleMouseUp = useCallback(
+    function handleMouseUp() {
+      const resize = resizingRef.current;
+      if (!resize) {
+        return;
+      }
 
-    document.removeEventListener("mousemove", handleMouseMove);
-    document.removeEventListener("mouseup", handleMouseUp);
-    document.body.style.cursor = "";
-    document.body.style.userSelect = "";
-
-    if (containerRef.current) {
-      const w = containerRef.current.offsetWidth;
-      const h = containerRef.current.offsetHeight;
-      updateAttributes({ width: w, height: h });
-    }
-
-    resizingRef.current = null;
-  }, [handleMouseMove, updateAttributes]);
-
-  useEffect(() => {
-    return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
       document.body.style.cursor = "";
       document.body.style.userSelect = "";
-    };
-  }, [handleMouseMove]);
+
+      if (containerRef.current) {
+        const w = containerRef.current.offsetWidth;
+        const h = containerRef.current.offsetHeight;
+        updateAttributes({ height: h, width: w });
+      }
+
+      resizingRef.current = null;
+    },
+    [handleMouseMove, updateAttributes]
+  );
+
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent, direction: "right" | "bottom" | "corner") => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const editorWidth = getEditorWidth();
+      const startWidth =
+        containerRef.current?.offsetWidth ??
+        width ??
+        Math.min(560, editorWidth);
+      const startHeight = containerRef.current?.offsetHeight ?? height ?? 315;
+
+      resizingRef.current = {
+        direction,
+        editorWidth,
+        startHeight,
+        startWidth,
+        startX: e.clientX,
+        startY: e.clientY,
+      };
+
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+      let cursor = "nwse-resize";
+      if (direction === "right") {
+        cursor = "ew-resize";
+      } else if (direction === "bottom") {
+        cursor = "ns-resize";
+      }
+      document.body.style.cursor = cursor;
+      document.body.style.userSelect = "none";
+    },
+    [width, height, getEditorWidth, handleMouseMove, handleMouseUp]
+  );
+
+  useEffect(
+    () => () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    },
+    [handleMouseMove, handleMouseUp]
+  );
 
   return (
     <NodeViewWrapper
@@ -152,9 +169,9 @@ export function ResizableNodeView({
         className="rte-embed"
         contentEditable={false}
         style={{
-          width: width ? `${width}px` : "100%",
           height: height ? `${height}px` : "auto",
           minWidth: `${minWidth}px`,
+          width: width ? `${width}px` : "100%",
         }}
       >
         {children}
@@ -163,18 +180,21 @@ export function ResizableNodeView({
             <div
               className="rte-resize-handle rte-resize-handle--right"
               onMouseDown={(e) => handleMouseDown(e, "right")}
+              role="presentation"
             />
             <div
               className="rte-resize-handle rte-resize-handle--bottom"
               onMouseDown={(e) => handleMouseDown(e, "bottom")}
+              role="presentation"
             />
             <div
               className="rte-resize-handle rte-resize-handle--corner"
               onMouseDown={(e) => handleMouseDown(e, "corner")}
+              role="presentation"
             />
           </>
         )}
       </div>
     </NodeViewWrapper>
   );
-}
+};

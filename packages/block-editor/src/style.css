@@ -45,7 +45,11 @@
   background: transparent;
   color: var(--muted-foreground);
   cursor: grab;
-  transition: background-color 150ms ease-out, color 150ms ease-out, opacity 150ms ease-out, transform 100ms ease-out;
+  transition:
+    background-color 150ms ease-out,
+    color 150ms ease-out,
+    opacity 150ms ease-out,
+    transform 100ms ease-out;
   opacity: 0;
 }
 
@@ -67,8 +71,14 @@
 
 /* ── Bubble Menu & Dropdowns ── */
 @keyframes bubble-pop-in {
-  0% { opacity: 0; transform: scale(0.96) translateY(4px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .block-editor-bubble-menu {
@@ -102,7 +112,10 @@
   cursor: pointer;
   font-size: 0.8125rem;
   white-space: nowrap;
-  transition: background-color 150ms ease-out, color 150ms ease-out, transform 100ms ease-out;
+  transition:
+    background-color 150ms ease-out,
+    color 150ms ease-out,
+    transform 100ms ease-out;
 }
 
 .block-editor-bubble-btn > svg {
@@ -133,7 +146,9 @@
   display: inline-flex;
   width: 1rem;
   height: 1rem;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.15s ease;
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    color 0.15s ease;
 }
 
 .block-editor-copy-icon > svg {
@@ -206,7 +221,10 @@
   border-radius: calc(var(--radius) - 4px);
   cursor: pointer;
   text-align: left;
-  transition: background-color 100ms ease-out, color 100ms ease-out, transform 100ms ease-out;
+  transition:
+    background-color 100ms ease-out,
+    color 100ms ease-out,
+    transform 100ms ease-out;
 }
 
 .block-editor-bubble-dropdown-icon {
@@ -309,7 +327,9 @@
   padding-left: 1rem;
   color: var(--muted-foreground);
   margin: 0.5em 0;
-  transition: border-color 150ms ease-out, background-color 150ms ease-out;
+  transition:
+    border-color 150ms ease-out,
+    background-color 150ms ease-out;
 }
 
 .block-editor-content .ProseMirror blockquote:hover {
@@ -453,7 +473,9 @@
   border-radius: var(--radius);
   outline: 1px solid oklch(0 0 0 / 0.1);
   outline-offset: -1px;
-  transition: transform 150ms ease-out, box-shadow 150ms ease-out;
+  transition:
+    transform 150ms ease-out,
+    box-shadow 150ms ease-out;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -495,7 +517,9 @@
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-color: color-mix(in srgb, var(--primary) 40%, transparent);
-  transition: color 150ms ease-out, text-decoration-color 150ms ease-out;
+  transition:
+    color 150ms ease-out,
+    text-decoration-color 150ms ease-out;
 }
 
 .block-editor-content .ProseMirror a:hover {
@@ -524,20 +548,37 @@
   margin-top: 0.25rem;
 }
 
-.block-editor-content .ProseMirror ul[data-type="taskList"] li > label input[type="checkbox"] {
+.block-editor-content
+  .ProseMirror
+  ul[data-type="taskList"]
+  li
+  > label
+  input[type="checkbox"] {
   cursor: pointer;
   transition: transform 100ms ease-out;
 }
 
-.block-editor-content .ProseMirror ul[data-type="taskList"] li > label input[type="checkbox"]:active {
+.block-editor-content
+  .ProseMirror
+  ul[data-type="taskList"]
+  li
+  > label
+  input[type="checkbox"]:active {
   transform: scale(0.9);
 }
 
 .block-editor-content .ProseMirror ul[data-type="taskList"] li > div > p {
-  transition: color 150ms ease-out, text-decoration-color 150ms ease-out;
+  transition:
+    color 150ms ease-out,
+    text-decoration-color 150ms ease-out;
 }
 
-.block-editor-content .ProseMirror ul[data-type="taskList"] li[data-checked="true"] > div > p {
+.block-editor-content
+  .ProseMirror
+  ul[data-type="taskList"]
+  li[data-checked="true"]
+  > div
+  > p {
   text-decoration: line-through;
   color: var(--muted-foreground);
 }
@@ -619,7 +660,10 @@
   border-radius: calc(var(--radius) - 4px);
   cursor: pointer;
   text-align: left;
-  transition: background-color 100ms ease-out, color 100ms ease-out, transform 100ms ease-out;
+  transition:
+    background-color 100ms ease-out,
+    color 100ms ease-out,
+    transform 100ms ease-out;
 }
 
 .block-editor-slash-menu-item-icon {
@@ -698,7 +742,9 @@
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) - 4px);
   outline: none;
-  transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
+  transition:
+    border-color 150ms ease-out,
+    box-shadow 150ms ease-out;
 }
 
 .block-editor-link-input::placeholder {
@@ -718,7 +764,7 @@
 /* Table wrapper for horizontal scroll */
 .block-editor-content .ProseMirror .tableWrapper {
   overflow-x: auto;
-  scroll-behavior: smooth; 
+  scroll-behavior: smooth;
 }
 
 /* Buttons */
@@ -732,7 +778,12 @@
   font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1;
-  transition: background-color 150ms ease-out, color 150ms ease-out, opacity 150ms ease-out, transform 100ms ease-out, box-shadow 150ms ease-out;
+  transition:
+    background-color 150ms ease-out,
+    color 150ms ease-out,
+    opacity 150ms ease-out,
+    transform 100ms ease-out,
+    box-shadow 150ms ease-out;
   cursor: pointer;
   border: 1px solid transparent;
   outline: none;
@@ -754,27 +805,43 @@
   pointer-events: none;
 }
 
-.block-editor-btn--md { height: 2.25rem; padding: 0 1rem; }
-.block-editor-btn--sm { height: 2rem; padding: 0 0.75rem; font-size: 0.75rem; }
-.block-editor-btn--lg { height: 2.5rem; padding: 0 2rem; }
-.block-editor-btn--icon { height: 2.25rem; width: 2.25rem; padding: 0; }
+.block-editor-btn--md {
+  height: 2.25rem;
+  padding: 0 1rem;
+}
+.block-editor-btn--sm {
+  height: 2rem;
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+}
+.block-editor-btn--lg {
+  height: 2.5rem;
+  padding: 0 2rem;
+}
+.block-editor-btn--icon {
+  height: 2.25rem;
+  width: 2.25rem;
+  padding: 0;
+}
 
 .block-editor-btn--primary {
   background: var(--primary);
   color: var(--primary-foreground);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-.block-editor-btn--primary:hover:not(:disabled) { 
-  opacity: 0.9; 
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+.block-editor-btn--primary:hover:not(:disabled) {
+  opacity: 0.9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .block-editor-btn--danger {
   background: var(--destructive);
   color: var(--destructive-foreground);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-.block-editor-btn--danger:hover:not(:disabled) { opacity: 0.9; }
+.block-editor-btn--danger:hover:not(:disabled) {
+  opacity: 0.9;
+}
 
 .block-editor-btn--ghost {
   background: transparent;
@@ -799,9 +866,11 @@
 .block-editor-btn--secondary {
   background: var(--secondary);
   color: var(--secondary-foreground);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-.block-editor-btn--secondary:hover:not(:disabled) { opacity: 0.8; }
+.block-editor-btn--secondary:hover:not(:disabled) {
+  opacity: 0.8;
+}
 
 /* Label */
 .block-editor-label {
@@ -827,9 +896,13 @@
   font-family: inherit;
   resize: vertical;
   outline: none;
-  transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
+  transition:
+    border-color 150ms ease-out,
+    box-shadow 150ms ease-out;
 }
-.block-editor-textarea::placeholder { color: var(--muted-foreground); }
+.block-editor-textarea::placeholder {
+  color: var(--muted-foreground);
+}
 .block-editor-textarea:focus {
   border-color: var(--ring);
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--ring) 20%, transparent);

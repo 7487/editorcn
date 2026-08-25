@@ -1,11 +1,12 @@
-import { useState, useEffect, useCallback } from "react";
-import { type Editor } from "@tiptap/react";
 import { isTextSelection } from "@tiptap/core";
+import type { Editor } from "@tiptap/react";
+import { useState, useEffect, useCallback } from "react";
+
 import { LanguageSelector } from "./language-selector";
 import { TextButtons } from "./text-buttons";
 import { useEditorState } from "./utils";
 
-interface BubbleMenuProps {
+export interface BubbleMenuProps {
   editor: Editor | null;
 }
 
@@ -15,7 +16,7 @@ let BubbleMenuComponent: any = null;
 
 const bubbleMenuPromise = (async () => {
   try {
-    // @ts-ignore - @tiptap/react/menus only exists in v3
+    // @ts-expect-error - @tiptap/react/menus only exists in v3
     const mod = await import("@tiptap/react/menus");
     BubbleMenuComponent = mod.BubbleMenu;
   } catch {
@@ -28,44 +29,58 @@ const bubbleMenuPromise = (async () => {
   }
 })();
 
-export function BubbleMenu({ editor }: BubbleMenuProps) {
+export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
   const [loaded, setLoaded] = useState(BubbleMenuComponent !== null);
   const editorState = useEditorState(editor, (ed) => ({
     isCodeBlock: ed.isActive("codeBlock"),
   }));
   useEffect(() => {
-    if (BubbleMenuComponent !== null) {
-      setLoaded(true);
-      return;
-    }
     let active = true;
-    bubbleMenuPromise.then(() => {
-      if (active) setLoaded(true);
-    });
+    const check = async () => {
+      await bubbleMenuPromise;
+      if (active) {
+        setLoaded(true);
+      }
+    };
+    void check();
     return () => {
       active = false;
     };
   }, []);
 
   const shouldShow = useCallback(
-    ({ editor: ed, state }: { editor: Editor; state: { selection: { empty: boolean } } }) => {
+    ({
+      editor: ed,
+      state,
+    }: {
+      editor: Editor;
+      state: { selection: { empty: boolean } };
+    }) => {
       const { selection } = state;
-      if (!ed.isEditable) return false;
-      if (selection.empty && !ed.isActive("codeBlock")) return false;
-      if (!selection.empty && !isTextSelection(selection)) return false;
+      if (!ed.isEditable) {
+        return false;
+      }
+      if (selection.empty && !ed.isActive("codeBlock")) {
+        return false;
+      }
+      if (!selection.empty && !isTextSelection(selection)) {
+        return false;
+      }
       return true;
     },
     []
   );
 
-  if (!editor || !BubbleMenuComponent || !loaded) return null;
+  if (!editor || !BubbleMenuComponent || !loaded) {
+    return null;
+  }
 
   const isCodeBlockActive = editorState?.isCodeBlock ?? false;
 
   return (
     <BubbleMenuComponent
       editor={editor}
-      tippyOptions={{ placement: "top", offset: [0, 8], hideOnClick: false }}
+      tippyOptions={{ hideOnClick: false, offset: [0, 8], placement: "top" }}
       shouldShow={shouldShow}
     >
       <div className="rte-bubble-menu">
@@ -77,4 +92,4 @@ export function BubbleMenu({ editor }: BubbleMenuProps) {
       </div>
     </BubbleMenuComponent>
   );
-}
+};

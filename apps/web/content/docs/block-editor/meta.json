@@ -1,7 +1,4 @@
 {
   "title": "@editorcn/block-editor",
-  "pages": [
-    "index",
-    "serialization-format"
-  ]
+  "pages": ["index", "serialization-format"]
 }

@@ -1,6 +1,7 @@
-import type { Editor } from '@tiptap/core';
-import type { ReactNode } from 'react';
-import type { BlockEditorIcons } from './icons';
+import type { Editor } from "@tiptap/core";
+import type { ReactNode } from "react";
+
+import type { BlockEditorIcons } from "./icons";
 
 export interface BlockEditorLabels {
   paragraphLabel?: string;

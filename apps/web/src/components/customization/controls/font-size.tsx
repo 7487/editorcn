@@ -1,29 +1,34 @@
 "use client";
 
+import { useRichTextEditorContext } from "@editorcn/editor";
+import { ButtonGroup } from "@editorcn/ui/components/button-group";
 import { useEditorState } from "@tiptap/react";
 import { Minus, Plus } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@editorcn/ui/components/button-group";
 import { Input } from "@/components/ui/input";
-import { useRichTextEditorContext } from "@editorcn/editor";
 
 const MIN = 1;
 const MAX = 72;
 
-function parseFontSize(fontSize: string | null | undefined): number {
-  if (!fontSize) return 16;
+const parseFontSize = (fontSize: string | null | undefined): number => {
+  if (!fontSize) {
+    return 16;
+  }
   const match = String(fontSize).match(/^(\d+)/);
-  return match ? parseInt(match[1] ?? "0", 10) : 16;
-}
+  return match ? Number.parseInt(match[1] ?? "0", 10) : 16;
+};
 
-export function FontSizeControl() {
+export const FontSizeControl = () => {
   const { editor } = useRichTextEditorContext();
   const fontSize =
     useEditorState({
       editor: editor ?? null,
       selector: (ctx) => {
         const e = ctx.editor;
-        if (!e || e.isDestroyed) return null;
+        if (!e || e.isDestroyed) {
+          return null;
+        }
         return e.getAttributes("textStyle").fontSize ?? null;
       },
     }) ?? null;
@@ -40,8 +45,10 @@ export function FontSizeControl() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const raw = parseInt(e.target.value, 10);
-    if (Number.isNaN(raw)) return;
+    const raw = Number.parseInt(e.target.value, 10);
+    if (Number.isNaN(raw)) {
+      return;
+    }
     setSize(raw);
   };
 
@@ -75,4 +82,4 @@ export function FontSizeControl() {
       </Button>
     </ButtonGroup>
   );
-}
+};

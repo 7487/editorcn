@@ -1,18 +1,19 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+
 import { CommandBox } from "@/components/command-box";
 import { EditorSection } from "@/components/editor-section";
+import { HomeCtas } from "@/components/home-ctas";
 import {
   IconsPreview,
   ThemePreview,
   ControlsPreview,
   ThemeCard,
 } from "@/components/landing-previews";
-import { PageTransition } from "@/components/page-transition";
-import { BreadcrumbJsonLd } from "@/seo/json-ld";
-import { ROUTES } from "@/constants/routes";
-import { HomeCtas } from "@/components/home-ctas";
 import { PageHero } from "@/components/page-hero";
+import { PageTransition } from "@/components/page-transition";
+import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/constants/routes";
+import { BreadcrumbJsonLd } from "@/seo/json-ld";
 
 const editorCode = `import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -213,127 +214,127 @@ export function MyBlockEditor() {
 
 const editorCodeData = [
   {
-    language: "tsx",
-    filename: "editor.tsx",
     code: editorCode,
+    filename: "editor.tsx",
+    language: "tsx",
   },
 ];
 
 const blockEditorCodeData = [
   {
-    language: "tsx",
-    filename: "block-editor.tsx",
     code: blockEditorCode,
+    filename: "block-editor.tsx",
+    language: "tsx",
   },
 ];
 
-export default function HomePage() {
-  return (
-    <>
-      <BreadcrumbJsonLd items={[{ name: "Home", path: ROUTES.HOME }]} />
-      <PageTransition>
-        <section className="container-wrapper relative">
-          <div className="container flex flex-col items-center gap-4 py-16 text-center md:py-20 lg:py-24">
-            <PageHero
-              description={
-                <>
-                  Two editors. One design system.
-                  <br className="hidden sm:block" />
-                  Built on Tiptap with shadcn/ui tokens.
-                </>
-              }
-              descriptionClassName="max-w-2xl text-lg sm:text-xl"
-              title="Rich Text Editors for Shadcn ui."
-              titleClassName="max-w-7xl"
-            />
+export const HomePage = () => (
+  <>
+    <BreadcrumbJsonLd items={[{ name: "Home", path: ROUTES.HOME }]} />
+    <PageTransition>
+      <section className="container-wrapper relative">
+        <div className="container flex flex-col items-center gap-4 py-16 text-center md:py-20 lg:py-24">
+          <PageHero
+            description={
+              <>
+                Ready to use, customizable rich text editor components for
+                React.
+                <br className="hidden sm:block" />
+                Built on Tiptap. Distributed via shadcn.
+              </>
+            }
+            descriptionClassName="max-w-2xl text-lg sm:text-xl"
+            title="Beautiful rich text editors, made simple"
+            titleClassName="max-w-7xl"
+          />
 
-            <CommandBox className="mt-4 w-full max-w-xl" />
+          <CommandBox className="mt-4 w-full max-w-xl" />
 
-            <HomeCtas />
-          </div>
-        </section>
+          <HomeCtas />
+        </div>
+      </section>
 
-        <section className="container-wrapper md:w-5xl pb-8 lg:pb-12">
-          <div className="container space-y-12">
-            <EditorSection
-              type="editor"
-              title="Rich Text Editor"
-              badge="Toolbar"
-              description="A traditional toolbar-style rich text editor. 20+ built-in controls including text formatting, headings, lists, links, alignment, and history."
-              codeData={editorCodeData}
-              docsHref="/docs/editor"
-            />
+      <section className="container-wrapper md:w-5xl pb-8 lg:pb-12">
+        <div className="container space-y-12">
+          <EditorSection
+            type="editor"
+            title="Rich Text Editor"
+            badge="Toolbar"
+            description="A traditional toolbar-style rich text editor. 20+ built-in controls including text formatting, headings, lists, links, alignment, and history."
+            codeData={editorCodeData}
+            docsHref="/docs/editor"
+          />
 
-            <EditorSection
-              type="block-editor"
-              title="Block Editor"
-              badge="Blocks"
-              badgeClass="inline-flex h-5 items-center rounded-full bg-primary px-2 text-[11px] font-medium tracking-wider text-primary-foreground"
-              description="A Notion-style block-based editor with slash commands, drag handles, and a bubble menu. Supports images, tables, code blocks, and task lists."
-              codeData={blockEditorCodeData}
-              docsHref="/docs/block-editor"
-            />
-          </div>
-        </section>
+          <EditorSection
+            type="block-editor"
+            title="Block Editor"
+            badge="Blocks"
+            badgeClass="inline-flex h-5 items-center rounded-full bg-primary px-2 text-[11px] font-medium tracking-wider text-primary-foreground"
+            description="A Notion-style block-based editor with slash commands, drag handles, and a bubble menu. Supports images, tables, code blocks, and task lists."
+            codeData={blockEditorCodeData}
+            docsHref="/docs/block-editor"
+          />
+        </div>
+      </section>
 
-        <section className="border-t border-border">
-          <div className="container-wrapper">
-            <div className="container space-y-12 py-24">
-              <div>
-                <h2 className="mb-2 text-lg font-medium tracking-tight text-foreground">
-                  Customize everything
-                </h2>
-                <p className="text-base text-muted-foreground">
-                  Icons, colors, controls — every part of the editor is yours to
-                  shape.
+      <section className="border-t border-border">
+        <div className="container-wrapper">
+          <div className="container space-y-12 py-24">
+            <div>
+              <h2 className="mb-2 text-lg font-medium tracking-tight text-foreground">
+                Customize everything
+              </h2>
+              <p className="text-base text-muted-foreground">
+                Icons, colors, controls — every part of the editor is yours to
+                shape.
+              </p>
+            </div>
+            <div className="grid gap-6 lg:grid-cols-3">
+              <div className="space-y-3 rounded-lg p-4">
+                <span className="inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background">
+                  Icons
+                </span>
+                <p className="text-sm text-muted-foreground">
+                  Swap any icon via the icons prop.
                 </p>
-              </div>
-              <div className="grid gap-6 lg:grid-cols-3">
-                <div className="space-y-3 rounded-lg p-4">
-                  <span className="inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background">
-                    Icons
-                  </span>
-                  <p className="text-sm text-muted-foreground">
-                    Swap any icon via the icons prop.
-                  </p>
-                  <div className="-mx-4 -mb-4">
-                    <IconsPreview />
-                  </div>
-                </div>
-                <ThemeCard className="space-y-3 rounded-lg p-4">
-                  <span className="inline-flex h-5 items-center rounded-full bg-primary px-2 text-[11px] font-medium tracking-wider text-primary-foreground">
-                    Themes
-                  </span>
-                  <p className="text-sm text-muted-foreground">
-                    Override CSS variables for a completely different look.
-                  </p>
-                  <div className="-mx-4 -mb-4">
-                    <ThemePreview />
-                  </div>
-                </ThemeCard>
-                <div className="space-y-3 rounded-lg p-4">
-                  <span className="inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background">
-                    Controls
-                  </span>
-                  <p className="text-sm text-muted-foreground">
-                    Add custom toolbar buttons using RichTextEditor.Control.
-                  </p>
-                  <div className="-mx-4 -mb-4">
-                    <ControlsPreview />
-                  </div>
+                <div className="-mx-4 -mb-4">
+                  <IconsPreview />
                 </div>
               </div>
-              <div>
-                <Link href="/docs/customization">
-                  <Button variant="link" className="h-auto px-0">
-                    Explore customization &rarr;
-                  </Button>
-                </Link>
+              <ThemeCard className="space-y-3 rounded-lg p-4">
+                <span className="inline-flex h-5 items-center rounded-full bg-primary px-2 text-[11px] font-medium tracking-wider text-primary-foreground">
+                  Themes
+                </span>
+                <p className="text-sm text-muted-foreground">
+                  Override CSS variables for a completely different look.
+                </p>
+                <div className="-mx-4 -mb-4">
+                  <ThemePreview />
+                </div>
+              </ThemeCard>
+              <div className="space-y-3 rounded-lg p-4">
+                <span className="inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background">
+                  Controls
+                </span>
+                <p className="text-sm text-muted-foreground">
+                  Add custom toolbar buttons using RichTextEditor.Control.
+                </p>
+                <div className="-mx-4 -mb-4">
+                  <ControlsPreview />
+                </div>
               </div>
             </div>
+            <div>
+              <Link href="/docs/customization">
+                <Button variant="link" className="h-auto px-0">
+                  Explore customization &rarr;
+                </Button>
+              </Link>
+            </div>
           </div>
-        </section>
-      </PageTransition>
-    </>
-  );
-}
+        </div>
+      </section>
+    </PageTransition>
+  </>
+);
+export default HomePage;

@@ -1,9 +1,22 @@
-import type { SlashCommandSuggestionItem } from "./slash-command";
-import type { SuggestionKeyDownProps, SuggestionProps } from "@tiptap/suggestion";
-import { forwardRef, useEffect, useImperativeHandle, useState, useRef } from "react";
-import { DEFAULT_ICONS } from "../../icons";
+import type {
+  SuggestionKeyDownProps,
+  SuggestionProps,
+} from "@tiptap/suggestion";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+  useRef,
+} from "react";
 
-export type SuggestionListProps = SuggestionProps<SlashCommandSuggestionItem, any>;
+import { DEFAULT_ICONS } from "../../icons";
+import type { SlashCommandSuggestionItem } from "./slash-command";
+
+export type SuggestionListProps = SuggestionProps<
+  SlashCommandSuggestionItem,
+  unknown
+>;
 
 export interface SuggestionListHandle {
   onKeyDown: (props: SuggestionKeyDownProps) => boolean;
@@ -25,7 +38,9 @@ const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
 
     const selectItem = (index: number) => {
       const item = filteredItems[index];
-      if (!item) return;
+      if (!item) {
+        return;
+      }
       props.command(item);
     };
 
@@ -44,16 +59,34 @@ const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
     };
 
     // Reset selection when items or search query changes
-    useEffect(() => {
+    const [prevResetKey, setPrevResetKey] = useState({
+      count: filteredItems.length,
+      query: searchQuery,
+    });
+    if (
+      prevResetKey.count !== filteredItems.length ||
+      prevResetKey.query !== searchQuery
+    ) {
+      setPrevResetKey({
+        count: filteredItems.length,
+        query: searchQuery,
+      });
       setSelectedIndex(0);
-    }, [filteredItems.length, searchQuery]);
+    }
 
     // Ensure the selected item remains visible in the scrollable area
     useEffect(() => {
-      if (!scrollContainerRef.current) return;
-      const selectedElement = scrollContainerRef.current.children[selectedIndex] as HTMLElement;
+      if (!scrollContainerRef.current) {
+        return;
+      }
+      const selectedElement = scrollContainerRef.current.children[
+        selectedIndex
+      ] as HTMLElement;
       if (selectedElement) {
-        selectedElement.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        selectedElement.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
       }
     }, [selectedIndex]);
 
@@ -89,9 +122,18 @@ const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
             className="block-editor-slash-menu-search-input"
             // If the user clicks into the input, let them use arrows/enter here too
             onKeyDown={(e) => {
-              if (e.key === "ArrowUp") { e.preventDefault(); upHandler(); }
-              if (e.key === "ArrowDown") { e.preventDefault(); downHandler(); }
-              if (e.key === "Enter") { e.preventDefault(); enterHandler(); }
+              if (e.key === "ArrowUp") {
+                e.preventDefault();
+                upHandler();
+              }
+              if (e.key === "ArrowDown") {
+                e.preventDefault();
+                downHandler();
+              }
+              if (e.key === "Enter") {
+                e.preventDefault();
+                enterHandler();
+              }
             }}
           />
         </div>
@@ -104,7 +146,9 @@ const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
                 key={item.title}
                 type="button"
                 className={`block-editor-slash-menu-item${
-                  i === selectedIndex ? " block-editor-slash-menu-item--selected" : ""
+                  i === selectedIndex
+                    ? " block-editor-slash-menu-item--selected"
+                    : ""
                 }`}
                 onClick={() => selectItem(i)}
                 onMouseEnter={() => setSelectedIndex(i)}
@@ -132,7 +176,7 @@ const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
         </div>
       </div>
     );
-  },
+  }
 );
 
 export default SuggestionList;

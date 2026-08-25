@@ -8,23 +8,17 @@ package: "@editorcn/editor"
 
 **Install via the shadcn registry (recommended):**
 
-<CodeBlockCommand
-  __npm__={"npx shadcn@latest add @editorcn/editor"}
-  __yarn__={"yarn dlx shadcn@latest add @editorcn/editor"}
-  __pnpm__={"pnpm dlx shadcn@latest add @editorcn/editor"}
-  __bun__={"bunx shadcn@latest add @editorcn/editor"}
-/>
+```bash
+npx shadcn@latest add @editorcn/editor
+```
 
 This copies the component source directly into your project, so you can customize it freely.
 
 **Or install via npm/pnpm:**
 
-<CodeBlockCommand
-  __npm__={"npm install @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
-  __yarn__={"yarn add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
-  __pnpm__={"pnpm add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
-  __bun__={"bun add @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder"}
-/>
+```bash
+npm install @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link @tiptap/extension-placeholder
+```
 
 After installation, import the editor styles at the root of your application:
 
@@ -38,11 +32,12 @@ import "@/components/editor/style.css";
 
 > **Order matters**: Import your shadcn globals first, then the editor styles.
 
-  If you installed via npm, import from `@editorcn/editor` instead of `@/components/editor` throughout this page:
-  ```tsx
-  import { RichTextEditor, Link } from "@/components/editor";
-  import "@editorcn/editor/style.css";
-  ```
+If you installed via npm, import from `@editorcn/editor` instead of `@/components/editor` throughout this page:
+
+```tsx
+import { RichTextEditor, Link } from "@/components/editor";
+import "@editorcn/editor/style.css";
+```
 
 ## Tiptap editor
 
@@ -192,24 +187,21 @@ A footer bar that sits below the content area. Useful for displaying word count,
 
 To use the word count feature, you must add the [`@tiptap/extension-character-count`](https://tiptap.dev/docs/extensions/api/character-count) extension to your editor.
 
-<CodeBlockCommand
-  __npm__={"npm install @tiptap/extension-character-count"}
-  __yarn__={"yarn add @tiptap/extension-character-count"}
-  __pnpm__={"pnpm add @tiptap/extension-character-count"}
-  __bun__={"bun add @tiptap/extension-character-count"}
-/>
+```bash
+npm install @tiptap/extension-character-count
+```
 
 ### Props
 
-| Prop                | Type                                       | Default   | Description                                              |
-| ------------------- | ------------------------------------------ | --------- | -------------------------------------------------------- |
-| `showWordCount`     | `boolean`                                  | `false`   | Show word and character count (requires CharacterCount)   |
-| `sticky`            | `boolean`                                  | `false`   | Makes footer stick to bottom on scroll                   |
-| `stickyOffset`      | `number \| string`                         | `0`       | Offset from bottom when sticky                           |
-| `wordCountClassName`| `string`                                   | —         | Additional CSS classes for the word count element        |
-| `wordCountFormatter`| `(info: { words, characters }) => string` | —         | Custom formatter for the word count text                 |
-| `className`         | `string`                                   | —         | Additional CSS classes                                   |
-| `children`          | `ReactNode`                                | —         | Custom content to render in the footer                   |
+| Prop                 | Type                                      | Default | Description                                             |
+| -------------------- | ----------------------------------------- | ------- | ------------------------------------------------------- |
+| `showWordCount`      | `boolean`                                 | `false` | Show word and character count (requires CharacterCount) |
+| `sticky`             | `boolean`                                 | `false` | Makes footer stick to bottom on scroll                  |
+| `stickyOffset`       | `number \| string`                        | `0`     | Offset from bottom when sticky                          |
+| `wordCountClassName` | `string`                                  | —       | Additional CSS classes for the word count element       |
+| `wordCountFormatter` | `(info: { words, characters }) => string` | —       | Custom formatter for the word count text                |
+| `className`          | `string`                                  | —       | Additional CSS classes                                  |
+| `children`           | `ReactNode`                               | —       | Custom content to render in the footer                  |
 
 ### Basic usage
 
@@ -227,7 +219,7 @@ const editor = useEditor({
   <RichTextEditor.Toolbar>...</RichTextEditor.Toolbar>
   <RichTextEditor.Content />
   <RichTextEditor.Footer showWordCount />
-</RichTextEditor>
+</RichTextEditor>;
 ```
 
 ### Custom formatter
@@ -406,12 +398,9 @@ Some controls require additional [Tiptap extensions](https://tiptap.dev/extensio
 
 ### Controls requiring `@tiptap/extension-underline`
 
-<CodeBlockCommand
-  __npm__={"npm install @tiptap/extension-underline"}
-  __yarn__={"yarn add @tiptap/extension-underline"}
-  __pnpm__={"pnpm add @tiptap/extension-underline"}
-  __bun__={"bun add @tiptap/extension-underline"}
-/>
+```bash
+npm install @tiptap/extension-underline
+```
 
 | Control                    |
 | -------------------------- |
@@ -419,12 +408,9 @@ Some controls require additional [Tiptap extensions](https://tiptap.dev/extensio
 
 ### Controls requiring `@tiptap/extension-text-align`
 
-<CodeBlockCommand
-  __npm__={"npm install @tiptap/extension-text-align"}
-  __yarn__={"yarn add @tiptap/extension-text-align"}
-  __pnpm__={"pnpm add @tiptap/extension-text-align"}
-  __bun__={"bun add @tiptap/extension-text-align"}
-/>
+```bash
+npm install @tiptap/extension-text-align
+```
 
 ```tsx
 import TextAlign from "@tiptap/extension-text-align";
@@ -443,12 +429,9 @@ const editor = useEditor({
 
 ### Controls requiring `@tiptap/extension-highlight`
 
-<CodeBlockCommand
-  __npm__={"npm install @tiptap/extension-highlight"}
-  __yarn__={"yarn add @tiptap/extension-highlight"}
-  __pnpm__={"pnpm add @tiptap/extension-highlight"}
-  __bun__={"bun add @tiptap/extension-highlight"}
-/>
+```bash
+npm install @tiptap/extension-highlight
+```
 
 | Control                    |
 | -------------------------- |
@@ -456,12 +439,9 @@ const editor = useEditor({
 
 ### Controls requiring `@tiptap/extension-subscript`
 
-<CodeBlockCommand
-  __npm__={"npm install @tiptap/extension-subscript"}
-  __yarn__={"yarn add @tiptap/extension-subscript"}
-  __pnpm__={"pnpm add @tiptap/extension-subscript"}
-  __bun__={"bun add @tiptap/extension-subscript"}
-/>
+```bash
+npm install @tiptap/extension-subscript
+```
 
 | Control                    |
 | -------------------------- |
@@ -469,12 +449,9 @@ const editor = useEditor({
 
 ### Controls requiring `@tiptap/extension-superscript`
 
-<CodeBlockCommand
-  __npm__={"npm install @tiptap/extension-superscript"}
-  __yarn__={"yarn add @tiptap/extension-superscript"}
-  __pnpm__={"pnpm add @tiptap/extension-superscript"}
-  __bun__={"bun add @tiptap/extension-superscript"}
-/>
+```bash
+npm install @tiptap/extension-superscript
+```
 
 | Control                      |
 | ---------------------------- |
@@ -515,10 +492,7 @@ Embed YouTube videos by URL or video ID. Supports standard watch URLs, shorts, l
 import { YouTubeEmbed, RichTextEditor } from "@/components/editor";
 
 const editor = useEditor({
-  extensions: [
-    StarterKit,
-    YouTubeEmbed,
-  ],
+  extensions: [StarterKit, YouTubeEmbed],
 });
 
 // In toolbar:
@@ -537,10 +511,7 @@ Embed tweets by pasting a tweet URL or numeric ID. Supports both `twitter.com` a
 import { TwitterEmbed, RichTextEditor } from "@/components/editor";
 
 const editor = useEditor({
-  extensions: [
-    StarterKit,
-    TwitterEmbed,
-  ],
+  extensions: [StarterKit, TwitterEmbed],
 });
 
 // In toolbar:
@@ -556,14 +527,14 @@ The Twitter embed can be freely resized (no aspect ratio lock) and will re-rende
 Add both to your editor:
 
 ```tsx
-import { YouTubeEmbed, TwitterEmbed, RichTextEditor } from "@/components/editor";
+import {
+  YouTubeEmbed,
+  TwitterEmbed,
+  RichTextEditor,
+} from "@/components/editor";
 
 const editor = useEditor({
-  extensions: [
-    StarterKit,
-    YouTubeEmbed,
-    TwitterEmbed,
-  ],
+  extensions: [StarterKit, YouTubeEmbed, TwitterEmbed],
 });
 ```
 
@@ -573,12 +544,9 @@ Both embeds support **alignment** (left, center, right) via the `data-align` att
 
 Install `@tiptap/extension-placeholder` to show placeholder text when the editor is empty:
 
-<CodeBlockCommand
-  __npm__={"npm install @tiptap/extension-placeholder"}
-  __yarn__={"yarn add @tiptap/extension-placeholder"}
-  __pnpm__={"pnpm add @tiptap/extension-placeholder"}
-  __bun__={"bun add @tiptap/extension-placeholder"}
-/>
+```bash
+npm install @tiptap/extension-placeholder
+```
 
 ```tsx
 import Placeholder from "@tiptap/extension-placeholder";
@@ -789,9 +757,9 @@ import {
 
 Exported constants:
 
-| Export                   | Description                                         |
-| ------------------------ | --------------------------------------------------- |
-| `DEFAULT_ICONS`          | Default toolbar icons                               |
+| Export                   | Description                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| `DEFAULT_ICONS`          | Default toolbar icons                                                           |
 | `DEFAULT_LANGUAGE_ICONS` | Per-language icons for 21 languages (js, ts, python, rust, go, html, css, etc.) |
 
 ### All available icons
@@ -869,12 +837,9 @@ function CustomBoldButton() {
 
 If you want to add additional languages, install the highlight.js language modules and register them:
 
-<CodeBlockCommand
-  __npm__={"npm install lowlight"}
-  __yarn__={"yarn add lowlight"}
-  __pnpm__={"pnpm add lowlight"}
-  __bun__={"bun add lowlight"}
-/>
+```bash
+npm install lowlight
+```
 
 ```tsx
 import { createLowlight, common } from "lowlight";

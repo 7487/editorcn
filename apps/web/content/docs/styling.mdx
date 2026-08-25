@@ -38,6 +38,7 @@ Tailwind v4 maps these to utility classes via `@theme inline`, and the editor CS
 Both editors fully support dark mode. To enable it:
 
 1. Set up `next-themes` with `attribute="class"`:
+
    ```tsx
    import { ThemeProvider } from "next-themes";
 
@@ -76,19 +77,19 @@ Override any CSS variable in your own stylesheet to change the editors' appearan
 
 ### Available variables
 
-| Variable | Affects |
-|----------|---------|
-| `--background` | Editor background, toolbar background |
-| `--foreground` | Text color |
-| `--primary` | Links, active controls, checkboxes, syntax highlights |
-| `--border` | Editor border, toolbar separator, blockquote line, code block border, HR |
-| `--muted` | Code background, secondary backgrounds |
-| `--muted-foreground` | Placeholder text, blockquote text, muted labels |
-| `--destructive` | Danger items in dropdowns, syntax error highlights |
-| `--accent-foreground` | Syntax keyword/function highlights |
-| `--radius` | Editor border radius, code block radius, checkbox radius |
-| `--font-mono` | Code blocks, inline code |
-| `--font-sans` | Default editor text |
+| Variable              | Affects                                                                  |
+| --------------------- | ------------------------------------------------------------------------ |
+| `--background`        | Editor background, toolbar background                                    |
+| `--foreground`        | Text color                                                               |
+| `--primary`           | Links, active controls, checkboxes, syntax highlights                    |
+| `--border`            | Editor border, toolbar separator, blockquote line, code block border, HR |
+| `--muted`             | Code background, secondary backgrounds                                   |
+| `--muted-foreground`  | Placeholder text, blockquote text, muted labels                          |
+| `--destructive`       | Danger items in dropdowns, syntax error highlights                       |
+| `--accent-foreground` | Syntax keyword/function highlights                                       |
+| `--radius`            | Editor border radius, code block radius, checkbox radius                 |
+| `--font-mono`         | Code blocks, inline code                                                 |
+| `--font-sans`         | Default editor text                                                      |
 
 ## Scoping overrides to a single editor
 
@@ -136,94 +137,97 @@ Every component accepts a `className` prop that merges with the default classes 
 
 ## CSS class reference
 
-  **Override not applying?** Editor styles are loaded from JS imports, which can affect CSS cascade order. If a simple class override doesn't work, add `!important`:
+**Override not applying?** Editor styles are loaded from JS imports, which can affect CSS cascade order. If a simple class override doesn't work, add `!important`:
 
-  ```css
-  .rte-editor-icon { width: 1.25rem !important; height: 1.25rem !important; }
-  ```
+```css
+.rte-editor-icon {
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+}
+```
 
-  Icons are inline SVGs — override `.rte-editor-icon` directly or via `[data-variant="compact"] .rte-editor-icon` for variant-specific sizing.
+Icons are inline SVGs — override `.rte-editor-icon` directly or via `[data-variant="compact"] .rte-editor-icon` for variant-specific sizing.
 
 Every editor element has a scoped CSS class. Override any of these in your stylesheet to customize specific parts.
 
 ### @editorcn/editor
 
-| Class | What it styles |
-|-------|----------------|
-| `.rte-root` | Editor container (border, background, border-radius) |
-| `.rte-toolbar` | Toolbar bar (layout, sticky support) |
-| `.rte-toolbar--subtle` | Toolbar in subtle variant |
-| `.rte-toolbar--compact` | Toolbar in compact variant |
-| `.rte-controls-group` | Group of controls in the toolbar |
-| `button.rte-control-button` | Individual control buttons |
-| `.rte-editor-icon` | Icons inside control buttons |
-| `.rte-content .ProseMirror` | Content editing area |
-| `.rte-content .ProseMirror p` | Paragraphs |
-| `.rte-content .ProseMirror h1`–`h6` | Headings |
-| `.rte-content .ProseMirror ul` | Unordered lists |
-| `.rte-content .ProseMirror ol` | Ordered lists |
-| `.rte-content .ProseMirror li` | List items |
-| `.rte-content .ProseMirror blockquote` | Blockquotes |
-| `.rte-content .ProseMirror code` | Inline code |
-| `.rte-content .ProseMirror pre` | Code blocks |
-| `.rte-content .ProseMirror hr` | Horizontal rules |
-| `.rte-content .ProseMirror a` | Links |
-| `.rte-content .ProseMirror pre .hljs-*` | Syntax highlighting tokens |
-| `.rte-link-editor` | Link editor popover |
-| `.rte-link-editor-input` | Link URL input field |
-| `.rte-link-editor-save` | Link save button |
-| `.rte-task-list` | Task list container |
-| `.rte-task-list li` | Task list items |
-| `.rte-task-list input[type="checkbox"]` | Task checkboxes |
+| Class                                   | What it styles                                       |
+| --------------------------------------- | ---------------------------------------------------- |
+| `.rte-root`                             | Editor container (border, background, border-radius) |
+| `.rte-toolbar`                          | Toolbar bar (layout, sticky support)                 |
+| `.rte-toolbar--subtle`                  | Toolbar in subtle variant                            |
+| `.rte-toolbar--compact`                 | Toolbar in compact variant                           |
+| `.rte-controls-group`                   | Group of controls in the toolbar                     |
+| `button.rte-control-button`             | Individual control buttons                           |
+| `.rte-editor-icon`                      | Icons inside control buttons                         |
+| `.rte-content .ProseMirror`             | Content editing area                                 |
+| `.rte-content .ProseMirror p`           | Paragraphs                                           |
+| `.rte-content .ProseMirror h1`–`h6`     | Headings                                             |
+| `.rte-content .ProseMirror ul`          | Unordered lists                                      |
+| `.rte-content .ProseMirror ol`          | Ordered lists                                        |
+| `.rte-content .ProseMirror li`          | List items                                           |
+| `.rte-content .ProseMirror blockquote`  | Blockquotes                                          |
+| `.rte-content .ProseMirror code`        | Inline code                                          |
+| `.rte-content .ProseMirror pre`         | Code blocks                                          |
+| `.rte-content .ProseMirror hr`          | Horizontal rules                                     |
+| `.rte-content .ProseMirror a`           | Links                                                |
+| `.rte-content .ProseMirror pre .hljs-*` | Syntax highlighting tokens                           |
+| `.rte-link-editor`                      | Link editor popover                                  |
+| `.rte-link-editor-input`                | Link URL input field                                 |
+| `.rte-link-editor-save`                 | Link save button                                     |
+| `.rte-task-list`                        | Task list container                                  |
+| `.rte-task-list li`                     | Task list items                                      |
+| `.rte-task-list input[type="checkbox"]` | Task checkboxes                                      |
 
 ### @editorcn/block-editor
 
-| Class | What it styles |
-|-------|----------------|
-| `.block-editor` | Editor container |
-| `.block-editor-content .ProseMirror` | Content editing area |
-| `.block-editor-content .ProseMirror p` | Paragraphs |
-| `.block-editor-content .ProseMirror h1`–`h3` | Headings |
-| `.block-editor-content .ProseMirror ul`, `ol` | Lists |
-| `.block-editor-content .ProseMirror li` | List items |
-| `.block-editor-content .ProseMirror blockquote` | Blockquotes |
-| `.block-editor-content .ProseMirror code` | Inline code |
-| `.block-editor-content .ProseMirror pre` | Code blocks |
-| `.block-editor-content .ProseMirror hr` | Horizontal rules |
-| `.block-editor-content .ProseMirror img` | Images |
-| `.block-editor-content .ProseMirror table`, `th`, `td` | Tables |
-| `.block-editor-content .ProseMirror .tableWrapper` | Table horizontal scroll wrapper |
-| `.block-editor-content .ProseMirror ul[data-type="taskList"]` | Task lists |
-| `.drag-handle` | Block drag handle |
-| `.block-editor-block-actions` | Block actions menu container |
-| `.block-editor-block-actions-trigger` | Block actions trigger button (grip icon) |
-| `.block-editor-block-actions-dropdown` | Block actions dropdown |
-| `.block-editor-block-actions-item` | Block actions dropdown items |
-| `.block-editor-bubble-menu` | Floating bubble menu |
-| `.block-editor-bubble-group` | Bubble menu button group |
-| `.block-editor-bubble-btn` | Bubble menu buttons |
-| `.block-editor-bubble-btn-text` | Bubble menu button text label |
-| `.block-editor-bubble-separator` | Bubble menu separator lines |
-| `.block-editor-bubble-dropdown` | Bubble menu dropdown |
-| `.block-editor-bubble-dropdown-item` | Dropdown items (heading select, align, etc.) |
-| `.block-editor-slash-menu` | Slash command popup |
-| `.block-editor-slash-menu-list` | Slash command list container |
-| `.block-editor-slash-menu-item` | Slash command items |
-| `.block-editor-slash-menu-item--selected` | Selected slash command item |
-| `.block-editor-slash-menu-item-content` | Slash command item content wrapper |
-| `.block-editor-slash-menu-item-label` | Slash command item title |
-| `.block-editor-slash-menu-item-desc` | Slash command item description |
-| `.block-editor-slash-menu-empty` | Slash command empty state |
-| `.block-editor-link-form` | Link form inside bubble menu |
-| `.block-editor-link-input` | Link URL input |
-| `.block-editor-link-actions` | Link action buttons row |
-| `.block-editor-btn` | Base button style (used in actions, alerts) |
-| `.block-editor-btn--primary`, `--ghost`, `--outline`, `--danger`, `--secondary` | Button variants |
-| `.block-editor-btn--sm`, `--md`, `--lg`, `--icon` | Button sizes |
-| `.block-editor-label` | Form label |
-| `.block-editor-textarea` | Textarea (used in code block source editing) |
-| `.block-editor-scroll-area` | Scrollable container |
-| `.block-editor-alert` | Alert box |
+| Class                                                                           | What it styles                               |
+| ------------------------------------------------------------------------------- | -------------------------------------------- |
+| `.block-editor`                                                                 | Editor container                             |
+| `.block-editor-content .ProseMirror`                                            | Content editing area                         |
+| `.block-editor-content .ProseMirror p`                                          | Paragraphs                                   |
+| `.block-editor-content .ProseMirror h1`–`h3`                                    | Headings                                     |
+| `.block-editor-content .ProseMirror ul`, `ol`                                   | Lists                                        |
+| `.block-editor-content .ProseMirror li`                                         | List items                                   |
+| `.block-editor-content .ProseMirror blockquote`                                 | Blockquotes                                  |
+| `.block-editor-content .ProseMirror code`                                       | Inline code                                  |
+| `.block-editor-content .ProseMirror pre`                                        | Code blocks                                  |
+| `.block-editor-content .ProseMirror hr`                                         | Horizontal rules                             |
+| `.block-editor-content .ProseMirror img`                                        | Images                                       |
+| `.block-editor-content .ProseMirror table`, `th`, `td`                          | Tables                                       |
+| `.block-editor-content .ProseMirror .tableWrapper`                              | Table horizontal scroll wrapper              |
+| `.block-editor-content .ProseMirror ul[data-type="taskList"]`                   | Task lists                                   |
+| `.drag-handle`                                                                  | Block drag handle                            |
+| `.block-editor-block-actions`                                                   | Block actions menu container                 |
+| `.block-editor-block-actions-trigger`                                           | Block actions trigger button (grip icon)     |
+| `.block-editor-block-actions-dropdown`                                          | Block actions dropdown                       |
+| `.block-editor-block-actions-item`                                              | Block actions dropdown items                 |
+| `.block-editor-bubble-menu`                                                     | Floating bubble menu                         |
+| `.block-editor-bubble-group`                                                    | Bubble menu button group                     |
+| `.block-editor-bubble-btn`                                                      | Bubble menu buttons                          |
+| `.block-editor-bubble-btn-text`                                                 | Bubble menu button text label                |
+| `.block-editor-bubble-separator`                                                | Bubble menu separator lines                  |
+| `.block-editor-bubble-dropdown`                                                 | Bubble menu dropdown                         |
+| `.block-editor-bubble-dropdown-item`                                            | Dropdown items (heading select, align, etc.) |
+| `.block-editor-slash-menu`                                                      | Slash command popup                          |
+| `.block-editor-slash-menu-list`                                                 | Slash command list container                 |
+| `.block-editor-slash-menu-item`                                                 | Slash command items                          |
+| `.block-editor-slash-menu-item--selected`                                       | Selected slash command item                  |
+| `.block-editor-slash-menu-item-content`                                         | Slash command item content wrapper           |
+| `.block-editor-slash-menu-item-label`                                           | Slash command item title                     |
+| `.block-editor-slash-menu-item-desc`                                            | Slash command item description               |
+| `.block-editor-slash-menu-empty`                                                | Slash command empty state                    |
+| `.block-editor-link-form`                                                       | Link form inside bubble menu                 |
+| `.block-editor-link-input`                                                      | Link URL input                               |
+| `.block-editor-link-actions`                                                    | Link action buttons row                      |
+| `.block-editor-btn`                                                             | Base button style (used in actions, alerts)  |
+| `.block-editor-btn--primary`, `--ghost`, `--outline`, `--danger`, `--secondary` | Button variants                              |
+| `.block-editor-btn--sm`, `--md`, `--lg`, `--icon`                               | Button sizes                                 |
+| `.block-editor-label`                                                           | Form label                                   |
+| `.block-editor-textarea`                                                        | Textarea (used in code block source editing) |
+| `.block-editor-scroll-area`                                                     | Scrollable container                         |
+| `.block-editor-alert`                                                           | Alert box                                    |
 
 ## Common customizations
 
@@ -465,7 +469,7 @@ Or pass a custom className to the editor container:
 Import the editor CSS **after** your shadcn globals so variables are defined:
 
 ```css
-@import "./globals.css";        /* your shadcn theme variables */
+@import "./globals.css"; /* your shadcn theme variables */
 @import "@editorcn/editor/style.css";
 @import "@editorcn/block-editor/style.css";
 ```

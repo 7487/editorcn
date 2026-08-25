@@ -1,10 +1,7 @@
 "use client";
 
 import type { Root as PageTreeRoot } from "fumadocs-core/page-tree";
-import {
-  ArrowRightIcon,
-  CornerDownLeftIcon,
-} from "lucide-react";
+import { ArrowRightIcon, CornerDownLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
@@ -26,9 +23,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Kbd } from "@/components/ui/kbd";
-import { Separator } from "@/components/ui/separator";
-import { ROUTES } from "@/constants/routes";
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { useIsMac } from "@/hooks/use-is-mac";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
 import { cn } from "@/lib/utils";
@@ -86,7 +80,6 @@ export const CommandMenu = ({
   const isMac = useIsMac();
   const [open, setOpen] = useState(false);
   const [showGoToPage, setShowGoToPage] = useState(false);
-  const { copyToClipboard } = useCopyToClipboard();
 
   const treeGroups = useMemo(() => {
     const groups: { label: string; pages: { url: string; name: string }[] }[] =
@@ -101,7 +94,10 @@ export const CommandMenu = ({
         for (const child of node.children) {
           if (child.type === "page") {
             pages.push({
-              name: typeof child.name === "string" ? child.name : String(child.name),
+              name:
+                typeof child.name === "string"
+                  ? child.name
+                  : String(child.name),
               url: child.url,
             });
           } else if (child.type === "folder") {

@@ -13,10 +13,7 @@ export const DocsKeyboardShortcuts = ({
 }) => {
   const router = useRouter();
 
-  const navigate = (
-    href: string | null,
-    direction: "previous" | "next",
-  ) => {
+  const navigate = (href: string | null, direction: "previous" | "next") => {
     if (href) {
       startTransition(() => {
         addTransitionType(direction === "next" ? "nav-forward" : "nav-back");
@@ -25,17 +22,13 @@ export const DocsKeyboardShortcuts = ({
     }
   };
 
-  useHotkeys(
-    "ArrowRight",
-    () => navigate(next, "next"),
-    { preventDefault: true }
-  );
+  useHotkeys("ArrowRight", () => navigate(next, "next"), {
+    preventDefault: true,
+  });
 
-  useHotkeys(
-    "ArrowLeft",
-    () => navigate(previous, "previous"),
-    { preventDefault: true }
-  );
+  useHotkeys("ArrowLeft", () => navigate(previous, "previous"), {
+    preventDefault: true,
+  });
 
   return null;
 };

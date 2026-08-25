@@ -1,4 +1,5 @@
 import { unstable_cache } from "next/cache";
+
 import { GITHUB } from "@/constants/links";
 
 interface Stargazer {
@@ -6,8 +7,8 @@ interface Stargazer {
   avatar_url: string;
 }
 
-export const repo = 'editorcn';
-export const owner = 'AbdullahMukadam';
+export const repo = "editorcn";
+export const owner = "AbdullahMukadam";
 
 export const getStargazers = unstable_cache(
   async (): Promise<Stargazer[]> => {

@@ -1,14 +1,9 @@
-import { createMDX } from 'fumadocs-mdx/next';
-import '@editorcn/env/web';
+import { createMDX } from "fumadocs-mdx/next";
+import "@editorcn/env/web";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // typedRoutes: true, // disabled due to Next.js 16 bug with @base-ui/react Form types
-  reactCompiler: true,
-  transpilePackages: ['@editorcn/editor'],
-  experimental: {
-    viewTransition: true,
-  },
   images: {
     remotePatterns: [
       {
@@ -17,14 +12,16 @@ const nextConfig = {
       },
     ],
   },
-  async rewrites() {
+  reactCompiler: true,
+  rewrites() {
     return [
       {
-        source: '/docs/:path*.md',
-        destination: '/llms.mdx/docs/:path*',
+        destination: "/llms.mdx/docs/:path*",
+        source: "/docs/:path*.md",
       },
     ];
   },
+  transpilePackages: ["@editorcn/editor"],
 };
 
 const withMDX = createMDX();

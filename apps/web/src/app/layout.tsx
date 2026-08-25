@@ -1,8 +1,11 @@
-import type { Metadata } from "next";
 import { SoundProvider } from "@web-kits/audio/react";
-import { ThemeProvider } from "@/components/theme-provider";
+import type { Metadata } from "next";
 import { Toaster } from "sonner";
-import { META_THEME_COLORS } from "@/constants/site";
+
+import { Analytics } from "@/components/analytics";
+import { ImagePromptPortal } from "@/components/image-prompt";
+import { ThemeProvider } from "@/components/theme-provider";
+import { META_THEME_COLORS, SITE } from "@/constants/site";
 import { fontVariables } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { SoftwareApplicationJsonLd, WebSiteJsonLd } from "@/seo/json-ld";
@@ -11,12 +14,14 @@ import "@editorcn/ui/globals.css";
 import "@/styles/themes.css";
 
 export const metadata: Metadata = {
+  description:
+    "Rich text editor components for the shadcn/ui ecosystem. Open-source, customizable, and ready to use.",
+  keywords: ["shadcn", "editor", "rich text", "tiptap", "react", "components"],
+  metadataBase: new URL(SITE.URL),
   title: {
     default: "editorcn - Rich Text Editors for shadcn/ui",
     template: "%s | editorcn",
   },
-  description: "Rich text editor components for the shadcn/ui ecosystem. Open-source, customizable, and ready to use.",
-  keywords: ["shadcn", "editor", "rich text", "tiptap", "react", "components"],
 };
 
 const RootLayout = ({
@@ -51,6 +56,8 @@ const RootLayout = ({
         <SoundProvider>
           {children}
           <Toaster position="top-center" />
+          <Analytics />
+          <ImagePromptPortal />
         </SoundProvider>
       </ThemeProvider>
     </body>

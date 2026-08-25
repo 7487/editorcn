@@ -2,6 +2,7 @@
 
 import { ChevronDownIcon } from "lucide-react";
 import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -17,11 +18,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import type { LabsNavLink as LabsNavLinkItem } from "@/constants/nav";
+import { LABS_NAV_SECTIONS } from "@/constants/nav";
 import { SITE } from "@/constants/site";
 import { useIconAnimation } from "@/hooks/use-icon-animation";
 import { cn } from "@/lib/utils";
-import { ArrowUpRightIcon, type ArrowUpRightIconHandle } from "./animated-icons/arrow-up-right";
-import { LABS_NAV_SECTIONS } from "@/constants/nav";
+
+import { ArrowUpRightIcon } from "./animated-icons/arrow-up-right";
+import type { ArrowUpRightIconHandle } from "./animated-icons/arrow-up-right";
 
 type SectionId = (typeof LABS_NAV_SECTIONS)[number]["id"];
 

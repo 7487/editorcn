@@ -8,23 +8,17 @@ package: "@editorcn/block-editor"
 
 **Install via the shadcn registry (recommended):**
 
-<CodeBlockCommand
-  __npm__={"npx shadcn@latest add @editorcn/block-editor"}
-  __yarn__={"yarn dlx shadcn@latest add @editorcn/block-editor"}
-  __pnpm__={"pnpm dlx shadcn@latest add @editorcn/block-editor"}
-  __bun__={"bunx shadcn@latest add @editorcn/block-editor"}
-/>
+```bash
+npx shadcn@latest add @editorcn/block-editor
+```
 
 This copies the component source directly into your project, so you can customize it freely.
 
 **Or install via npm/pnpm:**
 
-<CodeBlockCommand
-  __npm__={"npm install @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
-  __yarn__={"yarn add @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
-  __pnpm__={"pnpm add @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
-  __bun__={"bun add @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react"}
-/>
+```bash
+npm install @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react
+```
 
 After installation, import the editor styles at the root of your application:
 
@@ -38,29 +32,27 @@ import "@/components/block-editor/style.css";
 
 > **Order matters**: Import your shadcn globals first, then the editor styles.
 
-  If you installed via npm, import from `@editorcn/block-editor` instead of `@/components/block-editor` throughout this page:
-  ```tsx
-  import {
-    BlockEditor,
-    SlashCommand,
-    defaultSlashCommandItems,
-    getSlashCommandSuggestion,
-    DEFAULT_ICONS,
-  } from "@/components/block-editor";
-  import type { BlockEditorIcons } from "@/components/block-editor";
-  import "@editorcn/block-editor/style.css";
-  ```
+If you installed via npm, import from `@editorcn/block-editor` instead of `@/components/block-editor` throughout this page:
+
+```tsx
+import {
+  BlockEditor,
+  SlashCommand,
+  defaultSlashCommandItems,
+  getSlashCommandSuggestion,
+  DEFAULT_ICONS,
+} from "@/components/block-editor";
+import type { BlockEditorIcons } from "@/components/block-editor";
+import "@editorcn/block-editor/style.css";
+```
 
 ## Install Extensions
 
 For demo, we will use these extensions:
 
-<CodeBlockCommand
-  __npm__={"npm install @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header"}
-  __yarn__={"yarn add @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header"}
-  __pnpm__={"pnpm add @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header"}
-  __bun__={"bun add @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header"}
-/>
+```bash
+npm install @tiptap/extension-placeholder @tiptap/extension-underline @tiptap/extension-task-item @tiptap/extension-task-list @tiptap/extension-image @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header
+```
 
 ## Usage
 
@@ -147,12 +139,12 @@ The root wrapper that provides editor context. Renders the full editor UI by def
 
 ### Props
 
-| Prop        | Type                         | Default                       | Description                                            |
-| ----------- | ---------------------------- | ----------------------------- | ------------------------------------------------------ |
-| `editor`    | `Editor \| null`             | —                             | The Tiptap editor instance                             |
-| `children`  | `ReactNode`                  | —                             | Optional custom children to replace the default layout |
-| `className` | `string`                     | —                             | Additional CSS classes                                 |
-| `labels`    | `Partial<BlockEditorLabels>` | `DEFAULT_BLOCK_EDITOR_LABELS` | Override default slash command labels                  |
+| Prop        | Type                         | Default                       | Description                                                           |
+| ----------- | ---------------------------- | ----------------------------- | --------------------------------------------------------------------- |
+| `editor`    | `Editor \| null`             | —                             | The Tiptap editor instance                                            |
+| `children`  | `ReactNode`                  | —                             | Optional custom children to replace the default layout                |
+| `className` | `string`                     | —                             | Additional CSS classes                                                |
+| `labels`    | `Partial<BlockEditorLabels>` | `DEFAULT_BLOCK_EDITOR_LABELS` | Override default slash command labels                                 |
 | `icons`     | `Partial<BlockEditorIcons>`  | `DEFAULT_ICONS`               | Override any built-in icon (slash commands, bubble menu, drag handle) |
 
 ### Labels
@@ -243,10 +235,7 @@ Pass the custom items array to `getSlashCommandSuggestion(myItems)`. Items with 
 Override any built-in icon via the `icons` prop. All icons accept a `ReactNode`, so you can use inline SVGs, emoji, or any icon library.
 
 ```tsx
-import {
-  BlockEditor,
-  DEFAULT_ICONS,
-} from "@/components/block-editor";
+import { BlockEditor, DEFAULT_ICONS } from "@/components/block-editor";
 import type { BlockEditorIcons } from "@/components/block-editor";
 
 <BlockEditor
@@ -257,7 +246,7 @@ import type { BlockEditorIcons } from "@/components/block-editor";
     boldIcon: <strong>B</strong>,
     dragHandleIcon: <span>:::</span>,
   }}
-/>
+/>;
 ```
 
 Each slash command item also accepts an `icon` property. Override individual items to change their icon without replacing all defaults:
@@ -306,47 +295,47 @@ import {
       jsx: <YourJsxIcon />,
     },
   }}
-/>
+/>;
 ```
 
 Exported constants:
 
-| Export                   | Description                                         |
-| ------------------------ | --------------------------------------------------- |
-| `DEFAULT_ICONS`          | Default toolbar, slash menu, and bubble menu icons  |
+| Export                   | Description                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| `DEFAULT_ICONS`          | Default toolbar, slash menu, and bubble menu icons                              |
 | `DEFAULT_LANGUAGE_ICONS` | Per-language icons for 21 languages (js, ts, python, rust, go, html, css, etc.) |
 
 **Available icon keys:**
 
-| Key                    | Used in          |
-| ---------------------- | ---------------- |
-| `slashTextIcon`        | Slash menu       |
-| `slashHeadingIcon`     | Slash menu       |
-| `slashBulletListIcon`  | Slash menu       |
-| `slashOrderedListIcon` | Slash menu       |
-| `slashTaskListIcon`    | Slash menu       |
-| `slashBlockquoteIcon`  | Slash menu       |
-| `slashCodeBlockIcon`   | Slash menu       |
-| `slashDividerIcon`     | Slash menu       |
-| `slashImageIcon`       | Slash menu       |
-| `slashTableIcon`       | Slash menu       |
-| `searchIcon`           | Slash menu       |
-| `fallbackIcon`         | Slash menu       |
-| `dragHandleIcon`       | Drag handle      |
-| `boldIcon`             | Bubble menu      |
-| `italicIcon`           | Bubble menu      |
-| `underlineIcon`        | Bubble menu      |
-| `strikethroughIcon`    | Bubble menu      |
-| `codeIcon`             | Bubble menu      |
-| `alignLeftIcon`        | Bubble menu      |
-| `alignCenterIcon`      | Bubble menu      |
-| `alignRightIcon`       | Bubble menu      |
-| `linkIcon`             | Bubble menu      |
-| `unlinkIcon`           | Bubble menu      |
-| `checkIcon`            | Bubble menu      |
-| `copyIcon`             | Bubble menu      |
-| `deleteIcon`           | Bubble menu      |
-| `dropdownArrowIcon`    | Bubble menu      |
+| Key                    | Used in                                                  |
+| ---------------------- | -------------------------------------------------------- |
+| `slashTextIcon`        | Slash menu                                               |
+| `slashHeadingIcon`     | Slash menu                                               |
+| `slashBulletListIcon`  | Slash menu                                               |
+| `slashOrderedListIcon` | Slash menu                                               |
+| `slashTaskListIcon`    | Slash menu                                               |
+| `slashBlockquoteIcon`  | Slash menu                                               |
+| `slashCodeBlockIcon`   | Slash menu                                               |
+| `slashDividerIcon`     | Slash menu                                               |
+| `slashImageIcon`       | Slash menu                                               |
+| `slashTableIcon`       | Slash menu                                               |
+| `searchIcon`           | Slash menu                                               |
+| `fallbackIcon`         | Slash menu                                               |
+| `dragHandleIcon`       | Drag handle                                              |
+| `boldIcon`             | Bubble menu                                              |
+| `italicIcon`           | Bubble menu                                              |
+| `underlineIcon`        | Bubble menu                                              |
+| `strikethroughIcon`    | Bubble menu                                              |
+| `codeIcon`             | Bubble menu                                              |
+| `alignLeftIcon`        | Bubble menu                                              |
+| `alignCenterIcon`      | Bubble menu                                              |
+| `alignRightIcon`       | Bubble menu                                              |
+| `linkIcon`             | Bubble menu                                              |
+| `unlinkIcon`           | Bubble menu                                              |
+| `checkIcon`            | Bubble menu                                              |
+| `copyIcon`             | Bubble menu                                              |
+| `deleteIcon`           | Bubble menu                                              |
+| `dropdownArrowIcon`    | Bubble menu                                              |
 | `languageIcons`        | Code block language selector (Record of language → icon) |
 
 Custom items are commonly used for commands that require additional extensions, such as **Image** and **Table**:
@@ -444,12 +433,9 @@ Extensions for **Image**, **Table**, **Link**, and others are not included — a
 
 To enable syntax highlighting in code blocks, install `lowlight` and pass it to `@tiptap/extension-code-block-lowlight`:
 
-<CodeBlockCommand
-  __npm__={"npm install lowlight @tiptap/extension-code-block-lowlight"}
-  __yarn__={"yarn add lowlight @tiptap/extension-code-block-lowlight"}
-  __pnpm__={"pnpm add lowlight @tiptap/extension-code-block-lowlight"}
-  __bun__={"bun add lowlight @tiptap/extension-code-block-lowlight"}
-/>
+```bash
+npm install lowlight @tiptap/extension-code-block-lowlight
+```
 
 ```tsx
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
@@ -472,12 +458,9 @@ const editor = useEditor({
 
 Install `@tiptap/extension-placeholder` to show placeholder text:
 
-<CodeBlockCommand
-  __npm__={"npm install @tiptap/extension-placeholder"}
-  __yarn__={"yarn add @tiptap/extension-placeholder"}
-  __pnpm__={"pnpm add @tiptap/extension-placeholder"}
-  __bun__={"bun add @tiptap/extension-placeholder"}
-/>
+```bash
+npm install @tiptap/extension-placeholder
+```
 
 ```tsx
 import Placeholder from "@tiptap/extension-placeholder";

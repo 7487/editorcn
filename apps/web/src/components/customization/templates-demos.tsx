@@ -1,13 +1,5 @@
 "use client";
 
-import { TemplateCard } from "./template-card";
-import { HeadingSelect } from "./controls/heading-select";
-import { InsertLinkDialog } from "./controls/insert-link-dialog";
-import { HighlightColorPopover } from "./controls/highlight-color-popover";
-import { EmojiMenu } from "./controls/emoji-menu";
-import { InsertTableDialog } from "./controls/insert-table-dialog";
-import { FontFamilySelect } from "./controls/font-family-select";
-import { FontSizeControl } from "./controls/font-size";
 import {
   HEADING_SELECT_CODE,
   LINK_DIALOG_CODE,
@@ -17,59 +9,53 @@ import {
   FONT_FAMILY_CODE,
   FONT_SIZE_CODE,
 } from "./code-strings";
+import { EmojiMenu } from "./controls/emoji-menu";
+import { FontFamilySelect } from "./controls/font-family-select";
+import { FontSizeControl } from "./controls/font-size";
+import { HeadingSelect } from "./controls/heading-select";
+import { HighlightColorPopover } from "./controls/highlight-color-popover";
+import { InsertLinkDialog } from "./controls/insert-link-dialog";
+import { InsertTableDialog } from "./controls/insert-table-dialog";
+import { TemplateCard } from "./template-card";
 
-export function HeadingSelectCard() {
-  return (
-    <TemplateCard code={HEADING_SELECT_CODE}>
-      <HeadingSelect />
-    </TemplateCard>
-  );
-}
+export const HeadingSelectCard = () => (
+  <TemplateCard code={HEADING_SELECT_CODE}>
+    <HeadingSelect />
+  </TemplateCard>
+);
 
-export function InsertLinkDialogCard() {
-  return (
-    <TemplateCard code={LINK_DIALOG_CODE}>
-      <InsertLinkDialog />
-    </TemplateCard>
-  );
-}
+export const InsertLinkDialogCard = () => (
+  <TemplateCard code={LINK_DIALOG_CODE}>
+    <InsertLinkDialog />
+  </TemplateCard>
+);
 
-export function HighlightColorPopoverCard() {
-  return (
-    <TemplateCard code={COLOR_POPOVER_CODE}>
-      <HighlightColorPopover />
-    </TemplateCard>
-  );
-}
+export const HighlightColorPopoverCard = () => (
+  <TemplateCard code={COLOR_POPOVER_CODE}>
+    <HighlightColorPopover />
+  </TemplateCard>
+);
 
-export function EmojiMenuCard() {
-  return (
-    <TemplateCard code={EMOJI_MENU_CODE}>
-      <EmojiMenu />
-    </TemplateCard>
-  );
-}
+export const EmojiMenuCard = () => (
+  <TemplateCard code={EMOJI_MENU_CODE}>
+    <EmojiMenu />
+  </TemplateCard>
+);
 
-export function InsertTableDialogCard() {
-  return (
-    <TemplateCard code={TABLE_DIALOG_CODE}>
-      <InsertTableDialog />
-    </TemplateCard>
-  );
-}
+export const InsertTableDialogCard = () => (
+  <TemplateCard code={TABLE_DIALOG_CODE}>
+    <InsertTableDialog />
+  </TemplateCard>
+);
 
-export function FontFamilySelectCard() {
-  return (
-    <TemplateCard code={FONT_FAMILY_CODE}>
-      <FontFamilySelect />
-    </TemplateCard>
-  );
-}
+export const FontFamilySelectCard = () => (
+  <TemplateCard code={FONT_FAMILY_CODE}>
+    <FontFamilySelect />
+  </TemplateCard>
+);
 
-export function FontSizeCard() {
-  return (
-    <TemplateCard code={FONT_SIZE_CODE}>
-      <FontSizeControl />
-    </TemplateCard>
-  );
-}
+export const FontSizeCard = () => (
+  <TemplateCard code={FONT_SIZE_CODE}>
+    <FontSizeControl />
+  </TemplateCard>
+);

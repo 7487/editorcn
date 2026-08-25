@@ -1,5 +1,6 @@
+import type { Editor } from "@tiptap/react";
 import { useState } from "react";
-import { type Editor } from "@tiptap/react";
+
 import { DEFAULT_ICONS } from "../icons";
 import { useEditorState } from "./utils";
 
@@ -9,37 +10,48 @@ interface AlignSelectorResult {
   isAlignRight: boolean;
 }
 
+interface AlignableChain {
+  run(): boolean;
+  setTextAlign(alignment: "center" | "left" | "right"): AlignableChain;
+}
+
 const alignItems = [
   {
-    label: "Left",
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as AlignableChain)
+        .setTextAlign("left")
+        .run(),
     icon: DEFAULT_ICONS.alignLeftIcon,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- extension commands not in base ChainedCommands
-    command: (e: Editor) => (e.chain().focus() as any).setTextAlign("left").run(),
     isActive: (s: AlignSelectorResult) => s.isAlignLeft,
+    label: "Left",
   },
   {
-    label: "Center",
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as AlignableChain)
+        .setTextAlign("center")
+        .run(),
     icon: DEFAULT_ICONS.alignCenterIcon,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    command: (e: Editor) => (e.chain().focus() as any).setTextAlign("center").run(),
     isActive: (s: AlignSelectorResult) => s.isAlignCenter,
+    label: "Center",
   },
   {
-    label: "Right",
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as AlignableChain)
+        .setTextAlign("right")
+        .run(),
     icon: DEFAULT_ICONS.alignRightIcon,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    command: (e: Editor) => (e.chain().focus() as any).setTextAlign("right").run(),
     isActive: (s: AlignSelectorResult) => s.isAlignRight,
+    label: "Right",
   },
 ];
 
-export function TextAlignSelector({ editor }: { editor: Editor }) {
+export const TextAlignSelector = ({ editor }: { editor: Editor }) => {
   const [open, setOpen] = useState(false);
   const editorState = useEditorState(editor, (ed) => ({
+    isAlignCenter: ed.isActive({ textAlign: "center" }),
     isAlignLeft:
       !ed.isActive({ textAlign: "center" }) &&
       !ed.isActive({ textAlign: "right" }),
-    isAlignCenter: ed.isActive({ textAlign: "center" }),
     isAlignRight: ed.isActive({ textAlign: "right" }),
   }));
 
@@ -60,10 +72,19 @@ export function TextAlignSelector({ editor }: { editor: Editor }) {
       </button>
       {open && (
         <>
-          <div className="block-editor-bubble-overlay" onClick={() => setOpen(false)} />
+          <div
+            className="block-editor-bubble-overlay"
+            role="presentation"
+            onClick={() => setOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                setOpen(false);
+              }
+            }}
+          />
           <div
             className="block-editor-bubble-dropdown block-editor-bubble-dropdown--align"
-            style={{ right: 0, left: "auto" }}
+            style={{ left: "auto", right: 0 }}
           >
             {alignItems.map((item, i) => (
               <button
@@ -76,10 +97,14 @@ export function TextAlignSelector({ editor }: { editor: Editor }) {
                   setOpen(false);
                 }}
               >
-                <span className="block-editor-bubble-dropdown-icon">{item.icon}</span>
+                <span className="block-editor-bubble-dropdown-icon">
+                  {item.icon}
+                </span>
                 <span>{item.label}</span>
                 {item.isActive(editorState) && (
-                  <span className="block-editor-bubble-dropdown-icon">{DEFAULT_ICONS.checkIcon}</span>
+                  <span className="block-editor-bubble-dropdown-icon">
+                    {DEFAULT_ICONS.checkIcon}
+                  </span>
                 )}
               </button>
             ))}
@@ -88,4 +113,4 @@ export function TextAlignSelector({ editor }: { editor: Editor }) {
       )}
     </div>
   );
-}
+};

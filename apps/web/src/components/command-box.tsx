@@ -5,13 +5,13 @@ import { useRef } from "react";
 
 import { CopyButton } from "@/components/copy-button";
 import { getIconForPackageManager } from "@/components/icons";
-import { RegistryAddButton } from "@/components/registry-add-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TextFlip } from "@/components/ui/text-flip";
 import { SITE } from "@/constants/site";
 import type { PackageManager } from "@/hooks/use-package-manager";
 import { usePackageManager } from "@/hooks/use-package-manager";
 import { cn } from "@/lib/utils";
+
 import registry from "../../public/r/registry.json";
 
 const pmCommands = {

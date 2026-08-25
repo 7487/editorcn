@@ -1,19 +1,27 @@
 "use client";
 
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Underline from "@tiptap/extension-underline";
-import TextAlign from "@tiptap/extension-text-align";
-import Placeholder from "@tiptap/extension-placeholder";
-import Highlight from "@tiptap/extension-highlight";
-import Subscript from "@tiptap/extension-subscript";
-import Superscript from "@tiptap/extension-superscript";
-import { RichTextEditor, Link, useRichTextEditorContext, TwitterEmbed, YouTubeEmbed, CodeBlock } from "@editorcn/editor";
+import {
+  RichTextEditor,
+  Link,
+  useRichTextEditorContext,
+  TwitterEmbed,
+  YouTubeEmbed,
+  CodeBlock,
+} from "@editorcn/editor";
 import type { RichTextEditorVariant } from "@editorcn/editor";
 import { CharacterCount } from "@tiptap/extension-character-count";
+import { Highlight } from "@tiptap/extension-highlight";
+import { Placeholder } from "@tiptap/extension-placeholder";
+import { Subscript } from "@tiptap/extension-subscript";
+import { Superscript } from "@tiptap/extension-superscript";
+import { TextAlign } from "@tiptap/extension-text-align";
+import { Underline } from "@tiptap/extension-underline";
+import { useEditor } from "@tiptap/react";
+import { StarterKit } from "@tiptap/starter-kit";
+
 import "@editorcn/editor/style.css";
 
-function InsertStarControl() {
+const InsertStarControl = () => {
   const { editor } = useRichTextEditorContext();
 
   return (
@@ -22,12 +30,21 @@ function InsertStarControl() {
       aria-label="Insert star emoji"
       title="Insert star"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-4 w-4"
+      >
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
       </svg>
     </RichTextEditor.Control>
   );
-}
+};
 
 const DEMO_CONTENT = `
 <h1 style="text-align: center;">Welcome to editorcn</h1>
@@ -76,10 +93,13 @@ const DEMO_CONTENT = `
 <p style="text-align: center; color: var(--muted-foreground);">Built with Tiptap, shadcn/ui, and TypeScript. MIT licensed.</p>
 `.trim();
 
-export function EditorPreview({ variant = "default" }: { variant?: RichTextEditorVariant }) {
+export const EditorPreview = ({
+  variant = "default",
+}: {
+  variant?: RichTextEditorVariant;
+}) => {
   const editor = useEditor({
-    immediatelyRender: false,
-    shouldRerenderOnTransaction: false,
+    content: DEMO_CONTENT,
     extensions: [
       StarterKit.configure({
         heading: { levels: [1, 2, 3, 4, 5, 6] },
@@ -96,7 +116,8 @@ export function EditorPreview({ variant = "default" }: { variant?: RichTextEdito
       CharacterCount,
       CodeBlock,
     ],
-    content: DEMO_CONTENT,
+    immediatelyRender: false,
+    shouldRerenderOnTransaction: false,
   });
 
   return (
@@ -161,4 +182,4 @@ export function EditorPreview({ variant = "default" }: { variant?: RichTextEdito
       </RichTextEditor>
     </div>
   );
-}
+};

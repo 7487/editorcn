@@ -1,26 +1,25 @@
 import { computePosition, flip, shift } from "@floating-ui/dom";
-import { Editor, ReactRenderer } from "@tiptap/react";
 import { posToDOMRect } from "@tiptap/core";
+import type { Editor } from "@tiptap/react";
+import { ReactRenderer } from "@tiptap/react";
 import type { SuggestionOptions } from "@tiptap/suggestion";
+
 import { DEFAULT_ICONS } from "../../icons";
+import { chainFocus } from "../../lib/commands";
 import type { SlashCommandSuggestionItem } from "./slash-command";
-import SuggestionList, {
-  type SuggestionListHandle,
-  type SuggestionListProps,
+import SuggestionList from "./suggestion-list";
+import type {
+  SuggestionListHandle,
+  SuggestionListProps,
 } from "./suggestion-list";
 
 type SuggestionType = Omit<
-  SuggestionOptions<SlashCommandSuggestionItem, any>,
+  SuggestionOptions<SlashCommandSuggestionItem>,
   "editor"
 >;
 
 export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
   {
-    id: "text",
-    title: "Text",
-    description: "Just start typing with plain text.",
-    keywords: ["p", "paragraph"],
-    icon: DEFAULT_ICONS.slashTextIcon,
     command: ({ editor, range }) => {
       editor
         .chain()
@@ -29,13 +28,13 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
         .toggleNode("paragraph", "paragraph")
         .run();
     },
+    description: "Just start typing with plain text.",
+    icon: DEFAULT_ICONS.slashTextIcon,
+    id: "text",
+    keywords: ["p", "paragraph"],
+    title: "Text",
   },
   {
-    id: "h1",
-    title: "Heading 1",
-    description: "Big section heading.",
-    keywords: ["title", "big", "large", "heading"],
-    icon: DEFAULT_ICONS.slashHeadingIcon,
     command: ({ editor, range }) => {
       editor
         .chain()
@@ -44,13 +43,13 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
         .setNode("heading", { level: 1 })
         .run();
     },
+    description: "Big section heading.",
+    icon: DEFAULT_ICONS.slashHeadingIcon,
+    id: "h1",
+    keywords: ["title", "big", "large", "heading"],
+    title: "Heading 1",
   },
   {
-    id: "h2",
-    title: "Heading 2",
-    description: "Medium section heading.",
-    keywords: ["subtitle", "medium", "heading"],
-    icon: DEFAULT_ICONS.slashHeadingIcon,
     command: ({ editor, range }) => {
       editor
         .chain()
@@ -59,13 +58,13 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
         .setNode("heading", { level: 2 })
         .run();
     },
+    description: "Medium section heading.",
+    icon: DEFAULT_ICONS.slashHeadingIcon,
+    id: "h2",
+    keywords: ["subtitle", "medium", "heading"],
+    title: "Heading 2",
   },
   {
-    id: "h3",
-    title: "Heading 3",
-    description: "Small section heading.",
-    keywords: ["subtitle", "small", "heading"],
-    icon: DEFAULT_ICONS.slashHeadingIcon,
     command: ({ editor, range }) => {
       editor
         .chain()
@@ -74,136 +73,134 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
         .setNode("heading", { level: 3 })
         .run();
     },
+    description: "Small section heading.",
+    icon: DEFAULT_ICONS.slashHeadingIcon,
+    id: "h3",
+    keywords: ["subtitle", "small", "heading"],
+    title: "Heading 3",
   },
   {
-    id: "bulletList",
-    title: "Bullet List",
+    command: ({ editor, range }) => {
+      chainFocus(editor).deleteRange(range).toggleBulletList().run();
+    },
     description: "Create a simple bullet list.",
-    keywords: ["unordered", "list", "bullet"],
     icon: DEFAULT_ICONS.slashBulletListIcon,
-    command: ({ editor, range }) => {
-      (editor.chain().focus() as any).deleteRange(range).toggleBulletList().run();
-    },
+    id: "bulletList",
+    keywords: ["unordered", "list", "bullet"],
+    title: "Bullet List",
   },
   {
-    id: "orderedList",
-    title: "Numbered List",
+    command: ({ editor, range }) => {
+      chainFocus(editor).deleteRange(range).toggleOrderedList().run();
+    },
     description: "Create a list with numbering.",
-    keywords: ["ordered", "list"],
     icon: DEFAULT_ICONS.slashOrderedListIcon,
-    command: ({ editor, range }) => {
-      (editor.chain().focus() as any).deleteRange(range).toggleOrderedList().run();
-    },
+    id: "orderedList",
+    keywords: ["ordered", "list"],
+    title: "Numbered List",
   },
   {
-    id: "taskList",
-    title: "Task List",
+    command: ({ editor, range }) => {
+      chainFocus(editor).deleteRange(range).toggleTaskList().run();
+    },
     description: "Create a task list with checkboxes.",
-    keywords: ["task", "todo", "checkbox"],
     icon: DEFAULT_ICONS.slashTaskListIcon,
-    command: ({ editor, range }) => {
-      (editor.chain().focus() as any).deleteRange(range).toggleTaskList().run();
-    },
+    id: "taskList",
+    keywords: ["task", "todo", "checkbox"],
+    title: "Task List",
   },
   {
-    id: "blockquote",
-    title: "Quote",
-    description: "Capture a quote.",
-    keywords: ["blockquote"],
-    icon: DEFAULT_ICONS.slashBlockquoteIcon,
     command: ({ editor, range }) =>
-      (editor
-        .chain()
-        .focus() as any)
+      chainFocus(editor)
         .deleteRange(range)
         .toggleNode("paragraph", "paragraph")
         .toggleBlockquote()
         .run(),
+    description: "Capture a quote.",
+    icon: DEFAULT_ICONS.slashBlockquoteIcon,
+    id: "blockquote",
+    keywords: ["blockquote"],
+    title: "Quote",
   },
   {
-    id: "codeBlock",
-    title: "Code",
-    description: "Capture a code snippet.",
-    keywords: ["codeblock"],
-    icon: DEFAULT_ICONS.slashCodeBlockIcon,
     command: ({ editor, range }) =>
-      (editor.chain().focus() as any)
+      chainFocus(editor)
         .deleteRange(range)
         .toggleCodeBlock({ language: "plaintext" })
         .run(),
+    description: "Capture a code snippet.",
+    icon: DEFAULT_ICONS.slashCodeBlockIcon,
+    id: "codeBlock",
+    keywords: ["codeblock"],
+    title: "Code",
   },
   {
-    id: "divider",
-    title: "Divider",
-    description: "Create a horizontal divider.",
-    keywords: ["divider"],
-    icon: DEFAULT_ICONS.slashDividerIcon,
     command: ({ editor, range }) =>
-      (editor.chain().focus() as any).deleteRange(range).setHorizontalRule().run(),
+      chainFocus(editor).deleteRange(range).setHorizontalRule().run(),
+    description: "Create a horizontal divider.",
+    icon: DEFAULT_ICONS.slashDividerIcon,
+    id: "divider",
+    keywords: ["divider"],
+    title: "Divider",
   },
 ];
 
-function updatePosition(editor: Editor, element: Element) {
-  if (!(element instanceof HTMLElement)) return;
+const updatePosition = async (
+  editor: Editor,
+  element: Element
+): Promise<void> => {
+  if (!(element instanceof HTMLElement)) {
+    return;
+  }
 
   const virtualElement = {
     getBoundingClientRect: () =>
-      posToDOMRect(editor.view, editor.state.selection.from, editor.state.selection.to),
+      posToDOMRect(
+        editor.view,
+        editor.state.selection.from,
+        editor.state.selection.to
+      ),
   };
 
-  computePosition(virtualElement, element, {
+  const {
+    x,
+    y,
+    strategy: posStrategy,
+  } = await computePosition(virtualElement, element, {
+    middleware: [shift(), flip()],
     placement: "bottom-start",
     strategy: "absolute",
-    middleware: [shift(), flip()],
-  }).then(({ x, y, strategy }) => {
-    element.style.width = "max-content";
-    element.style.position = strategy;
-    element.style.left = `${x}px`;
-    element.style.top = `${y}px`;
   });
-}
+  element.style.width = "max-content";
+  element.style.position = posStrategy;
+  element.style.left = `${x}px`;
+  element.style.top = `${y}px`;
+};
 
-export function getSlashCommandSuggestion(
-  customItems?: SlashCommandSuggestionItem[],
-): SuggestionType {
+export const getSlashCommandSuggestion = (
+  customItems?: SlashCommandSuggestionItem[]
+): SuggestionType => {
   const items = customItems
     ? [
         ...customItems,
         ...defaultSlashCommandItems.filter(
-          (d) => !customItems.some((c) => c.id === d.id),
+          (d) => !customItems.some((c) => c.id === d.id)
         ),
       ]
     : defaultSlashCommandItems;
 
   return {
-    items: ({ query }) => {
-      return items.filter((item) =>
-        item.keywords.some((k) => k.startsWith(query.toLowerCase())),
-      );
-    },
+    items: ({ query }) =>
+      items.filter((item) =>
+        item.keywords.some((k) => k.startsWith(query.toLowerCase()))
+      ),
     render: () => {
       let component: ReactRenderer<SuggestionListHandle, SuggestionListProps>;
 
       return {
-        onStart: (props) => {
-          component = new ReactRenderer(SuggestionList, {
-            props,
-            editor: props.editor,
-          });
-
-          if (!props.clientRect) return;
-
-          if (component.element instanceof HTMLElement) {
-            component.element.style.position = "absolute";
-            document.body.appendChild(component.element);
-            updatePosition(props.editor, component.element);
-          }
-        },
-
-        onUpdate(props) {
-          component.updateProps(props);
-          if (!props.clientRect) return;
-          updatePosition(props.editor, component.element);
+        onExit() {
+          component?.element.remove();
+          component?.destroy();
         },
 
         onKeyDown(props) {
@@ -213,11 +210,31 @@ export function getSlashCommandSuggestion(
           return component.ref?.onKeyDown(props) ?? false;
         },
 
-        onExit() {
-          component?.element.remove();
-          component?.destroy();
+        onStart: (props) => {
+          component = new ReactRenderer(SuggestionList, {
+            editor: props.editor,
+            props,
+          });
+
+          if (!props.clientRect) {
+            return;
+          }
+
+          if (component.element instanceof HTMLElement) {
+            component.element.style.position = "absolute";
+            document.body.append(component.element);
+            updatePosition(props.editor, component.element);
+          }
+        },
+
+        onUpdate(props) {
+          component.updateProps(props);
+          if (!props.clientRect) {
+            return;
+          }
+          updatePosition(props.editor, component.element);
         },
       };
     },
   };
-}
+};

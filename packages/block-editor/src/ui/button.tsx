@@ -10,9 +10,9 @@ const variantClasses: Record<string, string> = {
 
 const sizeClasses: Record<string, string> = {
   default: "block-editor-btn--md",
-  sm: "block-editor-btn--sm",
-  lg: "block-editor-btn--lg",
   icon: "block-editor-btn--icon",
+  lg: "block-editor-btn--lg",
+  sm: "block-editor-btn--sm",
 };
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -21,13 +21,18 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className = "", variant = "default", size = "default", ...props }, ref) => {
+  (
+    { className = "", variant = "default", size = "default", ...props },
+    ref
+  ) => {
     const cls = [
       "block-editor-btn",
       variantClasses[variant] || "",
       sizeClasses[size] || "",
       className,
-    ].filter(Boolean).join(" ");
+    ]
+      .filter(Boolean)
+      .join(" ");
 
     return <button ref={ref} className={cls} {...props} />;
   }

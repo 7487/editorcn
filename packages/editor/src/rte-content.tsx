@@ -1,9 +1,13 @@
 import { EditorContent } from "@tiptap/react";
-import { cn } from "./ui/utils";
+
 import { useRichTextEditorContext } from "./rte-context";
 import type { RichTextEditorContentProps } from "./types";
+import { cn } from "./ui/utils";
 
-export function Content({ children, className }: RichTextEditorContentProps) {
+export const Content = ({
+  children,
+  className,
+}: RichTextEditorContentProps) => {
   const { editor } = useRichTextEditorContext();
 
   return (
@@ -15,4 +19,4 @@ export function Content({ children, className }: RichTextEditorContentProps) {
       {children}
     </div>
   );
-}
+};

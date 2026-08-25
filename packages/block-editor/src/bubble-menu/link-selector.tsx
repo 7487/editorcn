@@ -1,8 +1,16 @@
+import type { Editor } from "@tiptap/react";
 import { useState, useRef, useCallback, useEffect } from "react";
-import { type Editor } from "@tiptap/react";
+
 import { DEFAULT_ICONS } from "../icons";
 
-export function LinkSelector({ editor }: { editor: Editor }) {
+interface LinkableChain {
+  extendMarkRange(type: string): LinkableChain;
+  run(): boolean;
+  setLink(options: { href: string }): LinkableChain;
+  unsetLink(): LinkableChain;
+}
+
+export const LinkSelector = ({ editor }: { editor: Editor }) => {
   const [open, setOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [{ isLink, linkUrl }, setLinkState] = useState(() => ({
@@ -29,10 +37,13 @@ export function LinkSelector({ editor }: { editor: Editor }) {
     (evt: React.FormEvent) => {
       evt.preventDefault();
       let url = inputRef.current?.value?.trim();
-      if (!url) return;
-      if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- extension commands not in base ChainedCommands
-      (editor.chain().focus() as any)
+      if (!url) {
+        return;
+      }
+      if (!/^https?:\/\//i.test(url)) {
+        url = `https://${url}`;
+      }
+      (editor.chain().focus() as unknown as LinkableChain)
         .extendMarkRange("link")
         .setLink({ href: url })
         .run();
@@ -42,8 +53,7 @@ export function LinkSelector({ editor }: { editor: Editor }) {
   );
 
   const handleUnlink = useCallback(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (editor.chain().focus() as any).unsetLink().run();
+    (editor.chain().focus() as unknown as LinkableChain).unsetLink().run();
     setOpen(false);
   }, [editor]);
 
@@ -60,10 +70,19 @@ export function LinkSelector({ editor }: { editor: Editor }) {
       </button>
       {open && (
         <>
-          <div className="block-editor-bubble-overlay" onClick={() => setOpen(false)} />
+          <div
+            className="block-editor-bubble-overlay"
+            role="presentation"
+            onClick={() => setOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                setOpen(false);
+              }
+            }}
+          />
           <div
             className="block-editor-bubble-dropdown"
-            style={{ right: 0, left: "auto", minWidth: "220px" }}
+            style={{ left: "auto", minWidth: "220px", right: 0 }}
           >
             <form className="block-editor-link-form" onSubmit={handleSubmit}>
               <input
@@ -83,7 +102,9 @@ export function LinkSelector({ editor }: { editor: Editor }) {
                     onClick={handleUnlink}
                     style={{ justifyContent: "center" }}
                   >
-                    <span className="block-editor-bubble-dropdown-icon">{DEFAULT_ICONS.unlinkIcon}</span>
+                    <span className="block-editor-bubble-dropdown-icon">
+                      {DEFAULT_ICONS.unlinkIcon}
+                    </span>
                     <span>Remove</span>
                   </button>
                 )}
@@ -93,7 +114,9 @@ export function LinkSelector({ editor }: { editor: Editor }) {
                   onMouseDown={(e) => e.preventDefault()}
                   style={{ justifyContent: "center" }}
                 >
-                  <span className="block-editor-bubble-dropdown-icon">{DEFAULT_ICONS.checkIcon}</span>
+                  <span className="block-editor-bubble-dropdown-icon">
+                    {DEFAULT_ICONS.checkIcon}
+                  </span>
                   <span>{isLink ? "Update" : "Add"}</span>
                 </button>
               </div>
@@ -103,4 +126,4 @@ export function LinkSelector({ editor }: { editor: Editor }) {
       )}
     </div>
   );
-}
+};

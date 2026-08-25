@@ -1,21 +1,22 @@
-import { useMemo, useEffect } from 'react';
-import { cn } from "./ui/utils";
-import { RichTextEditorContext } from './rte-context';
-import { DEFAULT_LABELS } from './labels';
-import { DEFAULT_ICONS } from './icons';
-import { Toolbar } from './rte-toolbar';
-import { Footer } from './rte-footer';
-import { ControlsGroup } from './rte-controls-group';
-import { Content } from './rte-content';
-import { RichTextEditorControl } from './controls/rte-control';
-import { LinkControl } from './controls/rte-link-control';
-import * as controls from './controls/rte-controls';
-import type { RichTextEditorProps } from './types';
-import { YouTubeEmbedControl } from './controls/rte-youtube-control';
-import { TwitterEmbedControl } from './controls/rte-twitter-control';
-import { BubbleMenu } from './bubble-menu/index';
+import { useMemo, useEffect } from "react";
 
-function RichTextEditorRoot({
+import { BubbleMenu } from "./bubble-menu/index";
+import { RichTextEditorControl } from "./controls/rte-control";
+import * as controls from "./controls/rte-controls";
+import { LinkControl } from "./controls/rte-link-control";
+import { TwitterEmbedControl } from "./controls/rte-twitter-control";
+import { YouTubeEmbedControl } from "./controls/rte-youtube-control";
+import { DEFAULT_ICONS } from "./icons";
+import { DEFAULT_LABELS } from "./labels";
+import { Content } from "./rte-content";
+import { RichTextEditorContext } from "./rte-context";
+import { ControlsGroup } from "./rte-controls-group";
+import { Footer } from "./rte-footer";
+import { Toolbar } from "./rte-toolbar";
+import type { RichTextEditorProps } from "./types";
+import { cn } from "./ui/utils";
+
+const RichTextEditorRoot = ({
   editor,
   children,
   className,
@@ -23,16 +24,13 @@ function RichTextEditorRoot({
   icons,
   variant = "default",
   editable = true,
-}: RichTextEditorProps) {
+}: RichTextEditorProps) => {
   const mergedLabels = useMemo(
     () => ({ ...DEFAULT_LABELS, ...labels }),
     [labels]
   );
 
-  const mergedIcons = useMemo(
-    () => ({ ...DEFAULT_ICONS, ...icons }),
-    [icons]
-  );
+  const mergedIcons = useMemo(() => ({ ...DEFAULT_ICONS, ...icons }), [icons]);
 
   useEffect(() => {
     if (editor && editor.isEditable !== editable) {
@@ -41,10 +39,18 @@ function RichTextEditorRoot({
   }, [editor, editable]);
 
   return (
-    <RichTextEditorContext.Provider value={{ editor, labels: mergedLabels, icons: mergedIcons, variant, editable }}>
+    <RichTextEditorContext.Provider
+      value={{
+        editable,
+        editor,
+        icons: mergedIcons,
+        labels: mergedLabels,
+        variant,
+      }}
+    >
       <div
         className={cn(
-          'rte-root',
+          "rte-root",
           variant !== "default" && `rte-root--${variant}`,
           className
         )}
@@ -54,43 +60,43 @@ function RichTextEditorRoot({
       </div>
     </RichTextEditorContext.Provider>
   );
-}
+};
 
 export const RichTextEditor = Object.assign(RichTextEditorRoot, {
-  Toolbar,
-  Footer,
-  ControlsGroup,
-  Content,
-  BubbleMenu,
-  Control: RichTextEditorControl,
-  Link: LinkControl,
-  YouTubeEmbed: YouTubeEmbedControl,
-  TwitterEmbed: TwitterEmbedControl,
+  AlignCenter: controls.AlignCenterControl,
+  AlignJustify: controls.AlignJustifyControl,
+  AlignLeft: controls.AlignLeftControl,
+  AlignRight: controls.AlignRightControl,
+  Blockquote: controls.BlockquoteControl,
   Bold: controls.BoldControl,
-  Italic: controls.ItalicControl,
-  Underline: controls.UnderlineControl,
-  Strikethrough: controls.StrikethroughControl,
+  BubbleMenu,
+  BulletList: controls.BulletListControl,
   ClearFormatting: controls.ClearFormattingControl,
   Code: controls.CodeControl,
   CodeBlock: controls.CodeBlockControl,
+  Content,
+  Control: RichTextEditorControl,
+  ControlsGroup,
+  Footer,
   H1: controls.H1Control,
   H2: controls.H2Control,
   H3: controls.H3Control,
   H4: controls.H4Control,
   H5: controls.H5Control,
   H6: controls.H6Control,
-  BulletList: controls.BulletListControl,
-  OrderedList: controls.OrderedListControl,
-  Blockquote: controls.BlockquoteControl,
-  Hr: controls.HrControl,
-  Unlink: controls.UnlinkControl,
-  Undo: controls.UndoControl,
-  Redo: controls.RedoControl,
-  AlignLeft: controls.AlignLeftControl,
-  AlignCenter: controls.AlignCenterControl,
-  AlignRight: controls.AlignRightControl,
-  AlignJustify: controls.AlignJustifyControl,
   Highlight: controls.HighlightControl,
+  Hr: controls.HrControl,
+  Italic: controls.ItalicControl,
+  Link: LinkControl,
+  OrderedList: controls.OrderedListControl,
+  Redo: controls.RedoControl,
+  Strikethrough: controls.StrikethroughControl,
   Subscript: controls.SubscriptControl,
   Superscript: controls.SuperscriptControl,
+  Toolbar,
+  TwitterEmbed: TwitterEmbedControl,
+  Underline: controls.UnderlineControl,
+  Undo: controls.UndoControl,
+  Unlink: controls.UnlinkControl,
+  YouTubeEmbed: YouTubeEmbedControl,
 });

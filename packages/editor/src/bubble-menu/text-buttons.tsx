@@ -1,22 +1,27 @@
-import { type Editor } from "@tiptap/react";
+import type { Editor } from "@tiptap/react";
+
 import { useEditorState } from "./utils";
 
-function Svg({ children, strokeWidth = 2 }: { children: React.ReactNode; strokeWidth?: number }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={strokeWidth}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="rte-editor-icon"
-    >
-      {children}
-    </svg>
-  );
-}
+const Svg = ({
+  children,
+  strokeWidth = 2,
+}: {
+  children: React.ReactNode;
+  strokeWidth?: number;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={strokeWidth}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="rte-editor-icon"
+  >
+    {children}
+  </svg>
+);
 
 interface TextSelectorResult {
   isBold: boolean;
@@ -26,19 +31,30 @@ interface TextSelectorResult {
   isCode: boolean;
 }
 
+interface ToggleableChain {
+  run(): boolean;
+  toggleBold(): ToggleableChain;
+  toggleCode(): ToggleableChain;
+  toggleItalic(): ToggleableChain;
+  toggleStrike(): ToggleableChain;
+  toggleUnderline(): ToggleableChain;
+}
+
 const textItems = [
   {
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as ToggleableChain).toggleBold().run(),
     icon: (
       <Svg>
         <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
         <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
       </Svg>
     ),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- extension commands not in base ChainedCommands
-    command: (e: Editor) => (e.chain().focus() as any).toggleBold().run(),
     isActive: (s: TextSelectorResult) => s.isBold,
   },
   {
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as ToggleableChain).toggleItalic().run(),
     icon: (
       <Svg>
         <line x1="19" y1="4" x2="10" y2="4" />
@@ -46,22 +62,22 @@ const textItems = [
         <line x1="15" y1="4" x2="9" y2="20" />
       </Svg>
     ),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    command: (e: Editor) => (e.chain().focus() as any).toggleItalic().run(),
     isActive: (s: TextSelectorResult) => s.isItalic,
   },
   {
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as ToggleableChain).toggleUnderline().run(),
     icon: (
       <Svg>
         <path d="M6 4v6a6 6 0 0 0 12 0V4" />
         <line x1="4" y1="20" x2="20" y2="20" />
       </Svg>
     ),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    command: (e: Editor) => (e.chain().focus() as any).toggleUnderline().run(),
     isActive: (s: TextSelectorResult) => s.isUnderline,
   },
   {
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as ToggleableChain).toggleStrike().run(),
     icon: (
       <Svg>
         <path d="M16 4H9.5a3.5 3.5 0 0 0-2.9 5.4" />
@@ -69,30 +85,28 @@ const textItems = [
         <line x1="4" y1="12" x2="20" y2="12" />
       </Svg>
     ),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    command: (e: Editor) => (e.chain().focus() as any).toggleStrike().run(),
     isActive: (s: TextSelectorResult) => s.isStrike,
   },
   {
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as ToggleableChain).toggleCode().run(),
     icon: (
       <Svg>
         <polyline points="16 18 22 12 16 6" />
         <polyline points="8 6 2 12 8 18" />
       </Svg>
     ),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    command: (e: Editor) => (e.chain().focus() as any).toggleCode().run(),
     isActive: (s: TextSelectorResult) => s.isCode,
   },
 ];
 
-export function TextButtons({ editor }: { editor: Editor }) {
+export const TextButtons = ({ editor }: { editor: Editor }) => {
   const editorState = useEditorState(editor, (ed) => ({
     isBold: ed.isActive("bold"),
-    isItalic: ed.isActive("italic"),
-    isUnderline: ed.isActive("underline"),
-    isStrike: ed.isActive("strike"),
     isCode: ed.isActive("code"),
+    isItalic: ed.isActive("italic"),
+    isStrike: ed.isActive("strike"),
+    isUnderline: ed.isActive("underline"),
   }));
 
   return (
@@ -110,4 +124,4 @@ export function TextButtons({ editor }: { editor: Editor }) {
       ))}
     </div>
   );
-}
+};
