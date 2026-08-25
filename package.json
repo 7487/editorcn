@@ -11,6 +11,7 @@
     "build": "turbo build",
     "build:registry": "node scripts/build-registry.mjs",
     "check-types": "turbo check-types",
+    "lint": "turbo lint",
     "dev:web": "turbo -F web dev"
   },
   "dependencies": {

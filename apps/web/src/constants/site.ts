@@ -22,7 +22,7 @@ export const SITE = {
     LONG: "Rich text editor components for the shadcn/ui ecosystem.",
     SHORT: "Rich text editors for shadcn/ui",
   },
-  NAME: "Editorcn",
+  NAME: "editorcn",
   OG_IMAGE: `${baseUrl}/og`,
   REGISTRY: "@editorcn",
   URL: baseUrl,
