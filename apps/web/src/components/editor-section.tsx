@@ -163,18 +163,19 @@ export const EditorSection = (props: EditorSectionProps) => {
       </p>
 
       <Tabs defaultValue="preview">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col-reverse gap-2 items-start sm:flex-row sm:items-center sm:justify-between">
           <TabsList>
             <TabsTrigger value="preview">Preview</TabsTrigger>
             <TabsTrigger value="code">Code</TabsTrigger>
           </TabsList>
           {props.type === "editor" && (
-            <div className="flex gap-2">
+            <div className="flex w-full sm:w-auto gap-2">
               {VARIANTS.map((v) => (
                 <Button
                   key={v.value}
                   variant={variant === v.value ? "default" : "outline"}
                   size="sm"
+                  className="flex-1 sm:flex-auto"
                   onClick={() => setVariant(v.value)}
                 >
                   {v.label}
