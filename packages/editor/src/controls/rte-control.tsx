@@ -1,5 +1,3 @@
-"use no memo";
-
 import type { ChainedCommands, Editor } from "@tiptap/core";
 import { useEditorState } from "@tiptap/react";
 import React from "react";
@@ -54,6 +52,39 @@ export const RichTextEditorControl = ({
   </Toggle>
 );
 
+type EditorStateSelector = (ctx: { editor: Editor | null }) => {
+  active: boolean;
+  disabled: boolean;
+};
+
+const resolveIsActive = (
+  editor: Editor | null,
+  config?: IsActiveConfig
+): boolean => {
+  if (!editor || !config) {
+    return false;
+  }
+  if ("attrs" in config) {
+    return editor.isActive(config.attrs);
+  }
+  return editor.isActive(config.name, config.attributes);
+};
+
+const createSelector =
+  (
+    isActive?: IsActiveConfig,
+    isDisabled?: (editor: Editor) => boolean
+  ): EditorStateSelector =>
+  (ctx) => {
+    const safeEditor =
+      ctx.editor && !ctx.editor.isDestroyed ? ctx.editor : null;
+
+    return {
+      active: resolveIsActive(safeEditor, isActive),
+      disabled: safeEditor ? (isDisabled?.(safeEditor) ?? false) : true,
+    };
+  };
+
 export const createControl = ({
   label,
   iconKey,
@@ -64,32 +95,10 @@ export const createControl = ({
   const Control = ({ className }: { className?: string }) => {
     const { editor, labels, icons } = useRichTextEditorContext();
     const ariaLabel = labels[label] as string;
-    const activeConfig = isActive;
-    const checkDisabled = isDisabled;
 
     const editorState = useEditorState({
       editor: editor ?? null,
-      selector: (ctx) => {
-        const safeEditor =
-          ctx.editor && !ctx.editor.isDestroyed ? ctx.editor : null;
-        const checkIsActive = () => {
-          if (!safeEditor || !activeConfig) {
-            return false;
-          }
-          if ("attrs" in activeConfig) {
-            return safeEditor.isActive(activeConfig.attrs);
-          }
-          return safeEditor.isActive(
-            activeConfig.name,
-            activeConfig.attributes
-          );
-        };
-
-        return {
-          active: checkIsActive(),
-          disabled: safeEditor ? (checkDisabled?.(safeEditor) ?? false) : true,
-        };
-      },
+      selector: createSelector(isActive, isDisabled),
     });
 
     const active = editorState?.active ?? false;
