@@ -9,39 +9,17 @@ All controls use `useRichTextEditorContext` from `@editorcn/editor` to access th
 
 Install all controls at once:
 
-<CodeBlockCommand
-  __npm__={
-    'npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls"'
-  }
-  __yarn__={
-    'yarn dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls"'
-  }
-  __pnpm__={
-    'pnpm dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls"'
-  }
-  __bun__={
-    'bunx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls"'
-  }
-/>
+```bash
+npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls"
+```
 
 You can also copy the source directly from the **Code** tab in each control below.
 
 ### Heading Select
 
-<CodeBlockCommand
-  __npm__={
-    'npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/heading-select"'
-  }
-  __yarn__={
-    'yarn dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/heading-select"'
-  }
-  __pnpm__={
-    'pnpm dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/heading-select"'
-  }
-  __bun__={
-    'bunx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/heading-select"'
-  }
-/>
+```bash
+npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/heading-select"
+```
 
 A unified dropdown that toggles between paragraph and heading levels (H1–H3). Uses `useEditorState` from `@tiptap/react` to keep the select value in sync with the cursor position.
 
@@ -49,20 +27,9 @@ A unified dropdown that toggles between paragraph and heading levels (H1–H3). 
 
 ### Insert Link Dialog
 
-<CodeBlockCommand
-  __npm__={
-    'npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/insert-link-dialog"'
-  }
-  __yarn__={
-    'yarn dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/insert-link-dialog"'
-  }
-  __pnpm__={
-    'pnpm dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/insert-link-dialog"'
-  }
-  __bun__={
-    'bunx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/insert-link-dialog"'
-  }
-/>
+```bash
+npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/insert-link-dialog"
+```
 
 A dialog that opens when the toolbar button is clicked, with an input field to enter a URL and auto-detection of selected link text.
 
@@ -70,20 +37,9 @@ A dialog that opens when the toolbar button is clicked, with an input field to e
 
 ### Highlight Color Popover
 
-<CodeBlockCommand
-  __npm__={
-    'npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/highlight-color-popover"'
-  }
-  __yarn__={
-    'yarn dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/highlight-color-popover"'
-  }
-  __pnpm__={
-    'pnpm dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/highlight-color-popover"'
-  }
-  __bun__={
-    'bunx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/highlight-color-popover"'
-  }
-/>
+```bash
+npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/highlight-color-popover"
+```
 
 A popover with a color swatch grid for highlight colors and a button to remove existing highlights.
 
@@ -91,20 +47,9 @@ A popover with a color swatch grid for highlight colors and a button to remove e
 
 ### Emoji Menu
 
-<CodeBlockCommand
-  __npm__={
-    'npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/emoji-menu"'
-  }
-  __yarn__={
-    'yarn dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/emoji-menu"'
-  }
-  __pnpm__={
-    'pnpm dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/emoji-menu"'
-  }
-  __bun__={
-    'bunx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/emoji-menu"'
-  }
-/>
+```bash
+npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/emoji-menu"
+```
 
 A dropdown menu with a grid of emojis that inserts the selected emoji at the cursor position.
 
@@ -112,37 +57,15 @@ A dropdown menu with a grid of emojis that inserts the selected emoji at the cur
 
 ### Insert Table Dialog
 
-<CodeBlockCommand
-  __npm__={
-    'npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/insert-table-dialog"'
-  }
-  __yarn__={
-    'yarn dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/insert-table-dialog"'
-  }
-  __pnpm__={
-    'pnpm dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/insert-table-dialog"'
-  }
-  __bun__={
-    'bunx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/insert-table-dialog"'
-  }
-/>
+```bash
+npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/insert-table-dialog"
+```
 
 Requires table extensions:
 
-<CodeBlockCommand
-  __npm__={
-    "npm install @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header"
-  }
-  __yarn__={
-    "yarn add @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header"
-  }
-  __pnpm__={
-    "pnpm add @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header"
-  }
-  __bun__={
-    "bun add @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header"
-  }
-/>
+```bash
+npm install @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header
+```
 
 A dialog that opens when the toolbar button is clicked, with inputs for rows and columns, a header row toggle, and inserts the table on submit.
 
@@ -150,35 +73,15 @@ A dialog that opens when the toolbar button is clicked, with inputs for rows and
 
 ### Font Family Select
 
-<CodeBlockCommand
-  __npm__={
-    'npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-family-select"'
-  }
-  __yarn__={
-    'yarn dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-family-select"'
-  }
-  __pnpm__={
-    'pnpm dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-family-select"'
-  }
-  __bun__={
-    'bunx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-family-select"'
-  }
-/>
+```bash
+npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-family-select"
+```
 
 Requires text style extensions:
 
-<CodeBlockCommand
-  __npm__={
-    "npm install @tiptap/extension-text-style @tiptap/extension-font-family"
-  }
-  __yarn__={
-    "yarn add @tiptap/extension-text-style @tiptap/extension-font-family"
-  }
-  __pnpm__={
-    "pnpm add @tiptap/extension-text-style @tiptap/extension-font-family"
-  }
-  __bun__={"bun add @tiptap/extension-text-style @tiptap/extension-font-family"}
-/>
+```bash
+npm install @tiptap/extension-text-style @tiptap/extension-font-family
+```
 
 A select dropdown that changes the font family of selected text using `@tiptap/extension-font-family` and `@tiptap/extension-text-style`.
 
@@ -186,37 +89,15 @@ A select dropdown that changes the font family of selected text using `@tiptap/e
 
 ### Font Size
 
-<CodeBlockCommand
-  __npm__={
-    'npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-size"'
-  }
-  __yarn__={
-    'yarn dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-size"'
-  }
-  __pnpm__={
-    'pnpm dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-size"'
-  }
-  __bun__={
-    'bunx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-size"'
-  }
-/>
+```bash
+npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-size"
+```
 
 Requires font-size extension:
 
-<CodeBlockCommand
-  __npm__={
-    'npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-size-extension"'
-  }
-  __yarn__={
-    'yarn dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-size-extension"'
-  }
-  __pnpm__={
-    'pnpm dlx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-size-extension"'
-  }
-  __bun__={
-    'bunx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-size-extension"'
-  }
-/>
+```bash
+npx shadcn@latest add "https://editorcn.vercel.app/r/custom-controls/font-size-extension"
+```
 
 A plus/minus control with a number input to adjust the font size of selected text. Uses the `FontSize` extension which adds a `fontSize` attribute to `textStyle`.
 
