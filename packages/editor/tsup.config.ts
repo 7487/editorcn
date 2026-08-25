@@ -1,9 +1,9 @@
-import { defineConfig } from "tsup"
+import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts"],
-  format: ["esm", "cjs"],
+  clean: true,
   dts: true,
+  entry: ["src/index.ts"],
   external: [
     "react",
     "react-dom",
@@ -12,6 +12,6 @@ export default defineConfig({
     /^@base-ui\//,
     "class-variance-authority",
   ],
+  format: ["esm", "cjs"],
   sourcemap: true,
-  clean: true,
-})
+});

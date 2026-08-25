@@ -1,27 +1,30 @@
 "use client";
 
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Placeholder from "@tiptap/extension-placeholder";
-import Underline from "@tiptap/extension-underline";
-import TaskList from "@tiptap/extension-task-list";
-import TaskItem from "@tiptap/extension-task-item";
-import TextAlign from "@tiptap/extension-text-align";
-import Table from "@tiptap/extension-table";
-import TableRow from "@tiptap/extension-table-row";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import Image from "@tiptap/extension-image";
-import Link from "@tiptap/extension-link";
-import { CodeBlock } from "@editorcn/block-editor";
-import { showImagePrompt } from "@/components/image-prompt";
 import {
   BlockEditor,
+  CodeBlock,
   SlashCommand,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
 } from "@editorcn/block-editor";
 import type { SlashCommandSuggestionItem } from "@editorcn/block-editor";
+import type { Editor, Range } from "@tiptap/core";
+import { Image } from "@tiptap/extension-image";
+import { Link } from "@tiptap/extension-link";
+import { Placeholder } from "@tiptap/extension-placeholder";
+import { Table } from "@tiptap/extension-table";
+import { TableCell } from "@tiptap/extension-table-cell";
+import { TableHeader } from "@tiptap/extension-table-header";
+import { TableRow } from "@tiptap/extension-table-row";
+import { TaskItem } from "@tiptap/extension-task-item";
+import { TaskList } from "@tiptap/extension-task-list";
+import { TextAlign } from "@tiptap/extension-text-align";
+import { Underline } from "@tiptap/extension-underline";
+import { useEditor } from "@tiptap/react";
+import { StarterKit } from "@tiptap/starter-kit";
+
+import { showImagePrompt } from "@/components/image-prompt";
+
 import "@editorcn/block-editor/style.css";
 
 const BLOCK_CONTENT = `
@@ -38,36 +41,36 @@ const BLOCK_CONTENT = `
 const blockItems = [
   ...defaultSlashCommandItems,
   {
-    id: "image",
-    title: "Image",
-    description: "Insert an image.",
-    keywords: ["image", "img"],
-    command: ({ editor, range }: any) => {
-      showImagePrompt().then((url) => {
-        if (!url) return;
-        (editor.chain().focus() as any)
-          .deleteRange(range)
-          .setImage({ src: url })
-          .run();
-      });
+    command: async ({ editor, range }: { editor: Editor; range: Range }) => {
+      const url = await showImagePrompt();
+      if (!url) {
+        return;
+      }
+      editor.chain().focus().deleteRange(range).setImage({ src: url }).run();
     },
+    description: "Insert an image.",
+    id: "image",
+    keywords: ["image", "img"],
+    title: "Image",
   },
   {
-    id: "table",
-    title: "Table",
-    description: "Insert a table.",
-    keywords: ["table"],
-    command: ({ editor, range }: any) => {
-      (editor.chain().focus() as any)
+    command: ({ editor, range }: { editor: Editor; range: Range }) => {
+      editor
+        .chain()
+        .focus()
         .deleteRange(range)
-        .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+        .insertTable({ cols: 3, rows: 3, withHeaderRow: true })
         .run();
     },
+    description: "Insert a table.",
+    id: "table",
+    keywords: ["table"],
+    title: "Table",
   },
 ];
 
 const extensions = [
-  StarterKit.configure({ heading: { levels: [1, 2, 3] }, codeBlock: false }),
+  StarterKit.configure({ codeBlock: false, heading: { levels: [1, 2, 3] } }),
   Placeholder.configure({ placeholder: "Type / for commands..." }),
   Underline,
   TaskList,
@@ -80,58 +83,58 @@ const extensions = [
   TableHeader,
   Image,
   Link.configure({
-    openOnClick: true,
     autolink: true,
     defaultProtocol: "https",
+    openOnClick: true,
   }),
   SlashCommand.configure({ suggestion: getSlashCommandSuggestion(blockItems) }),
 ];
 
-export function BlockEditorVariantsDemo() {
+export const BlockEditorVariantsDemo = () => {
   const editor = useEditor({
+    content: BLOCK_CONTENT,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: BLOCK_CONTENT,
   });
   return (
     <div className="overflow-hidden rounded-md border border-border">
       <BlockEditor editor={editor} />
     </div>
   );
-}
+};
 
-export function BlockEditorThemingDemo() {
+export const BlockEditorThemingDemo = () => {
   const editor = useEditor({
+    content: BLOCK_CONTENT,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: BLOCK_CONTENT,
   });
   return (
     <div
       style={
         {
-          "--primary": "oklch(0.55 0.25 280)",
-          "--radius": "0.5rem",
           "--accent": "oklch(0.9 0.06 280)",
           "--accent-foreground": "oklch(0.3 0.1 280)",
           "--muted": "oklch(0.93 0.03 280)",
           "--muted-foreground": "oklch(0.5 0.05 280)",
+          "--primary": "oklch(0.55 0.25 280)",
+          "--radius": "0.5rem",
         } as React.CSSProperties
       }
     >
       <BlockEditor editor={editor} />
     </div>
   );
-}
+};
 
-export function BlockEditorClassNameDemo() {
+export const BlockEditorClassNameDemo = () => {
   const editor = useEditor({
+    content: BLOCK_CONTENT,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: BLOCK_CONTENT,
   });
   return (
     <BlockEditor
@@ -139,14 +142,10 @@ export function BlockEditorClassNameDemo() {
       className="border-2 border-dashed border-primary/50 rounded-xl"
     />
   );
-}
+};
 
 const customSlashItems: SlashCommandSuggestionItem[] = [
   {
-    id: "greeting",
-    title: "Greeting",
-    description: "Insert a friendly greeting.",
-    keywords: ["hello", "hi", "greeting"],
     command: ({ editor, range }) => {
       editor
         .chain()
@@ -155,38 +154,42 @@ const customSlashItems: SlashCommandSuggestionItem[] = [
         .insertContent("Hello there! 👋")
         .run();
     },
+    description: "Insert a friendly greeting.",
+    id: "greeting",
+    keywords: ["hello", "hi", "greeting"],
+    title: "Greeting",
   },
   {
-    id: "image",
-    title: "Image",
-    description: "Insert an image.",
-    keywords: ["image", "img", "picture"],
-    command: ({ editor, range }) => {
-      showImagePrompt().then((url) => {
-        if (!url) return;
-        (editor.chain().focus() as any)
-          .deleteRange(range)
-          .setImage({ src: url })
-          .run();
-      });
+    command: async ({ editor, range }) => {
+      const url = await showImagePrompt();
+      if (!url) {
+        return;
+      }
+      editor.chain().focus().deleteRange(range).setImage({ src: url }).run();
     },
+    description: "Insert an image.",
+    id: "image",
+    keywords: ["image", "img", "picture"],
+    title: "Image",
   },
   {
-    id: "table",
-    title: "Table",
-    description: "Insert a table.",
-    keywords: ["table", "grid"],
     command: ({ editor, range }) => {
-      (editor.chain().focus() as any)
+      editor
+        .chain()
+        .focus()
         .deleteRange(range)
-        .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+        .insertTable({ cols: 3, rows: 3, withHeaderRow: true })
         .run();
     },
+    description: "Insert a table.",
+    id: "table",
+    keywords: ["table", "grid"],
+    title: "Table",
   },
 ];
 
 const customSlashExtensions = [
-  StarterKit.configure({ heading: { levels: [1, 2, 3] }, codeBlock: false }),
+  StarterKit.configure({ codeBlock: false, heading: { levels: [1, 2, 3] } }),
   Placeholder.configure({ placeholder: "Type / for commands..." }),
   Underline,
   TaskList,
@@ -199,25 +202,25 @@ const customSlashExtensions = [
   TableHeader,
   Image,
   Link.configure({
-    openOnClick: true,
     autolink: true,
     defaultProtocol: "https",
+    openOnClick: true,
   }),
   SlashCommand.configure({
     suggestion: getSlashCommandSuggestion(customSlashItems),
   }),
 ];
 
-export function BlockEditorCustomSlashCommandsDemo() {
+export const BlockEditorCustomSlashCommandsDemo = () => {
   const editor = useEditor({
+    content: BLOCK_CONTENT,
+    extensions: customSlashExtensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions: customSlashExtensions,
-    content: BLOCK_CONTENT,
   });
   return (
     <div className="overflow-hidden rounded-md border border-border">
       <BlockEditor editor={editor} />
     </div>
   );
-}
+};

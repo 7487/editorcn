@@ -30,8 +30,10 @@ export const motionIconProps: HTMLMotionProps<"span"> = {
   variants: motionIconVariants,
 };
 
-export interface CopyButtonProps
-  extends Omit<React.ComponentProps<typeof Button>, "value"> {
+export interface CopyButtonProps extends Omit<
+  React.ComponentProps<typeof Button>,
+  "value"
+> {
   value: string | (() => Promise<string> | string);
   src?: string;
   event?: Event["name"];
@@ -110,7 +112,7 @@ export const CopyButton = ({
 
   return (
     <Tooltip>
-      <TooltipTrigger>{copyButton}</TooltipTrigger>
+      <TooltipTrigger asChild>{copyButton}</TooltipTrigger>
       <TooltipContent>
         {isCopied ? "Copied" : "Copy to Clipboard"}
       </TooltipContent>

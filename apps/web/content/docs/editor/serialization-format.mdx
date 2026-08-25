@@ -17,32 +17,32 @@ The HTML output is standard HTML with inline styles for certain attributes:
 
 ### Formatting
 
-| Element          | Output                                   |
-| ---------------- | ---------------------------------------- |
-| Bold             | `<strong>`                               |
-| Italic           | `<em>`                                   |
-| Underline        | `<u>`                                    |
-| Strikethrough    | `<s>`                                    |
-| Code (inline)    | `<code>`                                 |
-| Highlight        | `<mark>` with inline `style` attribute   |
-| Link             | `<a href="...">`                         |
-| Subscript        | `<sub>`                                  |
-| Superscript      | `<sup>`                                  |
-| Font size        | Inline `style="font-size: ..."`          |
-| Font family      | Inline `style="font-family: ..."`        |
+| Element       | Output                                 |
+| ------------- | -------------------------------------- |
+| Bold          | `<strong>`                             |
+| Italic        | `<em>`                                 |
+| Underline     | `<u>`                                  |
+| Strikethrough | `<s>`                                  |
+| Code (inline) | `<code>`                               |
+| Highlight     | `<mark>` with inline `style` attribute |
+| Link          | `<a href="...">`                       |
+| Subscript     | `<sub>`                                |
+| Superscript   | `<sup>`                                |
+| Font size     | Inline `style="font-size: ..."`        |
+| Font family   | Inline `style="font-family: ..."`      |
 
 ### Block elements
 
-| Element        | Output                      |
-| -------------- | --------------------------- |
-| Heading        | `<h1>` through `<h6>`      |
-| Paragraph      | `<p>`                       |
-| Bullet list    | `<ul>` / `<li>`             |
-| Ordered list   | `<ol>` / `<li>`             |
-| Blockquote     | `<blockquote>` / `<p>`      |
-| Code block     | `<pre><code>`               |
-| Horizontal rule| `<hr>`                      |
-| Task list      | `<ul data-type="taskList">` |
+| Element         | Output                      |
+| --------------- | --------------------------- |
+| Heading         | `<h1>` through `<h6>`       |
+| Paragraph       | `<p>`                       |
+| Bullet list     | `<ul>` / `<li>`             |
+| Ordered list    | `<ol>` / `<li>`             |
+| Blockquote      | `<blockquote>` / `<p>`      |
+| Code block      | `<pre><code>`               |
+| Horizontal rule | `<hr>`                      |
+| Task list       | `<ul data-type="taskList">` |
 
 ### Alignment
 
@@ -61,30 +61,42 @@ YouTube and Twitter embeds are serialized as custom HTML nodes.
 **YouTube embed:**
 
 ```html
-<div data-type="youtube" data-src="https://www.youtube.com/watch?v=dQw4w9WgXcQ" data-width="560" data-height="315" data-align="center"></div>
+<div
+  data-type="youtube"
+  data-src="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  data-width="560"
+  data-height="315"
+  data-align="center"
+></div>
 ```
 
-| Attribute      | Description                          |
-| -------------- | ------------------------------------ |
-| `data-type`    | Always `"youtube"`                   |
-| `data-src`     | The full YouTube URL or video ID     |
-| `data-width`   | Width in pixels (default: `560`)     |
-| `data-height`  | Height in pixels (default: `315`)    |
-| `data-align`   | Alignment: `"left"` / `"center"` / `"right"` |
+| Attribute     | Description                                  |
+| ------------- | -------------------------------------------- |
+| `data-type`   | Always `"youtube"`                           |
+| `data-src`    | The full YouTube URL or video ID             |
+| `data-width`  | Width in pixels (default: `560`)             |
+| `data-height` | Height in pixels (default: `315`)            |
+| `data-align`  | Alignment: `"left"` / `"center"` / `"right"` |
 
 **Twitter embed:**
 
 ```html
-<div data-type="twitter" data-tweet-id="123456789" data-width="550" data-height="400" data-align="center"></div>
+<div
+  data-type="twitter"
+  data-tweet-id="123456789"
+  data-width="550"
+  data-height="400"
+  data-align="center"
+></div>
 ```
 
-| Attribute        | Description                          |
-| ---------------- | ------------------------------------ |
-| `data-type`      | Always `"twitter"`                   |
-| `data-tweet-id`  | Numeric tweet ID                     |
-| `data-width`     | Width in pixels (default: `550`)     |
-| `data-height`    | Height in pixels (default: `400`)    |
-| `data-align`     | Alignment: `"left"` / `"center"` / `"right"` |
+| Attribute       | Description                                  |
+| --------------- | -------------------------------------------- |
+| `data-type`     | Always `"twitter"`                           |
+| `data-tweet-id` | Numeric tweet ID                             |
+| `data-width`    | Width in pixels (default: `550`)             |
+| `data-height`   | Height in pixels (default: `400`)            |
+| `data-align`    | Alignment: `"left"` / `"center"` / `"right"` |
 
 When rendering embeds on your own (outside the editor), detect these by their `data-type` attribute and render the appropriate iframe/widget.
 
@@ -103,6 +115,7 @@ const json = editor.getJSON();
 This returns a structured JSON tree representing the document. You can store this in a database and restore it later with `editor.commands.setContent(json)`.
 
 The JSON format is useful when you need to:
+
 - Store content in a structured format (e.g. a JSON column in your database)
 - Transform or analyze the document programmatically
 - Avoid HTML parsing on the server
@@ -135,10 +148,10 @@ The JSON format is useful when you need to:
 
 ### Embed node types (toolbar editor only)
 
-| Embed            | JSON node type | Attributes                                           |
-| ---------------- | -------------- | ---------------------------------------------------- |
-| YouTube          | `youtube`      | `src`, `width`, `height`, `align`                    |
-| Twitter          | `twitter`      | `tweetId`, `width`, `height`, `align`                |
+| Embed   | JSON node type | Attributes                            |
+| ------- | -------------- | ------------------------------------- |
+| YouTube | `youtube`      | `src`, `width`, `height`, `align`     |
+| Twitter | `twitter`      | `tweetId`, `width`, `height`, `align` |
 
 ## Plain text
 
@@ -176,12 +189,7 @@ To render editor content on the server (e.g. in a blog post view), use the HTML 
 
 ```tsx
 function RenderContent({ html }: { html: string }) {
-  return (
-    <div
-      className="prose"
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
+  return <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 ```
 

@@ -1,13 +1,8 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "editorcn",
   "homepage": "https://editorcn.vercel.app",
   "items": [
     {
-      "name": "editor",
-      "type": "registry:component",
-      "title": "Rich Text Editor",
-      "description": "A toolbar-style rich text editor built on Tiptap with shadcn/ui tokens.",
       "dependencies": [
         "@tiptap/core@>=2.11.5 <4",
         "@tiptap/react@>=2.11.5 <4",
@@ -28,6 +23,7 @@
         "clsx@^2.1.1",
         "tailwind-merge@^3.0.0"
       ],
+      "description": "A toolbar-style rich text editor built on Tiptap with shadcn/ui tokens.",
       "files": [
         {
           "path": "editor/index.ts",
@@ -149,13 +145,12 @@
           "path": "editor/ui/dialog.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "name": "editor",
+      "title": "Rich Text Editor",
+      "type": "registry:component"
     },
     {
-      "name": "block-editor",
-      "type": "registry:component",
-      "title": "Block Editor",
-      "description": "A Notion-style block editor built on Tiptap with shadcn/ui tokens.",
       "dependencies": [
         "@tiptap/react@>=2.11.5 <4",
         "@tiptap/pm@>=2.11.5 <4",
@@ -183,6 +178,7 @@
         "clsx@^2.1.1",
         "tailwind-merge@^3.0.0"
       ],
+      "description": "A Notion-style block editor built on Tiptap with shadcn/ui tokens.",
       "files": [
         {
           "path": "block-editor/index.ts",
@@ -292,7 +288,11 @@
           "path": "block-editor/lib/utils.ts",
           "type": "registry:lib"
         }
-      ]
+      ],
+      "name": "block-editor",
+      "title": "Block Editor",
+      "type": "registry:component"
     }
-  ]
+  ],
+  "name": "editorcn"
 }

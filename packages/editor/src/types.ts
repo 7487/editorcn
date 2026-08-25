@@ -1,6 +1,7 @@
-import type { Editor } from '@tiptap/react';
-import type { RichTextEditorLabels } from './labels';
-import type { RichTextEditorIcons } from './icons';
+import type { Editor } from "@tiptap/react";
+
+import type { RichTextEditorIcons } from "./icons";
+import type { RichTextEditorLabels } from "./labels";
 
 export type RichTextEditorVariant = "default" | "subtle" | "compact";
 
@@ -31,8 +32,7 @@ export interface RichTextEditorControlsGroupProps {
   className?: string;
 }
 
-export interface RichTextEditorControlProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface RichTextEditorControlProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   active?: boolean;
   interactive?: boolean;
 }

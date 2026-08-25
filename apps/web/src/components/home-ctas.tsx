@@ -4,13 +4,12 @@ import Link from "next/link";
 
 import { ArrowRightIcon } from "@/components/animated-icons/arrow-right";
 import type { ArrowRightIconHandle } from "@/components/animated-icons/arrow-right";
-import { ComponentIcon } from "@/components/animated-icons/component";
 import type { ComponentIconHandle } from "@/components/animated-icons/component";
 import { Button } from "@/components/ui/button";
+import { githubUrl } from "@/constants/links";
 import { ROUTES } from "@/constants/routes";
 import { useIconAnimation } from "@/hooks/use-icon-animation";
 import { cn } from "@/lib/utils";
-import { githubUrl } from "@/constants/links";
 
 const GetStartedButton = () => {
   const {
@@ -36,11 +35,8 @@ const GetStartedButton = () => {
 };
 
 const BrowseComponentsButton = () => {
-  const {
-    iconRef: componentIconRef,
-    onMouseEnter,
-    onMouseLeave,
-  } = useIconAnimation<ComponentIconHandle>();
+  const { onMouseEnter, onMouseLeave } =
+    useIconAnimation<ComponentIconHandle>();
 
   return (
     <Button

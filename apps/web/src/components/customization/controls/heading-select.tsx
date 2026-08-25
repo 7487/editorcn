@@ -1,20 +1,32 @@
 "use client";
 
-import { useEditorState } from "@tiptap/react";
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import { useRichTextEditorContext } from "@editorcn/editor";
+import { useEditorState } from "@tiptap/react";
 
-export function HeadingSelect() {
+import {
+  NativeSelect,
+  NativeSelectOption,
+} from "@/components/ui/native-select";
+
+export const HeadingSelect = () => {
   const { editor } = useRichTextEditorContext();
   const value =
     useEditorState({
       editor: editor ?? null,
       selector: (ctx) => {
         const e = ctx.editor;
-        if (!e || e.isDestroyed) return "paragraph";
-        if (e.isActive("heading", { level: 1 })) return "h1";
-        if (e.isActive("heading", { level: 2 })) return "h2";
-        if (e.isActive("heading", { level: 3 })) return "h3";
+        if (!e || e.isDestroyed) {
+          return "paragraph";
+        }
+        if (e.isActive("heading", { level: 1 })) {
+          return "h1";
+        }
+        if (e.isActive("heading", { level: 2 })) {
+          return "h2";
+        }
+        if (e.isActive("heading", { level: 3 })) {
+          return "h3";
+        }
         return "paragraph";
       },
     }) ?? "paragraph";
@@ -25,11 +37,19 @@ export function HeadingSelect() {
       value={value}
       onChange={(e) => {
         const v = e.target.value;
-        if (!v) return;
+        if (!v) {
+          return;
+        }
         if (v === "paragraph") {
           editor?.chain().focus().setParagraph().run();
         } else {
-          const level = parseInt(v.replace("h", "")) as 1 | 2 | 3 | 4 | 5 | 6;
+          const level = Number.parseInt(v.replace("h", ""), 10) as
+            | 1
+            | 2
+            | 3
+            | 4
+            | 5
+            | 6;
           editor?.chain().focus().toggleHeading({ level }).run();
         }
       }}
@@ -41,4 +61,4 @@ export function HeadingSelect() {
       <NativeSelectOption value="h3">Heading 3</NativeSelectOption>
     </NativeSelect>
   );
-}
+};

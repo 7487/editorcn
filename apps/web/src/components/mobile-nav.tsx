@@ -47,7 +47,7 @@ const MobileLink = ({
 
 export const MobileNav = ({
   items,
-  tree,
+  tree: _tree,
   className,
 }: {
   items: { href: string; label: string }[];

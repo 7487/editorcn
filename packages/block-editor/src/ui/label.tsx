@@ -1,17 +1,16 @@
 import * as React from "react";
 
-export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}
+export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement>;
 
 const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
-  ({ className = "", ...props }, ref) => {
-    return (
-      <label
-        ref={ref}
-        className={["block-editor-label", className].filter(Boolean).join(" ")}
-        {...props}
-      />
-    );
-  }
+  ({ className = "", htmlFor, ...props }, ref) => (
+    <label
+      ref={ref}
+      className={["block-editor-label", className].filter(Boolean).join(" ")}
+      htmlFor={htmlFor}
+      {...props}
+    />
+  )
 );
 Label.displayName = "Label";
 

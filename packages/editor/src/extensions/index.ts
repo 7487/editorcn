@@ -1,2 +1,2 @@
-export { Link } from './link';
-export { ResizableNodeView } from './resizable-node-view';
+export { Link } from "./link";
+export { ResizableNodeView } from "./resizable-node-view";

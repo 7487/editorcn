@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRichTextEditorContext } from "@editorcn/editor";
 import { Grid3x3 } from "lucide-react";
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogTrigger,
@@ -11,11 +14,9 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRichTextEditorContext } from "@editorcn/editor";
 
-export function InsertTableDialog() {
+export const InsertTableDialog = () => {
   const { editor } = useRichTextEditorContext();
   const [open, setOpen] = useState(false);
   const [rows, setRows] = useState(3);
@@ -24,7 +25,7 @@ export function InsertTableDialog() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    editor?.chain().focus().insertTable({ rows, cols, withHeaderRow }).run();
+    editor?.chain().focus().insertTable({ cols, rows, withHeaderRow }).run();
     setOpen(false);
   };
 
@@ -44,25 +45,37 @@ export function InsertTableDialog() {
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex gap-4">
-            <label className="flex flex-col gap-1.5">
+            <label
+              className="flex flex-col gap-1.5"
+              htmlFor="insert-table-rows"
+            >
               <span className="text-xs text-muted-foreground">Rows</span>
               <Input
+                id="insert-table-rows"
                 type="number"
                 min={1}
                 max={10}
                 value={rows}
-                onChange={(e) => setRows(parseInt(e.target.value) || 1)}
+                onChange={(e) =>
+                  setRows(Number.parseInt(e.target.value, 10) || 1)
+                }
                 className="w-20"
               />
             </label>
-            <label className="flex flex-col gap-1.5">
+            <label
+              className="flex flex-col gap-1.5"
+              htmlFor="insert-table-cols"
+            >
               <span className="text-xs text-muted-foreground">Columns</span>
               <Input
+                id="insert-table-cols"
                 type="number"
                 min={1}
                 max={10}
                 value={cols}
-                onChange={(e) => setCols(parseInt(e.target.value) || 1)}
+                onChange={(e) =>
+                  setCols(Number.parseInt(e.target.value, 10) || 1)
+                }
                 className="w-20"
               />
             </label>
@@ -90,4 +103,4 @@ export function InsertTableDialog() {
       </DialogContent>
     </Dialog>
   );
-}
+};

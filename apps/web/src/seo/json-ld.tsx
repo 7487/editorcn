@@ -32,17 +32,17 @@ export const WebSiteJsonLd = () => (
     data={{
       "@context": "https://schema.org",
       "@type": "WebSite",
-      name: SITE.NAME,
-      url: SITE.URL,
       description: SITE.DESCRIPTION.LONG,
+      name: SITE.NAME,
       potentialAction: {
         "@type": "SearchAction",
+        "query-input": "required name=search_term_string",
         target: {
           "@type": "EntryPoint",
           urlTemplate: `${SITE.URL}/docs?q={search_term_string}`,
         },
-        "query-input": "required name=search_term_string",
       },
+      url: SITE.URL,
     }}
   />
 );
@@ -52,16 +52,16 @@ export const SoftwareApplicationJsonLd = () => (
     data={{
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      name: SITE.NAME,
-      url: SITE.URL,
-      description: SITE.DESCRIPTION.LONG,
       applicationCategory: "DeveloperApplication",
-      operatingSystem: "Web",
+      description: SITE.DESCRIPTION.LONG,
+      name: SITE.NAME,
       offers: {
         "@type": "Offer",
         price: "0",
         priceCurrency: "USD",
       },
+      operatingSystem: "Web",
+      url: SITE.URL,
     }}
   />
 );

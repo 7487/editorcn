@@ -1,17 +1,22 @@
 "use client";
 
-import { useState } from "react";
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Underline from "@tiptap/extension-underline";
-import TextAlign from "@tiptap/extension-text-align";
-import Placeholder from "@tiptap/extension-placeholder";
-import Highlight from "@tiptap/extension-highlight";
-import Subscript from "@tiptap/extension-subscript";
-import Superscript from "@tiptap/extension-superscript";
-import { Lock, Unlock } from "lucide-react";
-import { RichTextEditor, Link, useRichTextEditorContext } from "@editorcn/editor";
+import {
+  RichTextEditor,
+  Link,
+  useRichTextEditorContext,
+} from "@editorcn/editor";
 import type { RichTextEditorLabels } from "@editorcn/editor";
+import { Highlight } from "@tiptap/extension-highlight";
+import { Placeholder } from "@tiptap/extension-placeholder";
+import { Subscript } from "@tiptap/extension-subscript";
+import { Superscript } from "@tiptap/extension-superscript";
+import { TextAlign } from "@tiptap/extension-text-align";
+import { Underline } from "@tiptap/extension-underline";
+import { useEditor } from "@tiptap/react";
+import { StarterKit } from "@tiptap/starter-kit";
+import { Lock, Unlock } from "lucide-react";
+import { useState } from "react";
+
 import "@editorcn/editor/style.css";
 
 const EDITOR_CONTENT = `
@@ -41,63 +46,61 @@ const extensions = [
   Placeholder.configure({ placeholder: "Start typing..." }),
 ];
 
-function EditorToolbar() {
-  return (
-    <>
-      <RichTextEditor.ControlsGroup>
-        <RichTextEditor.Bold />
-        <RichTextEditor.Italic />
-        <RichTextEditor.Underline />
-        <RichTextEditor.Strikethrough />
-        <RichTextEditor.Code />
-        <RichTextEditor.ClearFormatting />
-      </RichTextEditor.ControlsGroup>
-      <RichTextEditor.ControlsGroup>
-        <RichTextEditor.H1 />
-        <RichTextEditor.H2 />
-        <RichTextEditor.H3 />
-      </RichTextEditor.ControlsGroup>
-      <RichTextEditor.ControlsGroup>
-        <RichTextEditor.BulletList />
-        <RichTextEditor.OrderedList />
-        <RichTextEditor.Blockquote />
-        <RichTextEditor.Hr />
-      </RichTextEditor.ControlsGroup>
-      <RichTextEditor.ControlsGroup>
-        <RichTextEditor.AlignLeft />
-        <RichTextEditor.AlignCenter />
-        <RichTextEditor.AlignRight />
-      </RichTextEditor.ControlsGroup>
-      <RichTextEditor.ControlsGroup>
-        <RichTextEditor.Link />
-        <RichTextEditor.Unlink />
-      </RichTextEditor.ControlsGroup>
-      <RichTextEditor.ControlsGroup>
-        <RichTextEditor.Undo />
-        <RichTextEditor.Redo />
-      </RichTextEditor.ControlsGroup>
-    </>
-  );
-}
+const EditorToolbar = () => (
+  <>
+    <RichTextEditor.ControlsGroup>
+      <RichTextEditor.Bold />
+      <RichTextEditor.Italic />
+      <RichTextEditor.Underline />
+      <RichTextEditor.Strikethrough />
+      <RichTextEditor.Code />
+      <RichTextEditor.ClearFormatting />
+    </RichTextEditor.ControlsGroup>
+    <RichTextEditor.ControlsGroup>
+      <RichTextEditor.H1 />
+      <RichTextEditor.H2 />
+      <RichTextEditor.H3 />
+    </RichTextEditor.ControlsGroup>
+    <RichTextEditor.ControlsGroup>
+      <RichTextEditor.BulletList />
+      <RichTextEditor.OrderedList />
+      <RichTextEditor.Blockquote />
+      <RichTextEditor.Hr />
+    </RichTextEditor.ControlsGroup>
+    <RichTextEditor.ControlsGroup>
+      <RichTextEditor.AlignLeft />
+      <RichTextEditor.AlignCenter />
+      <RichTextEditor.AlignRight />
+    </RichTextEditor.ControlsGroup>
+    <RichTextEditor.ControlsGroup>
+      <RichTextEditor.Link />
+      <RichTextEditor.Unlink />
+    </RichTextEditor.ControlsGroup>
+    <RichTextEditor.ControlsGroup>
+      <RichTextEditor.Undo />
+      <RichTextEditor.Redo />
+    </RichTextEditor.ControlsGroup>
+  </>
+);
 
-export function EditorVariantsDemo() {
+export const EditorVariantsDemo = () => {
   const a = useEditor({
+    content: EDITOR_CONTENT,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: EDITOR_CONTENT,
   });
   const b = useEditor({
+    content: EDITOR_CONTENT,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: EDITOR_CONTENT,
   });
   const c = useEditor({
+    content: EDITOR_CONTENT,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: EDITOR_CONTENT,
   });
 
   return (
@@ -141,14 +144,14 @@ export function EditorVariantsDemo() {
       </div>
     </div>
   );
-}
+};
 
-export function EditorClassNameDemo() {
+export const EditorClassNameDemo = () => {
   const editor = useEditor({
+    content: EDITOR_CONTENT,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: EDITOR_CONTENT,
   });
   return (
     <RichTextEditor
@@ -161,25 +164,25 @@ export function EditorClassNameDemo() {
       <RichTextEditor.Content />
     </RichTextEditor>
   );
-}
+};
 
-export function EditorThemingDemo() {
+export const EditorThemingDemo = () => {
   const editor = useEditor({
+    content: EDITOR_CONTENT,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: EDITOR_CONTENT,
   });
   return (
     <div
       style={
         {
-          "--primary": "oklch(0.6 0.2 25)",
-          "--radius": "0.75rem",
-          "--border": "oklch(0.6 0.15 25 / 0.3)",
           "--accent": "oklch(0.9 0.05 25)",
           "--accent-foreground": "oklch(0.3 0.1 25)",
+          "--border": "oklch(0.6 0.15 25 / 0.3)",
           "--muted": "oklch(0.95 0.02 25)",
+          "--primary": "oklch(0.6 0.2 25)",
+          "--radius": "0.75rem",
         } as React.CSSProperties
       }
     >
@@ -191,14 +194,14 @@ export function EditorThemingDemo() {
       </RichTextEditor>
     </div>
   );
-}
+};
 
-export function EditorStickyToolbarDemo() {
+export const EditorStickyToolbarDemo = () => {
   const editor = useEditor({
+    content: EDITOR_CONTENT,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: EDITOR_CONTENT,
   });
   return (
     <RichTextEditor editor={editor}>
@@ -212,9 +215,9 @@ export function EditorStickyToolbarDemo() {
       <RichTextEditor.Content />
     </RichTextEditor>
   );
-}
+};
 
-function CustomStarControl() {
+const CustomStarControl = () => {
   const { editor } = useRichTextEditorContext();
   return (
     <RichTextEditor.Control
@@ -235,9 +238,9 @@ function CustomStarControl() {
       </svg>
     </RichTextEditor.Control>
   );
-}
+};
 
-function CustomGreetingControl() {
+const CustomGreetingControl = () => {
   const { editor } = useRichTextEditorContext();
   return (
     <RichTextEditor.Control
@@ -249,14 +252,14 @@ function CustomGreetingControl() {
       <span className="text-sm">👋</span>
     </RichTextEditor.Control>
   );
-}
+};
 
-export function EditorCustomControlsDemo() {
+export const EditorCustomControlsDemo = () => {
   const editor = useEditor({
+    content: EDITOR_CONTENT,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: EDITOR_CONTENT,
   });
   return (
     <RichTextEditor editor={editor}>
@@ -274,20 +277,22 @@ export function EditorCustomControlsDemo() {
       <RichTextEditor.Content />
     </RichTextEditor>
   );
-}
+};
 
-export function EditorReadOnlyDemo() {
+export const EditorReadOnlyDemo = () => {
   const [isEditable, setIsEditable] = useState(true);
   const editor = useEditor({
+    content: EDITOR_CONTENT,
     editable: isEditable,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: EDITOR_CONTENT,
   });
 
   const toggle = () => {
-    if (!editor) return;
+    if (!editor) {
+      return;
+    }
     const next = !editor.isEditable;
     editor.setEditable(next);
     setIsEditable(next);
@@ -317,44 +322,40 @@ export function EditorReadOnlyDemo() {
       </RichTextEditor>
     </div>
   );
-}
+};
 
-function StarIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      className="rte-editor-icon"
-    >
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
-  );
-}
+const StarIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    className="rte-editor-icon"
+  >
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>
+);
 
-function HeartIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      className="rte-editor-icon"
-    >
-      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-    </svg>
-  );
-}
+const HeartIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    className="rte-editor-icon"
+  >
+    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+  </svg>
+);
 
-export function EditorCustomIconsDemo() {
+export const EditorCustomIconsDemo = () => {
   const editor = useEditor({
+    content: EDITOR_CONTENT,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: EDITOR_CONTENT,
   });
   return (
     <div className="overflow-hidden rounded-md border border-border">
@@ -384,24 +385,24 @@ export function EditorCustomIconsDemo() {
       </RichTextEditor>
     </div>
   );
-}
+};
 
 const customLabels: Partial<RichTextEditorLabels> = {
   boldControlLabel: "Bold (B)",
-  italicControlLabel: "Italic (I)",
-  underlineControlLabel: "Underline (U)",
-  linkControlLabel: "🔗 Link",
+  bulletListControlLabel: "List",
   h1ControlLabel: "Title",
   h2ControlLabel: "Subtitle",
-  bulletListControlLabel: "List",
+  italicControlLabel: "Italic (I)",
+  linkControlLabel: "🔗 Link",
+  underlineControlLabel: "Underline (U)",
 };
 
-export function EditorCustomLabelsDemo() {
+export const EditorCustomLabelsDemo = () => {
   const editor = useEditor({
+    content: EDITOR_CONTENT,
+    extensions,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
-    extensions,
-    content: EDITOR_CONTENT,
   });
   return (
     <div className="overflow-hidden rounded-md border border-border">
@@ -433,4 +434,4 @@ export function EditorCustomLabelsDemo() {
       </RichTextEditor>
     </div>
   );
-}
+};

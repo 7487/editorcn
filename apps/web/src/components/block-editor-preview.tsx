@@ -1,29 +1,30 @@
 "use client";
 
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Placeholder from "@tiptap/extension-placeholder";
-import Underline from "@tiptap/extension-underline";
-import TaskList from "@tiptap/extension-task-list";
-import TaskItem from "@tiptap/extension-task-item";
-import TextAlign from "@tiptap/extension-text-align";
-import TableKit from "@tiptap/extension-table";
-import TableRow from "@tiptap/extension-table-row";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import Image from "@tiptap/extension-image";
-import Link from "@tiptap/extension-link";
-import { showImagePrompt } from "@/components/image-prompt";
 import {
   BlockEditor,
   SlashCommand,
-  CodeBlock,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
 } from "@editorcn/block-editor";
-import type {
-  SlashCommandSuggestionItem,
-} from "@editorcn/block-editor";
+import type { SlashCommandSuggestionItem } from "@editorcn/block-editor";
+import { CodeBlockLowlight } from "@tiptap/extension-code-block-lowlight";
+import { Image } from "@tiptap/extension-image";
+import { Link } from "@tiptap/extension-link";
+import { Placeholder } from "@tiptap/extension-placeholder";
+import TableKit from "@tiptap/extension-table";
+import { TableCell } from "@tiptap/extension-table-cell";
+import { TableHeader } from "@tiptap/extension-table-header";
+import { TableRow } from "@tiptap/extension-table-row";
+import { TaskItem } from "@tiptap/extension-task-item";
+import { TaskList } from "@tiptap/extension-task-list";
+import { TextAlign } from "@tiptap/extension-text-align";
+import { Underline } from "@tiptap/extension-underline";
+import { useEditor } from "@tiptap/react";
+import { StarterKit } from "@tiptap/starter-kit";
+import { common, createLowlight } from "lowlight";
+
+import { showImagePrompt } from "@/components/image-prompt";
+
 import "@editorcn/block-editor/style.css";
 
 const DEMO_CONTENT = `
@@ -89,49 +90,82 @@ function MyEditor() {
 const myItems: SlashCommandSuggestionItem[] = [
   ...defaultSlashCommandItems,
   {
-    id: "custom",
-    title: "Custom",
+    command: ({ editor, range }) => {
+      editor.chain().focus().deleteRange(range).insertContent("Hello!").run();
+    },
     description: "A custom command",
-    keywords: ["custom"],
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M12 5v14" />
         <path d="M5 12h14" />
       </svg>
     ),
-    command: ({ editor, range }) => {
-      editor.chain().focus().deleteRange(range).insertContent("Hello!").run();
-    },
+    id: "custom",
+    keywords: ["custom"],
+    title: "Custom",
   },
   {
-    id: "image",
-    title: "Image",
+    command: async ({ editor, range }) => {
+      const url = await showImagePrompt();
+      if (!url) {
+        return;
+      }
+      editor.chain().focus().deleteRange(range).setImage({ src: url }).run();
+    },
     description: "Insert an image.",
-    keywords: ["image", "img", "picture", "photo"],
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
         <circle cx="8.5" cy="8.5" r="1.5" />
         <polyline points="21 15 16 10 5 21" />
       </svg>
     ),
-    command: ({ editor, range }) => {
-      showImagePrompt().then((url) => {
-        if (!url) return;
-        (editor.chain().focus() as any)
-          .deleteRange(range)
-          .setImage({ src: url })
-          .run();
-      });
-    },
+    id: "image",
+    keywords: ["image", "img", "picture", "photo"],
+    title: "Image",
   },
   {
-    id: "table",
-    title: "Table",
+    command: ({ editor, range }) => {
+      editor
+        .chain()
+        .focus()
+        .deleteRange(range)
+        .insertTable({ cols: 3, rows: 3, withHeaderRow: true })
+        .run();
+    },
     description: "Insert a table.",
-    keywords: ["table", "grid"],
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
         <line x1="3" y1="9" x2="21" y2="9" />
         <line x1="3" y1="15" x2="21" y2="15" />
@@ -139,29 +173,27 @@ const myItems: SlashCommandSuggestionItem[] = [
         <line x1="15" y1="3" x2="15" y2="21" />
       </svg>
     ),
-    command: ({ editor, range }) => {
-      (editor.chain().focus() as any)
-        .deleteRange(range)
-        .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
-        .run();
-    },
+    id: "table",
+    keywords: ["table", "grid"],
+    title: "Table",
   },
 ];
 
-export function BlockEditorPreview() {
+const lowlight = createLowlight(common);
 
+export const BlockEditorPreview = () => {
   const editor = useEditor({
-    immediatelyRender: false,
-    shouldRerenderOnTransaction: false,
+    content: DEMO_CONTENT,
     extensions: [
       StarterKit.configure({
+        codeBlock: false,
         heading: { levels: [1, 2, 3] },
       }),
       Placeholder.configure({ placeholder: "Type / for commands..." }),
       Underline,
       TaskList,
       TaskItem.configure({ nested: true }),
-      CodeBlock,
+      CodeBlockLowlight.configure({ lowlight }),
       SlashCommand.configure({
         suggestion: getSlashCommandSuggestion(myItems),
       }),
@@ -174,10 +206,8 @@ export function BlockEditorPreview() {
       TableHeader,
       Image,
       Link.configure({
-        openOnClick: true,
         autolink: true,
         defaultProtocol: "https",
-        protocols: ["http", "https"],
         isAllowedUri: (url, ctx) => {
           try {
             // construct URL
@@ -224,6 +254,8 @@ export function BlockEditorPreview() {
             return false;
           }
         },
+        openOnClick: true,
+        protocols: ["http", "https"],
         shouldAutoLink: (url) => {
           try {
             // construct URL
@@ -245,17 +277,22 @@ export function BlockEditorPreview() {
         },
       }),
     ],
-    content: DEMO_CONTENT,
+    immediatelyRender: false,
+    shouldRerenderOnTransaction: false,
   });
 
   return (
     <div className=" rounded-md border border-border font-inter [&_.ProseMirror]:text-[15px]">
-      <BlockEditor editor={editor} className="px-2" icons={{
-        slashTextIcon: <span className="text-sm font-bold">T</span>,
-        slashHeadingIcon: <span className="text-sm font-bold">H</span>,
-        boldIcon: <strong>B</strong>,
-        italicIcon: <em>I</em>,
-      }} />
+      <BlockEditor
+        editor={editor}
+        className="px-2"
+        icons={{
+          boldIcon: <strong>B</strong>,
+          italicIcon: <em>I</em>,
+          slashHeadingIcon: <span className="text-sm font-bold">H</span>,
+          slashTextIcon: <span className="text-sm font-bold">T</span>,
+        }}
+      />
     </div>
   );
-}
+};

@@ -1,4 +1,5 @@
-import { type Editor } from "@tiptap/react";
+import type { Editor } from "@tiptap/react";
+
 import { DEFAULT_ICONS } from "../icons";
 import { useEditorState } from "./utils";
 
@@ -10,46 +11,55 @@ interface TextSelectorResult {
   isCode: boolean;
 }
 
+interface ToggleableChain {
+  run(): boolean;
+  toggleBold(): ToggleableChain;
+  toggleCode(): ToggleableChain;
+  toggleItalic(): ToggleableChain;
+  toggleStrike(): ToggleableChain;
+  toggleUnderline(): ToggleableChain;
+}
+
 const textItems = [
   {
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as ToggleableChain).toggleBold().run(),
     icon: DEFAULT_ICONS.boldIcon,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- extension commands not in base ChainedCommands
-    command: (e: Editor) => (e.chain().focus() as any).toggleBold().run(),
     isActive: (s: TextSelectorResult) => s.isBold,
   },
   {
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as ToggleableChain).toggleItalic().run(),
     icon: DEFAULT_ICONS.italicIcon,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    command: (e: Editor) => (e.chain().focus() as any).toggleItalic().run(),
     isActive: (s: TextSelectorResult) => s.isItalic,
   },
   {
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as ToggleableChain).toggleUnderline().run(),
     icon: DEFAULT_ICONS.underlineIcon,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    command: (e: Editor) => (e.chain().focus() as any).toggleUnderline().run(),
     isActive: (s: TextSelectorResult) => s.isUnderline,
   },
   {
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as ToggleableChain).toggleStrike().run(),
     icon: DEFAULT_ICONS.strikethroughIcon,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    command: (e: Editor) => (e.chain().focus() as any).toggleStrike().run(),
     isActive: (s: TextSelectorResult) => s.isStrike,
   },
   {
+    command: (e: Editor) =>
+      (e.chain().focus() as unknown as ToggleableChain).toggleCode().run(),
     icon: DEFAULT_ICONS.codeIcon,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    command: (e: Editor) => (e.chain().focus() as any).toggleCode().run(),
     isActive: (s: TextSelectorResult) => s.isCode,
   },
 ];
 
-export function TextButtons({ editor }: { editor: Editor }) {
+export const TextButtons = ({ editor }: { editor: Editor }) => {
   const editorState = useEditorState(editor, (ed) => ({
     isBold: ed.isActive("bold"),
-    isItalic: ed.isActive("italic"),
-    isUnderline: ed.isActive("underline"),
-    isStrike: ed.isActive("strike"),
     isCode: ed.isActive("code"),
+    isItalic: ed.isActive("italic"),
+    isStrike: ed.isActive("strike"),
+    isUnderline: ed.isActive("underline"),
   }));
 
   return (
@@ -67,4 +77,4 @@ export function TextButtons({ editor }: { editor: Editor }) {
       ))}
     </div>
   );
-}
+};

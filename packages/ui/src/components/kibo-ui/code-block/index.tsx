@@ -1,5 +1,14 @@
 "use client";
 
+import { Button } from "@editorcn/ui/components/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@editorcn/ui/components/select";
+import { cn } from "@editorcn/ui/lib/utils";
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
 import {
   transformerNotationDiff,
@@ -93,97 +102,85 @@ import {
   SiVuedotjs,
   SiWebassembly,
 } from "react-icons/si";
-import {
-  type BundledLanguage,
-  type CodeOptionsMultipleThemes,
-  codeToHtml,
-} from "shiki";
-import { Button } from "@editorcn/ui/components/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@editorcn/ui/components/select";
-import { cn } from "@editorcn/ui/lib/utils";
+import { codeToHtml } from "shiki";
+import type { BundledLanguage, CodeOptionsMultipleThemes } from "shiki";
 
 export type { BundledLanguage } from "shiki";
 
 const filenameIconMap = {
-  ".env": SiDotenv,
   "*.astro": SiAstro,
-  "biome.json": SiBiome,
-  ".bowerrc": SiBower,
-  "bun.lockb": SiBun,
   "*.c": SiC,
-  "*.cpp": SiCplusplus,
-  ".circleci/config.yml": SiCircleci,
   "*.coffee": SiCoffeescript,
-  "*.module.css": SiCssmodules,
+  "*.cpp": SiCplusplus,
   "*.css": SiCss,
   "*.dart": SiDart,
-  Dockerfile: SiDocker,
-  "docusaurus.config.js": SiDocusaurus,
-  ".editorconfig": SiEditorconfig,
-  ".eslintrc": SiEslint,
-  "eslint.config.*": SiEslint,
-  "gatsby-config.*": SiGatsby,
-  ".gitignore": SiGitignoredotio,
   "*.go": SiGo,
   "*.graphql": SiGraphql,
-  "*.sh": SiGnubash,
-  "Gruntfile.*": SiGrunt,
-  "gulpfile.*": SiGulp,
   "*.hbs": SiHandlebarsdotjs,
   "*.html": SiHtml5,
   "*.js": SiJavascript,
   "*.json": SiJson,
-  "*.test.js": SiJest,
+  "*.jsx": SiReact,
   "*.less": SiLess,
   "*.md": SiMarkdown,
   "*.mdx": SiMdx,
-  "mintlify.json": SiMintlify,
-  "mocha.opts": SiMocha,
+  "*.module.css": SiCssmodules,
   "*.mustache": SiHandlebarsdotjs,
-  "*.sql": SiMysql,
-  "next.config.*": SiNextdotjs,
-  "*.pl": SiPerl,
   "*.php": SiPhp,
-  "postcss.config.*": SiPostcss,
-  "prettier.config.*": SiPrettier,
+  "*.pl": SiPerl,
   "*.prisma": SiPrisma,
   "*.pug": SiPug,
   "*.py": SiPython,
   "*.r": SiR,
   "*.rb": SiRuby,
-  "*.jsx": SiReact,
-  "*.tsx": SiReact,
-  "readme.md": SiReadme,
   "*.rdb": SiRedis,
-  "remix.config.*": SiRemix,
   "*.riv": SiRive,
-  "rollup.config.*": SiRollupdotjs,
-  "sanity.config.*": SiSanity,
   "*.sass": SiSass,
-  "*.scss": SiSass,
   "*.sc": SiScala,
   "*.scala": SiScala,
-  "sentry.client.config.*": SiSentry,
-  "components.json": SiShadcnui,
-  "storybook.config.*": SiStorybook,
-  "stylelint.config.*": SiStylelint,
-  ".sublime-settings": SiSublimetext,
+  "*.scss": SiSass,
+  "*.sh": SiGnubash,
+  "*.sql": SiMysql,
   "*.svelte": SiSvelte,
   "*.svg": SiSvg,
   "*.swift": SiSwift,
-  "tailwind.config.*": SiTailwindcss,
+  "*.test.js": SiJest,
   "*.toml": SiToml,
   "*.ts": SiTypescript,
-  "vercel.json": SiVercel,
-  "vite.config.*": SiVite,
+  "*.tsx": SiReact,
   "*.vue": SiVuedotjs,
   "*.wasm": SiWebassembly,
+  ".bowerrc": SiBower,
+  ".circleci/config.yml": SiCircleci,
+  ".editorconfig": SiEditorconfig,
+  ".env": SiDotenv,
+  ".eslintrc": SiEslint,
+  ".gitignore": SiGitignoredotio,
+  ".sublime-settings": SiSublimetext,
+  Dockerfile: SiDocker,
+  "Gruntfile.*": SiGrunt,
+  "biome.json": SiBiome,
+  "bun.lockb": SiBun,
+  "components.json": SiShadcnui,
+  "docusaurus.config.js": SiDocusaurus,
+  "eslint.config.*": SiEslint,
+  "gatsby-config.*": SiGatsby,
+  "gulpfile.*": SiGulp,
+  "mintlify.json": SiMintlify,
+  "mocha.opts": SiMocha,
+  "next.config.*": SiNextdotjs,
+  "postcss.config.*": SiPostcss,
+  "prettier.config.*": SiPrettier,
+  "readme.md": SiReadme,
+  "remix.config.*": SiRemix,
+  "rollup.config.*": SiRollupdotjs,
+  "sanity.config.*": SiSanity,
+  "sentry.client.config.*": SiSentry,
+  "storybook.config.*": SiStorybook,
+  "stylelint.config.*": SiStylelint,
+  "tailwind.config.*": SiTailwindcss,
+  "vercel.json": SiVercel,
+  "vite.config.*": SiVite,
 };
 
 const lineNumberClassNames = cn(
@@ -270,8 +267,8 @@ const highlight = (
   codeToHtml(html, {
     lang: language ?? "typescript",
     themes: themes ?? {
-      light: "github-light",
       dark: "github-dark-default",
+      light: "github-light",
     },
     transformers: [
       transformerNotationDiff({
@@ -292,22 +289,22 @@ const highlight = (
     ],
   });
 
-type CodeBlockData = {
+interface CodeBlockData {
   language: string;
   filename: string;
   code: string;
-};
+}
 
-type CodeBlockContextType = {
+interface CodeBlockContextType {
   value: string | undefined;
   onValueChange: ((value: string) => void) | undefined;
   data: CodeBlockData[];
-};
+}
 
 const CodeBlockContext = createContext<CodeBlockContextType>({
-  value: undefined,
-  onValueChange: undefined,
   data: [],
+  onValueChange: undefined,
+  value: undefined,
 });
 
 export type CodeBlockProps = HTMLAttributes<HTMLDivElement> & {
@@ -327,12 +324,12 @@ export const CodeBlock = ({
 }: CodeBlockProps) => {
   const [value, onValueChange] = useControllableState({
     defaultProp: defaultValue ?? "",
-    prop: controlledValue,
     onChange: controlledOnValueChange,
+    prop: controlledValue,
   });
 
   return (
-    <CodeBlockContext.Provider value={{ value, onValueChange, data }}>
+    <CodeBlockContext.Provider value={{ data, onValueChange, value }}>
       <div
         className={cn("size-full overflow-hidden rounded-md border", className)}
         {...props}
@@ -380,13 +377,15 @@ export const CodeBlockFiles = ({
   );
 };
 
-export type CodeBlockFilenameProps = HTMLAttributes<HTMLDivElement> & {
+export type CodeBlockFilenameProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "className"
+> & {
   icon?: IconType;
   value?: string;
 };
 
 export const CodeBlockFilename = ({
-  className,
   icon,
   value,
   children,
@@ -395,7 +394,7 @@ export const CodeBlockFilename = ({
   const { value: activeValue } = useContext(CodeBlockContext);
   const defaultIcon = Object.entries(filenameIconMap).find(([pattern]) => {
     const regex = new RegExp(
-      `^${pattern.replace(/\\/g, "\\\\").replace(/\./g, "\\.").replace(/\*/g, ".*")}$`
+      `^${pattern.replaceAll("\\", "\\\\").replaceAll(".", "\\.").replaceAll("*", ".*")}$`
     );
     return regex.test(children as string);
   })?.[1];
@@ -421,7 +420,21 @@ export type CodeBlockSelectProps = ComponentProps<typeof Select>;
 export const CodeBlockSelect = (props: CodeBlockSelectProps) => {
   const { value, onValueChange } = useContext(CodeBlockContext);
 
-  return <Select onValueChange={onValueChange as any} value={value} {...props} />;
+  return (
+    <Select
+      onValueChange={
+        onValueChange
+          ? (selected) => {
+              if (typeof selected === "string") {
+                onValueChange(selected);
+              }
+            }
+          : undefined
+      }
+      value={value}
+      {...props}
+    />
+  );
 };
 
 export type CodeBlockSelectTriggerProps = ComponentProps<typeof SelectTrigger>;
@@ -471,7 +484,7 @@ export const CodeBlockSelectItem = ({
 );
 
 export type CodeBlockCopyButtonProps = ComponentProps<typeof Button> & {
-  asChild?: any;
+  asChild?: boolean;
   onCopy?: () => void;
   onError?: (error: Error) => void;
   timeout?: number;
@@ -490,7 +503,7 @@ export const CodeBlockCopyButton = ({
   const { data, value } = useContext(CodeBlockContext);
   const code = data.find((item) => item.language === value)?.code;
 
-  const copyToClipboard = () => {
+  const copyToClipboard = async () => {
     if (
       typeof window === "undefined" ||
       !navigator.clipboard.writeText ||
@@ -499,12 +512,15 @@ export const CodeBlockCopyButton = ({
       return;
     }
 
-    navigator.clipboard.writeText(code).then(() => {
+    try {
+      await navigator.clipboard.writeText(code);
       setIsCopied(true);
       onCopy?.();
 
       setTimeout(() => setIsCopied(false), timeout);
-    }, onError);
+    } catch (error) {
+      onError?.(error as Error);
+    }
   };
 
   if (asChild) {
@@ -619,10 +635,16 @@ export const CodeBlockContent = ({
       return;
     }
 
-    highlight(children as string, language, themes)
-      .then(setHtml)
-      // biome-ignore lint/suspicious/noConsole: "it's fine"
-      .catch(console.error);
+    const render = async () => {
+      try {
+        const result = await highlight(children as string, language, themes);
+        setHtml(result);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    void render();
   }, [children, themes, syntaxHighlighting, language]);
 
   if (!(syntaxHighlighting && html)) {

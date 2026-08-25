@@ -23,11 +23,7 @@ export const SoundSwitcher = () => {
   }
 
   return (
-    <div
-      className="inline-flex items-center rounded-full bg-background inset-ring-1 inset-ring-border"
-      role="radiogroup"
-      aria-label="Sound"
-    >
+    <div className="inline-flex items-center rounded-full bg-background inset-ring-1 inset-ring-border">
       {SOUND_OPTIONS.map((option) => {
         const Icon = option.icon;
         const isActive = value === option.value;
@@ -40,8 +36,7 @@ export const SoundSwitcher = () => {
             className={cn(
               "relative flex size-8 items-center justify-center rounded-full text-muted-foreground transition-[color,box-shadow] hover:text-foreground data-[active=true]:text-foreground data-[active=true]:inset-ring-1 data-[active=true]:inset-ring-border [&_svg]:size-4"
             )}
-            role="radio"
-            aria-checked={isActive}
+            aria-pressed={isActive}
             aria-label={`Switch sound ${option.label}`}
             onClick={() => {
               if (option.value === value) {

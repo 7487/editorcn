@@ -1,27 +1,26 @@
+import type { Editor } from "@tiptap/react";
 import { useState } from "react";
-import { type Editor } from "@tiptap/react";
-import { CODE_BLOCK_LANGUAGES, useEditorState } from "./utils";
+
 import { useRichTextEditorContext } from "../rte-context";
+import { CODE_BLOCK_LANGUAGES, useEditorState } from "./utils";
 
-function FallbackIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="rte-editor-icon"
-    >
-      <polyline points="16 18 22 12 16 6" />
-      <polyline points="8 6 2 12 8 18" />
-    </svg>
-  );
-}
+const FallbackIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="rte-editor-icon"
+  >
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
+  </svg>
+);
 
-export function LanguageSelector({ editor }: { editor: Editor }) {
+export const LanguageSelector = ({ editor }: { editor: Editor }) => {
   const [open, setOpen] = useState(false);
   const { icons } = useRichTextEditorContext();
   const { currentLanguage } = useEditorState(editor, (ed) => ({
@@ -40,7 +39,7 @@ export function LanguageSelector({ editor }: { editor: Editor }) {
       >
         <span className="rte-bubble-btn-icon">{langIcon}</span>
         <span className="rte-bubble-btn-text">{currentLanguage}</span>
-        <span className="rte-bubble-btn-icon" style={{ width: 12, height: 12 }}>
+        <span className="rte-bubble-btn-icon" style={{ height: 12, width: 12 }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -56,10 +55,17 @@ export function LanguageSelector({ editor }: { editor: Editor }) {
       </button>
       {open && (
         <>
-          <div className="rte-bubble-overlay" onClick={() => setOpen(false)} />
           <div
-            className="rte-bubble-dropdown rte-bubble-dropdown--language"
-          >
+            className="rte-bubble-overlay"
+            role="presentation"
+            onClick={() => setOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                setOpen(false);
+              }
+            }}
+          />
+          <div className="rte-bubble-dropdown rte-bubble-dropdown--language">
             {CODE_BLOCK_LANGUAGES.map((lang) => (
               <button
                 key={lang}
@@ -101,4 +107,4 @@ export function LanguageSelector({ editor }: { editor: Editor }) {
       )}
     </div>
   );
-}
+};

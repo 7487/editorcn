@@ -5,10 +5,36 @@ import { Callout } from "@/components/callout";
 import { CodeBlockCommand } from "@/components/code-block-command";
 import { CodeTabs } from "@/components/code-tabs";
 import { CopyButton } from "@/components/copy-button";
-import { EditorVariantsDemo, EditorClassNameDemo, EditorThemingDemo, EditorStickyToolbarDemo, EditorCustomControlsDemo, EditorReadOnlyDemo, EditorCustomLabelsDemo, EditorCustomIconsDemo } from '@/components/customization/editor-demos';
-import { BlockEditorVariantsDemo, BlockEditorThemingDemo, BlockEditorClassNameDemo, BlockEditorCustomSlashCommandsDemo } from '@/components/customization/block-editor-demos';
-import { HeadingSelectCard, InsertLinkDialogCard, HighlightColorPopoverCard, EmojiMenuCard, InsertTableDialogCard, FontFamilySelectCard, FontSizeCard } from '@/components/customization/templates-demos';
-import { DocumentEditorCard, EnhancedEditorCard, FullEditorCard } from '@/components/customization/template-demos';
+import {
+  BlockEditorVariantsDemo,
+  BlockEditorThemingDemo,
+  BlockEditorClassNameDemo,
+  BlockEditorCustomSlashCommandsDemo,
+} from "@/components/customization/block-editor-demos";
+import {
+  EditorVariantsDemo,
+  EditorClassNameDemo,
+  EditorThemingDemo,
+  EditorStickyToolbarDemo,
+  EditorCustomControlsDemo,
+  EditorReadOnlyDemo,
+  EditorCustomLabelsDemo,
+  EditorCustomIconsDemo,
+} from "@/components/customization/editor-demos";
+import {
+  DocumentEditorCard,
+  EnhancedEditorCard,
+  FullEditorCard,
+} from "@/components/customization/template-demos";
+import {
+  HeadingSelectCard,
+  InsertLinkDialogCard,
+  HighlightColorPopoverCard,
+  EmojiMenuCard,
+  InsertTableDialogCard,
+  FontFamilySelectCard,
+  FontSizeCard,
+} from "@/components/customization/templates-demos";
 import {
   Accordion,
   AccordionContent,
@@ -30,32 +56,25 @@ export const mdxComponents = {
   AlertDescription,
   AlertTitle,
   AspectRatio,
+  BlockEditorClassNameDemo,
+  BlockEditorCustomSlashCommandsDemo,
+  BlockEditorThemingDemo,
+  BlockEditorVariantsDemo,
   Button,
   Callout,
   CodeBlockCommand,
   CodeTabs,
-  EditorVariantsDemo,
-  EditorClassNameDemo,
-  EditorThemingDemo,
-  EditorStickyToolbarDemo,
-  EditorCustomControlsDemo,
-  EditorReadOnlyDemo,
-  EditorCustomLabelsDemo,
-  EditorCustomIconsDemo,
-  BlockEditorVariantsDemo,
-  BlockEditorThemingDemo,
-  BlockEditorClassNameDemo,
-  BlockEditorCustomSlashCommandsDemo,
-  HeadingSelectCard,
-  InsertLinkDialogCard,
-  HighlightColorPopoverCard,
-  EmojiMenuCard,
-  InsertTableDialogCard,
-  FontFamilySelectCard,
-  FontSizeCard,
   DocumentEditorCard,
+  EditorClassNameDemo,
+  EditorCustomControlsDemo,
+  EditorCustomIconsDemo,
+  EditorCustomLabelsDemo,
+  EditorReadOnlyDemo,
+  EditorStickyToolbarDemo,
+  EditorThemingDemo,
+  EditorVariantsDemo,
+  EmojiMenuCard,
   EnhancedEditorCard,
-  FullEditorCard,
   FeatureCard: ({
     icon: Icon,
     title,
@@ -83,6 +102,11 @@ export const mdxComponents = {
       </CardContent>
     </Card>
   ),
+  FontFamilySelectCard,
+  FontSizeCard,
+  FullEditorCard,
+  HeadingSelectCard,
+  HighlightColorPopoverCard,
   Image: ({
     src,
     className,
@@ -100,6 +124,8 @@ export const mdxComponents = {
       {...props}
     />
   ),
+  InsertLinkDialogCard,
+  InsertTableDialogCard,
   Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
     <Link
       className={cn("font-medium underline underline-offset-4", className)}

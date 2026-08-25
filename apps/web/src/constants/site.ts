@@ -16,14 +16,28 @@ const baseUrl = getBaseUrl();
 
 export const SITE = {
   AUTHOR: {
-    NAME: "Abdullah",
+    NAME: "Abdullah Mukadam",
+    TWITTER: "@abd_mukadam",
   },
   DESCRIPTION: {
-    LONG: "Rich text editor components for the shadcn/ui ecosystem.",
-    SHORT: "Rich text editors for shadcn/ui",
+    LONG: "A collection of beautifully designed, accessible, and customizable rich text editor components. Built on Tiptap. Works with shadcn/ui.",
+    SHORT: "Beautiful rich text editors, made simple",
   },
+  KEYWORDS: [
+    "rich text editor",
+    "tiptap",
+    "react",
+    "next.js",
+    "shadcn",
+    "components",
+    "editor",
+    "rich text",
+    "text editor",
+    "text editor components",
+    "text editor components for shadcn",
+  ] as const,
   NAME: "editorcn",
-  OG_IMAGE: `${baseUrl}/og`,
+  OG_IMAGE: `${baseUrl}/og.png`,
   REGISTRY: "@editorcn",
   URL: baseUrl,
 };

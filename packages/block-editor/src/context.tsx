@@ -1,17 +1,21 @@
-import { createContext, useContext, type ReactNode } from 'react';
-import type { Editor } from '@tiptap/core';
-import type { BlockEditorContextValue, BlockEditorLabels } from './types';
-import type { BlockEditorIcons } from './icons';
-import { DEFAULT_ICONS } from './icons';
-import { DEFAULT_BLOCK_EDITOR_LABELS } from './labels';
+import type { Editor } from "@tiptap/core";
+import { createContext, useContext } from "react";
+import type { ReactNode } from "react";
+
+import type { BlockEditorIcons } from "./icons";
+import { DEFAULT_ICONS } from "./icons";
+import { DEFAULT_BLOCK_EDITOR_LABELS } from "./labels";
+import type { BlockEditorContextValue, BlockEditorLabels } from "./types";
 
 const BlockEditorContext = createContext<BlockEditorContextValue | null>(null);
 
-export function useBlockEditorContext() {
+export const useBlockEditorContext = () => {
   const ctx = useContext(BlockEditorContext);
-  if (!ctx) throw new Error('BlockEditor components must be used within <BlockEditor>');
+  if (!ctx) {
+    throw new Error("BlockEditor components must be used within <BlockEditor>");
+  }
   return ctx;
-}
+};
 
 export interface BlockEditorProviderProps {
   editor: Editor | null;
@@ -20,12 +24,12 @@ export interface BlockEditorProviderProps {
   icons?: Partial<BlockEditorIcons>;
 }
 
-export function BlockEditorProvider({
+export const BlockEditorProvider = ({
   editor,
   children,
   labels,
   icons,
-}: BlockEditorProviderProps) {
+}: BlockEditorProviderProps) => {
   const mergedLabels = { ...DEFAULT_BLOCK_EDITOR_LABELS, ...labels };
   const mergedIcons = { ...DEFAULT_ICONS, ...icons };
 
@@ -33,11 +37,11 @@ export function BlockEditorProvider({
     <BlockEditorContext.Provider
       value={{
         editor,
-        labels: mergedLabels,
         icons: mergedIcons,
+        labels: mergedLabels,
       }}
     >
       {children}
     </BlockEditorContext.Provider>
   );
-}
+};

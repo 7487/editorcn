@@ -5,7 +5,7 @@
 <h1 align="center">editorcn</h1>
 
 <p align="center">
-  Free & open-source, ready-to-use, customizable terminal UI components for React.<br/>
+  Free & open-source, ready-to-use, customizable rich text editor components for React.<br/>
   Zero config. One command setup. Built on <a href="https://tiptap.dev/">Tiptap</a>. Install via <a href="https://ui.shadcn.com/">shadcn CLI</a>.
 </p>
 

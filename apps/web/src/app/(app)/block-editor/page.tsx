@@ -1,17 +1,6 @@
 "use client";
 
 import "@editorcn/block-editor/style.css";
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Placeholder from "@tiptap/extension-placeholder";
-import TextAlign from "@tiptap/extension-text-align";
-import Underline from "@tiptap/extension-underline";
-import Image from "@tiptap/extension-image";
-import Table from "@tiptap/extension-table";
-import TableRow from "@tiptap/extension-table-row";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import { showImagePrompt } from "@/components/image-prompt";
 import {
   BlockEditor,
   SlashCommand,
@@ -19,32 +8,68 @@ import {
   getSlashCommandSuggestion,
 } from "@editorcn/block-editor";
 import type { SlashCommandSuggestionItem } from "@editorcn/block-editor";
+import type { ChainedCommands, Editor, Range } from "@tiptap/core";
+import { Image } from "@tiptap/extension-image";
+import { Placeholder } from "@tiptap/extension-placeholder";
+import { Table } from "@tiptap/extension-table";
+import { TableCell } from "@tiptap/extension-table-cell";
+import { TableHeader } from "@tiptap/extension-table-header";
+import { TableRow } from "@tiptap/extension-table-row";
+import { TextAlign } from "@tiptap/extension-text-align";
+import { Underline } from "@tiptap/extension-underline";
+import { useEditor } from "@tiptap/react";
+import { StarterKit } from "@tiptap/starter-kit";
+
+import { showImagePrompt } from "@/components/image-prompt";
+
+type ExtendedChain = ChainedCommands & {
+  deleteRange: (range: Range) => ExtendedChain;
+  setImage: (options: {
+    src: string;
+    alt?: string;
+    title?: string;
+  }) => ExtendedChain;
+  insertTable: (options: {
+    cols: number;
+    rows: number;
+    withHeaderRow?: boolean;
+  }) => ExtendedChain;
+};
+
+const getExtendedChain = (editor: Editor) =>
+  editor.chain().focus() as unknown as ExtendedChain;
 
 const myItems: SlashCommandSuggestionItem[] = [
   ...defaultSlashCommandItems,
   {
-    id: "image",
-    title: "Image",
-    description: "Insert an image.",
-    keywords: ["image", "img", "picture", "photo"],
     command: ({ editor, range }) => {
-      showImagePrompt().then((url) => {
-        if (!url) return;
-        (editor.chain().focus() as any).deleteRange(range).setImage({ src: url }).run();
-      });
+      void (async () => {
+        const url = await showImagePrompt();
+        if (!url) {
+          return;
+        }
+        getExtendedChain(editor)
+          .deleteRange(range)
+          .setImage({ src: url })
+          .run();
+      })();
     },
+    description: "Insert an image.",
+    id: "image",
+    keywords: ["image", "img", "picture", "photo"],
+    title: "Image",
   },
   {
-    id: "table",
-    title: "Table",
-    description: "Insert a table.",
-    keywords: ["table", "grid"],
     command: ({ editor, range }) => {
-      (editor.chain().focus() as any)
+      getExtendedChain(editor)
         .deleteRange(range)
-        .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+        .insertTable({ cols: 3, rows: 3, withHeaderRow: true })
         .run();
     },
+    description: "Insert a table.",
+    id: "table",
+    keywords: ["table", "grid"],
+    title: "Table",
   },
 ];
 
@@ -63,10 +88,9 @@ const content = `
 <pre><code class="language-javascript">console.log("Hello from code block!");</code></pre>
 `;
 
-export default function BlockEditorPage() {
+export const BlockEditorPage = () => {
   const editor = useEditor({
-    immediatelyRender: false,
-    shouldRerenderOnTransaction: true,
+    content,
     extensions: [
       StarterKit.configure({
         heading: { levels: [1, 2, 3] },
@@ -87,7 +111,8 @@ export default function BlockEditorPage() {
         suggestion: getSlashCommandSuggestion(myItems),
       }),
     ],
-    content,
+    immediatelyRender: false,
+    shouldRerenderOnTransaction: true,
   });
 
   return (
@@ -98,4 +123,5 @@ export default function BlockEditorPage() {
       </div>
     </div>
   );
-}
+};
+export default BlockEditorPage;

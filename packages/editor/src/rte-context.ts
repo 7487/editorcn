@@ -1,8 +1,9 @@
-import { Editor } from "@tiptap/react";
-import type { RichTextEditorLabels } from "./labels";
-import type { RichTextEditorIcons } from "./icons";
-import type { RichTextEditorVariant } from "./types";
+import type { Editor } from "@tiptap/react";
 import { createContext, useContext } from "react";
+
+import type { RichTextEditorIcons } from "./icons";
+import type { RichTextEditorLabels } from "./labels";
+import type { RichTextEditorVariant } from "./types";
 
 interface RichTextEditorContextValue {
   editor: Editor | null;
@@ -12,9 +13,10 @@ interface RichTextEditorContextValue {
   editable: boolean;
 }
 
-export const RichTextEditorContext = createContext<RichTextEditorContextValue | null>(null);
+export const RichTextEditorContext =
+  createContext<RichTextEditorContextValue | null>(null);
 
-export function useRichTextEditorContext(): RichTextEditorContextValue {
+export const useRichTextEditorContext = (): RichTextEditorContextValue => {
   const context = useContext(RichTextEditorContext);
   if (!context) {
     throw new Error(
@@ -22,5 +24,4 @@ export function useRichTextEditorContext(): RichTextEditorContextValue {
     );
   }
   return context;
-}
-
+};

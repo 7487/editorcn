@@ -1,10 +1,9 @@
+import { docs } from "collections/server";
 import type { InferPageType } from "fumadocs-core/source";
 import { loader } from "fumadocs-core/source";
 
-import { docs } from 'collections/server';
-
 export const source = loader({
-  baseUrl: '/docs',
+  baseUrl: "/docs",
   source: docs.toFumadocsSource(),
 });
 

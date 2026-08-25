@@ -431,7 +431,10 @@ button.rte-control-button:active {
   min-width: 1.625rem;
   height: 1.625rem;
   background-color: var(--background);
-  transition: background-color 150ms ease-out, color 150ms ease-out, box-shadow 150ms ease-out;
+  transition:
+    background-color 150ms ease-out,
+    color 150ms ease-out,
+    box-shadow 150ms ease-out;
 }
 .rte-root[data-variant="default"]
   .rte-controls-group
@@ -485,7 +488,9 @@ button.rte-control-button:active {
   min-width: 2rem;
   height: 2rem;
   background-color: transparent;
-  transition: background-color 150ms ease-out, color 150ms ease-out;
+  transition:
+    background-color 150ms ease-out,
+    color 150ms ease-out;
 }
 .rte-root[data-variant="subtle"] .rte-controls-group > button:hover {
   background-color: var(--accent);
@@ -523,7 +528,9 @@ button.rte-control-button:active {
   min-width: 1.5rem;
   height: 1.5rem;
   background-color: transparent;
-  transition: background-color 150ms ease-out, color 150ms ease-out;
+  transition:
+    background-color 150ms ease-out,
+    color 150ms ease-out;
 }
 .rte-root[data-variant="compact"] .rte-controls-group > button:hover {
   background-color: var(--accent);
@@ -798,8 +805,14 @@ button.rte-control-button:active {
 
 /* ── Bubble Menu ── */
 @keyframes rte-bubble-pop-in {
-  0% { opacity: 0; transform: scale(0.96) translateY(4px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .rte-bubble-menu {
@@ -841,7 +854,10 @@ button.rte-control-button:active {
   cursor: pointer;
   font-size: 0.8125rem;
   white-space: nowrap;
-  transition: background-color 150ms ease-out, color 150ms ease-out, transform 100ms ease-out;
+  transition:
+    background-color 150ms ease-out,
+    color 150ms ease-out,
+    transform 100ms ease-out;
 }
 
 .rte-bubble-btn:hover {
@@ -910,7 +926,7 @@ button.rte-control-button:active {
 .rte-bubble-dropdown-item {
   display: flex;
   align-items: center;
-  justify-content:flex-start;
+  justify-content: flex-start;
   gap: 0.5rem;
   width: 100%;
   padding: 0.375rem 0.5rem;
@@ -921,7 +937,9 @@ button.rte-control-button:active {
   border-radius: calc(var(--radius) - 4px);
   cursor: pointer;
   text-align: left;
-  transition: background-color 100ms ease-out, color 100ms ease-out;
+  transition:
+    background-color 100ms ease-out,
+    color 100ms ease-out;
 }
 
 .rte-bubble-dropdown-item:hover {

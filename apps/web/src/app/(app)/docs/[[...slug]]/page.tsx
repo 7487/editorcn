@@ -1,8 +1,8 @@
 import { findNeighbour } from "fumadocs-core/page-tree";
 import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
 
 import { DocsCopyPage } from "@/components/docs-copy-page";
 import { DocsKeyboardShortcuts } from "@/components/docs-keyboard-shortcuts";

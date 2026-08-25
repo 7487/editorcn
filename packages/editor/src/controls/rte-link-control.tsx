@@ -1,17 +1,14 @@
-import * as React from "react";
-import { useState } from "react";
 import { useEditorState } from "@tiptap/react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../ui/popover";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Toggle } from "../ui/toggle";
-import { useRichTextEditorContext } from "../rte-context";
+import * as React from "react";
+import { useCallback, useState } from "react";
 
-export function LinkControl() {
+import { useRichTextEditorContext } from "../rte-context";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Toggle } from "../ui/toggle";
+
+export const LinkControl = () => {
   const { editor, labels, icons } = useRichTextEditorContext();
   const [url, setUrl] = useState("");
   const [open, setOpen] = useState(false);
@@ -24,18 +21,23 @@ export function LinkControl() {
         : false,
   });
 
-  const handleOpen = (isOpen: boolean) => {
-    if (isOpen) {
-      const linkData = editor?.getAttributes("link");
-      setUrl(linkData?.href || "");
-    } else {
-      setUrl("");
-    }
-    setOpen(isOpen);
-  };
+  const handleOpen = useCallback(
+    (isOpen: boolean) => {
+      if (isOpen) {
+        const linkData = editor?.getAttributes("link");
+        setUrl(linkData?.href || "");
+      } else {
+        setUrl("");
+      }
+      setOpen(isOpen);
+    },
+    [editor]
+  );
 
   const handleSave = () => {
-    if (!editor || editor.isDestroyed) return;
+    if (!editor || editor.isDestroyed) {
+      return;
+    }
     if (url === "") {
       editor.chain().focus().extendMarkRange("link").unsetLink().run();
     } else {
@@ -50,7 +52,9 @@ export function LinkControl() {
     setUrl("");
   };
 
-  const handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void = (e) => {
+  const handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void = (
+    e
+  ) => {
     if (e.key === "Enter") {
       e.preventDefault();
       handleSave();
@@ -61,22 +65,23 @@ export function LinkControl() {
     const handler = () => handleOpen(true);
     window.addEventListener("edit-link", handler);
     return () => window.removeEventListener("edit-link", handler);
-  }, [editor]);
+  }, [handleOpen]);
 
   return (
     <Popover open={open} onOpenChange={handleOpen}>
       <PopoverTrigger
+        render={
+          <Toggle
+            size="sm"
+            pressed={active ?? false}
+            aria-label={labels.linkControlLabel}
+            title={labels.linkControlLabel}
+            className="p-0"
+          />
+        }
         onMouseDown={(e: React.MouseEvent) => e.preventDefault()}
       >
-        <Toggle
-          size="sm"
-          pressed={active ?? false}
-          aria-label={labels.linkControlLabel}
-          title={labels.linkControlLabel}
-          className="p-0"
-        >
-          {icons.linkControlIcon}
-        </Toggle>
+        {icons.linkControlIcon}
       </PopoverTrigger>
       <PopoverContent className="w-72 p-3">
         <div className="rte-link-editor">
@@ -101,4 +106,4 @@ export function LinkControl() {
       </PopoverContent>
     </Popover>
   );
-}
+};

@@ -1,13 +1,19 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+
 import { NextResponse } from "next/server";
 
-export async function GET(
+export const GET = async (
   _request: Request,
   { params }: { params: Promise<{ slug: string[] }> }
-) {
+) => {
   const { slug } = await params;
-  const filePath = join(process.cwd(), "content", "docs", `${slug.join("/").replace(/^docs\//, "")}.mdx`);
+  const filePath = join(
+    process.cwd(),
+    "content",
+    "docs",
+    `${slug.join("/").replace(/^docs\//, "")}.mdx`
+  );
   try {
     const content = await readFile(filePath, "utf-8");
     return new NextResponse(content, {
@@ -16,4 +22,4 @@ export async function GET(
   } catch {
     return new NextResponse("Not found", { status: 404 });
   }
-}
+};

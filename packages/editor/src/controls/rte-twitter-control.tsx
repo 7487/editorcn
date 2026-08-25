@@ -1,15 +1,13 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
 import { Node, nodeInputRule } from "@tiptap/core";
-import {
-  ReactNodeViewRenderer,
-  useEditorState,
-  type NodeViewProps,
-} from "@tiptap/react";
-import { useRichTextEditorContext } from "../rte-context";
+import { ReactNodeViewRenderer, useEditorState } from "@tiptap/react";
+import type { NodeViewProps } from "@tiptap/react";
+import { useState, useCallback, useEffect, useRef } from "react";
+
 import { RichTextEditorControl } from "../controls/rte-control";
-import { Input } from "../ui/input";
+import { ResizableNodeView } from "../extensions/resizable-node-view";
+import { useRichTextEditorContext } from "../rte-context";
 import {
   Dialog,
   DialogClose,
@@ -20,63 +18,119 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { ResizableNodeView } from "../extensions/resizable-node-view";
+import { Input } from "../ui/input";
 
 const WIDGET_SCRIPT_URL = "https://platform.twitter.com/widgets.js";
 
-function TwitterNodeView(props: NodeViewProps) {
+declare global {
+  interface Window {
+    twttr?: {
+      widgets?: {
+        createTweet: (
+          tweetId: string,
+          container: HTMLElement
+        ) => Promise<unknown>;
+      };
+    };
+  }
+}
+
+declare module "@tiptap/core" {
+  interface Commands<ReturnType> {
+    twitter: {
+      setTwitterEmbed: (tweetId: string) => ReturnType;
+    };
+  }
+}
+
+const TwitterNodeView = (props: NodeViewProps) => {
   const { node } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
-  const tweetId = node.attrs.tweetId;
+  const { tweetId } = node.attrs;
   const w = node.attrs.width as number | undefined;
   const h = node.attrs.height as number | undefined;
 
-  const renderTweet = useCallback(() => {
-    if (!containerRef.current || !tweetId) return;
+  const renderTweet = useCallback(async () => {
+    if (!containerRef.current || !tweetId) {
+      return;
+    }
     containerRef.current.innerHTML = "";
     setLoading(true);
-    const twttr = (window as any).twttr;
-    if (twttr?.widgets) {
-      twttr.widgets.createTweet(tweetId, containerRef.current).then(() => {
+    const { twttr } = window;
+    if (twttr?.widgets && containerRef.current) {
+      try {
+        await twttr.widgets.createTweet(tweetId, containerRef.current);
         setLoading(false);
-      });
+      } catch {
+        /* ignored */
+      }
     }
   }, [tweetId]);
 
   useEffect(() => {
-    if (!containerRef.current || !tweetId) return;
-
-    if ((window as any).twttr?.widgets) {
-      renderTweet();
-    } else {
-      const script = document.createElement("script");
-      script.src = WIDGET_SCRIPT_URL;
-      script.async = true;
-      script.onload = renderTweet;
-      document.body.appendChild(script);
+    if (!containerRef.current || !tweetId) {
+      return;
     }
+
+    const load = async () => {
+      if (window.twttr?.widgets && containerRef.current) {
+        containerRef.current.innerHTML = "";
+        setLoading(true);
+        try {
+          await window.twttr.widgets.createTweet(tweetId, containerRef.current);
+          setLoading(false);
+        } catch {
+          /* ignored */
+        }
+      } else {
+        const script = document.createElement("script");
+        script.src = WIDGET_SCRIPT_URL;
+        script.async = true;
+        script.addEventListener("load", () => {
+          void renderTweet();
+        });
+        document.body.append(script);
+      }
+    };
+
+    void load();
   }, [tweetId, w, h, renderTweet]);
 
   return (
-    <ResizableNodeView {...props} lockAspect={false} minWidth={300} maxWidth={1200}>
+    <ResizableNodeView
+      {...props}
+      lockAspect={false}
+      minWidth={300}
+      maxWidth={1200}
+    >
       {loading && <div className="rte-embed-loading">Loading tweet...</div>}
       <div ref={containerRef} />
     </ResizableNodeView>
   );
-}
+};
 
 export const TwitterEmbed = Node.create({
-  name: "twitter",
-  group: "block",
-  atom: true,
-  draggable: true,
-
   addAttributes() {
     return {
+      align: {
+        default: "center",
+        parseHTML: (el: HTMLElement) => el.dataset.align || "center",
+        renderHTML: (attrs: Record<string, unknown>) => ({
+          "data-align": attrs.align,
+        }),
+      },
+      height: {
+        default: 400,
+        parseHTML: (el: HTMLElement) =>
+          el.dataset.height ? Number(el.dataset.height) : 400,
+        renderHTML: (attrs: Record<string, unknown>) => ({
+          "data-height": attrs.height,
+        }),
+      },
       tweetId: {
         default: null,
-        parseHTML: (el: HTMLElement) => el.getAttribute("data-tweet-id"),
+        parseHTML: (el: HTMLElement) => el.dataset.tweetId,
         renderHTML: (attrs: Record<string, unknown>) => ({
           "data-tweet-id": attrs.tweetId,
         }),
@@ -84,82 +138,69 @@ export const TwitterEmbed = Node.create({
       width: {
         default: 550,
         parseHTML: (el: HTMLElement) =>
-          el.getAttribute("data-width") ? Number(el.getAttribute("data-width")) : 550,
+          el.dataset.width ? Number(el.dataset.width) : 550,
         renderHTML: (attrs: Record<string, unknown>) => ({
           "data-width": attrs.width,
         }),
       },
-      height: {
-        default: 400,
-        parseHTML: (el: HTMLElement) =>
-          el.getAttribute("data-height") ? Number(el.getAttribute("data-height")) : 400,
-        renderHTML: (attrs: Record<string, unknown>) => ({
-          "data-height": attrs.height,
-        }),
-      },
-      align: {
-        default: "center",
-        parseHTML: (el: HTMLElement) =>
-          el.getAttribute("data-align") || "center",
-        renderHTML: (attrs: Record<string, unknown>) => ({
-          "data-align": attrs.align,
-        }),
-      },
     };
   },
-
-  parseHTML() {
-    return [{ tag: 'div[data-type="twitter"]' }];
-  },
-
-  renderHTML({ node }: { node: { attrs: Record<string, unknown> } }) {
-    return [
-      "div",
-      {
-        "data-type": "twitter",
-        "data-tweet-id": node.attrs.tweetId,
-        "data-width": node.attrs.width,
-        "data-height": node.attrs.height,
-        "data-align": node.attrs.align,
-      },
-    ];
-  },
-
-  addNodeView() {
-    return ReactNodeViewRenderer(TwitterNodeView) as any;
-  },
-
   addCommands() {
     return {
       setTwitterEmbed:
         (tweetId: string) =>
-        ({ commands }: { commands: any }) => {
-          return commands.insertContent({
-            type: "twitter",
+        ({ commands }) =>
+          commands.insertContent({
             attrs: { tweetId },
-          });
-        },
-    } as any;
+            type: "twitter",
+          }),
+    };
   },
-
   addInputRules() {
     return [
       nodeInputRule({
         find: /https?:\/\/(?:www\.)?(?:twitter\.com|x\.com)\/\w+\/status\/(\d+)/,
-        type: this.type,
         getAttributes: (match: RegExpMatchArray) => ({ tweetId: match[1] }),
+        type: this.type,
       }),
+    ];
+  },
+  addNodeView() {
+    return ReactNodeViewRenderer(TwitterNodeView);
+  },
+  atom: true,
+  draggable: true,
+  group: "block",
+  name: "twitter",
+  parseHTML() {
+    return [{ tag: 'div[data-type="twitter"]' }];
+  },
+  renderHTML({ node }: { node: { attrs: Record<string, unknown> } }) {
+    return [
+      "div",
+      {
+        "data-align": node.attrs.align,
+        "data-height": node.attrs.height,
+        "data-tweet-id": node.attrs.tweetId,
+        "data-type": "twitter",
+        "data-width": node.attrs.width,
+      },
     ];
   },
 });
 
-function extractTweetId(input: string): string | null {
+const extractTweetId = (input: string): string | null => {
   const clean = input.trim();
-  const match = clean.match(/(?:twitter\.com|x\.com)\/(?:\w+\/status\/|i\/web\/status\/)(\d+)/);
-  return match ? (match[1] ?? null) : /^\d+$/.test(clean) ? clean : null;
-}
+  const match = clean.match(
+    /(?:twitter\.com|x\.com)\/(?:\w+\/status\/|i\/web\/status\/)(\d+)/
+  );
+  if (match) {
+    return match[1] ?? null;
+  }
+  return /^\d+$/.test(clean) ? clean : null;
+};
 
-export function TwitterEmbedControl({ className }: { className?: string }) {
+export const TwitterEmbedControl = ({ className }: { className?: string }) => {
   const { editor } = useRichTextEditorContext();
   const [open, setOpen] = useState(false);
   const [url, setUrl] = useState("");
@@ -178,7 +219,7 @@ export function TwitterEmbedControl({ className }: { className?: string }) {
     if (url && editor) {
       const tweetId = extractTweetId(url);
       if (tweetId) {
-        (editor as any).chain().focus().setTwitterEmbed(tweetId).run();
+        editor.chain().focus().setTwitterEmbed(tweetId).run();
         setUrl("");
       }
     }
@@ -234,4 +275,4 @@ export function TwitterEmbedControl({ className }: { className?: string }) {
       </DialogContent>
     </Dialog>
   );
-}
+};

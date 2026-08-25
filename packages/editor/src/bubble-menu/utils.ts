@@ -1,19 +1,24 @@
+import type { Editor } from "@tiptap/react";
 import { useState, useEffect, useRef } from "react";
-import { type Editor } from "@tiptap/react";
 
-export function useEditorState<T>(
+export const useEditorState = <T>(
   editor: Editor | null,
-  selector: (e: Editor) => T,
-): T {
+  selector: (e: Editor) => T
+): T => {
   const selectorRef = useRef(selector);
-  selectorRef.current = selector;
 
   const [state, setState] = useState<T>(() =>
-    editor ? selector(editor) : (undefined as unknown as T),
+    editor ? selector(editor) : (undefined as unknown as T)
   );
 
   useEffect(() => {
-    if (!editor) return;
+    selectorRef.current = selector;
+  });
+
+  useEffect(() => {
+    if (!editor) {
+      return;
+    }
     const update = () => setState(selectorRef.current(editor));
     update();
     editor.on("selectionUpdate", update);
@@ -25,7 +30,7 @@ export function useEditorState<T>(
   }, [editor]);
 
   return state;
-}
+};
 
 export const CODE_BLOCK_LANGUAGES = [
   "javascript",

@@ -1,9 +1,13 @@
 "use client";
 
+import { useRichTextEditorContext } from "@editorcn/editor";
 import { useEditorState } from "@tiptap/react";
 import { Type } from "lucide-react";
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
-import { useRichTextEditorContext } from "@editorcn/editor";
+
+import {
+  NativeSelect,
+  NativeSelectOption,
+} from "@/components/ui/native-select";
 
 const FONTS = [
   { label: "Default", value: "" },
@@ -15,14 +19,16 @@ const FONTS = [
   { label: "Verdana", value: "Verdana" },
 ];
 
-export function FontFamilySelect() {
+export const FontFamilySelect = () => {
   const { editor } = useRichTextEditorContext();
   const value =
     useEditorState({
       editor: editor ?? null,
       selector: (ctx) => {
         const e = ctx.editor;
-        if (!e || e.isDestroyed) return "";
+        if (!e || e.isDestroyed) {
+          return "";
+        }
         return e.getAttributes("textStyle").fontFamily ?? "";
       },
     }) ?? "";
@@ -51,4 +57,4 @@ export function FontFamilySelect() {
       </NativeSelect>
     </div>
   );
-}
+};

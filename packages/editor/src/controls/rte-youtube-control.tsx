@@ -1,14 +1,13 @@
 "use client";
 
-import { useState, useCallback } from "react";
 import { Node, nodeInputRule } from "@tiptap/core";
-import {
-  ReactNodeViewRenderer,
-  useEditorState,
-  type NodeViewProps,
-} from "@tiptap/react";
-import { useRichTextEditorContext } from "../rte-context";
+import { ReactNodeViewRenderer, useEditorState } from "@tiptap/react";
+import type { NodeViewProps } from "@tiptap/react";
+import { useState, useCallback } from "react";
+
 import { RichTextEditorControl } from "../controls/rte-control";
+import { ResizableNodeView } from "../extensions/resizable-node-view";
+import { useRichTextEditorContext } from "../rte-context";
 import {
   Dialog,
   DialogTrigger,
@@ -20,9 +19,16 @@ import {
   DialogClose,
 } from "../ui/dialog";
 import { Input } from "../ui/input";
-import { ResizableNodeView } from "../extensions/resizable-node-view";
 
-function getYouTubeId(url: string): string | null {
+declare module "@tiptap/core" {
+  interface Commands<ReturnType> {
+    youtube: {
+      setYouTubeEmbed: (src: string) => ReturnType;
+    };
+  }
+}
+
+const getYouTubeId = (url: string): string | null => {
   const clean = url.trim();
   const patterns = [
     /(?:youtube\.com\/watch\?v=)([a-zA-Z0-9_-]{11})/,
@@ -35,17 +41,25 @@ function getYouTubeId(url: string): string | null {
   ];
   for (const pattern of patterns) {
     const match = clean.match(pattern);
-    if (match) return match[1] ?? null;
+    if (match) {
+      return match[1] ?? null;
+    }
   }
   return /^[a-zA-Z0-9_-]{11}$/.test(clean) ? clean : null;
-}
+};
 
-function YouTubeNodeView(props: NodeViewProps) {
+const YouTubeNodeView = (props: NodeViewProps) => {
   const { node } = props;
   const videoId = getYouTubeId(node.attrs.src) || node.attrs.src;
 
   return (
-    <ResizableNodeView {...props} lockAspect aspectRatio={16 / 9} minWidth={320} maxWidth={1200}>
+    <ResizableNodeView
+      {...props}
+      lockAspect
+      aspectRatio={16 / 9}
+      minWidth={320}
+      maxWidth={1200}
+    >
       <iframe
         src={`https://www.youtube-nocookie.com/embed/${videoId}`}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -55,19 +69,29 @@ function YouTubeNodeView(props: NodeViewProps) {
       />
     </ResizableNodeView>
   );
-}
+};
 
 export const YouTubeEmbed = Node.create({
-  name: "youtube",
-  group: "block",
-  atom: true,
-  draggable: true,
-
   addAttributes() {
     return {
+      align: {
+        default: "center",
+        parseHTML: (el: HTMLElement) => el.dataset.align || "center",
+        renderHTML: (attrs: Record<string, unknown>) => ({
+          "data-align": attrs.align,
+        }),
+      },
+      height: {
+        default: 315,
+        parseHTML: (el: HTMLElement) =>
+          el.dataset.height ? Number(el.dataset.height) : 315,
+        renderHTML: (attrs: Record<string, unknown>) => ({
+          "data-height": attrs.height,
+        }),
+      },
       src: {
         default: null,
-        parseHTML: (el: HTMLElement) => el.getAttribute("data-src"),
+        parseHTML: (el: HTMLElement) => el.dataset.src,
         renderHTML: (attrs: Record<string, unknown>) => ({
           "data-src": attrs.src,
         }),
@@ -75,76 +99,58 @@ export const YouTubeEmbed = Node.create({
       width: {
         default: 560,
         parseHTML: (el: HTMLElement) =>
-          el.getAttribute("data-width") ? Number(el.getAttribute("data-width")) : 560,
+          el.dataset.width ? Number(el.dataset.width) : 560,
         renderHTML: (attrs: Record<string, unknown>) => ({
           "data-width": attrs.width,
         }),
       },
-      height: {
-        default: 315,
-        parseHTML: (el: HTMLElement) =>
-          el.getAttribute("data-height") ? Number(el.getAttribute("data-height")) : 315,
-        renderHTML: (attrs: Record<string, unknown>) => ({
-          "data-height": attrs.height,
-        }),
-      },
-      align: {
-        default: "center",
-        parseHTML: (el: HTMLElement) =>
-          el.getAttribute("data-align") || "center",
-        renderHTML: (attrs: Record<string, unknown>) => ({
-          "data-align": attrs.align,
-        }),
-      },
     };
   },
-
-  parseHTML() {
-    return [{ tag: 'div[data-type="youtube"]' }];
-  },
-
-  renderHTML({ node }: { node: { attrs: Record<string, unknown> } }) {
-    return [
-      "div",
-      {
-        "data-type": "youtube",
-        "data-src": node.attrs.src,
-        "data-width": node.attrs.width,
-        "data-height": node.attrs.height,
-        "data-align": node.attrs.align,
-      },
-    ];
-  },
-
-  addNodeView() {
-    return ReactNodeViewRenderer(YouTubeNodeView) as any;
-  },
-
   addCommands() {
     return {
       setYouTubeEmbed:
         (src: string) =>
-        ({ commands }: { commands: any }) => {
-          return commands.insertContent({
-            type: "youtube",
+        ({ commands }) =>
+          commands.insertContent({
             attrs: { src },
-          });
-        },
-    } as any;
+            type: "youtube",
+          }),
+    };
   },
-
   addInputRules() {
     return [
       nodeInputRule({
         find: /https?:\/\/(?:www\.|m\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|shorts\/|live\/|v\/)?([a-zA-Z0-9_-]{11})/,
-        type: this.type,
         getAttributes: (match: RegExpMatchArray) => ({ src: match[0] }),
+        type: this.type,
       }),
+    ];
+  },
+  addNodeView() {
+    return ReactNodeViewRenderer(YouTubeNodeView);
+  },
+  atom: true,
+  draggable: true,
+  group: "block",
+  name: "youtube",
+  parseHTML() {
+    return [{ tag: 'div[data-type="youtube"]' }];
+  },
+  renderHTML({ node }: { node: { attrs: Record<string, unknown> } }) {
+    return [
+      "div",
+      {
+        "data-align": node.attrs.align,
+        "data-height": node.attrs.height,
+        "data-src": node.attrs.src,
+        "data-type": "youtube",
+        "data-width": node.attrs.width,
+      },
     ];
   },
 });
 
-export function YouTubeEmbedControl({ className }: { className?: string }) {
+export const YouTubeEmbedControl = ({ className }: { className?: string }) => {
   const { editor } = useRichTextEditorContext();
   const [open, setOpen] = useState(false);
   const [url, setUrl] = useState("");
@@ -161,7 +167,7 @@ export function YouTubeEmbedControl({ className }: { className?: string }) {
 
   const handleInsert = useCallback(() => {
     if (url && editor) {
-      (editor as any).chain().focus().setYouTubeEmbed(url).run();
+      editor.chain().focus().setYouTubeEmbed(url).run();
       setUrl("");
     }
   }, [url, editor]);
@@ -181,9 +187,9 @@ export function YouTubeEmbedControl({ className }: { className?: string }) {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="rte-editor-icon"
             >
               <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6a3 3 0 0 0-2.1 2.1C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8z" />
@@ -223,4 +229,4 @@ export function YouTubeEmbedControl({ className }: { className?: string }) {
       </DialogContent>
     </Dialog>
   );
-}
+};

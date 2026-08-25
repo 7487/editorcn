@@ -61,7 +61,7 @@ function InsertLinkDialog() {
       const { from, to } = editor?.state.selection ?? {};
       if (from !== undefined && to !== undefined && from !== to) {
         const text = editor?.state.doc.textBetween(from, to) ?? "";
-        if (/^https?:\/\//.test(text)) setUrl(text);
+        if (/^https?:///.test(text)) setUrl(text);
       }
       requestAnimationFrame(() => inputRef.current?.focus());
     }

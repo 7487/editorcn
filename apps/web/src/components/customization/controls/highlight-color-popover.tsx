@@ -1,13 +1,14 @@
 "use client";
 
+import { useRichTextEditorContext } from "@editorcn/editor";
 import { Highlighter } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import { useRichTextEditorContext } from "@editorcn/editor";
 
 const COLORS = [
   { name: "Yellow", value: "#fef08a" },
@@ -18,7 +19,7 @@ const COLORS = [
   { name: "Purple", value: "#e9d5ff" },
 ];
 
-export function HighlightColorPopover() {
+export const HighlightColorPopover = () => {
   const { editor } = useRichTextEditorContext();
   return (
     <Popover>
@@ -36,6 +37,7 @@ export function HighlightColorPopover() {
               className="h-6 w-6 rounded-sm border border-border hover:scale-110 transition-transform"
               style={{ backgroundColor: c.value }}
               title={c.name}
+              aria-label={c.name}
               onClick={() =>
                 editor
                   ?.chain()
@@ -57,4 +59,4 @@ export function HighlightColorPopover() {
       </PopoverContent>
     </Popover>
   );
-}
+};

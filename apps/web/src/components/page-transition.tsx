@@ -1,14 +1,21 @@
 "use client";
 
-import { type ReactNode, useCallback, useLayoutEffect, useRef } from "react";
+import { ViewTransition } from "react";
 
-export const PageTransition = ({ children }: { children: ReactNode }) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    if (!document.startViewTransition) return;
-    document.startViewTransition(() => {});
-  }, []);
-
-  return <div ref={ref}>{children}</div>;
-};
+export const PageTransition = ({ children }: { children: React.ReactNode }) => (
+  <ViewTransition
+    enter={{
+      default: "none",
+      "nav-back": "slide-from-left",
+      "nav-forward": "slide-from-right",
+    }}
+    exit={{
+      default: "none",
+      "nav-back": "slide-to-right",
+      "nav-forward": "slide-to-left",
+    }}
+    default="none"
+  >
+    {children}
+  </ViewTransition>
+);

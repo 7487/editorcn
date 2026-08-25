@@ -111,7 +111,9 @@ export const DocsSidebar = ({
 
           const pages = isComponentsFolder(item)
             ? getAllPagesFromFolder(item).filter(
-                (page) => !page.url.endsWith("/editor") && !page.url.endsWith("/block-editor")
+                (page) =>
+                  !page.url.endsWith("/editor") &&
+                  !page.url.endsWith("/block-editor")
               )
             : getPagesFromFolder(item);
 

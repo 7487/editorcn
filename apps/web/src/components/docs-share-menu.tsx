@@ -1,7 +1,7 @@
 "use client";
 
 import { EllipsisIcon, LinkIcon } from "lucide-react";
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
