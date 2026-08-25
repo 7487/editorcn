@@ -37,11 +37,13 @@ function Svg({
   className,
   width = 24,
   height = 24,
+  strokeWidth = 2,
 }: {
   children: React.ReactNode;
   className?: string;
   width?: number;
   height?: number;
+  strokeWidth?: number;
 }) {
   return (
     <svg
@@ -51,7 +53,7 @@ function Svg({
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={2}
+      strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
@@ -322,7 +324,7 @@ export const DEFAULT_ICONS: BlockEditorIcons = {
     </Svg>
   ),
   searchIcon: (
-    <Svg width={14} height={14}>
+    <Svg width={14} height={14} strokeWidth={1.5}>
       <circle cx="11" cy="11" r="8" />
       <line x1="21" y1="21" x2="16.65" y2="16.65" />
     </Svg>

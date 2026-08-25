@@ -37,9 +37,11 @@ export interface RichTextEditorIcons {
 function Svg({
   children,
   className,
+  strokeWidth = 2,
 }: {
   children: React.ReactNode;
   className?: string;
+  strokeWidth?: number;
 }) {
   return (
     <svg
@@ -47,7 +49,7 @@ function Svg({
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={2}
+      strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}

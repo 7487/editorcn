@@ -253,7 +253,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="container-wrapper pb-8 lg:pb-12">
+        <section className="container-wrapper md:w-5xl pb-8 lg:pb-12">
           <div className="container space-y-12">
             <EditorSection
               type="editor"
