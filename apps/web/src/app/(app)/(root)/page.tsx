@@ -1,17 +1,9 @@
-import Link from "next/link";
-
 import { CommandBox } from "@/components/command-box";
 import { EditorSection } from "@/components/editor-section";
 import { HomeCtas } from "@/components/home-ctas";
-import {
-  IconsPreview,
-  ThemePreview,
-  ControlsPreview,
-  ThemeCard,
-} from "@/components/landing-previews";
+import { HomeCustomize } from "@/components/home-customize";
 import { PageHero } from "@/components/page-hero";
 import { PageTransition } from "@/components/page-transition";
-import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
 import { BreadcrumbJsonLd } from "@/seo/json-ld";
 
@@ -254,7 +246,7 @@ export const HomePage = () => (
         </div>
       </section>
 
-      <section className="container-wrapper md:w-5xl pb-8 lg:pb-12">
+      <section className="container-wrapper">
         <div className="container space-y-12">
           <EditorSection
             type="editor"
@@ -277,62 +269,8 @@ export const HomePage = () => (
         </div>
       </section>
 
-      <section className="border-t border-border">
-        <div className="container-wrapper">
-          <div className="container space-y-12 py-24">
-            <div>
-              <h2 className="mb-2 text-lg font-medium tracking-tight text-foreground">
-                Customize everything
-              </h2>
-              <p className="text-base text-muted-foreground">
-                Icons, colors, controls — every part of the editor is yours to
-                shape.
-              </p>
-            </div>
-            <div className="grid gap-6 lg:grid-cols-3">
-              <div className="space-y-3 rounded-lg p-4">
-                <span className="inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background">
-                  Icons
-                </span>
-                <p className="text-sm text-muted-foreground">
-                  Swap any icon via the icons prop.
-                </p>
-                <div className="-mx-4 -mb-4">
-                  <IconsPreview />
-                </div>
-              </div>
-              <ThemeCard className="space-y-3 rounded-lg p-4">
-                <span className="inline-flex h-5 items-center rounded-full bg-primary px-2 text-[11px] font-medium tracking-wider text-primary-foreground">
-                  Themes
-                </span>
-                <p className="text-sm text-muted-foreground">
-                  Override CSS variables for a completely different look.
-                </p>
-                <div className="-mx-4 -mb-4">
-                  <ThemePreview />
-                </div>
-              </ThemeCard>
-              <div className="space-y-3 rounded-lg p-4">
-                <span className="inline-flex h-5 items-center rounded-full bg-foreground px-2 text-[11px] font-medium tracking-wider text-background">
-                  Controls
-                </span>
-                <p className="text-sm text-muted-foreground">
-                  Add custom toolbar buttons using RichTextEditor.Control.
-                </p>
-                <div className="-mx-4 -mb-4">
-                  <ControlsPreview />
-                </div>
-              </div>
-            </div>
-            <div>
-              <Link href="/docs/customization">
-                <Button variant="link" className="h-auto px-0">
-                  Explore customization &rarr;
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
+      <section className="container-wrapper">
+        <HomeCustomize className="container py-16 md:py-20 lg:py-24" />
       </section>
     </PageTransition>
   </>

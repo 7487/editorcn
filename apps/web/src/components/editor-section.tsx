@@ -5,10 +5,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { codeToHtml } from "shiki";
 
+import { ArrowRightIcon } from "@/components/animated-icons/arrow-right";
+import type { ArrowRightIconHandle } from "@/components/animated-icons/arrow-right";
 import { BlockEditorPreview } from "@/components/block-editor-preview";
 import { EditorPreview } from "@/components/editor-preview";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useIconAnimation } from "@/hooks/use-icon-animation";
 
 import { ComponentCode } from "./component-code";
 import { Badge } from "./ui/badge";
@@ -145,7 +148,8 @@ const CodeViewer = ({ files }: { files: CodeFile[] }) => {
 
 export const EditorSection = (props: EditorSectionProps) => {
   const [variant, setVariant] = useState<RichTextEditorVariant>("default");
-
+  const { iconRef, onMouseEnter, onMouseLeave } =
+    useIconAnimation<ArrowRightIconHandle>();
   return (
     <div>
       <div className="mb-2 flex items-center gap-2">
@@ -158,43 +162,50 @@ export const EditorSection = (props: EditorSectionProps) => {
         {props.description}
       </p>
 
-      {props.type === "editor" && (
-        <div className="mb-3 flex gap-1">
-          {VARIANTS.map((v) => (
-            <Button
-              key={v.value}
-              variant={variant === v.value ? "default" : "outline"}
-              size="sm"
-              onClick={() => setVariant(v.value)}
-            >
-              {v.label}
-            </Button>
-          ))}
-        </div>
-      )}
-
       <Tabs defaultValue="preview">
-        <TabsList>
-          <TabsTrigger value="preview">Preview</TabsTrigger>
-          <TabsTrigger value="code">Code</TabsTrigger>
-        </TabsList>
-        <TabsContent value="preview" className="pt-4">
+        <div className="flex items-center justify-between">
+          <TabsList>
+            <TabsTrigger value="preview">Preview</TabsTrigger>
+            <TabsTrigger value="code">Code</TabsTrigger>
+          </TabsList>
+          {props.type === "editor" && (
+            <div className="flex gap-2">
+              {VARIANTS.map((v) => (
+                <Button
+                  key={v.value}
+                  variant={variant === v.value ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setVariant(v.value)}
+                >
+                  {v.label}
+                </Button>
+              ))}
+            </div>
+          )}
+        </div>
+        <TabsContent value="preview">
           {props.type === "editor" ? (
             <EditorPreview variant={variant} />
           ) : (
             <BlockEditorPreview />
           )}
         </TabsContent>
-        <TabsContent value="code" className="pt-4">
+        <TabsContent value="code">
           <CodeViewer files={props.codeData} />
         </TabsContent>
       </Tabs>
-      <div className="mt-3">
-        <Link href={props.docsHref}>
-          <Button variant="link" className="h-auto px-0">
-            View docs &rarr;
-          </Button>
-        </Link>
+      <div className="mt-2">
+        <Button
+          variant="link"
+          className="h-auto px-0"
+          asChild
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
+          <Link href={props.docsHref}>
+            View docs <ArrowRightIcon ref={iconRef} />
+          </Link>
+        </Button>
       </div>
     </div>
   );
