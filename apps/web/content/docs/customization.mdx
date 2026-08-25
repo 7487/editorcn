@@ -356,3 +356,28 @@ const myItems: SlashCommandSuggestionItem[] = [
   },
 ];
 ```
+
+### Language Icons
+
+Override per-language icons in the code block language selector via the `languageIcons` key:
+
+```tsx
+import {
+  BlockEditor,
+  DEFAULT_ICONS,
+  DEFAULT_LANGUAGE_ICONS,
+} from "@/components/block-editor";
+
+<BlockEditor
+  editor={editor}
+  icons={{
+    ...DEFAULT_ICONS,
+    languageIcons: {
+      ...DEFAULT_LANGUAGE_ICONS,
+      jsx: <YourJsxIcon />,
+    },
+  }}
+/>
+```
+
+Built-in languages: js, jsx, ts, tsx, python, rust, go, java, html, css, json, yaml, bash, c, cpp, csharp, ruby, php, swift, kotlin, sql.

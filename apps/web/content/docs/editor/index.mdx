@@ -32,7 +32,7 @@ After installation, import the editor styles at the root of your application:
 // Your shadcn globals
 import "@/app/globals.css";
 
-// Editor styles
+// Editor component styles
 import "@/components/editor/style.css";
 ```
 
@@ -40,7 +40,7 @@ import "@/components/editor/style.css";
 
   If you installed via npm, import from `@editorcn/editor` instead of `@/components/editor` throughout this page:
   ```tsx
-import { RichTextEditor, Link } from "@/components/editor";
+  import { RichTextEditor, Link } from "@/components/editor";
   import "@editorcn/editor/style.css";
   ```
 
@@ -762,6 +762,38 @@ import { RichTextEditor, DEFAULT_ICONS } from "@/components/editor";
 </RichTextEditor>;
 ```
 
+### Language icons
+
+The code block language selector shows per-language icons (e.g. a JavaScript icon for JS, a Python icon for Python). These are provided via the `languageIcons` key in the icons object:
+
+```tsx
+import {
+  RichTextEditor,
+  DEFAULT_ICONS,
+  DEFAULT_LANGUAGE_ICONS,
+} from "@/components/editor";
+
+<RichTextEditor
+  editor={editor}
+  icons={{
+    ...DEFAULT_ICONS,
+    languageIcons: {
+      ...DEFAULT_LANGUAGE_ICONS,
+      jsx: <YourJsxIcon />, // override a specific language icon
+    },
+  }}
+>
+  {/* ... */}
+</RichTextEditor>;
+```
+
+Exported constants:
+
+| Export                   | Description                                         |
+| ------------------------ | --------------------------------------------------- |
+| `DEFAULT_ICONS`          | Default toolbar icons                               |
+| `DEFAULT_LANGUAGE_ICONS` | Per-language icons for 21 languages (js, ts, python, rust, go, html, css, etc.) |
+
 ### All available icons
 
 ```tsx
@@ -794,6 +826,7 @@ interface RichTextEditorIcons {
   highlightControlIcon: React.ReactNode;
   subscriptControlIcon: React.ReactNode;
   superscriptControlIcon: React.ReactNode;
+  languageIcons: Record<string, React.ReactNode>; // per-language icons for code block language selector
 }
 ```
 
@@ -832,29 +865,26 @@ function CustomBoldButton() {
 
 ## Code highlight
 
-To use syntax highlighting in code blocks, install `@tiptap/extension-code-block-lowlight` and `lowlight`:
+`@editorcn/editor` ships with `@tiptap/extension-code-block-lowlight` and `lowlight` pre-configured. Code blocks automatically get syntax highlighting with 21 built-in languages — no extra setup needed.
+
+If you want to add additional languages, install the highlight.js language modules and register them:
 
 <CodeBlockCommand
-  __npm__={"npm install lowlight @tiptap/extension-code-block-lowlight"}
-  __yarn__={"yarn add lowlight @tiptap/extension-code-block-lowlight"}
-  __pnpm__={"pnpm add lowlight @tiptap/extension-code-block-lowlight"}
-  __bun__={"bun add lowlight @tiptap/extension-code-block-lowlight"}
+  __npm__={"npm install lowlight"}
+  __yarn__={"yarn add lowlight"}
+  __pnpm__={"pnpm add lowlight"}
+  __bun__={"bun add lowlight"}
 />
 
 ```tsx
-import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
-import { createLowlight } from "lowlight";
-import ts from "highlight.js/lib/languages/typescript";
+import { createLowlight, common } from "lowlight";
+import python from "highlight.js/lib/languages/python";
 
-const lowlight = createLowlight();
-lowlight.register({ ts });
+const lowlight = createLowlight(common);
+lowlight.register({ python });
 
-const editor = useEditor({
-  extensions: [
-    StarterKit.configure({ codeBlock: false }),
-    CodeBlockLowlight.configure({ lowlight }),
-  ],
-});
+// Pass to CodeBlock extension in your editor config
+CodeBlock.configure({ lowlight });
 ```
 
 The editor styles include syntax highlighting tokens for `.hljs-*` classes that use your theme's CSS variables (`--primary`, `--muted-foreground`, `--destructive`, `--accent-foreground`).

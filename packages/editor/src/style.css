@@ -5,8 +5,8 @@
   border: 1px solid var(--border);
   background-color: var(--background);
   transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    border-color 150ms ease-out,
+    box-shadow 150ms ease-out;
 }
 
 .rte-editor-icon {
@@ -23,13 +23,13 @@ button.rte-control-button {
   width: 2rem;
   padding: 0;
   transition:
-    background-color 0.15s ease,
-    color 0.15s ease,
-    transform 0.1s ease;
+    background-color 150ms ease-out,
+    color 150ms ease-out,
+    transform 100ms ease-out;
 }
 
 button.rte-control-button:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
 }
 
 /* ── Editor Content ── */
@@ -50,7 +50,7 @@ button.rte-control-button:active {
   float: left;
   height: 0;
   color: var(--muted-foreground);
-  transition: opacity 0.2s ease;
+  transition: opacity 150ms ease-out;
 }
 
 .rte-content .ProseMirror p {
@@ -165,14 +165,11 @@ button.rte-control-button:active {
   font-style: italic;
 }
 
-.rte-content .ProseMirror code {
-  background-color: var(--muted);
-  color: var(--foreground);
-  border-radius: calc(var(--radius) - 2px);
-  padding: 0.125rem 0.375rem;
-  font-family: var(--font-mono);
-  font-size: 0.875em;
-  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+.rte-content .ProseMirror pre code {
+  color: inherit;
+  background: none;
+  padding: 0;
+  font-weight: 400;
 }
 
 .rte-content .ProseMirror pre {
@@ -209,8 +206,8 @@ button.rte-control-button:active {
   text-underline-offset: 4px;
   cursor: pointer;
   transition:
-    color 0.2s ease,
-    text-decoration-color 0.2s ease;
+    color 150ms ease-out,
+    text-decoration-color 150ms ease-out;
   text-decoration-color: color-mix(in srgb, var(--primary) 40%, transparent);
 }
 
@@ -226,7 +223,7 @@ button.rte-control-button:active {
 /* Syntax Highlighting */
 .rte-content .ProseMirror pre .hljs-comment,
 .rte-content .ProseMirror pre .hljs-quote {
-  color: var(--muted-foreground);
+  color: #6c7086;
 }
 
 .rte-content .ProseMirror pre .hljs-variable,
@@ -238,7 +235,7 @@ button.rte-control-button:active {
 .rte-content .ProseMirror pre .hljs-name,
 .rte-content .ProseMirror pre .hljs-selector-id,
 .rte-content .ProseMirror pre .hljs-selector-class {
-  color: var(--primary);
+  color: #89b4fa;
 }
 
 .rte-content .ProseMirror pre .hljs-number,
@@ -248,23 +245,57 @@ button.rte-control-button:active {
 .rte-content .ProseMirror pre .hljs-literal,
 .rte-content .ProseMirror pre .hljs-type,
 .rte-content .ProseMirror pre .hljs-params {
-  color: var(--destructive);
+  color: #fab387;
 }
 
 .rte-content .ProseMirror pre .hljs-string,
 .rte-content .ProseMirror pre .hljs-symbol,
 .rte-content .ProseMirror pre .hljs-bullet {
-  color: var(--primary);
+  color: #a6e3a1;
 }
 
 .rte-content .ProseMirror pre .hljs-title,
 .rte-content .ProseMirror pre .hljs-section {
-  color: var(--accent-foreground);
+  color: #f9e2af;
 }
 
 .rte-content .ProseMirror pre .hljs-keyword,
 .rte-content .ProseMirror pre .hljs-selector-tag {
-  color: var(--accent-foreground);
+  color: #cba6f7;
+}
+
+/* Object/JSON keys & HTML/XML attribute names (previously missing) */
+.rte-content .ProseMirror pre .hljs-attr {
+  color: #89b4fa;
+}
+
+/* JSDoc-style tags, e.g. @param, @returns */
+.rte-content .ProseMirror pre .hljs-doctag {
+  color: #f38ba8;
+  font-weight: 600;
+}
+
+/* Operators & punctuation (finer-grained grammars) */
+.rte-content .ProseMirror pre .hljs-operator,
+.rte-content .ProseMirror pre .hljs-punctuation {
+  color: #9399b2;
+}
+
+/* CSS selector attributes/pseudo-classes, e.g. [type="text"], :hover */
+.rte-content .ProseMirror pre .hljs-selector-attr,
+.rte-content .ProseMirror pre .hljs-selector-pseudo {
+  color: #94e2d5;
+}
+
+/* Language-level variables, e.g. this, super */
+.rte-content .ProseMirror pre .hljs-variable.language_ {
+  color: #cba6f7;
+  font-style: italic;
+}
+
+/* Template literal substitutions, e.g. ${...} */
+.rte-content .ProseMirror pre .hljs-subst {
+  color: #cdd6f4;
 }
 
 .rte-content .ProseMirror pre .hljs-emphasis {
@@ -272,6 +303,25 @@ button.rte-control-button:active {
 }
 .rte-content .ProseMirror pre .hljs-strong {
   font-weight: 700;
+}
+
+.rte-content .ProseMirror pre .hljs-addition {
+  color: #a6e3a1;
+  background-color: color-mix(in srgb, #a6e3a1 10%, transparent);
+}
+
+.rte-content .ProseMirror pre .hljs-deletion {
+  color: #f38ba8;
+  background-color: color-mix(in srgb, #f38ba8 10%, transparent);
+}
+
+.rte-content .ProseMirror code {
+  font-size: 0.875em;
+  font-weight: 500;
+  background: color-mix(in srgb, var(--muted) 70%, transparent);
+  padding: 0.125rem 0.375rem;
+  border-radius: calc(var(--radius) - 4px);
+  transition: background-color 150ms ease-out;
 }
 
 /* ── Toolbars and Footer ── */
@@ -289,15 +339,25 @@ button.rte-control-button:active {
   border-bottom: 1px solid var(--border);
   padding: 0.5rem 0.75rem;
   transition:
-    box-shadow 0.2s ease,
-    background-color 0.2s ease;
+    box-shadow 150ms ease-out,
+    background-color 150ms ease-out;
 }
 
 .rte-toolbar[data-sticky] {
   position: sticky;
   background-color: color-mix(in srgb, var(--background) 85%, transparent);
   backdrop-filter: blur(8px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0px 0px 0px 1px oklch(0 0 0 / 0.04),
+    0px 4px 12px 0px oklch(0 0 0 / 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  .rte-toolbar[data-sticky] {
+    box-shadow:
+      0px 0px 0px 1px oklch(1 0 0 / 0.06),
+      0px 4px 12px 0px oklch(0 0 0 / 0.3);
+  }
 }
 
 .rte-footer {
@@ -321,7 +381,17 @@ button.rte-control-button:active {
   bottom: 0;
   background-color: color-mix(in srgb, var(--background) 85%, transparent);
   backdrop-filter: blur(8px);
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0px 0px 0px 1px oklch(0 0 0 / 0.04),
+    0px -4px 12px 0px oklch(0 0 0 / 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  .rte-footer[data-sticky] {
+    box-shadow:
+      0px 0px 0px 1px oklch(1 0 0 / 0.06),
+      0px -4px 12px 0px oklch(0 0 0 / 0.3);
+  }
 }
 
 .rte-footer-word-count {
@@ -361,7 +431,7 @@ button.rte-control-button:active {
   min-width: 1.625rem;
   height: 1.625rem;
   background-color: var(--background);
-  transition: all 0.15s ease;
+  transition: background-color 150ms ease-out, color 150ms ease-out, box-shadow 150ms ease-out;
 }
 .rte-root[data-variant="default"]
   .rte-controls-group
@@ -396,11 +466,6 @@ button.rte-control-button:active {
     0 1px 3px rgba(0, 0, 0, 0.06),
     0 1px 2px rgba(0, 0, 0, 0.04);
 }
-.rte-root[data-variant="subtle"]:focus-within {
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.08),
-    0 0 0 1px var(--primary);
-}
 .rte-toolbar--subtle {
   border-bottom: 1px solid var(--border);
   padding: 0.25rem 0.375rem;
@@ -420,7 +485,7 @@ button.rte-control-button:active {
   min-width: 2rem;
   height: 2rem;
   background-color: transparent;
-  transition: all 0.15s ease;
+  transition: background-color 150ms ease-out, color 150ms ease-out;
 }
 .rte-root[data-variant="subtle"] .rte-controls-group > button:hover {
   background-color: var(--accent);
@@ -458,7 +523,7 @@ button.rte-control-button:active {
   min-width: 1.5rem;
   height: 1.5rem;
   background-color: transparent;
-  transition: all 0.15s ease;
+  transition: background-color 150ms ease-out, color 150ms ease-out;
 }
 .rte-root[data-variant="compact"] .rte-controls-group > button:hover {
   background-color: var(--accent);
@@ -511,7 +576,7 @@ button.rte-control-button:active {
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
-  transition: opacity 0.2s ease;
+  transition: opacity 150ms ease-out;
 }
 
 .rte-task-list li[data-checked] {
@@ -550,13 +615,13 @@ button.rte-control-button:active {
   position: relative;
   flex-shrink: 0;
   transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.1s ease;
+    background-color 150ms ease-out,
+    border-color 150ms ease-out,
+    transform 100ms ease-out;
 }
 
 .rte-task-list input[type="checkbox"]:active {
-  transform: scale(0.9);
+  transform: scale(0.96);
 }
 
 .rte-task-list input[type="checkbox"]:checked {
@@ -564,7 +629,6 @@ button.rte-control-button:active {
   border-color: var(--primary);
 }
 
-/* Pop animation for the checkmark */
 @keyframes checkmark-in {
   0% {
     transform: scale(0.5) rotate(-15deg);
@@ -591,8 +655,8 @@ button.rte-control-button:active {
 .rte-embed-wrapper {
   margin: 1rem 0;
   transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
+    opacity 150ms ease-out,
+    transform 150ms ease-out;
 }
 
 .rte-embed-wrapper[data-align="left"] {
@@ -619,8 +683,8 @@ button.rte-control-button:active {
   background: var(--muted);
   display: inline-block;
   transition:
-    outline-color 0.2s ease,
-    box-shadow 0.2s ease;
+    outline-color 150ms ease-out,
+    box-shadow 150ms ease-out;
 }
 
 .rte-embed-iframe {
@@ -654,8 +718,8 @@ button.rte-control-button:active {
   z-index: 10;
   opacity: 0;
   transition:
-    opacity 0.2s ease,
-    background-color 0.2s ease;
+    opacity 150ms ease-out,
+    background-color 150ms ease-out;
 }
 
 .rte-embed-wrapper[data-selected] .rte-resize-handle {
@@ -679,8 +743,8 @@ button.rte-control-button:active {
   background: var(--primary);
   border-radius: 1px;
   transition:
-    width 0.2s ease,
-    inset 0.2s ease;
+    width 150ms ease-out,
+    inset 150ms ease-out;
 }
 
 .rte-resize-handle--right:hover::after {
@@ -707,8 +771,8 @@ button.rte-control-button:active {
   border-radius: 1px;
   bottom: 1px;
   transition:
-    height 0.2s ease,
-    bottom 0.2s ease;
+    height 150ms ease-out,
+    bottom 150ms ease-out;
 }
 
 .rte-resize-handle--bottom:hover::after {
@@ -725,9 +789,173 @@ button.rte-control-button:active {
   background: var(--primary);
   border: 2px solid var(--background);
   border-radius: 2px;
-  transition: transform 0.15s ease;
+  transition: transform 150ms ease-out;
 }
 
 .rte-resize-handle--corner:hover {
   transform: scale(1.15);
+}
+
+/* ── Bubble Menu ── */
+@keyframes rte-bubble-pop-in {
+  0% { opacity: 0; transform: scale(0.96) translateY(4px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.rte-bubble-menu {
+  display: flex;
+  align-items: center;
+  height: 2.25rem;
+  background: var(--popover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  padding: 0 0.25rem;
+  animation: rte-bubble-pop-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.rte-bubble-group {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.rte-bubble-separator {
+  width: 1px;
+  height: 1.25rem;
+  background: var(--border);
+  margin: 0 0.125rem;
+  flex-shrink: 0;
+}
+
+.rte-bubble-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 1.75rem;
+  padding: 0 0.375rem;
+  border: none;
+  border-radius: calc(var(--radius) - 4px);
+  background: transparent;
+  color: var(--popover-foreground);
+  cursor: pointer;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  transition: background-color 150ms ease-out, color 150ms ease-out, transform 100ms ease-out;
+}
+
+.rte-bubble-btn:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.rte-bubble-btn:active {
+  transform: scale(0.96);
+}
+
+.rte-bubble-btn--active {
+  color: var(--primary);
+  background: var(--accent);
+}
+
+.rte-bubble-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+}
+
+.rte-bubble-btn-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.rte-bubble-btn-text {
+  max-width: 5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rte-bubble-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.rte-bubble-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  min-width: 150px;
+  background: var(--popover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 0.25rem;
+  margin-top: 4px;
+  transform-origin: top left;
+  animation: rte-bubble-pop-in 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.rte-bubble-dropdown--language {
+  min-width: 160px;
+  max-height: 320px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.rte-bubble-dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content:flex-start;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.375rem 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--popover-foreground);
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius) - 4px);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 100ms ease-out, color 100ms ease-out;
+}
+
+.rte-bubble-dropdown-item:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.rte-bubble-dropdown-item--active {
+  color: var(--primary);
+  background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.rte-bubble-dropdown-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--muted-foreground);
+  width: 1rem;
+  height: 1rem;
+}
+
+.rte-bubble-dropdown-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.rte-bubble-dropdown-item--active .rte-bubble-dropdown-icon {
+  color: var(--primary);
+}
+
+/* ── Suppress transitions on theme switch ── */
+.rte-theme-transitioning *,
+.rte-theme-transitioning *::before,
+.rte-theme-transitioning *::after {
+  transition: none !important;
 }

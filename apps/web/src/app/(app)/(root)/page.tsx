@@ -22,7 +22,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Highlight from "@tiptap/extension-highlight";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
-import { RichTextEditor, Link, YouTubeEmbed, TwitterEmbed } from "@editorcn/editor";
+import { RichTextEditor, Link, YouTubeEmbed, TwitterEmbed, CodeBlock } from "@editorcn/editor";
 import "@editorcn/editor/style.css";
 
 export function MyEditor() {
@@ -31,6 +31,7 @@ export function MyEditor() {
     extensions: [
       StarterKit.configure({
         heading: { levels: [1, 2, 3, 4, 5, 6] },
+        codeBlock: false,
       }),
       Link,
       YouTubeEmbed,
@@ -41,6 +42,7 @@ export function MyEditor() {
       Superscript,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       Placeholder.configure({ placeholder: "Start typing..." }),
+      CodeBlock,
     ],
   });
 
@@ -123,6 +125,7 @@ import { showImagePrompt } from "@/components/image-prompt";
 import {
   BlockEditor,
   SlashCommand,
+  CodeBlock,
   defaultSlashCommandItems,
   getSlashCommandSuggestion,
 } from "@editorcn/block-editor";
@@ -180,7 +183,7 @@ export function MyBlockEditor() {
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
-      StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
+      StarterKit.configure({ heading: { levels: [1, 2, 3], codeBlock: false } }),
       Placeholder.configure({ placeholder: "Type / for commands..." }),
       Underline,
       TaskList,
@@ -191,6 +194,7 @@ export function MyBlockEditor() {
       TableHeader,
       Image,
       SlashCommand.configure({ suggestion: getSlashCommandSuggestion(myItems) }),
+      CodeBlock,
       Link.configure({ openOnClick: true, autolink: true, defaultProtocol: "https", protocols: ["http", "https"] }),
     ],
     content: DEMO_CONTENT,
@@ -249,7 +253,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="container-wrapper pb-8 lg:pb-12">
+        <section className="container-wrapper md:w-5xl pb-8 lg:pb-12">
           <div className="container space-y-12">
             <EditorSection
               type="editor"

@@ -13,6 +13,7 @@ import * as controls from './controls/rte-controls';
 import type { RichTextEditorProps } from './types';
 import { YouTubeEmbedControl } from './controls/rte-youtube-control';
 import { TwitterEmbedControl } from './controls/rte-twitter-control';
+import { BubbleMenu } from './bubble-menu/index';
 
 function RichTextEditorRoot({
   editor,
@@ -60,6 +61,7 @@ export const RichTextEditor = Object.assign(RichTextEditorRoot, {
   Footer,
   ControlsGroup,
   Content,
+  BubbleMenu,
   Control: RichTextEditorControl,
   Link: LinkControl,
   YouTubeEmbed: YouTubeEmbedControl,

@@ -1,6 +1,6 @@
 {
   "name": "@editorcn/editor",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -16,7 +16,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup && node -e \"require('fs').copyFileSync('src/style.css','dist/style.css')\"",
     "dev": "tsup --watch",
@@ -26,7 +28,6 @@
   "peerDependencies": {
     "@base-ui/react": "^1.0.0",
     "@tiptap/core": ">=2.11.5 <4",
-    "@tiptap/extension-code-block-lowlight": ">=2.11.5 <4",
     "@tiptap/extension-link": ">=2.11.5 <4",
     "@tiptap/extension-placeholder": ">=2.11.5 <4",
     "@tiptap/extension-underline": ">=2.11.5 <4",
@@ -34,12 +35,16 @@
     "@tiptap/react": ">=2.11.5 <4",
     "@tiptap/starter-kit": ">=2.11.5 <4",
     "class-variance-authority": "^0.7.1",
-    "lowlight": "^3.3.0",
     "react": "^18 || ^19",
-    "react-dom": "^18 || ^19"
+    "react-dom": "^18 || ^19",
+    "@tiptap/extension-code-block-lowlight": ">=2.11.5 <4",
+    "lowlight": ">=3.0.0 <4"
   },
   "peerDependenciesMeta": {
     "@tiptap/extension-code-block-lowlight": {
+      "optional": true
+    },
+    "lowlight": {
       "optional": true
     },
     "@tiptap/extension-placeholder": {

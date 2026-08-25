@@ -1,5 +1,4 @@
 /* Block Editor styles using shadcn CSS variables */
-
 .block-editor {
   position: relative;
   width: 100%;
@@ -14,7 +13,7 @@
   min-height: 200px;
   padding: 0.5rem 0 0.5rem 2rem;
   overflow: auto hidden;
-  transition: opacity 0.2s ease;
+  transition: opacity 150ms ease-out;
 }
 
 .block-editor-content .ProseMirror p.is-editor-empty:first-child::before {
@@ -23,7 +22,7 @@
   float: left;
   height: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease;
+  transition: opacity 150ms ease-out;
 }
 
 .block-editor-content .ProseMirror .is-empty::before {
@@ -32,7 +31,7 @@
   float: left;
   height: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease;
+  transition: opacity 150ms ease-out;
 }
 
 /* Tiptap drag handle (from @tiptap/extension-drag-handle-react) */
@@ -46,7 +45,7 @@
   background: transparent;
   color: var(--muted-foreground);
   cursor: grab;
-  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, transform 0.1s ease;
+  transition: background-color 150ms ease-out, color 150ms ease-out, opacity 150ms ease-out, transform 100ms ease-out;
   opacity: 0;
 }
 
@@ -67,7 +66,6 @@
 }
 
 /* ── Bubble Menu & Dropdowns ── */
-
 @keyframes bubble-pop-in {
   0% { opacity: 0; transform: scale(0.96) translateY(4px); }
   100% { opacity: 1; transform: scale(1) translateY(0); }
@@ -83,7 +81,6 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   padding: 0 0.25rem;
   animation: bubble-pop-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  transition: box-shadow 0.2s ease;
 }
 
 .block-editor-bubble-group {
@@ -105,7 +102,7 @@
   cursor: pointer;
   font-size: 0.8125rem;
   white-space: nowrap;
-  transition: all 0.15s ease;
+  transition: background-color 150ms ease-out, color 150ms ease-out, transform 100ms ease-out;
 }
 
 .block-editor-bubble-btn > svg {
@@ -118,13 +115,35 @@
   color: var(--accent-foreground);
 }
 
+.block-editor-bubble-btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+
 .block-editor-bubble-btn:active {
-  transform: scale(0.94);
+  transform: scale(0.96);
 }
 
 .block-editor-bubble-btn--active {
   color: var(--primary);
-  background: var(--muted);
+  background: var(--accent);
+}
+
+.block-editor-copy-icon {
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.15s ease;
+}
+
+.block-editor-copy-icon > svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.block-editor-copy-icon--copied {
+  color: var(--primary);
+  transform: scale(1.15);
 }
 
 .block-editor-bubble-btn-text {
@@ -167,6 +186,13 @@
   min-width: 130px;
 }
 
+.block-editor-bubble-dropdown--language {
+  min-width: 160px;
+  max-height: 320px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
 .block-editor-bubble-dropdown-item {
   display: flex;
   align-items: center;
@@ -180,7 +206,7 @@
   border-radius: calc(var(--radius) - 4px);
   cursor: pointer;
   text-align: left;
-  transition: all 0.15s ease;
+  transition: background-color 100ms ease-out, color 100ms ease-out, transform 100ms ease-out;
 }
 
 .block-editor-bubble-dropdown-icon {
@@ -283,7 +309,7 @@
   padding-left: 1rem;
   color: var(--muted-foreground);
   margin: 0.5em 0;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: border-color 150ms ease-out, background-color 150ms ease-out;
 }
 
 .block-editor-content .ProseMirror blockquote:hover {
@@ -293,19 +319,14 @@
 
 .block-editor-content .ProseMirror pre {
   background: #1e1e2e;
-  border: 1px solid var(--border);
   border-radius: var(--radius);
+  border: 1px solid var(--border);
   padding: 1rem;
   overflow-x: auto;
   font-size: 0.875rem;
   line-height: 1.5;
   margin: 0.5em 0;
   color: #cdd6f4;
-  transition: border-color 0.2s ease;
-}
-
-.block-editor-content .ProseMirror pre:hover {
-  border-color: color-mix(in srgb, var(--border) 80%, var(--foreground) 20%);
 }
 
 .block-editor-content .ProseMirror pre code {
@@ -315,13 +336,109 @@
   font-weight: 400;
 }
 
+/* ── Syntax Highlighting (lowlight / highlight.js) ── */
+.block-editor-content .ProseMirror pre .hljs-comment,
+.block-editor-content .ProseMirror pre .hljs-quote {
+  color: #6c7086;
+}
+
+.block-editor-content .ProseMirror pre .hljs-variable,
+.block-editor-content .ProseMirror pre .hljs-template-variable,
+.block-editor-content .ProseMirror pre .hljs-attribute,
+.block-editor-content .ProseMirror pre .hljs-tag,
+.block-editor-content .ProseMirror pre .hljs-regexp,
+.block-editor-content .ProseMirror pre .hljs-link,
+.block-editor-content .ProseMirror pre .hljs-name,
+.block-editor-content .ProseMirror pre .hljs-selector-id,
+.block-editor-content .ProseMirror pre .hljs-selector-class {
+  color: #89b4fa;
+}
+
+.block-editor-content .ProseMirror pre .hljs-number,
+.block-editor-content .ProseMirror pre .hljs-meta,
+.block-editor-content .ProseMirror pre .hljs-built_in,
+.block-editor-content .ProseMirror pre .hljs-builtin-name,
+.block-editor-content .ProseMirror pre .hljs-literal,
+.block-editor-content .ProseMirror pre .hljs-type,
+.block-editor-content .ProseMirror pre .hljs-params {
+  color: #fab387;
+}
+
+.block-editor-content .ProseMirror pre .hljs-string,
+.block-editor-content .ProseMirror pre .hljs-symbol,
+.block-editor-content .ProseMirror pre .hljs-bullet {
+  color: #a6e3a1;
+}
+
+.block-editor-content .ProseMirror pre .hljs-title,
+.block-editor-content .ProseMirror pre .hljs-section {
+  color: #f9e2af;
+}
+
+.block-editor-content .ProseMirror pre .hljs-keyword,
+.block-editor-content .ProseMirror pre .hljs-selector-tag {
+  color: #cba6f7;
+}
+
+/* Object/JSON keys & HTML/XML attribute names (previously missing) */
+.block-editor-content .ProseMirror pre .hljs-attr {
+  color: #89b4fa;
+}
+
+/* JSDoc-style tags, e.g. @param, @returns */
+.block-editor-content .ProseMirror pre .hljs-doctag {
+  color: #f38ba8;
+  font-weight: 600;
+}
+
+/* Operators & punctuation (finer-grained grammars) */
+.block-editor-content .ProseMirror pre .hljs-operator,
+.block-editor-content .ProseMirror pre .hljs-punctuation {
+  color: #9399b2;
+}
+
+/* CSS selector attributes/pseudo-classes, e.g. [type="text"], :hover */
+.block-editor-content .ProseMirror pre .hljs-selector-attr,
+.block-editor-content .ProseMirror pre .hljs-selector-pseudo {
+  color: #94e2d5;
+}
+
+/* Language-level variables, e.g. this, super */
+.block-editor-content .ProseMirror pre .hljs-variable.language_ {
+  color: #cba6f7;
+  font-style: italic;
+}
+
+/* Template literal substitutions, e.g. ${...} */
+.block-editor-content .ProseMirror pre .hljs-subst {
+  color: #cdd6f4;
+}
+
+.block-editor-content .ProseMirror pre .hljs-emphasis {
+  font-style: italic;
+}
+
+.block-editor-content .ProseMirror pre .hljs-strong {
+  font-weight: 700;
+}
+
+.block-editor-content .ProseMirror pre .hljs-addition {
+  color: #a6e3a1;
+  background-color: color-mix(in srgb, #a6e3a1 10%, transparent);
+}
+
+.block-editor-content .ProseMirror pre .hljs-deletion {
+  color: #f38ba8;
+  background-color: color-mix(in srgb, #f38ba8 10%, transparent);
+}
+
 .block-editor-content .ProseMirror code {
   font-size: 0.875em;
   font-weight: 500;
   background: color-mix(in srgb, var(--muted) 70%, transparent);
   padding: 0.125rem 0.375rem;
   border-radius: calc(var(--radius) - 4px);
-  transition: background-color 0.2s ease;
+  transition: background-color 150ms ease-out;
 }
 
 .block-editor-content .ProseMirror hr {
@@ -334,7 +451,15 @@
   max-width: 100%;
   height: auto;
   border-radius: var(--radius);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
+  transition: transform 150ms ease-out, box-shadow 150ms ease-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  .block-editor-content .ProseMirror img {
+    outline-color: oklch(1 0 0 / 0.1);
+  }
 }
 
 .block-editor-content .ProseMirror img.ProseMirror-selectednode {
@@ -357,7 +482,7 @@
   min-width: 100px;
   text-align: left;
   vertical-align: top;
-  transition: background-color 0.15s ease;
+  transition: background-color 100ms ease-out;
 }
 
 .block-editor-content .ProseMirror th {
@@ -370,7 +495,7 @@
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-color: color-mix(in srgb, var(--primary) 40%, transparent);
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  transition: color 150ms ease-out, text-decoration-color 150ms ease-out;
 }
 
 .block-editor-content .ProseMirror a:hover {
@@ -391,7 +516,7 @@
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
-  transition: opacity 0.2s ease;
+  transition: opacity 150ms ease-out;
 }
 
 .block-editor-content .ProseMirror ul[data-type="taskList"] li > label {
@@ -401,7 +526,7 @@
 
 .block-editor-content .ProseMirror ul[data-type="taskList"] li > label input[type="checkbox"] {
   cursor: pointer;
-  transition: transform 0.1s ease;
+  transition: transform 100ms ease-out;
 }
 
 .block-editor-content .ProseMirror ul[data-type="taskList"] li > label input[type="checkbox"]:active {
@@ -409,7 +534,7 @@
 }
 
 .block-editor-content .ProseMirror ul[data-type="taskList"] li > div > p {
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  transition: color 150ms ease-out, text-decoration-color 150ms ease-out;
 }
 
 .block-editor-content .ProseMirror ul[data-type="taskList"] li[data-checked="true"] > div > p {
@@ -428,7 +553,7 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   min-width: 260px;
   max-width: 300px;
-  overflow: hidden; /* Important: moved overflow-y to the list */
+  overflow: hidden;
   transform-origin: var(--origin, 0 0);
   animation: block-editor-slide-in 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -494,7 +619,7 @@
   border-radius: calc(var(--radius) - 4px);
   cursor: pointer;
   text-align: left;
-  transition: all 0.1s ease;
+  transition: background-color 100ms ease-out, color 100ms ease-out, transform 100ms ease-out;
 }
 
 .block-editor-slash-menu-item-icon {
@@ -505,7 +630,7 @@
   height: 1rem;
   color: var(--muted-foreground);
   flex-shrink: 0;
-  transition: color 0.1s ease;
+  transition: color 100ms ease-out;
 }
 
 .block-editor-slash-menu-item-icon svg {
@@ -573,7 +698,7 @@
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) - 4px);
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
 }
 
 .block-editor-link-input::placeholder {
@@ -593,11 +718,8 @@
 /* Table wrapper for horizontal scroll */
 .block-editor-content .ProseMirror .tableWrapper {
   overflow-x: auto;
-  /* Smooth scroll behavior for large tables */
   scroll-behavior: smooth; 
 }
-
-/* ── shadcn-style UI components ── */
 
 /* Buttons */
 .block-editor-btn {
@@ -610,11 +732,16 @@
   font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1;
-  transition: background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  transition: background-color 150ms ease-out, color 150ms ease-out, opacity 150ms ease-out, transform 100ms ease-out, box-shadow 150ms ease-out;
   cursor: pointer;
   border: 1px solid transparent;
   outline: none;
   text-decoration: none;
+}
+
+.block-editor-btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 
 .block-editor-btn:active:not(:disabled) {
@@ -700,12 +827,16 @@
   font-family: inherit;
   resize: vertical;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
 }
 .block-editor-textarea::placeholder { color: var(--muted-foreground); }
 .block-editor-textarea:focus {
   border-color: var(--ring);
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--ring) 20%, transparent);
+}
+.block-editor-textarea:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 .block-editor-textarea:disabled {
   cursor: not-allowed;
@@ -722,7 +853,7 @@
   font-size: 0.875rem;
   background: var(--background);
   color: var(--foreground);
-  animation: block-editor-slide-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: block-editor-slide-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .block-editor-alert--danger {
   border-color: color-mix(in srgb, var(--destructive) 50%, transparent);
@@ -734,4 +865,11 @@
 .block-editor-scroll-area {
   overflow: auto;
   scrollbar-width: thin;
+}
+
+/* ── Suppress transitions on theme switch ── */
+.block-editor-theme-transitioning *,
+.block-editor-theme-transitioning *::before,
+.block-editor-theme-transitioning *::after {
+  transition: none !important;
 }
