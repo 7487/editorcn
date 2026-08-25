@@ -7,7 +7,6 @@ import type { ArrowRightIconHandle } from "@/components/animated-icons/arrow-rig
 import type { ComponentIconHandle } from "@/components/animated-icons/component";
 import { ComponentIcon } from "@/components/animated-icons/component";
 import { Button } from "@/components/ui/button";
-import { githubUrl } from "@/constants/links";
 import { ROUTES } from "@/constants/routes";
 import { useIconAnimation } from "@/hooks/use-icon-animation";
 import { cn } from "@/lib/utils";
@@ -45,7 +44,7 @@ const BrowseComponentsButton = () => {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <Link href={githubUrl} transitionTypes={["nav-forward"]}>
+      <Link href={ROUTES.DOCS_EDITOR} transitionTypes={["nav-forward"]}>
         <ComponentIcon className="hidden sm:inline" ref={iconRef} />
         Browse Editor
       </Link>
