@@ -82,7 +82,7 @@ export const DocsSidebar = ({
       <SidebarContent className="mx-auto no-scrollbar w-(--sidebar-menu-width) overflow-x-hidden px-2">
         <SidebarGroup className="pt-6">
           <SidebarGroupLabel className="text-muted-foreground font-medium">
-            Pages
+            Sections
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>

@@ -4,7 +4,7 @@ import type { Root as PageTreeRoot } from "fumadocs-core/page-tree";
 import type { LinkProps } from "next/link";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,6 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ROUTES } from "@/constants/routes";
+import { getTreeGroups } from "@/lib/page-tree";
 import { cn } from "@/lib/utils";
 
 const MobileLink = ({
@@ -45,9 +46,35 @@ const MobileLink = ({
   );
 };
 
+const MobileNavGroup = ({
+  label,
+  pages,
+  setOpen,
+}: {
+  label: React.ReactNode;
+  pages: { url: string; name: React.ReactNode }[];
+  setOpen: (open: boolean) => void;
+}) => {
+  if (pages.length === 0) {
+    return null;
+  }
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="text-muted-foreground text-sm font-medium">{label}</div>
+      <div className="flex flex-col gap-3">
+        {pages.map((page) => (
+          <MobileLink key={page.url} href={page.url} onOpenChange={setOpen}>
+            {page.name}
+          </MobileLink>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export const MobileNav = ({
   items,
-  tree: _tree,
+  tree,
   className,
 }: {
   items: { href: string; label: string }[];
@@ -56,13 +83,20 @@ export const MobileNav = ({
 }) => {
   const [open, setOpen] = useState(false);
 
+  const topLevelPages = useMemo(
+    () => tree.children.filter((item) => item.type === "page"),
+    [tree]
+  );
+
+  const treeGroups = useMemo(() => getTreeGroups(tree), [tree]);
+
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover sounds open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
           className={cn(
-            "extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent",
+            "extend-touch-target h-8 touch-manipulation items-center justify-start !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent",
             className
           )}
         >
@@ -112,6 +146,33 @@ export const MobileNav = ({
               ))}
             </div>
           </div>
+          <div className="flex flex-col gap-4">
+            <div className="text-muted-foreground text-sm font-medium">
+              Sections
+            </div>
+            <div className="flex flex-col gap-3">
+              {topLevelPages.map((page) => (
+                <MobileLink
+                  key={page.url}
+                  href={page.url}
+                  onOpenChange={setOpen}
+                >
+                  {page.name}
+                </MobileLink>
+              ))}
+            </div>
+          </div>
+          {treeGroups.map((group) => (
+            <MobileNavGroup
+              key={group.label}
+              label={group.label}
+              pages={group.pages.map((p) => ({
+                name: p.name,
+                url: p.url,
+              }))}
+              setOpen={setOpen}
+            />
+          ))}
         </div>
       </PopoverContent>
     </Popover>
