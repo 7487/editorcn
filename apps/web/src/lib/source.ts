@@ -7,15 +7,6 @@ export const source = loader({
   source: docs.toFumadocsSource(),
 });
 
-export const getPageImage = (page: InferPageType<typeof source>) => {
-  const segments = [...page.slugs, "image.png"];
-
-  return {
-    segments,
-    url: `/docs/images/${segments.join("/")}`,
-  };
-};
-
 export const getPageMarkdownUrl = (page: InferPageType<typeof source>) => {
   const segments = [...page.slugs, "content.md"];
 

@@ -13,6 +13,7 @@ export const LABS_REGISTRIES = [
   { href: "https://ogimagecn.com", name: "ogimagecn" },
   { href: "https://agentcn.run", name: "agentcn" },
   { href: "https://mcpcn.dev", name: "mcpcn" },
+  { href: "https://pdfcn.dev", name: "pdfcn" },
 ] as const satisfies readonly LabsNavLink[];
 
 export const LABS_TEMPLATES = [

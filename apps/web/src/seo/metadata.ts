@@ -30,8 +30,7 @@ export const createPageMetadata = ({
   const canonical = path.startsWith(ROUTES.HOME)
     ? path
     : `${ROUTES.HOME}${path}`;
-  const resolvedOgImage =
-    ogImage ?? `/og${canonical === ROUTES.HOME ? "" : canonical}`;
+  const resolvedOgImage = ogImage ?? SITE.OG_IMAGE;
   const resolvedTitle = ogTitle ?? title;
 
   return {
