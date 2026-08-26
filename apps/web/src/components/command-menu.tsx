@@ -157,7 +157,7 @@ export const CommandMenu = ({
   }, []);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen} sounds>
       <DialogTrigger asChild>
         <Button
           variant="secondary"

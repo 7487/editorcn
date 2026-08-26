@@ -57,6 +57,7 @@ export const CommandBox = ({ className }: { className?: string }) => {
               <TabsTrigger
                 key={key}
                 className="data-[state=active]:border-input h-7 border border-transparent pt-0.5 data-[state=active]:shadow-none"
+                sound="tabSwitch"
                 value={key}
               >
                 {key}
