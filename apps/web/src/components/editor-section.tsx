@@ -8,13 +8,11 @@ import { codeToHtml } from "shiki";
 import { ArrowRightIcon } from "@/components/animated-icons/arrow-right";
 import type { ArrowRightIconHandle } from "@/components/animated-icons/arrow-right";
 import { BlockEditorPreview } from "@/components/block-editor-preview";
+import { ComponentCode } from "@/components/component-code";
 import { EditorPreview } from "@/components/editor-preview";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useIconAnimation } from "@/hooks/use-icon-animation";
-
-import { ComponentCode } from "./component-code";
-import { Badge } from "./ui/badge";
 
 interface CodeFile {
   language: string;
@@ -150,13 +148,13 @@ export const EditorSection = (props: EditorSectionProps) => {
   const [variant, setVariant] = useState<RichTextEditorVariant>("default");
   const { iconRef, onMouseEnter, onMouseLeave } =
     useIconAnimation<ArrowRightIconHandle>();
+
   return (
     <div>
       <div className="mb-2 flex items-center gap-2">
         <h2 className="text-lg font-medium tracking-tight text-foreground">
           {props.title}
         </h2>
-        <Badge className={`${props.badgeClass}`}>{props.badge}</Badge>
       </div>
       <p className="mb-4 text-base text-muted-foreground">
         {props.description}
