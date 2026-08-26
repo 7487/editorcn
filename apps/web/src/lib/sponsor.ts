@@ -1,7 +1,9 @@
-interface Sponsor {
+export interface Sponsor {
   name: string;
   href: string;
   logo?: string;
+  logoLight?: string;
+  logoDark?: string;
 }
 
 export const tiers = [

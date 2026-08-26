@@ -8,12 +8,48 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { LINK } from "@/constants/links";
 import { ROUTES } from "@/constants/routes";
 import { getStargazers } from "@/lib/github";
+import type { Sponsor } from "@/lib/sponsor";
 import { tiers } from "@/lib/sponsor";
 import { createPageMetadata } from "@/seo/metadata";
 
+const logoClassName =
+  "h-8 w-auto opacity-60 transition-opacity group-hover:opacity-100";
+
+const SponsorLogo = ({ sponsor }: { sponsor: Sponsor }) => {
+  if (sponsor.logoLight || sponsor.logoDark) {
+    return (
+      <>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={sponsor.logoLight ?? sponsor.logoDark}
+          alt={sponsor.name}
+          className={`${logoClassName} dark:hidden`}
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={sponsor.logoDark ?? sponsor.logoLight}
+          alt={sponsor.name}
+          className={`hidden ${logoClassName} dark:block`}
+        />
+      </>
+    );
+  }
+
+  if (sponsor.logo) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img src={sponsor.logo} alt={sponsor.name} className={logoClassName} />
+    );
+  }
+
+  return (
+    <span className="text-sm font-medium text-foreground">{sponsor.name}</span>
+  );
+};
+
 export const metadata: Metadata = createPageMetadata({
   description:
-    "Support framecn — free & open-source video components for React. Sponsor tiers, stargazers, and how to contribute.",
+    "Support editorcn — beautiful rich text editor components built on Tiptap. Sponsor tiers, stargazers, and how to contribute.",
   path: ROUTES.SPONSOR,
   title: "Sponsor",
 });
@@ -29,13 +65,13 @@ const SponsorPage = async () => {
             Support the project
           </h1>
           <p className="text-base text-muted-foreground text-balance">
-            framecn is a collection of beautifully designed, and customizable
-            video components for React. Every component is free and that&apos;s
-            not changing.
+            editorcn is a collection of beautifully designed, accessible, and
+            customizable rich text editor components built on Tiptap. Every
+            component is free and that&apos;s not changing.
           </p>
           <p className="text-sm text-muted-foreground text-balance">
             I&apos;m not going to paywall features or gate components behind a
-            sponsorship tier. But if framecn made your project better, or you
+            sponsorship tier. But if editorcn made your project better, or you
             just like that this exists in the open, sponsoring is a nice way to
             say so. It helps me justify spending real time on it instead of
             treating it like a side-of-desk thing.
@@ -117,18 +153,7 @@ const SponsorPage = async () => {
                         borderColor: tier.colors.slotBorder,
                       }}
                     >
-                      {sponsor.logo ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={sponsor.logo}
-                          alt={sponsor.name}
-                          className="h-8 w-auto opacity-60 transition-opacity group-hover:opacity-100"
-                        />
-                      ) : (
-                        <span className="text-sm font-medium text-foreground">
-                          {sponsor.name}
-                        </span>
-                      )}
+                      <SponsorLogo sponsor={sponsor} />
                     </a>
                   ))}
 
