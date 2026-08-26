@@ -10,10 +10,9 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "build:registry": "node scripts/build-registry.mjs",
-    "check-types": "turbo check-types",
+    "typecheck": "turbo typecheck",
     "check": "ultracite check",
     "fix": "ultracite fix",
-    "lint": "ultracite check",
     "dev:web": "turbo -F web dev",
     "prepare": "lefthook install"
   },

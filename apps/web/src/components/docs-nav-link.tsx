@@ -1,9 +1,14 @@
 "use client";
 
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
+import { useCallback, useRef } from "react";
 
+import type { ArrowLeftIconHandle } from "@/components/animated-icons/arrow-left";
+import { ArrowLeftIcon } from "@/components/animated-icons/arrow-left";
+import type { ArrowRightIconHandle } from "@/components/animated-icons/arrow-right";
+import { ArrowRightIcon } from "@/components/animated-icons/arrow-right";
 import { Button } from "@/components/ui/button";
+import { Kbd } from "@/components/ui/kbd";
 import {
   Tooltip,
   TooltipContent,
@@ -26,18 +31,35 @@ export const DocsNavLink = ({
   tooltip?: { title: string; icon: React.ReactNode };
   transitionTypes?: string[];
 }) => {
+  const iconRef = useRef<ArrowLeftIconHandle | ArrowRightIconHandle>(null);
+
+  const handleMouseEnter = useCallback(() => {
+    iconRef.current?.startAnimation();
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    iconRef.current?.stopAnimation();
+  }, []);
+
   const link = (
     <Button
       variant="secondary"
       size={size}
       className={cn("shadow-none", className)}
       asChild
+      sound="click"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       {...props}
     >
       <Link href={href} transitionTypes={transitionTypes}>
-        {transitionTypes?.includes("nav-back") && <ArrowLeftIcon />}
+        {transitionTypes?.includes("nav-back") && (
+          <ArrowLeftIcon ref={iconRef} />
+        )}
         {children}
-        {transitionTypes?.includes("nav-forward") && <ArrowRightIcon />}
+        {transitionTypes?.includes("nav-forward") && (
+          <ArrowRightIcon ref={iconRef} />
+        )}
       </Link>
     </Button>
   );
@@ -49,7 +71,7 @@ export const DocsNavLink = ({
         <TooltipContent className="pr-2 pl-3">
           <div className="flex items-center gap-3">
             {tooltip.title}
-            {tooltip.icon}
+            {tooltip.icon && <Kbd>{tooltip.icon}</Kbd>}
           </div>
         </TooltipContent>
       </Tooltip>

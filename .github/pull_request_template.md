@@ -19,4 +19,4 @@ results or limitations. Explain when tests are not applicable.
 - [ ] I linked an issue with prior discussion confirming this change is wanted
 - [ ] I ran the relevant checks from [CONTRIBUTING.md](../CONTRIBUTING.md)
 - [ ] I added tests and documentation where relevant
-- [ ] I ran `turbo check-types` and `turbo lint` successfully
+- [ ] I ran `turbo typecheck` and `turbo lint` successfully

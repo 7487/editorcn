@@ -6,12 +6,13 @@
     "getting-started",
     "styling",
     "customization",
+    "---Registry---",
+    "ownership",
+    "mcp",
+    "registry",
     "---Editor (Toolbar)---",
     "editor",
     "---Block Editor (Blocks)---",
-    "block-editor",
-    "---Registry---",
-    "registry",
-    "ownership"
+    "block-editor"
   ]
 }

@@ -13,12 +13,36 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
-import { getAllPagesFromFolder, getPagesFromFolder } from "@/lib/page-tree";
+import { TOP_LEVEL_SECTIONS } from "@/constants/nav";
+import { ROUTES } from "@/constants/routes";
+import { PAGES_NEW } from "@/lib/docs";
+import { getTreeGroups } from "@/lib/page-tree";
 import type { source } from "@/lib/source";
 
 const MENU_BUTTON_CLS =
   "relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48";
+
+const SidebarMenuItemLink = ({
+  href,
+  isActive,
+  children,
+}: {
+  href: string;
+  isActive: boolean;
+  children: React.ReactNode;
+}) => (
+  <SidebarMenuItem>
+    <SidebarMenuButton asChild className={MENU_BUTTON_CLS} isActive={isActive}>
+      <Link href={href}>
+        <span className="absolute inset-0 flex w-(--sidebar-menu-width) bg-transparent" />
+        {children}
+        {PAGES_NEW.includes(href) && (
+          <span className="flex size-2 rounded-full bg-blue-500" title="New" />
+        )}
+      </Link>
+    </SidebarMenuButton>
+  </SidebarMenuItem>
+);
 
 const SidebarPageGroup = ({
   label,
@@ -66,9 +90,7 @@ export const DocsSidebar = ({
 }: React.ComponentProps<typeof Sidebar> & { tree: typeof source.pageTree }) => {
   const pathname = usePathname();
 
-  const topLevelPages = tree.children.filter((item) => item.type === "page");
-
-  const folders = tree.children.filter((item) => item.type === "folder");
+  const treeGroups = getTreeGroups(tree);
 
   return (
     <Sidebar
@@ -86,46 +108,31 @@ export const DocsSidebar = ({
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {topLevelPages.map((page) => (
-                <SidebarMenuItem key={page.url}>
-                  <SidebarMenuButton
-                    asChild
-                    className={MENU_BUTTON_CLS}
-                    isActive={page.url === pathname}
-                  >
-                    <Link href={page.url}>
-                      <span className="absolute inset-0 flex w-(--sidebar-menu-width) bg-transparent" />
-                      {page.name}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+              {TOP_LEVEL_SECTIONS.map(({ name, href }) => (
+                <SidebarMenuItemLink
+                  key={name}
+                  href={href}
+                  isActive={
+                    href === ROUTES.DOCS
+                      ? pathname === href
+                      : pathname.startsWith(href)
+                  }
+                >
+                  {name}
+                </SidebarMenuItemLink>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {folders.map((item) => {
-          if (EXCLUDED_SECTIONS.has(item.$id ?? "")) {
-            return null;
-          }
-
-          const pages = isComponentsFolder(item)
-            ? getAllPagesFromFolder(item).filter(
-                (page) =>
-                  !page.url.endsWith("/editor") &&
-                  !page.url.endsWith("/block-editor")
-              )
-            : getPagesFromFolder(item);
-
-          return (
-            <SidebarPageGroup
-              key={item.$id}
-              label={item.name}
-              pages={pages}
-              pathname={pathname}
-            />
-          );
-        })}
+        {treeGroups.map((group) => (
+          <SidebarPageGroup
+            key={group.label}
+            label={group.label}
+            pages={group.pages}
+            pathname={pathname}
+          />
+        ))}
         <div className="from-background via-background/80 to-background/50 sticky -bottom-1 z-10 h-16 shrink-0 bg-linear-to-t blur-xs" />
       </SidebarContent>
     </Sidebar>

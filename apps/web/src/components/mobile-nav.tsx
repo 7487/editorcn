@@ -12,6 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { TOP_LEVEL_SECTIONS } from "@/constants/nav";
 import { ROUTES } from "@/constants/routes";
 import { getTreeGroups } from "@/lib/page-tree";
 import { cn } from "@/lib/utils";
@@ -83,11 +84,6 @@ export const MobileNav = ({
 }) => {
   const [open, setOpen] = useState(false);
 
-  const topLevelPages = useMemo(
-    () => tree.children.filter((item) => item.type === "page"),
-    [tree]
-  );
-
   const treeGroups = useMemo(() => getTreeGroups(tree), [tree]);
 
   return (
@@ -151,13 +147,9 @@ export const MobileNav = ({
               Sections
             </div>
             <div className="flex flex-col gap-3">
-              {topLevelPages.map((page) => (
-                <MobileLink
-                  key={page.url}
-                  href={page.url}
-                  onOpenChange={setOpen}
-                >
-                  {page.name}
+              {TOP_LEVEL_SECTIONS.map(({ name, href }) => (
+                <MobileLink key={name} href={href} onOpenChange={setOpen}>
+                  {name}
                 </MobileLink>
               ))}
             </div>
