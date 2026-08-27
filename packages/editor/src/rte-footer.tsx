@@ -58,7 +58,8 @@ export const Footer = ({
       return null;
     }
 
-    const count = (editor.storage as Record<string, unknown>).characterCount as
+    const count = (editor.storage as unknown as Record<string, unknown>)
+      .characterCount as
       | { words: () => number; characters: () => number }
       | undefined;
     const words = count?.words() ?? 0;
