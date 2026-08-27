@@ -1,6 +1,7 @@
 import { isTextSelection } from "@tiptap/core";
 import type { Editor } from "@tiptap/react";
-import { useState, useEffect, useCallback } from "react";
+import { BubbleMenu as TiptapBubbleMenu } from "@tiptap/react/menus";
+import { useState, useCallback } from "react";
 
 import { DEFAULT_ICONS } from "../icons";
 import { BubbleButton, BubbleSeparator } from "../ui";
@@ -15,44 +16,11 @@ export interface BubbleMenuProps {
   editor: Editor | null;
 }
 
-// Dynamic import — BubbleMenuComponent type is resolved at runtime
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let BubbleMenuComponent: any = null;
-
-const bubbleMenuPromise = (async () => {
-  try {
-    const mod = await import("@tiptap/react/menus");
-    BubbleMenuComponent = mod.BubbleMenu;
-  } catch {
-    try {
-      const mod = await import("@tiptap/react");
-      BubbleMenuComponent = mod.BubbleMenu;
-    } catch {
-      // No Tiptap BubbleMenu available
-    }
-  }
-})();
-
 export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
-  const [loaded, setLoaded] = useState(BubbleMenuComponent !== null);
   const [copied, setCopied] = useState(false);
   const editorState = useEditorState(editor, (ed) => ({
     isCodeBlock: ed.isActive("codeBlock"),
   }));
-
-  useEffect(() => {
-    let active = true;
-    const check = async () => {
-      await bubbleMenuPromise;
-      if (active) {
-        setLoaded(true);
-      }
-    };
-    void check();
-    return () => {
-      active = false;
-    };
-  }, []);
 
   const shouldShow = useCallback(
     ({
@@ -77,7 +45,7 @@ export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
     []
   );
 
-  if (!editor || !BubbleMenuComponent || !loaded) {
+  if (!editor) {
     return null;
   }
 
@@ -88,9 +56,9 @@ export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
   const isCodeBlockActive = editorState.isCodeBlock;
 
   return (
-    <BubbleMenuComponent
+    <TiptapBubbleMenu
       editor={editor}
-      tippyOptions={{ hideOnClick: false, offset: [0, 8], placement: "top" }}
+      options={{ offset: 8, placement: "top" }}
       shouldShow={shouldShow}
     >
       <div className="block-editor-bubble-menu">
@@ -137,6 +105,6 @@ export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
           </>
         )}
       </div>
-    </BubbleMenuComponent>
+    </TiptapBubbleMenu>
   );
 };

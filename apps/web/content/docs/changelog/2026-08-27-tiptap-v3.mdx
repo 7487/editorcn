@@ -1,0 +1,17 @@
+---
+title: August 27, 2026 - Tiptap v3
+description: All editor and block editor packages now run on Tiptap v3.
+date: 2026-08-27
+---
+
+All `@editorcn/editor` and `@editorcn/block-editor` components now run on **Tiptap v3**. This brings newer extension APIs, consolidated kits, and a modern Floating UI-based bubble menu.
+
+## Highlights
+
+- **Tiptap v3 everywhere** — `@tiptap/*` packages across the app and both packages were bumped from v2 to `^3`.
+- **Bubble menu on Floating UI** — `BubbleMenu` is now imported from `@tiptap/react/menus`, and tippy options were migrated to the Floating UI `options` prop (`placement`, `offset`). `@tiptap/react/menus` resolves natively under v3, so the previous webpack workaround was removed.
+- **Table consolidation** — table extensions are now registered via `TableKit` from `@tiptap/extension-table` (which bundles `Table`, `TableRow`, `TableCell`, and `TableHeader`), matching the v3 recommended structure.
+- **Named imports** — updated the docs and code snippets that relied on v3 default exports that changed (`@tiptap/extension-table`, `@tiptap/extension-text-style`).
+- **Clean dependency tree** — the remaining v2 Tiptap transition packages (drag handle, node range, collaboration) were pinned to v3, leaving no v2 leftovers.
+
+> **Upgrade note:** if you're consuming `@editorcn/editor` or `@editorcn/block-editor`, ensure your own `@tiptap/*` dependencies are on v3, and import `BubbleMenu`/`FloatingMenu` from `@tiptap/react/menus` rather than the `@tiptap/react` root.
