@@ -10,7 +10,7 @@ import {
   BubbleDropdownItem,
   DropdownOverlay,
 } from "../ui";
-import { useEditorState, copyBlock, deleteBlock } from "./utils";
+import { useEditorState, copyBlock, deleteBlock, shallowEqual } from "./utils";
 
 interface SelectorResult {
   isParagraph: boolean;
@@ -122,17 +122,21 @@ const nodeItems: NodeItem[] = [
 
 export const NodeSelector = ({ editor }: { editor: Editor }) => {
   const [open, setOpen] = useState(false);
-  const editorState = useEditorState(editor, (ed) => ({
-    isBlockquote: ed.isActive("blockquote"),
-    isBulletList: ed.isActive("bulletList"),
-    isCodeBlock: ed.isActive("codeBlock"),
-    isHeading1: ed.isActive("heading", { level: 1 }),
-    isHeading2: ed.isActive("heading", { level: 2 }),
-    isHeading3: ed.isActive("heading", { level: 3 }),
-    isOrderedList: ed.isActive("orderedList"),
-    isParagraph: ed.isActive("paragraph"),
-    isTaskList: ed.isActive("taskList"),
-  }));
+  const editorState = useEditorState(
+    editor,
+    (ed) => ({
+      isBlockquote: ed.isActive("blockquote"),
+      isBulletList: ed.isActive("bulletList"),
+      isCodeBlock: ed.isActive("codeBlock"),
+      isHeading1: ed.isActive("heading", { level: 1 }),
+      isHeading2: ed.isActive("heading", { level: 2 }),
+      isHeading3: ed.isActive("heading", { level: 3 }),
+      isOrderedList: ed.isActive("orderedList"),
+      isParagraph: ed.isActive("paragraph"),
+      isTaskList: ed.isActive("taskList"),
+    }),
+    shallowEqual
+  );
 
   const activeItems = nodeItems.filter((i) => i.isActive(editorState));
   const activeName =

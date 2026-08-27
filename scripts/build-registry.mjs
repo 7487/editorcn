@@ -371,6 +371,12 @@ const blockEditorFiles = [
     "block-editor",
     "lib/utils.ts"
   ),
+  entry(
+    "block-editor/lib/commands.ts",
+    "registry:lib",
+    "block-editor",
+    "lib/commands.ts"
+  ),
 ];
 
 const deps = {

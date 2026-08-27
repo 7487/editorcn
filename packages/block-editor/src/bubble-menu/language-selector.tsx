@@ -14,15 +14,20 @@ import {
   CODE_BLOCK_LANGUAGES,
   getLanguageLabel,
   useEditorState,
+  shallowEqual,
 } from "./utils";
 
 export const LanguageSelector = ({ editor }: { editor: Editor }) => {
   const [open, setOpen] = useState(false);
   const { icons } = useBlockEditorContext();
 
-  const { currentLanguage } = useEditorState(editor, (ed) => ({
-    currentLanguage: ed.getAttributes("codeBlock").language || "javascript",
-  }));
+  const { currentLanguage } = useEditorState(
+    editor,
+    (ed) => ({
+      currentLanguage: ed.getAttributes("codeBlock").language || "javascript",
+    }),
+    shallowEqual
+  );
 
   const langIcon =
     icons.languageIcons[currentLanguage] ?? icons.codeBlockLanguageIcon;

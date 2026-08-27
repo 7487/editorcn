@@ -5,16 +5,20 @@ import { useCallback } from "react";
 
 import { LanguageSelector } from "./language-selector";
 import { TextButtons } from "./text-buttons";
-import { useEditorState } from "./utils";
+import { useEditorState, shallowEqual } from "./utils";
 
 export interface BubbleMenuProps {
   editor: Editor | null;
 }
 
 export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
-  const editorState = useEditorState(editor, (ed) => ({
-    isCodeBlock: ed.isActive("codeBlock"),
-  }));
+  const editorState = useEditorState(
+    editor,
+    (ed) => ({
+      isCodeBlock: ed.isActive("codeBlock"),
+    }),
+    shallowEqual
+  );
 
   const shouldShow = useCallback(
     ({

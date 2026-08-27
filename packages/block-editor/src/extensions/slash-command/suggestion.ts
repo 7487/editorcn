@@ -22,9 +22,7 @@ type SuggestionType = Omit<
 export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
   {
     command: ({ editor, range }) => {
-      editor
-        .chain()
-        .focus()
+      chainFocus(editor)
         .deleteRange(range)
         .toggleNode("paragraph", "paragraph")
         .run();
@@ -37,9 +35,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
   },
   {
     command: ({ editor, range }) => {
-      editor
-        .chain()
-        .focus()
+      chainFocus(editor)
         .deleteRange(range)
         .setNode("heading", { level: 1 })
         .run();
@@ -52,9 +48,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
   },
   {
     command: ({ editor, range }) => {
-      editor
-        .chain()
-        .focus()
+      chainFocus(editor)
         .deleteRange(range)
         .setNode("heading", { level: 2 })
         .run();
@@ -67,9 +61,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
   },
   {
     command: ({ editor, range }) => {
-      editor
-        .chain()
-        .focus()
+      chainFocus(editor)
         .deleteRange(range)
         .setNode("heading", { level: 3 })
         .run();

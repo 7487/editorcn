@@ -10,7 +10,7 @@ import { LanguageSelector } from "./language-selector";
 import { LinkSelector } from "./link-selector";
 import { NodeSelector } from "./node-selector";
 import { TextButtons } from "./text-buttons";
-import { useEditorState } from "./utils";
+import { useEditorState, shallowEqual } from "./utils";
 
 export interface BubbleMenuProps {
   editor: Editor | null;
@@ -18,9 +18,13 @@ export interface BubbleMenuProps {
 
 export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
   const [copied, setCopied] = useState(false);
-  const editorState = useEditorState(editor, (ed) => ({
-    isCodeBlock: ed.isActive("codeBlock"),
-  }));
+  const editorState = useEditorState(
+    editor,
+    (ed) => ({
+      isCodeBlock: ed.isActive("codeBlock"),
+    }),
+    shallowEqual
+  );
 
   const shouldShow = useCallback(
     ({

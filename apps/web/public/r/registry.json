@@ -320,6 +320,10 @@
         {
           "path": "block-editor/lib/utils.ts",
           "type": "registry:lib"
+        },
+        {
+          "path": "block-editor/lib/commands.ts",
+          "type": "registry:lib"
         }
       ],
       "name": "block-editor",

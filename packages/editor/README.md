@@ -19,6 +19,8 @@ A **toolbar-style** rich text editor built on [Tiptap](https://tiptap.dev/) with
 npm install @editorcn/editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
 ```
 
+> **Tiptap v3 required.** `@editorcn/editor` is built against Tiptap **v3**. Make sure your `@tiptap/*` packages are on v3, and import `BubbleMenu`/`FloatingMenu` from `@tiptap/react/menus` (not the `@tiptap/react` root) if you use them directly.
+
 ### shadcn registry
 
 ```bash

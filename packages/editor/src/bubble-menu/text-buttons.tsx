@@ -1,6 +1,6 @@
 import type { Editor } from "@tiptap/react";
 
-import { useEditorState } from "./utils";
+import { useEditorState, shallowEqual } from "./utils";
 
 const Svg = ({
   children,
@@ -101,13 +101,17 @@ const textItems = [
 ];
 
 export const TextButtons = ({ editor }: { editor: Editor }) => {
-  const editorState = useEditorState(editor, (ed) => ({
-    isBold: ed.isActive("bold"),
-    isCode: ed.isActive("code"),
-    isItalic: ed.isActive("italic"),
-    isStrike: ed.isActive("strike"),
-    isUnderline: ed.isActive("underline"),
-  }));
+  const editorState = useEditorState(
+    editor,
+    (ed) => ({
+      isBold: ed.isActive("bold"),
+      isCode: ed.isActive("code"),
+      isItalic: ed.isActive("italic"),
+      isStrike: ed.isActive("strike"),
+      isUnderline: ed.isActive("underline"),
+    }),
+    shallowEqual
+  );
 
   return (
     <div className="rte-bubble-group">

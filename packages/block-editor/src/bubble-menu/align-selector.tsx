@@ -9,7 +9,7 @@ import {
   BubbleDropdownItem,
   DropdownOverlay,
 } from "../ui";
-import { useEditorState } from "./utils";
+import { useEditorState, shallowEqual } from "./utils";
 
 interface AlignSelectorResult {
   isAlignLeft: boolean;
@@ -54,13 +54,17 @@ const alignItems = [
 
 export const TextAlignSelector = ({ editor }: { editor: Editor }) => {
   const [open, setOpen] = useState(false);
-  const editorState = useEditorState(editor, (ed) => ({
-    isAlignCenter: ed.isActive({ textAlign: "center" }),
-    isAlignLeft:
-      !ed.isActive({ textAlign: "center" }) &&
-      !ed.isActive({ textAlign: "right" }),
-    isAlignRight: ed.isActive({ textAlign: "right" }),
-  }));
+  const editorState = useEditorState(
+    editor,
+    (ed) => ({
+      isAlignCenter: ed.isActive({ textAlign: "center" }),
+      isAlignLeft:
+        !ed.isActive({ textAlign: "center" }) &&
+        !ed.isActive({ textAlign: "right" }),
+      isAlignRight: ed.isActive({ textAlign: "right" }),
+    }),
+    shallowEqual
+  );
 
   const activeItem = alignItems.find((i) => i.isActive(editorState));
 
