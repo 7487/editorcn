@@ -3,8 +3,9 @@ import { posToDOMRect } from "@tiptap/core";
 import type { Editor } from "@tiptap/react";
 import { ReactRenderer } from "@tiptap/react";
 import type { SuggestionOptions } from "@tiptap/suggestion";
+import { createElement } from "react";
 
-import { DEFAULT_ICONS } from "../../icons";
+import { DEFAULT_ICONS, HeadingIcon } from "../../icons";
 import { chainFocus } from "../../lib/commands";
 import type { SlashCommandSuggestionItem } from "./slash-command";
 import SuggestionList from "./suggestion-list";
@@ -44,7 +45,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
         .run();
     },
     description: "Big section heading.",
-    icon: DEFAULT_ICONS.slashHeadingIcon,
+    icon: createElement(HeadingIcon, { level: 1 }),
     id: "h1",
     keywords: ["title", "big", "large", "heading"],
     title: "Heading 1",
@@ -59,7 +60,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
         .run();
     },
     description: "Medium section heading.",
-    icon: DEFAULT_ICONS.slashHeadingIcon,
+    icon: createElement(HeadingIcon, { level: 2 }),
     id: "h2",
     keywords: ["subtitle", "medium", "heading"],
     title: "Heading 2",
@@ -74,7 +75,7 @@ export const defaultSlashCommandItems: SlashCommandSuggestionItem[] = [
         .run();
     },
     description: "Small section heading.",
-    icon: DEFAULT_ICONS.slashHeadingIcon,
+    icon: createElement(HeadingIcon, { level: 3 }),
     id: "h3",
     keywords: ["subtitle", "small", "heading"],
     title: "Heading 3",

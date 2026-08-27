@@ -3,6 +3,7 @@ import type { Editor } from "@tiptap/react";
 import { useState, useEffect, useCallback } from "react";
 
 import { DEFAULT_ICONS } from "../icons";
+import { BubbleButton, BubbleSeparator } from "../ui";
 import { TextAlignSelector } from "./align-selector";
 import { LanguageSelector } from "./language-selector";
 import { LinkSelector } from "./link-selector";
@@ -20,7 +21,6 @@ let BubbleMenuComponent: any = null;
 
 const bubbleMenuPromise = (async () => {
   try {
-    // @ts-expect-error - @tiptap/react/menus only exists in v3
     const mod = await import("@tiptap/react/menus");
     BubbleMenuComponent = mod.BubbleMenu;
   } catch {
@@ -97,12 +97,10 @@ export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
         {isCodeBlockActive ? (
           <>
             <NodeSelector editor={editor} />
-            <div className="block-editor-bubble-separator" />
+            <BubbleSeparator />
             <LanguageSelector editor={editor} />
-            <div className="block-editor-bubble-separator" />
-            <button
-              type="button"
-              className="block-editor-bubble-btn block-editor-copy-btn"
+            <BubbleSeparator />
+            <BubbleButton
               onMouseDown={(e) => e.preventDefault()}
               onClick={async () => {
                 const { from, to } = editor.state.selection;
@@ -121,18 +119,18 @@ export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
               >
                 {copied ? DEFAULT_ICONS.checkIcon : DEFAULT_ICONS.copyIcon}
               </span>
-            </button>
+            </BubbleButton>
           </>
         ) : (
           <>
             <NodeSelector editor={editor} />
-            <div className="block-editor-bubble-separator" />
+            <BubbleSeparator />
             <TextButtons editor={editor} />
-            <div className="block-editor-bubble-separator" />
+            <BubbleSeparator />
             <LinkSelector editor={editor} />
             {hasTextAlign && (
               <>
-                <div className="block-editor-bubble-separator" />
+                <BubbleSeparator />
                 <TextAlignSelector editor={editor} />
               </>
             )}

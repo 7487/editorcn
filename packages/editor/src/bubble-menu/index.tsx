@@ -16,7 +16,6 @@ let BubbleMenuComponent: any = null;
 
 const bubbleMenuPromise = (async () => {
   try {
-    // @ts-expect-error - @tiptap/react/menus only exists in v3
     const mod = await import("@tiptap/react/menus");
     BubbleMenuComponent = mod.BubbleMenu;
   } catch {

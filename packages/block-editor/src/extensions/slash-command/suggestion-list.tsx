@@ -11,6 +11,13 @@ import {
 } from "react";
 
 import { DEFAULT_ICONS } from "../../icons";
+import {
+  SlashMenu,
+  SlashMenuList,
+  SlashMenuItem,
+  SlashMenuSearch,
+  SlashMenuSearchInput,
+} from "../../ui";
 import type { SlashCommandSuggestionItem } from "./slash-command";
 
 export type SuggestionListProps = SuggestionProps<
@@ -110,16 +117,14 @@ const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
     }));
 
     return (
-      <div className="block-editor-slash-menu">
+      <SlashMenu>
         {/* Search Header */}
-        <div className="block-editor-slash-menu-search">
+        <SlashMenuSearch>
           {DEFAULT_ICONS.searchIcon}
-          <input
-            type="text"
+          <SlashMenuSearchInput
             placeholder="Search commands..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="block-editor-slash-menu-search-input"
             // If the user clicks into the input, let them use arrows/enter here too
             onKeyDown={(e) => {
               if (e.key === "ArrowUp") {
@@ -136,20 +141,15 @@ const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
               }
             }}
           />
-        </div>
+        </SlashMenuSearch>
 
         {/* Scrollable List */}
-        <div className="block-editor-slash-menu-list" ref={scrollContainerRef}>
+        <SlashMenuList ref={scrollContainerRef}>
           {filteredItems.length > 0 ? (
             filteredItems.map((item, i) => (
-              <button
+              <SlashMenuItem
                 key={item.title}
-                type="button"
-                className={`block-editor-slash-menu-item${
-                  i === selectedIndex
-                    ? " block-editor-slash-menu-item--selected"
-                    : ""
-                }`}
+                selected={i === selectedIndex}
                 onClick={() => selectItem(i)}
                 onMouseEnter={() => setSelectedIndex(i)}
               >
@@ -166,15 +166,15 @@ const SuggestionList = forwardRef<SuggestionListHandle, SuggestionListProps>(
                     </span>
                   )}
                 </div>
-              </button>
+              </SlashMenuItem>
             ))
           ) : (
             <div className="block-editor-slash-menu-empty">
               No results for "{searchQuery}"
             </div>
           )}
-        </div>
-      </div>
+        </SlashMenuList>
+      </SlashMenu>
     );
   }
 );

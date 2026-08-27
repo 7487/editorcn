@@ -1,6 +1,7 @@
 import type { Editor } from "@tiptap/react";
 
 import { DEFAULT_ICONS } from "../icons";
+import { BubbleButton, BubbleButtonGroup } from "../ui";
 import { useEditorState } from "./utils";
 
 interface TextSelectorResult {
@@ -63,18 +64,17 @@ export const TextButtons = ({ editor }: { editor: Editor }) => {
   }));
 
   return (
-    <div className="block-editor-bubble-group">
+    <BubbleButtonGroup>
       {textItems.map((item, i) => (
-        <button
+        <BubbleButton
           key={i}
-          type="button"
-          className={`block-editor-bubble-btn${item.isActive(editorState) ? " block-editor-bubble-btn--active" : ""}`}
+          active={item.isActive(editorState)}
           onMouseDown={(e) => e.preventDefault()}
           onClick={() => item.command(editor)}
         >
           {item.icon}
-        </button>
+        </BubbleButton>
       ))}
-    </div>
+    </BubbleButtonGroup>
   );
 };

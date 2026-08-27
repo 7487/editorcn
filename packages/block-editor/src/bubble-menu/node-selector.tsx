@@ -1,7 +1,15 @@
 import type { Editor } from "@tiptap/react";
 import { useState } from "react";
 
-import { DEFAULT_ICONS } from "../icons";
+import { DEFAULT_ICONS, HeadingIcon } from "../icons";
+import {
+  BubbleButton,
+  BubbleDropdown,
+  BubbleDropdownDivider,
+  BubbleDropdownIcon,
+  BubbleDropdownItem,
+  DropdownOverlay,
+} from "../ui";
 import { useEditorState, copyBlock, deleteBlock } from "./utils";
 
 interface SelectorResult {
@@ -53,7 +61,7 @@ const nodeItems: NodeItem[] = [
       (e.chain().focus() as unknown as NodeChain)
         .toggleHeading({ level: 1 })
         .run(),
-    icon: DEFAULT_ICONS.slashHeadingIcon,
+    icon: <HeadingIcon level={1} />,
     isActive: (s) => s.isHeading1,
     name: "Heading 1",
   },
@@ -62,7 +70,7 @@ const nodeItems: NodeItem[] = [
       (e.chain().focus() as unknown as NodeChain)
         .toggleHeading({ level: 2 })
         .run(),
-    icon: DEFAULT_ICONS.slashHeadingIcon,
+    icon: <HeadingIcon level={2} />,
     isActive: (s) => s.isHeading2,
     name: "Heading 2",
   },
@@ -71,7 +79,7 @@ const nodeItems: NodeItem[] = [
       (e.chain().focus() as unknown as NodeChain)
         .toggleHeading({ level: 3 })
         .run(),
-    icon: DEFAULT_ICONS.slashHeadingIcon,
+    icon: <HeadingIcon level={3} />,
     isActive: (s) => s.isHeading3,
     name: "Heading 3",
   },
@@ -133,25 +141,17 @@ export const NodeSelector = ({ editor }: { editor: Editor }) => {
 
   return (
     <div style={{ position: "relative" }}>
-      <button
-        type="button"
-        className="block-editor-bubble-btn"
+      <BubbleButton
         onMouseDown={(e) => e.preventDefault()}
         onClick={() => setOpen(!open)}
       >
-        {activeIcon && (
-          <span className="block-editor-bubble-dropdown-icon">
-            {activeIcon}
-          </span>
-        )}
+        {activeIcon && <BubbleDropdownIcon>{activeIcon}</BubbleDropdownIcon>}
         <span className="block-editor-bubble-btn-text">{activeName}</span>
         {DEFAULT_ICONS.dropdownArrowIcon}
-      </button>
+      </BubbleButton>
       {open && (
         <>
-          <div
-            className="block-editor-bubble-overlay"
-            role="presentation"
+          <DropdownOverlay
             onClick={() => setOpen(false)}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
@@ -159,59 +159,51 @@ export const NodeSelector = ({ editor }: { editor: Editor }) => {
               }
             }}
           />
-          <div className="block-editor-bubble-dropdown">
+          <BubbleDropdown>
             {nodeItems.map((item, i) => (
-              <button
+              <BubbleDropdownItem
                 key={i}
-                type="button"
-                className={`block-editor-bubble-dropdown-item${item.isActive(editorState) ? " block-editor-bubble-dropdown-item--active" : ""}`}
+                active={item.isActive(editorState)}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => {
                   item.command(editor);
                   setOpen(false);
                 }}
               >
-                <span className="block-editor-bubble-dropdown-icon">
-                  {item.icon}
-                </span>
+                <BubbleDropdownIcon>{item.icon}</BubbleDropdownIcon>
                 <span>{item.name}</span>
                 {item.isActive(editorState) && (
-                  <span className="block-editor-bubble-dropdown-icon">
+                  <BubbleDropdownIcon>
                     {DEFAULT_ICONS.checkIcon}
-                  </span>
+                  </BubbleDropdownIcon>
                 )}
-              </button>
+              </BubbleDropdownItem>
             ))}
-            <div className="block-editor-bubble-dropdown-divider" />
-            <button
-              type="button"
-              className="block-editor-bubble-dropdown-item"
+            <BubbleDropdownDivider />
+            <BubbleDropdownItem
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => {
                 copyBlock(editor);
                 setOpen(false);
               }}
             >
-              <span className="block-editor-bubble-dropdown-icon">
-                {DEFAULT_ICONS.copyIcon}
-              </span>
+              <BubbleDropdownIcon>{DEFAULT_ICONS.copyIcon}</BubbleDropdownIcon>
               <span>Copy</span>
-            </button>
-            <button
-              type="button"
-              className="block-editor-bubble-dropdown-item block-editor-bubble-dropdown-item--danger"
+            </BubbleDropdownItem>
+            <BubbleDropdownItem
+              danger
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => {
                 deleteBlock(editor);
                 setOpen(false);
               }}
             >
-              <span className="block-editor-bubble-dropdown-icon">
+              <BubbleDropdownIcon>
                 {DEFAULT_ICONS.deleteIcon}
-              </span>
+              </BubbleDropdownIcon>
               <span>Delete</span>
-            </button>
-          </div>
+            </BubbleDropdownItem>
+          </BubbleDropdown>
         </>
       )}
     </div>

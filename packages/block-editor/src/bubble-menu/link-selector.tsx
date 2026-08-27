@@ -2,6 +2,13 @@ import type { Editor } from "@tiptap/react";
 import { useState, useRef, useCallback, useEffect } from "react";
 
 import { DEFAULT_ICONS } from "../icons";
+import {
+  BubbleButton,
+  BubbleDropdown,
+  BubbleDropdownIcon,
+  BubbleDropdownItem,
+  DropdownOverlay,
+} from "../ui";
 
 interface LinkableChain {
   extendMarkRange(type: string): LinkableChain;
@@ -59,20 +66,17 @@ export const LinkSelector = ({ editor }: { editor: Editor }) => {
 
   return (
     <div style={{ position: "relative" }}>
-      <button
-        type="button"
-        className={`block-editor-bubble-btn${isLink ? " block-editor-bubble-btn--active" : ""}`}
+      <BubbleButton
+        active={isLink}
         onMouseDown={(e) => e.preventDefault()}
         onClick={() => setOpen(!open)}
         title="Link"
       >
         {DEFAULT_ICONS.linkIcon}
-      </button>
+      </BubbleButton>
       {open && (
         <>
-          <div
-            className="block-editor-bubble-overlay"
-            role="presentation"
+          <DropdownOverlay
             onClick={() => setOpen(false)}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
@@ -80,10 +84,7 @@ export const LinkSelector = ({ editor }: { editor: Editor }) => {
               }
             }}
           />
-          <div
-            className="block-editor-bubble-dropdown"
-            style={{ left: "auto", minWidth: "220px", right: 0 }}
-          >
+          <BubbleDropdown style={{ left: "auto", minWidth: "220px", right: 0 }}>
             <form className="block-editor-link-form" onSubmit={handleSubmit}>
               <input
                 ref={inputRef}
@@ -95,33 +96,31 @@ export const LinkSelector = ({ editor }: { editor: Editor }) => {
               />
               <div className="block-editor-link-actions">
                 {isLink && (
-                  <button
-                    type="button"
-                    className="block-editor-bubble-dropdown-item block-editor-bubble-dropdown-item--danger"
+                  <BubbleDropdownItem
+                    danger
                     onMouseDown={(e) => e.preventDefault()}
                     onClick={handleUnlink}
                     style={{ justifyContent: "center" }}
                   >
-                    <span className="block-editor-bubble-dropdown-icon">
+                    <BubbleDropdownIcon>
                       {DEFAULT_ICONS.unlinkIcon}
-                    </span>
+                    </BubbleDropdownIcon>
                     <span>Remove</span>
-                  </button>
+                  </BubbleDropdownItem>
                 )}
-                <button
-                  type="submit"
-                  className="block-editor-bubble-dropdown-item"
+                <BubbleDropdownItem
                   onMouseDown={(e) => e.preventDefault()}
+                  type="submit"
                   style={{ justifyContent: "center" }}
                 >
-                  <span className="block-editor-bubble-dropdown-icon">
+                  <BubbleDropdownIcon>
                     {DEFAULT_ICONS.checkIcon}
-                  </span>
+                  </BubbleDropdownIcon>
                   <span>{isLink ? "Update" : "Add"}</span>
-                </button>
+                </BubbleDropdownItem>
               </div>
             </form>
-          </div>
+          </BubbleDropdown>
         </>
       )}
     </div>

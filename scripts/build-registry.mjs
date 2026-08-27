@@ -288,34 +288,82 @@ const blockEditorFiles = [
     "ui/index.ts"
   ),
   entry(
-    "block-editor/ui/alert.tsx",
+    "block-editor/ui/bubble-button.tsx",
     "registry:component",
     "block-editor",
-    "ui/alert.tsx"
+    "ui/bubble-button.tsx"
   ),
   entry(
-    "block-editor/ui/button.tsx",
+    "block-editor/ui/bubble-button-group.tsx",
     "registry:component",
     "block-editor",
-    "ui/button.tsx"
+    "ui/bubble-button-group.tsx"
   ),
   entry(
-    "block-editor/ui/label.tsx",
+    "block-editor/ui/bubble-separator.tsx",
     "registry:component",
     "block-editor",
-    "ui/label.tsx"
+    "ui/bubble-separator.tsx"
   ),
   entry(
-    "block-editor/ui/scroll-area.tsx",
+    "block-editor/ui/bubble-dropdown.tsx",
     "registry:component",
     "block-editor",
-    "ui/scroll-area.tsx"
+    "ui/bubble-dropdown.tsx"
   ),
   entry(
-    "block-editor/ui/textarea.tsx",
+    "block-editor/ui/bubble-dropdown-item.tsx",
     "registry:component",
     "block-editor",
-    "ui/textarea.tsx"
+    "ui/bubble-dropdown-item.tsx"
+  ),
+  entry(
+    "block-editor/ui/bubble-dropdown-divider.tsx",
+    "registry:component",
+    "block-editor",
+    "ui/bubble-dropdown-divider.tsx"
+  ),
+  entry(
+    "block-editor/ui/bubble-dropdown-icon.tsx",
+    "registry:component",
+    "block-editor",
+    "ui/bubble-dropdown-icon.tsx"
+  ),
+  entry(
+    "block-editor/ui/dropdown-overlay.tsx",
+    "registry:component",
+    "block-editor",
+    "ui/dropdown-overlay.tsx"
+  ),
+  entry(
+    "block-editor/ui/slash-menu.tsx",
+    "registry:component",
+    "block-editor",
+    "ui/slash-menu.tsx"
+  ),
+  entry(
+    "block-editor/ui/slash-menu-search.tsx",
+    "registry:component",
+    "block-editor",
+    "ui/slash-menu-search.tsx"
+  ),
+  entry(
+    "block-editor/ui/slash-menu-search-input.tsx",
+    "registry:component",
+    "block-editor",
+    "ui/slash-menu-search-input.tsx"
+  ),
+  entry(
+    "block-editor/ui/slash-menu-list.tsx",
+    "registry:component",
+    "block-editor",
+    "ui/slash-menu-list.tsx"
+  ),
+  entry(
+    "block-editor/ui/slash-menu-item.tsx",
+    "registry:component",
+    "block-editor",
+    "ui/slash-menu-item.tsx"
   ),
   entry(
     "block-editor/lib/utils.ts",
@@ -351,9 +399,10 @@ const deps = {
     "@floating-ui/dom@^1.6.0",
     "class-variance-authority@^0.7.1",
     "clsx@^2.1.1",
+    "lucide-react@>=0.400.0 <1.0.0",
     "tailwind-merge@^3.0.0",
   ],
-  "custom-controls": ["@editorcn/editor@latest", "lucide-react@^0.546.0"],
+  "custom-controls": ["@editorcn/editor@latest", "lucide-react@>=0.400.0 <1.0.0"],
   editor: [
     "@tiptap/core@>=2.11.5 <4",
     "@tiptap/react@>=2.11.5 <4",
