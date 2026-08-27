@@ -402,7 +402,10 @@ const deps = {
     "lucide-react@>=0.400.0 <1.0.0",
     "tailwind-merge@^3.0.0",
   ],
-  "custom-controls": ["@editorcn/editor@latest", "lucide-react@>=0.400.0 <1.0.0"],
+  "custom-controls": [
+    "@editorcn/editor@latest",
+    "lucide-react@>=0.400.0 <1.0.0",
+  ],
   editor: [
     "@tiptap/core@>=2.11.5 <4",
     "@tiptap/react@>=2.11.5 <4",
