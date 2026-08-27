@@ -1,58 +1,30 @@
 import { isTextSelection } from "@tiptap/core";
 import type { Editor } from "@tiptap/react";
-import { useState, useEffect, useCallback } from "react";
+import { BubbleMenu as TiptapBubbleMenu } from "@tiptap/react/menus";
+import { useState, useCallback } from "react";
 
 import { DEFAULT_ICONS } from "../icons";
+import { BubbleButton, BubbleSeparator } from "../ui";
 import { TextAlignSelector } from "./align-selector";
 import { LanguageSelector } from "./language-selector";
 import { LinkSelector } from "./link-selector";
 import { NodeSelector } from "./node-selector";
 import { TextButtons } from "./text-buttons";
-import { useEditorState } from "./utils";
+import { useEditorState, shallowEqual } from "./utils";
 
 export interface BubbleMenuProps {
   editor: Editor | null;
 }
 
-// Dynamic import — BubbleMenuComponent type is resolved at runtime
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let BubbleMenuComponent: any = null;
-
-const bubbleMenuPromise = (async () => {
-  try {
-    // @ts-expect-error - @tiptap/react/menus only exists in v3
-    const mod = await import("@tiptap/react/menus");
-    BubbleMenuComponent = mod.BubbleMenu;
-  } catch {
-    try {
-      const mod = await import("@tiptap/react");
-      BubbleMenuComponent = mod.BubbleMenu;
-    } catch {
-      // No Tiptap BubbleMenu available
-    }
-  }
-})();
-
 export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
-  const [loaded, setLoaded] = useState(BubbleMenuComponent !== null);
   const [copied, setCopied] = useState(false);
-  const editorState = useEditorState(editor, (ed) => ({
-    isCodeBlock: ed.isActive("codeBlock"),
-  }));
-
-  useEffect(() => {
-    let active = true;
-    const check = async () => {
-      await bubbleMenuPromise;
-      if (active) {
-        setLoaded(true);
-      }
-    };
-    void check();
-    return () => {
-      active = false;
-    };
-  }, []);
+  const editorState = useEditorState(
+    editor,
+    (ed) => ({
+      isCodeBlock: ed.isActive("codeBlock"),
+    }),
+    shallowEqual
+  );
 
   const shouldShow = useCallback(
     ({
@@ -77,7 +49,7 @@ export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
     []
   );
 
-  if (!editor || !BubbleMenuComponent || !loaded) {
+  if (!editor) {
     return null;
   }
 
@@ -88,21 +60,19 @@ export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
   const isCodeBlockActive = editorState.isCodeBlock;
 
   return (
-    <BubbleMenuComponent
+    <TiptapBubbleMenu
       editor={editor}
-      tippyOptions={{ hideOnClick: false, offset: [0, 8], placement: "top" }}
+      options={{ offset: 8, placement: "top" }}
       shouldShow={shouldShow}
     >
       <div className="block-editor-bubble-menu">
         {isCodeBlockActive ? (
           <>
             <NodeSelector editor={editor} />
-            <div className="block-editor-bubble-separator" />
+            <BubbleSeparator />
             <LanguageSelector editor={editor} />
-            <div className="block-editor-bubble-separator" />
-            <button
-              type="button"
-              className="block-editor-bubble-btn block-editor-copy-btn"
+            <BubbleSeparator />
+            <BubbleButton
               onMouseDown={(e) => e.preventDefault()}
               onClick={async () => {
                 const { from, to } = editor.state.selection;
@@ -121,24 +91,24 @@ export const BubbleMenu = ({ editor }: BubbleMenuProps) => {
               >
                 {copied ? DEFAULT_ICONS.checkIcon : DEFAULT_ICONS.copyIcon}
               </span>
-            </button>
+            </BubbleButton>
           </>
         ) : (
           <>
             <NodeSelector editor={editor} />
-            <div className="block-editor-bubble-separator" />
+            <BubbleSeparator />
             <TextButtons editor={editor} />
-            <div className="block-editor-bubble-separator" />
+            <BubbleSeparator />
             <LinkSelector editor={editor} />
             {hasTextAlign && (
               <>
-                <div className="block-editor-bubble-separator" />
+                <BubbleSeparator />
                 <TextAlignSelector editor={editor} />
               </>
             )}
           </>
         )}
       </div>
-    </BubbleMenuComponent>
+    </TiptapBubbleMenu>
   );
 };

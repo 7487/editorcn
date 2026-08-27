@@ -12,14 +12,17 @@ A **Notion-style** block-type rich text editor built on [Tiptap](https://tiptap.
 - Fully typed with TypeScript
 - Extensible via Tiptap extensions
 - Built with shadcn/ui CSS variables — matches your theme
+- Icons powered by [lucide-react](https://lucide.dev), inheriting your theme's colors
 
 ## Installation
 
 ### npm
 
 ```bash
-npm install @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
+npm install @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link lucide-react
 ```
+
+> **Tiptap v3 required.** `@editorcn/block-editor` is built against Tiptap **v3**. Make sure your `@tiptap/*` packages are on v3, and import `BubbleMenu`/`FloatingMenu` from `@tiptap/react/menus` (not the `@tiptap/react` root) if you use them directly.
 
 ### shadcn registry
 

@@ -2,7 +2,14 @@ import type { Editor } from "@tiptap/react";
 import { useState } from "react";
 
 import { DEFAULT_ICONS } from "../icons";
-import { useEditorState } from "./utils";
+import {
+  BubbleButton,
+  BubbleDropdown,
+  BubbleDropdownIcon,
+  BubbleDropdownItem,
+  DropdownOverlay,
+} from "../ui";
+import { useEditorState, shallowEqual } from "./utils";
 
 interface AlignSelectorResult {
   isAlignLeft: boolean;
@@ -47,34 +54,34 @@ const alignItems = [
 
 export const TextAlignSelector = ({ editor }: { editor: Editor }) => {
   const [open, setOpen] = useState(false);
-  const editorState = useEditorState(editor, (ed) => ({
-    isAlignCenter: ed.isActive({ textAlign: "center" }),
-    isAlignLeft:
-      !ed.isActive({ textAlign: "center" }) &&
-      !ed.isActive({ textAlign: "right" }),
-    isAlignRight: ed.isActive({ textAlign: "right" }),
-  }));
+  const editorState = useEditorState(
+    editor,
+    (ed) => ({
+      isAlignCenter: ed.isActive({ textAlign: "center" }),
+      isAlignLeft:
+        !ed.isActive({ textAlign: "center" }) &&
+        !ed.isActive({ textAlign: "right" }),
+      isAlignRight: ed.isActive({ textAlign: "right" }),
+    }),
+    shallowEqual
+  );
 
   const activeItem = alignItems.find((i) => i.isActive(editorState));
 
   return (
     <div style={{ position: "relative" }}>
-      <button
-        type="button"
-        className="block-editor-bubble-btn"
+      <BubbleButton
         onMouseDown={(e) => e.preventDefault()}
         onClick={() => setOpen(!open)}
       >
-        <span className="block-editor-bubble-dropdown-icon">
+        <BubbleDropdownIcon>
           {activeItem ? activeItem.icon : DEFAULT_ICONS.alignLeftIcon}
-        </span>
+        </BubbleDropdownIcon>
         {DEFAULT_ICONS.dropdownArrowIcon}
-      </button>
+      </BubbleButton>
       {open && (
         <>
-          <div
-            className="block-editor-bubble-overlay"
-            role="presentation"
+          <DropdownOverlay
             onClick={() => setOpen(false)}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
@@ -82,33 +89,27 @@ export const TextAlignSelector = ({ editor }: { editor: Editor }) => {
               }
             }}
           />
-          <div
-            className="block-editor-bubble-dropdown block-editor-bubble-dropdown--align"
-            style={{ left: "auto", right: 0 }}
-          >
+          <BubbleDropdown align="align" style={{ left: "auto", right: 0 }}>
             {alignItems.map((item, i) => (
-              <button
+              <BubbleDropdownItem
                 key={i}
-                type="button"
-                className={`block-editor-bubble-dropdown-item${item.isActive(editorState) ? " block-editor-bubble-dropdown-item--active" : ""}`}
+                active={item.isActive(editorState)}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => {
                   item.command(editor);
                   setOpen(false);
                 }}
               >
-                <span className="block-editor-bubble-dropdown-icon">
-                  {item.icon}
-                </span>
+                <BubbleDropdownIcon>{item.icon}</BubbleDropdownIcon>
                 <span>{item.label}</span>
                 {item.isActive(editorState) && (
-                  <span className="block-editor-bubble-dropdown-icon">
+                  <BubbleDropdownIcon>
                     {DEFAULT_ICONS.checkIcon}
-                  </span>
+                  </BubbleDropdownIcon>
                 )}
-              </button>
+              </BubbleDropdownItem>
             ))}
-          </div>
+          </BubbleDropdown>
         </>
       )}
     </div>

@@ -176,6 +176,7 @@
         "@floating-ui/dom@^1.6.0",
         "class-variance-authority@^0.7.1",
         "clsx@^2.1.1",
+        "lucide-react@>=0.400.0 <1.0.0",
         "tailwind-merge@^3.0.0"
       ],
       "description": "A Notion-style block editor built on Tiptap with shadcn/ui tokens.",
@@ -265,27 +266,63 @@
           "type": "registry:component"
         },
         {
-          "path": "block-editor/ui/alert.tsx",
+          "path": "block-editor/ui/bubble-button.tsx",
           "type": "registry:component"
         },
         {
-          "path": "block-editor/ui/button.tsx",
+          "path": "block-editor/ui/bubble-button-group.tsx",
           "type": "registry:component"
         },
         {
-          "path": "block-editor/ui/label.tsx",
+          "path": "block-editor/ui/bubble-separator.tsx",
           "type": "registry:component"
         },
         {
-          "path": "block-editor/ui/scroll-area.tsx",
+          "path": "block-editor/ui/bubble-dropdown.tsx",
           "type": "registry:component"
         },
         {
-          "path": "block-editor/ui/textarea.tsx",
+          "path": "block-editor/ui/bubble-dropdown-item.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/ui/bubble-dropdown-divider.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/ui/bubble-dropdown-icon.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/ui/dropdown-overlay.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/ui/slash-menu.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/ui/slash-menu-search.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/ui/slash-menu-search-input.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/ui/slash-menu-list.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "block-editor/ui/slash-menu-item.tsx",
           "type": "registry:component"
         },
         {
           "path": "block-editor/lib/utils.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "block-editor/lib/commands.ts",
           "type": "registry:lib"
         }
       ],

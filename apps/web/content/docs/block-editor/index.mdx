@@ -17,7 +17,7 @@ This copies the component source directly into your project, so you can customiz
 **Or install via npm/pnpm:**
 
 ```bash
-npm install @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react
+npm install @editorcn/block-editor @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/extension-drag-handle-react lucide-react
 ```
 
 After installation, import the editor styles at the root of your application:
@@ -66,7 +66,7 @@ import Underline from "@tiptap/extension-underline";
 import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
 import Image from "@tiptap/extension-image";
-import Table from "@tiptap/extension-table";
+import { Table } from "@tiptap/extension-table";
 import TableRow from "@tiptap/extension-table-row";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
@@ -77,6 +77,7 @@ import {
   getSlashCommandSuggestion,
 } from "@/components/block-editor";
 import type { SlashCommandSuggestionItem } from "@/components/block-editor";
+import "@/components/block-editor/style.css";
 
 const myItems: SlashCommandSuggestionItem[] = [
   ...defaultSlashCommandItems,
@@ -146,6 +147,10 @@ The root wrapper that provides editor context. Renders the full editor UI by def
 | `className` | `string`                     | —                             | Additional CSS classes                                                |
 | `labels`    | `Partial<BlockEditorLabels>` | `DEFAULT_BLOCK_EDITOR_LABELS` | Override default slash command labels                                 |
 | `icons`     | `Partial<BlockEditorIcons>`  | `DEFAULT_ICONS`               | Override any built-in icon (slash commands, bubble menu, drag handle) |
+
+### Icons
+
+By default all icons come from **lucide-react**, which inherits your theme's colors automatically (they render with `currentColor`). The block editor declares `lucide-react` as a dependency, so it is installed automatically via the shadcn registry or alongside the npm package.
 
 ### Labels
 
@@ -232,7 +237,7 @@ Pass the custom items array to `getSlashCommandSuggestion(myItems)`. Items with 
 
 ### Custom icons
 
-Override any built-in icon via the `icons` prop. All icons accept a `ReactNode`, so you can use inline SVGs, emoji, or any icon library.
+All default icons come from **lucide-react**. Override any built-in icon via the `icons` prop. All icons accept a `ReactNode`, so you can use inline SVGs, emoji, or any icon library.
 
 ```tsx
 import { BlockEditor, DEFAULT_ICONS } from "@/components/block-editor";
@@ -277,7 +282,7 @@ const myItems: SlashCommandSuggestionItem[] = [
 
 ### Language icons
 
-The code block language selector shows per-language icons (e.g. a JavaScript icon for JS, a Python icon for Python). Override them via the `languageIcons` key:
+The code block language selector shows the language name (properly capitalized, e.g. **TypeScript**, **C++**, **JSON**) alongside its icon. Override per-language icons via the `languageIcons` key:
 
 ```tsx
 import {
@@ -342,7 +347,7 @@ Custom items are commonly used for commands that require additional extensions, 
 
 ```tsx
 import Image from "@tiptap/extension-image";
-import Table from "@tiptap/extension-table";
+import { Table } from "@tiptap/extension-table";
 import TableRow from "@tiptap/extension-table-row";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";

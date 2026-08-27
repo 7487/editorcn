@@ -2,7 +2,7 @@ import type { Editor } from "@tiptap/react";
 import { useState } from "react";
 
 import { useRichTextEditorContext } from "../rte-context";
-import { CODE_BLOCK_LANGUAGES, useEditorState } from "./utils";
+import { CODE_BLOCK_LANGUAGES, useEditorState, shallowEqual } from "./utils";
 
 const FallbackIcon = () => (
   <svg
@@ -23,9 +23,13 @@ const FallbackIcon = () => (
 export const LanguageSelector = ({ editor }: { editor: Editor }) => {
   const [open, setOpen] = useState(false);
   const { icons } = useRichTextEditorContext();
-  const { currentLanguage } = useEditorState(editor, (ed) => ({
-    currentLanguage: ed.getAttributes("codeBlock").language || "javascript",
-  }));
+  const { currentLanguage } = useEditorState(
+    editor,
+    (ed) => ({
+      currentLanguage: ed.getAttributes("codeBlock").language || "javascript",
+    }),
+    shallowEqual
+  );
 
   const langIcon = icons.languageIcons[currentLanguage] ?? <FallbackIcon />;
 

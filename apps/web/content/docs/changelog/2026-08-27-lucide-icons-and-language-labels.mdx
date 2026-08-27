@@ -1,0 +1,14 @@
+---
+title: August 27, 2026 - Lucide icons & language labels
+description: Block Editor now ships lucide-react icons and capitalized language labels.
+date: 2026-08-27
+---
+
+The **Block Editor** now uses polished, consistent icons from [lucide-react](https://lucide.dev) instead of hand-drawn SVGs, and code-block language names are displayed capitalized.
+
+## Highlights
+
+- **Lucide icons** — all default toolbar, bubble menu, slash menu, and drag handle icons now come from `lucide-react`. They render with `currentColor`, so they automatically match your shadcn theme. The `icons` prop remains fully customizable.
+- **Heading icons** — the node selector and slash menu now show real H1/H2/H3 glyphs (`Heading1`, `Heading2`, `Heading3`).
+- **Capitalized language labels** — the code block language selector now shows proper names (TypeScript, C++, JSON, Plain Text) instead of lowercase codes.
+- `lucide-react` is now a dependency of `@editorcn/block-editor` (range `>=0.400.0 <1.0.0`), so it is installed automatically and stays compatible with whatever version you already have.

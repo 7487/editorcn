@@ -3,36 +3,50 @@ import { useState } from "react";
 
 import { useBlockEditorContext } from "../context";
 import { DEFAULT_ICONS } from "../icons";
-import { CODE_BLOCK_LANGUAGES, useEditorState } from "./utils";
+import {
+  BubbleButton,
+  BubbleDropdown,
+  BubbleDropdownIcon,
+  BubbleDropdownItem,
+  DropdownOverlay,
+} from "../ui";
+import {
+  CODE_BLOCK_LANGUAGES,
+  getLanguageLabel,
+  useEditorState,
+  shallowEqual,
+} from "./utils";
 
 export const LanguageSelector = ({ editor }: { editor: Editor }) => {
   const [open, setOpen] = useState(false);
   const { icons } = useBlockEditorContext();
 
-  const { currentLanguage } = useEditorState(editor, (ed) => ({
-    currentLanguage: ed.getAttributes("codeBlock").language || "javascript",
-  }));
+  const { currentLanguage } = useEditorState(
+    editor,
+    (ed) => ({
+      currentLanguage: ed.getAttributes("codeBlock").language || "javascript",
+    }),
+    shallowEqual
+  );
 
   const langIcon =
     icons.languageIcons[currentLanguage] ?? icons.codeBlockLanguageIcon;
 
   return (
     <div style={{ position: "relative" }}>
-      <button
-        type="button"
-        className="block-editor-bubble-btn"
+      <BubbleButton
         onMouseDown={(e) => e.preventDefault()}
         onClick={() => setOpen(!open)}
       >
-        <span className="block-editor-bubble-dropdown-icon">{langIcon}</span>
-        <span className="block-editor-bubble-btn-text">{currentLanguage}</span>
+        <BubbleDropdownIcon>{langIcon}</BubbleDropdownIcon>
+        <span className="block-editor-bubble-btn-text">
+          {getLanguageLabel(currentLanguage)}
+        </span>
         {DEFAULT_ICONS.dropdownArrowIcon}
-      </button>
+      </BubbleButton>
       {open && (
         <>
-          <div
-            className="block-editor-bubble-overlay"
-            role="presentation"
+          <DropdownOverlay
             onClick={() => setOpen(false)}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
@@ -40,15 +54,11 @@ export const LanguageSelector = ({ editor }: { editor: Editor }) => {
               }
             }}
           />
-          <div
-            className="block-editor-bubble-dropdown block-editor-bubble-dropdown--language"
-            style={{ left: "auto", right: 0 }}
-          >
+          <BubbleDropdown align="language" style={{ left: "auto", right: 0 }}>
             {CODE_BLOCK_LANGUAGES.map((lang) => (
-              <button
+              <BubbleDropdownItem
                 key={lang}
-                type="button"
-                className={`block-editor-bubble-dropdown-item${currentLanguage === lang ? " block-editor-bubble-dropdown-item--active" : ""}`}
+                active={currentLanguage === lang}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => {
                   editor
@@ -59,18 +69,18 @@ export const LanguageSelector = ({ editor }: { editor: Editor }) => {
                   setOpen(false);
                 }}
               >
-                <span className="block-editor-bubble-dropdown-icon">
+                <BubbleDropdownIcon>
                   {icons.languageIcons[lang] ?? icons.codeBlockLanguageIcon}
-                </span>
-                <span>{lang}</span>
+                </BubbleDropdownIcon>
+                <span>{getLanguageLabel(lang)}</span>
                 {currentLanguage === lang && (
-                  <span className="block-editor-bubble-dropdown-icon">
+                  <BubbleDropdownIcon>
                     {DEFAULT_ICONS.checkIcon}
-                  </span>
+                  </BubbleDropdownIcon>
                 )}
-              </button>
+              </BubbleDropdownItem>
             ))}
-          </div>
+          </BubbleDropdown>
         </>
       )}
     </div>

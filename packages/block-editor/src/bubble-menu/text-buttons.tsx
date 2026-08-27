@@ -1,7 +1,8 @@
 import type { Editor } from "@tiptap/react";
 
 import { DEFAULT_ICONS } from "../icons";
-import { useEditorState } from "./utils";
+import { BubbleButton, BubbleButtonGroup } from "../ui";
+import { useEditorState, shallowEqual } from "./utils";
 
 interface TextSelectorResult {
   isBold: boolean;
@@ -54,27 +55,30 @@ const textItems = [
 ];
 
 export const TextButtons = ({ editor }: { editor: Editor }) => {
-  const editorState = useEditorState(editor, (ed) => ({
-    isBold: ed.isActive("bold"),
-    isCode: ed.isActive("code"),
-    isItalic: ed.isActive("italic"),
-    isStrike: ed.isActive("strike"),
-    isUnderline: ed.isActive("underline"),
-  }));
+  const editorState = useEditorState(
+    editor,
+    (ed) => ({
+      isBold: ed.isActive("bold"),
+      isCode: ed.isActive("code"),
+      isItalic: ed.isActive("italic"),
+      isStrike: ed.isActive("strike"),
+      isUnderline: ed.isActive("underline"),
+    }),
+    shallowEqual
+  );
 
   return (
-    <div className="block-editor-bubble-group">
+    <BubbleButtonGroup>
       {textItems.map((item, i) => (
-        <button
+        <BubbleButton
           key={i}
-          type="button"
-          className={`block-editor-bubble-btn${item.isActive(editorState) ? " block-editor-bubble-btn--active" : ""}`}
+          active={item.isActive(editorState)}
           onMouseDown={(e) => e.preventDefault()}
           onClick={() => item.command(editor)}
         >
           {item.icon}
-        </button>
+        </BubbleButton>
       ))}
-    </div>
+    </BubbleButtonGroup>
   );
 };

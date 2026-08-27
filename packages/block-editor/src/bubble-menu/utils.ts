@@ -1,35 +1,79 @@
 import type { Editor } from "@tiptap/react";
-import { useState, useEffect, useRef } from "react";
+import { useCallback, useRef, useSyncExternalStore } from "react";
+
+const defaultEqual = <T>(a: T, b: T) => a === b;
+
+export const shallowEqual = <T extends Record<string, unknown>>(
+  a: T,
+  b: T
+): boolean => {
+  if (a === b) {
+    return true;
+  }
+  if (!a || !b) {
+    return false;
+  }
+  const ak = Object.keys(a);
+  const bk = Object.keys(b);
+  if (ak.length !== bk.length) {
+    return false;
+  }
+  return ak.every((k) => a[k] === b[k]);
+};
 
 export const useEditorState = <T>(
   editor: Editor | null,
-  selector: (e: Editor) => T
+  selector: (e: Editor) => T,
+  isEqual: (a: T, b: T) => boolean = defaultEqual
 ): T => {
   const selectorRef = useRef(selector);
+  selectorRef.current = selector;
 
-  const [state, setState] = useState<T>(() =>
-    editor ? selector(editor) : (undefined as unknown as T)
-  );
+  const isEqualRef = useRef(isEqual);
+  isEqualRef.current = isEqual;
 
-  useEffect(() => {
-    selectorRef.current = selector;
+  const snapshotRef = useRef<{ value: T }>({
+    value: editor ? selector(editor) : (undefined as unknown as T),
   });
 
-  useEffect(() => {
+  const updateSnapshot = useCallback(() => {
     if (!editor) {
       return;
     }
-    const update = () => setState(selectorRef.current(editor));
-    update();
-    editor.on("selectionUpdate", update);
-    editor.on("transaction", update);
-    return () => {
-      editor.off("selectionUpdate", update);
-      editor.off("transaction", update);
-    };
+    const next = selectorRef.current(editor);
+    if (
+      snapshotRef.current &&
+      isEqualRef.current(snapshotRef.current.value, next)
+    ) {
+      return;
+    }
+    snapshotRef.current = { value: next };
   }, [editor]);
 
-  return state;
+  const subscribe = useCallback(
+    (onStoreChange: () => void) => {
+      if (!editor) {
+        return () => {
+          // noop
+        };
+      }
+      const update = () => {
+        updateSnapshot();
+        onStoreChange();
+      };
+      editor.on("selectionUpdate", update);
+      editor.on("transaction", update);
+      return () => {
+        editor.off("selectionUpdate", update);
+        editor.off("transaction", update);
+      };
+    },
+    [editor, updateSnapshot]
+  );
+
+  const getSnapshot = useCallback((): T => snapshotRef.current.value, []);
+
+  return useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
 };
 
 export const copyBlock = async (editor: Editor): Promise<void> => {
@@ -48,7 +92,7 @@ export const copyBlock = async (editor: Editor): Promise<void> => {
   }
 };
 
-export const deleteBlock = (editor: Editor) => {
+export const deleteBlock = (editor: Editor): void => {
   const { from } = editor.state.selection;
   const $from = editor.state.doc.resolve(from);
   const { depth } = $from;
@@ -83,3 +127,30 @@ export const CODE_BLOCK_LANGUAGES = [
   "xml",
   "plaintext",
 ] as const;
+
+export const CODE_BLOCK_LANGUAGE_LABELS: Record<string, string> = {
+  bash: "Bash",
+  c: "C",
+  cpp: "C++",
+  css: "CSS",
+  go: "Go",
+  html: "HTML",
+  java: "Java",
+  javascript: "JavaScript",
+  json: "JSON",
+  kotlin: "Kotlin",
+  markdown: "Markdown",
+  php: "PHP",
+  plaintext: "Plain Text",
+  python: "Python",
+  ruby: "Ruby",
+  rust: "Rust",
+  sql: "SQL",
+  swift: "Swift",
+  typescript: "TypeScript",
+  xml: "XML",
+  yaml: "YAML",
+};
+
+export const getLanguageLabel = (lang: string): string =>
+  CODE_BLOCK_LANGUAGE_LABELS[lang] ?? lang;
