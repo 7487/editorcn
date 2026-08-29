@@ -102,11 +102,6 @@ export const TextAlignSelector = ({ editor }: { editor: Editor }) => {
               >
                 <BubbleDropdownIcon>{item.icon}</BubbleDropdownIcon>
                 <span>{item.label}</span>
-                {item.isActive(editorState) && (
-                  <BubbleDropdownIcon>
-                    {DEFAULT_ICONS.checkIcon}
-                  </BubbleDropdownIcon>
-                )}
               </BubbleDropdownItem>
             ))}
           </BubbleDropdown>

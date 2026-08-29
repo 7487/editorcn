@@ -73,11 +73,6 @@ export const LanguageSelector = ({ editor }: { editor: Editor }) => {
                   {icons.languageIcons[lang] ?? icons.codeBlockLanguageIcon}
                 </BubbleDropdownIcon>
                 <span>{getLanguageLabel(lang)}</span>
-                {currentLanguage === lang && (
-                  <BubbleDropdownIcon>
-                    {DEFAULT_ICONS.checkIcon}
-                  </BubbleDropdownIcon>
-                )}
               </BubbleDropdownItem>
             ))}
           </BubbleDropdown>

@@ -65,9 +65,7 @@ export const Footer = ({
     const words = count?.words() ?? 0;
     const characters = count?.characters() ?? 0;
 
-    return wordCountFormatter
-      ? wordCountFormatter({ characters, words })
-      : `${words} words | ${characters} characters`;
+    return { characters, words };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     editor,
@@ -93,7 +91,28 @@ export const Footer = ({
     >
       {showWordCount && wordCount && (
         <span className={cn("rte-footer-word-count", wordCountClassName)}>
-          {wordCount}
+          {wordCountFormatter ? (
+            wordCountFormatter(wordCount)
+          ) : (
+            <>
+              <span className="rte-footer-word-count-stat">
+                <span className="rte-footer-word-count-number">
+                  {wordCount.words}
+                </span>
+                <span className="rte-footer-word-count-unit">words</span>
+              </span>
+              <span
+                className="rte-footer-word-count-separator"
+                aria-hidden="true"
+              />
+              <span className="rte-footer-word-count-stat">
+                <span className="rte-footer-word-count-number">
+                  {wordCount.characters}
+                </span>
+                <span className="rte-footer-word-count-unit">characters</span>
+              </span>
+            </>
+          )}
         </span>
       )}
       {children}

@@ -20,7 +20,7 @@ button.rte-control-button {
   align-items: center;
   justify-content: center;
   height: 2rem;
-  width: 2rem;
+  min-width: 2rem;
   padding: 0;
   transition:
     background-color 150ms ease-out,
@@ -330,9 +330,9 @@ button.rte-control-button:active {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.25rem;
+  gap: 0.5rem;
   top: var(--rte-sticky-offset, 0px);
-  background-color: var(--background);
+  background-color: color-mix(in srgb, var(--muted) 35%, var(--background));
   z-index: 1;
   border-start-end-radius: var(--radius);
   border-start-start-radius: var(--radius);
@@ -395,7 +395,40 @@ button.rte-control-button:active {
 }
 
 .rte-footer-word-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
   white-space: nowrap;
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+}
+
+.rte-footer-word-count-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.rte-footer-word-count-number {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--foreground);
+}
+
+.rte-footer-word-count-unit {
+  color: var(--muted-foreground);
+}
+
+.rte-footer-word-count-separator {
+  width: 3px;
+  height: 3px;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background-color: color-mix(
+    in srgb,
+    var(--muted-foreground) 45%,
+    transparent
+  );
 }
 
 .rte-toolbar--subtle + .rte-content + .rte-footer {
@@ -428,9 +461,10 @@ button.rte-control-button:active {
 .rte-root[data-variant="default"] .rte-controls-group > button {
   border: 1px solid var(--border);
   border-radius: 0;
-  min-width: 1.625rem;
-  height: 1.625rem;
+  min-width: 1.75rem;
+  height: 1.75rem;
   background-color: var(--background);
+  color: var(--muted-foreground);
   transition:
     background-color 150ms ease-out,
     color 150ms ease-out,
@@ -442,16 +476,21 @@ button.rte-control-button:active {
   border-inline-end-width: 0;
 }
 .rte-root[data-variant="default"] .rte-controls-group > button:first-of-type {
-  border-start-start-radius: calc(var(--radius) - 1px);
-  border-end-start-radius: calc(var(--radius) - 1px);
+  border-start-start-radius: calc(var(--radius) - 2px);
+  border-end-start-radius: calc(var(--radius) - 2px);
 }
 .rte-root[data-variant="default"] .rte-controls-group > button:last-of-type {
-  border-start-end-radius: calc(var(--radius) - 1px);
-  border-end-end-radius: calc(var(--radius) - 1px);
+  border-start-end-radius: calc(var(--radius) - 2px);
+  border-end-end-radius: calc(var(--radius) - 2px);
 }
 .rte-root[data-variant="default"] .rte-controls-group > button:hover {
   background-color: var(--accent);
   color: var(--accent-foreground);
+}
+.rte-root[data-variant="default"] .rte-controls-group > button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  outline-offset: -2px;
+  background-color: color-mix(in srgb, var(--primary) 8%, transparent);
 }
 .rte-root[data-variant="default"] .rte-controls-group > button[data-state="on"],
 .rte-root[data-variant="default"]
@@ -471,8 +510,8 @@ button.rte-control-button:active {
 }
 .rte-toolbar--subtle {
   border-bottom: 1px solid var(--border);
-  padding: 0.25rem 0.375rem;
-  gap: 0.25rem;
+  padding: 0.375rem 0.5rem;
+  gap: 0.375rem;
   background-color: var(--muted);
 }
 .rte-root[data-variant="subtle"] .rte-content .ProseMirror {
@@ -482,12 +521,23 @@ button.rte-control-button:active {
   display: flex;
   align-items: center;
 }
+.rte-root[data-variant="subtle"]
+  .rte-controls-group
+  + .rte-controls-group::before {
+  content: "";
+  width: 1px;
+  height: 1rem;
+  margin-inline: 0.25rem;
+  background-color: var(--border);
+  flex-shrink: 0;
+}
 .rte-root[data-variant="subtle"] .rte-controls-group > button {
   border: none;
   border-radius: calc(var(--radius) - 2px);
   min-width: 2rem;
   height: 2rem;
   background-color: transparent;
+  color: var(--muted-foreground);
   transition:
     background-color 150ms ease-out,
     color 150ms ease-out;
@@ -496,12 +546,20 @@ button.rte-control-button:active {
   background-color: var(--accent);
   color: var(--accent-foreground);
 }
+.rte-root[data-variant="subtle"] .rte-controls-group > button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  outline-offset: 1px;
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
 .rte-root[data-variant="subtle"] .rte-controls-group > button[data-state="on"],
 .rte-root[data-variant="subtle"]
   .rte-controls-group
   > button[aria-pressed="true"] {
-  background-color: color-mix(in srgb, var(--accent) 90%, black 5%);
-  color: var(--accent-foreground);
+  background-color: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+  box-shadow: inset 0 0 0 1px
+    color-mix(in srgb, var(--primary) 25%, transparent);
 }
 
 /* ── Compact variant: inline fused toolbar-content ── */
@@ -510,7 +568,7 @@ button.rte-control-button:active {
 }
 .rte-toolbar--compact {
   padding: 0.25rem 0.375rem;
-  gap: 0.125rem;
+  gap: 0.25rem;
   border-bottom: none;
   background-color: var(--muted);
 }
@@ -522,12 +580,23 @@ button.rte-control-button:active {
   display: flex;
   align-items: center;
 }
+.rte-root[data-variant="compact"]
+  .rte-controls-group
+  + .rte-controls-group::before {
+  content: "";
+  width: 1px;
+  height: 0.875rem;
+  margin-inline: 0.125rem;
+  background-color: var(--border);
+  flex-shrink: 0;
+}
 .rte-root[data-variant="compact"] .rte-controls-group > button {
   border: none;
   border-radius: calc(var(--radius) - 3px);
   min-width: 1.5rem;
   height: 1.5rem;
   background-color: transparent;
+  color: var(--muted-foreground);
   transition:
     background-color 150ms ease-out,
     color 150ms ease-out;
@@ -536,16 +605,24 @@ button.rte-control-button:active {
   background-color: var(--accent);
   color: var(--accent-foreground);
 }
+.rte-root[data-variant="compact"] .rte-controls-group > button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  outline-offset: 1px;
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
 .rte-root[data-variant="compact"] .rte-controls-group > button[data-state="on"],
 .rte-root[data-variant="compact"]
   .rte-controls-group
   > button[aria-pressed="true"] {
-  background-color: var(--accent);
-  color: var(--accent-foreground);
+  background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+  color: var(--primary);
+  box-shadow: inset 0 0 0 1px
+    color-mix(in srgb, var(--primary) 25%, transparent);
 }
 .rte-root[data-variant="compact"] .rte-editor-icon {
-  height: 0.75rem;
-  width: 0.75rem;
+  height: 0.875rem;
+  width: 0.875rem;
 }
 
 /* ── Controls group base (no separators) ── */
@@ -807,7 +884,7 @@ button.rte-control-button:active {
 @keyframes rte-bubble-pop-in {
   0% {
     opacity: 0;
-    transform: scale(0.96) translateY(4px);
+    transform: scale(0.98) translateY(6px);
   }
   100% {
     opacity: 1;
@@ -824,7 +901,7 @@ button.rte-control-button:active {
   border-radius: var(--radius);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   padding: 0 0.25rem;
-  animation: rte-bubble-pop-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: rte-bubble-pop-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .rte-bubble-group {
@@ -913,7 +990,7 @@ button.rte-control-button:active {
   padding: 0.25rem;
   margin-top: 4px;
   transform-origin: top left;
-  animation: rte-bubble-pop-in 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: rte-bubble-pop-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .rte-bubble-dropdown--language {
@@ -928,10 +1005,12 @@ button.rte-control-button:active {
   align-items: center;
   justify-content: flex-start;
   gap: 0.5rem;
+  position: relative;
+  z-index: 1;
   width: 100%;
   padding: 0.375rem 0.5rem;
   font-size: 0.8125rem;
-  color: var(--popover-foreground);
+  color: var(--muted-foreground);
   background: transparent;
   border: none;
   border-radius: calc(var(--radius) - 4px);
@@ -942,9 +1021,30 @@ button.rte-control-button:active {
     color 100ms ease-out;
 }
 
-.rte-bubble-dropdown-item:hover {
-  background: var(--accent);
-  color: var(--accent-foreground);
+.rte-bubble-dropdown-item:hover,
+.rte-bubble-dropdown-item:focus-visible {
+  color: var(--foreground);
+}
+
+.rte-bubble-dropdown-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: calc(var(--radius) - 4px);
+  background: color-mix(in srgb, var(--primary) 6%, transparent);
+  opacity: 0;
+  transition:
+    top 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    left 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    width 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 150ms ease-out;
+}
+
+.rte-bubble-dropdown-pill--visible {
+  opacity: 1;
 }
 
 .rte-bubble-dropdown-item--active {

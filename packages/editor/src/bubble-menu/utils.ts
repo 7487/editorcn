@@ -99,3 +99,30 @@ export const CODE_BLOCK_LANGUAGES = [
   "xml",
   "plaintext",
 ] as const;
+
+export const CODE_BLOCK_LANGUAGE_LABELS: Record<string, string> = {
+  bash: "Bash",
+  c: "C",
+  cpp: "C++",
+  css: "CSS",
+  go: "Go",
+  html: "HTML",
+  java: "Java",
+  javascript: "JavaScript",
+  json: "JSON",
+  kotlin: "Kotlin",
+  markdown: "Markdown",
+  php: "PHP",
+  plaintext: "Plain Text",
+  python: "Python",
+  ruby: "Ruby",
+  rust: "Rust",
+  sql: "SQL",
+  swift: "Swift",
+  typescript: "TypeScript",
+  xml: "XML",
+  yaml: "YAML",
+};
+
+export const getLanguageLabel = (lang: string): string =>
+  CODE_BLOCK_LANGUAGE_LABELS[lang] ?? lang;
