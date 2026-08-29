@@ -430,6 +430,7 @@ const deps = {
     "@base-ui/react@^1.0.0",
     "class-variance-authority@^0.7.1",
     "clsx@^2.1.1",
+    "lucide-react@>=0.400.0 <1.0.0",
     "tailwind-merge@^3.0.0",
   ],
 };

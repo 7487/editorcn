@@ -18,7 +18,15 @@ const BubbleDropdownItem = React.forwardRef<
     .filter(Boolean)
     .join(" ");
 
-  return <button ref={ref} type="button" className={cls} {...props} />;
+  return (
+    <button
+      ref={ref}
+      type="button"
+      data-dropdown-item
+      className={cls}
+      {...props}
+    />
+  );
 });
 BubbleDropdownItem.displayName = "BubbleDropdownItem";
 

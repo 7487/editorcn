@@ -176,11 +176,6 @@ export const NodeSelector = ({ editor }: { editor: Editor }) => {
               >
                 <BubbleDropdownIcon>{item.icon}</BubbleDropdownIcon>
                 <span>{item.name}</span>
-                {item.isActive(editorState) && (
-                  <BubbleDropdownIcon>
-                    {DEFAULT_ICONS.checkIcon}
-                  </BubbleDropdownIcon>
-                )}
               </BubbleDropdownItem>
             ))}
             <BubbleDropdownDivider />
