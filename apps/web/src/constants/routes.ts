@@ -13,6 +13,7 @@ export const ROUTES = {
   DOCS_MCP: "/docs/mcp",
   DOCS_OWNERSHIP: "/docs/ownership",
   DOCS_REGISTRY: "/docs/registry",
+  DOCS_STATIC_RENDERER: "/docs/static-renderer",
   DOCS_STYLING: "/docs/styling",
   HOME: "/",
   LLMS: "/llms.txt",

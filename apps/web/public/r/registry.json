@@ -330,6 +330,34 @@
       "name": "block-editor",
       "title": "Block Editor",
       "type": "registry:component"
+    },
+    {
+      "dependencies": [
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.0.0"
+      ],
+      "description": "Read-only rendering and styling for HTML produced by editor and block-editor.",
+      "files": [
+        {
+          "path": "static-renderer/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "static-renderer/static-renderer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "static-renderer/lib/utils.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "static-renderer/style.css",
+          "type": "registry:style"
+        }
+      ],
+      "name": "static-renderer",
+      "title": "Static Renderer",
+      "type": "registry:component"
     }
   ],
   "name": "editorcn"
