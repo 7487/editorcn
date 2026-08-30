@@ -1,0 +1,16 @@
+---
+title: August 30, 2026 - Static renderer
+description: New @editorcn/static-renderer package for read-only rendering of saved editor content.
+date: 2026-08-30
+---
+
+We shipped **`@editorcn/static-renderer`** — a small package that renders content produced by `@editorcn/editor` or `@editorcn/block-editor` as **read-only, fully styled HTML**. Perfect for blog posts, preview panes, emails, and chat history.
+
+## Highlights
+
+- **Read-only rendering** — `<StaticRenderer content={html} />` styles the exact HTML the editors serialize, so no markdown or `typeset.css` conversions are needed.
+- **Dedicated stylesheet** — `style.css` scopes itself to `.rte-static-renderer` and covers headings, lists, blockquotes, inline code, code blocks with `.hljs-*` highlighting, tables, task lists, links, images, horizontal rules, and YouTube/Twitter embed placeholders. It follows your shadcn theme variables and adapts to dark mode automatically.
+- **Two install methods** — install via the shadcn registry (recommended; copies the source into `components/static-renderer`) or as a regular npm dependency, same as the editors.
+- **Live docs demo** — the [static renderer docs](/docs/static-renderer) include an editable editor whose output is rendered read-only beside it, updating as you type.
+
+See the [Static Renderer docs](/docs/static-renderer) for installation options, the component API, and the full list of supported output.
