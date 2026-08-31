@@ -21,6 +21,7 @@ import {
   EditorCustomLabelsDemo,
   EditorCustomIconsDemo,
 } from "@/components/customization/editor-demos";
+import { StaticRendererDemo } from "@/components/customization/static-renderer-demo";
 import {
   DocumentEditorCard,
   EnhancedEditorCard,
@@ -141,6 +142,7 @@ export const mdxComponents = {
       {...props}
     />
   ),
+  StaticRendererDemo,
   Step: ({ className, children, ...props }: React.ComponentProps<"h3">) => (
     <h3
       className={cn(

@@ -379,6 +379,33 @@ const blockEditorFiles = [
   ),
 ];
 
+const staticRendererFiles = [
+  entry(
+    "static-renderer/index.ts",
+    "registry:component",
+    "static-renderer",
+    "index.ts"
+  ),
+  entry(
+    "static-renderer/static-renderer.tsx",
+    "registry:component",
+    "static-renderer",
+    "static-renderer.tsx"
+  ),
+  entry(
+    "static-renderer/lib/utils.ts",
+    "registry:lib",
+    "static-renderer",
+    "lib/utils.ts"
+  ),
+  entry(
+    "static-renderer/style.css",
+    "registry:style",
+    "static-renderer",
+    "style.css"
+  ),
+];
+
 const deps = {
   "block-editor": [
     "@tiptap/react@>=2.11.5 <4",
@@ -433,6 +460,7 @@ const deps = {
     "lucide-react@>=0.400.0 <1.0.0",
     "tailwind-merge@^3.0.0",
   ],
+  "static-renderer": ["clsx@^2.1.1", "tailwind-merge@^3.0.0"],
 };
 
 const buildItem = (
@@ -500,6 +528,20 @@ writeFileSync(
     2
   )
 );
+writeFileSync(
+  resolve(outDir, "static-renderer.json"),
+  JSON.stringify(
+    buildItem(
+      "static-renderer",
+      "Static Renderer",
+      "Read-only rendering and styling for HTML produced by editor and block-editor.",
+      staticRendererFiles,
+      deps["static-renderer"]
+    ),
+    null,
+    2
+  )
+);
 
 const catalog = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
@@ -519,6 +561,13 @@ const catalog = {
       deps["block-editor"],
       blockEditorFiles
     ),
+    catalogItem(
+      "static-renderer",
+      "Static Renderer",
+      "Read-only rendering and styling for HTML produced by editor and block-editor.",
+      deps["static-renderer"],
+      staticRendererFiles
+    ),
   ],
   name: "editorcn",
 };
@@ -531,3 +580,4 @@ console.log("Built registry:");
 console.log("  apps/web/public/r/registry.json");
 console.log("  apps/web/public/r/editor.json");
 console.log("  apps/web/public/r/block-editor.json");
+console.log("  apps/web/public/r/static-renderer.json");

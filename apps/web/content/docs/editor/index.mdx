@@ -248,6 +248,26 @@ const editor = useEditor({
 <RichTextEditor.Footer sticky stickyOffset={0} showWordCount />
 ```
 
+## RichTextEditor.BubbleMenu
+
+A floating formatting menu that appears when you select text inside the content area. It shows inline formatting actions (**bold**, _italic_, underline, strikethrough, code); when the selection is inside a code block it instead shows the syntax language selector.
+
+```tsx
+<RichTextEditor editor={editor}>
+  <RichTextEditor.Toolbar>...</RichTextEditor.Toolbar>
+  <RichTextEditor.BubbleMenu editor={editor} />
+  <RichTextEditor.Content />
+</RichTextEditor>
+```
+
+### Props
+
+| Prop     | Type             | Default | Description                |
+| -------- | ---------------- | ------- | -------------------------- |
+| `editor` | `Editor \| null` | —       | The Tiptap editor instance |
+
+The bubble menu uses Floating UI via `@tiptap/react/menus` and hides automatically when the editor becomes read-only (`editor.setEditable(false)`). Its visuals follow your shadcn theme tokens and can be customized with the `.rte-bubble-menu`, `.rte-bubble-btn`, and `.rte-bubble-dropdown` classes.
+
 ## RichTextEditor.Control
 
 A generic control button for custom controls. Use built-in controls when possible.

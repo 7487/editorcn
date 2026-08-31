@@ -13,6 +13,8 @@
     "---Editor (Toolbar)---",
     "editor",
     "---Block Editor (Blocks)---",
-    "block-editor"
+    "block-editor",
+    "---Static Rendering---",
+    "static-renderer"
   ]
 }
