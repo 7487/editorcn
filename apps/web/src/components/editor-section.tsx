@@ -3,7 +3,6 @@
 import type { RichTextEditorVariant } from "@editorcn/editor";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { codeToHtml } from "shiki";
 
 import { ArrowRightIcon } from "@/components/animated-icons/arrow-right";
 import type { ArrowRightIconHandle } from "@/components/animated-icons/arrow-right";
@@ -13,6 +12,7 @@ import { EditorPreview } from "@/components/editor-preview";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useIconAnimation } from "@/hooks/use-icon-animation";
+import { highlightCode } from "@/lib/highlight-code";
 
 interface CodeFile {
   language: string;
@@ -59,10 +59,7 @@ const CodeViewer = ({ files }: { files: CodeFile[] }) => {
 
     const render = async () => {
       try {
-        const html = await codeToHtml(current.code, {
-          lang: current.language,
-          theme: "github-dark",
-        });
+        const html = await highlightCode(current.code, current.language);
         if (!cancelled) {
           setState({ code: current.code, error: null, html });
         }
