@@ -15,6 +15,7 @@ export default defineConfig({
   extends: [ultracite],
   ignorePatterns: [
     ...(ultracite.ignorePatterns ?? []),
+    "**/tsconfig.json",
     "**/public/r/**",
     "**/.next/**",
     "**/.source/**",
